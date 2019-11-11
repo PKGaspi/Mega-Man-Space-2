@@ -1,19 +1,11 @@
 extends KinematicBody2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+# Constants.
+const MOTION_SPEED = 500 # Pixels/second.
+const CANNON_LEFT_POS = Vector2(15, 9)
+const CANNON_RIGHT_POS = Vector2(15, -9)
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-const MOTION_SPEED = 160 # Pixels/second
-
-onready var camera = get_node("Camera2D")
+const LEMON = preload("res://lemon.tscn")
 
 func _physics_process(_delta):
 	# Movement.
@@ -31,7 +23,26 @@ func _physics_process(_delta):
 	motion = motion.normalized() * MOTION_SPEED
 	move_and_slide(motion)
 	
-	# Direction.
+func _process(delta):
+	# Calculate direction to look at the mouse.
 	var mouse_pos = get_global_mouse_position()
-	rotation = (mouse_pos - global_position).rotated(deg2rad(90)).angle()
+	rotation = mouse_pos.angle_to_point(global_position)
 	
+	if Input.is_action_just_pressed("shoot"):
+		fire()
+	if Input.is_action_pressed("auto_shoot"):
+		fire()
+
+func fire():
+	# Fire left lemon.
+	var lem_l = LEMON.instance()
+	lem_l.add_collision_exception_with(self)
+	lem_l.rotation = rotation
+	lem_l.global_position = global_position + CANNON_LEFT_POS.rotated(rotation)
+	get_parent().add_child(lem_l)
+	
+	var lem_r = LEMON.instance()
+	lem_r.add_collision_exception_with(self)
+	lem_r.rotation = rotation
+	lem_r.global_position = global_position + CANNON_RIGHT_POS.rotated(rotation)
+	get_parent().add_child(lem_r)

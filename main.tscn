@@ -11,8 +11,8 @@
 [node name="Sprite" type="Sprite" parent="ParallaxBackground"]
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
-margin_left = -2048.0
+margin_left = -2047.3
 margin_top = -2048.0
-margin_right = 2048.0
+margin_right = 2048.7
 margin_bottom = 2048.0
 color = Color( 0.117647, 0.0196078, 0.231373, 1 )
