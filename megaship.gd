@@ -1,31 +1,39 @@
 extends KinematicBody2D
 
 # Constants.
-const MOVE_SPEED = 160 # In pixels/second.
+const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
+const MOVE_SPEED_DEACCEL = 50 # In pixels/second^2.
+const MOVE_SPEED_MAX = 160 # In pixels/second.
 const CANNON_LEFT_POS = Vector2(15, 9)
 const CANNON_RIGHT_POS = Vector2(15, -9)
 const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
 
 const LEMON = preload("res://lemon.tscn")
 
+var speed = 0
 var speed_multiplier = 1
 var bullet_max = 3
 var auto_fire = 0
+var motion = Vector2()
 
 func _physics_process(_delta):
 	# Movement.
-	var motion = Vector2()
-	
+	var input = Vector2()
 	if Input.is_action_pressed("move_up"):
-		motion += Vector2(0, -1)
+		input += Vector2(0, -1)
 	if Input.is_action_pressed("move_down"):
-		motion += Vector2(0, 1)
+		input += Vector2(0, 1)
 	if Input.is_action_pressed("move_left"):
-		motion += Vector2(-1, 0)
+		input += Vector2(-1, 0)
 	if Input.is_action_pressed("move_right"):
-		motion += Vector2(1, 0)
+		input += Vector2(1, 0)
 	
-	motion = motion.normalized() * MOVE_SPEED * speed_multiplier
+	if input != Vector2():
+		motion = input
+		speed = clamp(speed + MOVE_SPEED_ACCEL, 0, MOVE_SPEED_MAX) * speed_multiplier
+	else:
+		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
+	motion = motion.normalized() * speed
 	move_and_slide(motion)
 	
 func _process(delta):
