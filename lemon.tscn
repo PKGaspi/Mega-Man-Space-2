@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 4 )
 
-[node name="lemon" type="KinematicBody2D"]
+[node name="lemon" type="KinematicBody2D" groups=[
+"BULLETS",
+]]
 collision_mask = 2
 script = ExtResource( 1 )
 
@@ -17,5 +19,5 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -2.38419e-007 )
+position = Vector2( 0, -2.38419e-07 )
 scale = Vector2( 0.3, 0.4 )
