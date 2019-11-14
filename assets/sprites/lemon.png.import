@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lemon.png-2858179bb01f1479fd143f48cf031ef1.stex"
+path="res://.import/lemon.png-4cc47357f1adc25815c4f81ef726e837.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://lemon.png"
-dest_files=[ "res://.import/lemon.png-2858179bb01f1479fd143f48cf031ef1.stex" ]
+source_file="res://assets/sprites/lemon.png"
+dest_files=[ "res://.import/lemon.png-4cc47357f1adc25815c4f81ef726e837.stex" ]
 
 [params]
 

@@ -8,7 +8,7 @@ const CANNON_LEFT_POS = Vector2(15, 9)
 const CANNON_RIGHT_POS = Vector2(15, -9)
 const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
 
-const LEMON = preload("res://lemon.tscn")
+const LEMON = preload("res://scenes/lemon.tscn")
 
 var speed = 0
 var speed_multiplier = 1

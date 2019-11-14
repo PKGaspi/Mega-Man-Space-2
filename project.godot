@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Mega Man Space 2"
-run/main_scene="res://main.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -87,4 +87,3 @@ auto_shoot={
 
 quality/2d/use_pixel_snap=true
 quality/subsurface_scattering/scale=1
-environment/default_environment="res://default_env.tres"

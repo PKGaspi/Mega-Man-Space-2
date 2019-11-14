@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/megaship.png-cb9147b5f4e30b3f7d12e084e599a524.stex"
+path="res://.import/megaship.png-c04effe95734cd150886a3f144829080.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://megaship.png"
-dest_files=[ "res://.import/megaship.png-cb9147b5f4e30b3f7d12e084e599a524.stex" ]
+source_file="res://assets/sprites/megaship.png"
+dest_files=[ "res://.import/megaship.png-c04effe95734cd150886a3f144829080.stex" ]
 
 [params]
 
