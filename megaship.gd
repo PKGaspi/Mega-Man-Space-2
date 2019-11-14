@@ -51,7 +51,7 @@ func _process(delta):
 	
 
 func fire():
-	# Check if there are too many lemons.
+	# Check if there are too many left lemons.
 	if get_tree().get_nodes_in_group("BULLETS_LEFT").size() < bullet_max:
 		# Fire left lemon.
 		var lem_l = LEMON.instance()
@@ -61,7 +61,9 @@ func fire():
 		lem_l.add_to_group("BULLETS_LEFT")
 		get_parent().add_child(lem_l)
 	
+	# Check if there are too many right lemons.
 	if get_tree().get_nodes_in_group("BULLETS_RIGHT").size() < bullet_max:
+		# Fire right lemon.
 		var lem_r = LEMON.instance()
 		lem_r.add_collision_exception_with(self)
 		lem_r.rotation = rotation
