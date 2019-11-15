@@ -3,8 +3,6 @@
 [ext_resource path="res://scripts/megaship.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/megaship.png" type="Texture" id=2]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11, 12.5 )
 
