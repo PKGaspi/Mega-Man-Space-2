@@ -8,8 +8,6 @@
 [node name="Megaship" parent="." instance=ExtResource( 1 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="StarGenerator" type="Node2D" parent="ParallaxBackground"]
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]

@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/sprites/lemon.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 4 )
 
 [node name="lemon" type="KinematicBody2D" groups=[
 "BULLETS",
@@ -16,8 +15,9 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.4, 0.3 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -2.38419e-007 )
-scale = Vector2( 0.3, 0.4 )
+position = Vector2( 0, -2.38419e-07 )
+scale = Vector2( 0.4, 0.3 )
