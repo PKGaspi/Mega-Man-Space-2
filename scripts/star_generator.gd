@@ -1,7 +1,6 @@
-extends Node2D
+extends ParallaxBackground
 
-const STAR = preload("res://scenes/star.tscn")
-const NUMBER_OF_LAYERS = 2
+const NUMBER_OF_LAYERS = 7
 
 var random
 var layers = []
@@ -10,14 +9,14 @@ func _ready():
 	random = RandomNumberGenerator.new()
 	for i in range(NUMBER_OF_LAYERS):
 		var layer = ParallaxLayer.new()
-		var scale = float(i) / NUMBER_OF_LAYERS
+		var scale = float(i + 1) / NUMBER_OF_LAYERS
 		layer.motion_scale = Vector2(scale, scale)
+		layer.z_index = i
+		add_child(layer)
 		layers.append(layer)
-		get_parent().add_child(layer)
-		print(get_parent().get_child_count())
-	# Test
-	create_star(Vector2(50, 50), 0, "res://assets/sprites/megaship.png")
-	create_star(Vector2(70, 0), 1, "res://assets/sprites/megaship.png")
+	create_star(Vector2(20, -20), 4, "res://assets/sprites/megaship.png")
+	create_star(Vector2(26, -18), 6, "res://assets/sprites/megaship.png")
+	create_star(Vector2(12, -22), 5, "res://assets/sprites/megaship.png")
 	
 func create_star(pos, layer, sprite):
 	# Vector2 pos: position of the star.
@@ -25,7 +24,8 @@ func create_star(pos, layer, sprite):
 	# String sprite: route of the texture of the star.
 	sprite = load(sprite)
 	var star = Sprite.new()
+	star.z_index = layers[layer].z_index
+	print(star.z_index)
 	star.position = pos
 	star.texture = sprite
 	layers[layer].add_child(star)
-	print(layers[layer].get_child_count())
