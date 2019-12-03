@@ -1,10 +1,16 @@
 extends ParallaxBackground
 
 const NUMBER_OF_LAYERS = 7
-const WIDTH = 480
-const HEIGHT = 270
-const TILES_X = 30
-const TILES_Y = 30
+
+# How many stars are generated.
+# Must be between 0.0 and 1.0
+const STAR_FREQUENCY = .5 
+
+const WIDTH = 480 # Screen width.
+const HEIGHT = 270 # Screen height.
+const TILES_X = 10 # Max stars in a row.
+const TILES_Y = 10 # Max stars in a column.
+const TILE_OFFSET = 5 # Offset for columns and rows.
 
 var random
 var r_seed
@@ -30,10 +36,13 @@ func _process(delta):
 	random.seed = r_seed
 	for i in range(0, TILES_X):
 		for j in range(0, TILES_Y):
-			if (random.randf() < .1):
-				var x = (float(i) / TILES_X) * WIDTH
-				var y = (float(j) / TILES_Y) * HEIGHT
-				create_star(Vector2(x, y), 2, "res://assets/sprites/megaship.png")
+			if (random.randf() < STAR_FREQUENCY):
+				var x = (float(i) / TILES_X) * WIDTH + random.randf() * TILES_X * TILE_OFFSET
+				x -= WIDTH / 2
+				var y = (float(j) / TILES_Y) * HEIGHT + random.randf() * TILES_Y * TILE_OFFSET
+				y -= HEIGHT / 2
+				var layer = int(random.randf() * NUMBER_OF_LAYERS)
+				create_star(Vector2(x, y), layer, "res://assets/sprites/lemon.png")
 
 func create_star(pos, layer, sprite):
 	# Vector2 pos: position of the star.
