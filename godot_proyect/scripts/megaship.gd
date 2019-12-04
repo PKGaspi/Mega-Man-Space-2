@@ -3,7 +3,7 @@ extends KinematicBody2D
 # Constants.
 const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 50 # In pixels/second^2.
-const MOVE_SPEED_MAX = 160 # In pixels/second.
+const MOVE_SPEED_MAX = 260 # In pixels/second.
 const CANNON_LEFT_POS = Vector2(8, 4)
 const CANNON_RIGHT_POS = Vector2(8, -5)
 const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
@@ -12,7 +12,7 @@ const LEMON = preload("res://scenes/lemon.tscn")
 
 var speed = 0
 var speed_multiplier = 1
-var bullet_max = 3
+var bullet_max = 10
 var auto_fire = 0
 var motion = Vector2()
 

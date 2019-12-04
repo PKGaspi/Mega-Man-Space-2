@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MOTION_SPEED = 320 # Pixels/second.
+const MOTION_SPEED = 560 # Pixels/second.
 
 func _ready():
 	# TODO: Make sound.
