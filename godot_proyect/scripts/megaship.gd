@@ -1,20 +1,27 @@
 extends KinematicBody2D
 
 # Constants.
+# Moving speed.
 const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 50 # In pixels/second^2.
 const MOVE_SPEED_MAX = 260 # In pixels/second.
+# Cannons positions.
 const CANNON_LEFT_POS = Vector2(8, 4)
 const CANNON_RIGHT_POS = Vector2(8, -5)
+# Auto fire cooldown. Maybe do this a variable so
+# you can get upgrades to improve it.
 const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
 
 const LEMON = preload("res://scenes/lemon.tscn")
 
-var speed = 0
+# Upgrades and atributes.
 var speed_multiplier = 1
-var bullet_max = 10
-var auto_fire = 0
-var motion = Vector2()
+var bullet_max = 7 # Max bullets per cannon on screen.
+var auto_fire = 0 # Seconds since last fire.
+
+# Motion variables.
+var speed = 0 # Speed at this frame.
+var motion = Vector2() ## How much to move this frame.
 
 func _physics_process(_delta):
 	# Movement.

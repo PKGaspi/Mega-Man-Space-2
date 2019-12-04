@@ -37,12 +37,13 @@ const TILES_Y = 40 # Max stars in a column.
 const TILE_OFFSET = 10 # Offset for columns and rows.
 
 var random
+# warning-ignore:unused_class_variable
 var r_seed
 var layers = []
 
 func _ready():
 	
-	# Initialize more constants.
+	# Initialize runtime constants.
 	var STAR_MAX_SIZE = len(STAR_SIZES)
 	var N_STAR_SPRITES = len(STARS)
 	# Create random generator.
@@ -61,13 +62,16 @@ func _ready():
 		layers.append(layer)
 		
 	# Create the stars.
+	var n_planetas = 0
 	for i in range(0, TILES_X):
 		for j in range(0, TILES_Y):
 			if (random.randf() < STAR_FREQUENCY):
 				# Generate random position.
 				var x = (float(i) / TILES_X) * WIDTH + (random.randf() - .5) * TILES_X * TILE_OFFSET
+# warning-ignore:integer_division
 				x -= WIDTH / 2
 				var y = (float(j) / TILES_Y) * HEIGHT + (random.randf() - .5) * TILES_Y * TILE_OFFSET
+# warning-ignore:integer_division
 				y -= HEIGHT / 2
 				
 				# Generate random layer.
@@ -75,7 +79,6 @@ func _ready():
 				
 				# Calculate sprite from layer.
 				var star_index = min(int((layer * 100) / (N_STAR_SPRITES * N_LAYERS)), N_STAR_SPRITES - 1)
-				print(star_index)
 				var prev_size = 0
 				var star_size
 				for k in range(0, STAR_MAX_SIZE):
@@ -86,9 +89,10 @@ func _ready():
 					prev_size = STAR_SIZES[k] + 1
 				var sprite = STARS[star_index]
 				# This star might be a planet!
-				if (star_size == 0 && random.randi_range(0, 128) == 69):
+				if (star_size == 0 && random.randi_range(0, 200 * n_planetas) == 0):
 					# IT'S A PLANET!!
 					sprite = PLANETS[random.randi_range(0, len(PLANETS) - 1)]
+					n_planetas += 1
 				# Create the star.
 				create_star(Vector2(x, y), layer, sprite)
 
