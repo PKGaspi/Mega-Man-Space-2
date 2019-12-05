@@ -28,27 +28,28 @@ const MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
-const STAR_FREQUENCY = .5
+const STAR_FREQUENCY = 1
 
-const WIDTH = 1920 # Room width.
-const HEIGHT = 1080 # Room height.
-const TILES_X = 40 # Max stars in a row.
-const TILES_Y = 40 # Max stars in a column.
-const TILE_OFFSET = 10 # Offset for columns and rows.
+const WIDTH = 30 # Room width.
+const HEIGHT = 30 # Room height.
+const TILES_X = 4 # Max stars in a row.
+const TILES_Y = 4 # Max stars in a column.
+const TILE_OFFSET = 0 # Offset for columns and rows.
 
 var random
-# warning-ignore:unused_class_variable
 var r_seed
 var layers = []
 
+# Initialize runtime constants.
+var STAR_MAX_SIZE = len(STAR_SIZES)
+var N_STAR_SPRITES = len(STARS)
+
 func _ready():
 	
-	# Initialize runtime constants.
-	var STAR_MAX_SIZE = len(STAR_SIZES)
-	var N_STAR_SPRITES = len(STARS)
 	# Create random generator.
 	random = RandomNumberGenerator.new()
 	random.seed *= OS.get_ticks_usec()
+	r_seed = random.seed
 	
 	# Create parallax layers.
 	for i in range(N_LAYERS):
@@ -61,6 +62,21 @@ func _ready():
 		add_child(layer)
 		layers.append(layer)
 		
+	create_stars(Vector2(0, 0))
+	create_stars(Vector2(1, 0))
+	create_stars(Vector2(0, 1))
+	create_stars(Vector2(1, 1))
+	create_stars(Vector2(-1, 0))
+	create_stars(Vector2(0, -1))
+	create_stars(Vector2(-1, -1))
+	create_stars(Vector2(1, -1))
+	create_stars(Vector2(-1, 1))
+	create_stars(Vector2(-5, 3))
+		
+func create_stars(sector):
+	# Calculate sector coordinates.
+	var center_x = (WIDTH * sector.x)
+	var center_y = (HEIGHT * sector.y)
 	# Create the stars.
 	var n_planetas = 0
 	for i in range(0, TILES_X):
@@ -68,11 +84,9 @@ func _ready():
 			if (random.randf() < STAR_FREQUENCY):
 				# Generate random position.
 				var x = (float(i) / TILES_X) * WIDTH + (random.randf() - .5) * TILES_X * TILE_OFFSET
-# warning-ignore:integer_division
-				x -= WIDTH / 2
+				x += center_x - WIDTH / 2
 				var y = (float(j) / TILES_Y) * HEIGHT + (random.randf() - .5) * TILES_Y * TILE_OFFSET
-# warning-ignore:integer_division
-				y -= HEIGHT / 2
+				y += center_y - HEIGHT / 2
 				
 				# Generate random layer.
 				var layer = random.randi_range(0, N_LAYERS - 1)
@@ -91,10 +105,10 @@ func _ready():
 				# This star might be a planet!
 				if (star_size == 0 && random.randi_range(0, 200 * n_planetas) == 0):
 					# IT'S A PLANET!!
-					sprite = PLANETS[random.randi_range(0, len(PLANETS) - 1)]
+					#sprite = PLANETS[random.randi_range(0, len(PLANETS) - 1)]
 					n_planetas += 1
 				# Create the star.
-				create_star(Vector2(x, y), layer, sprite)
+				create_star(Vector2(x, y), 1, sprite)
 
 func create_star(pos, layer, sprite):
 	# Vector2 pos: position of the star.
