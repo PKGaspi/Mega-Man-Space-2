@@ -32,7 +32,9 @@ const MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
-const STAR_FREQUENCY = .4
+const STAR_FREQUENCY = .1
+const PLANET_FREQUENCY = .0004
+const MAX_PLANETS_PER_SECTOR = 1
 
 const SECTOR_WIDTH = 160 # Sector width.
 const SECTOR_HEIGHT = 100 # Sector height.
@@ -48,14 +50,13 @@ var seeds = {} # Seeds for each sector.
 var stars = {} # Dictionary with lists of stars for each sector.
 var layers = [] # Array of layers.
 
-var prev_sector # Megaship last sector.
+var prev_sector = Vector2(1000, 1000) # Megaship last sector.
 
 var MEGASHIP
 
 func _ready():
 	
 	MEGASHIP = get_tree().get_root().get_child(0).get_node("Megaship")
-	prev_sector = Vector2(1000, 1000)
 	# Create random generator.
 	random = RandomNumberGenerator.new()
 	random.seed *= OS.get_ticks_usec()
@@ -121,7 +122,7 @@ func create_stars(sector):
 	random.seed = seeds[sector]
 	
 	# Create the stars.
-	var n_planetas = 0
+	var n_planets = 0
 	for i in range(0, TILES_X):
 		for j in range(0, TILES_Y):
 			if (random.randf() < STAR_FREQUENCY):
@@ -146,10 +147,10 @@ func create_stars(sector):
 					prev_size = STAR_SIZES[k] + 1
 				var sprite = STARS[star_index]
 				# This star might be a planet!
-				if (star_size == 0 && random.randi_range(0, 200 * n_planetas) == 0):
+				if (star_size == 0 && random.randf() < PLANET_FREQUENCY && n_planets < MAX_PLANETS_PER_SECTOR):
 					# IT'S A PLANET!!
-					#sprite = PLANETS[random.randi_range(0, len(PLANETS) - 1)]
-					n_planetas += 1
+					n_planets += 1
+					sprite = PLANETS[random.randi_range(0, len(PLANETS) - 1)]
 				# Create the star.
 				stars[sector].append(create_star(Vector2(x, y), layer, sprite))
 
