@@ -6,74 +6,149 @@ const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 50 # In pixels/second^2.
 const MOVE_SPEED_MAX = 260 # In pixels/second.
 # Cannons positions.
-const CANNON_LEFT_POS = Vector2(8, 4)
-const CANNON_RIGHT_POS = Vector2(8, -5)
+const CANNON_CENTRE_POS = Vector2(15, -.5)
+const CANNON_LEFT_POS = Vector2(7, 4)
+const CANNON_RIGHT_POS = Vector2(7, -5)
 # Auto fire cooldown. Maybe do this a variable so
 # you can get upgrades to improve it.
 const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
 
+const JOYSTICK_DEADZONE = .1
+
 const LEMON = preload("res://scenes/lemon.tscn")
 
+var gamepad = false
+var mouse_pos
+var mouse_last_pos
+
 # Upgrades and atributes.
+# Speeds.
 var speed_multiplier = 1
+# Bullets.
+var n_shoots = 3
 var bullet_max = 7 # Max bullets per cannon on screen.
 var auto_fire = 0 # Seconds since last fire.
 
 # Motion variables.
 var speed = 0 # Speed at this frame.
-var motion = Vector2() ## How much to move this frame.
+var input = Vector2() ## How much to move this frame.
 
 func _physics_process(_delta):
 	# Movement.
-	var input = Vector2()
-	if Input.is_action_pressed("move_up"):
-		input += Vector2(0, -1)
-	if Input.is_action_pressed("move_down"):
-		input += Vector2(0, 1)
-	if Input.is_action_pressed("move_left"):
-		input += Vector2(-1, 0)
-	if Input.is_action_pressed("move_right"):
-		input += Vector2(1, 0)
-	
-	if input != Vector2():
-		motion = input
-		speed = clamp(speed + MOVE_SPEED_ACCEL, 0, MOVE_SPEED_MAX) * speed_multiplier
-	else:
-		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
-	motion = motion.normalized() * speed
-	move_and_slide(motion)
+	input = get_directional_input()
+	apply_motion()
 	
 func _process(delta):
-	# Calculate direction to look at the mouse.
-	var mouse_pos = get_global_mouse_position()
-	rotation = mouse_pos.angle_to_point(global_position)
 	
+	# Get new values of this frame.
+	mouse_pos = get_viewport().get_mouse_position()
+	
+	# Calculate rotation.
+	rotation = get_rotation()
+	
+	# Check if we are firing.
 	auto_fire += delta
-	
-	if Input.is_action_just_pressed("shoot"):
-		fire()
-	if Input.is_action_pressed("auto_shoot") and auto_fire >= AUTO_FIRE_INTERVAL:
-		fire()
+	if Input.is_action_pressed("shoot") and auto_fire >= AUTO_FIRE_INTERVAL:
+		fire(n_shoots)
 		auto_fire = 0
 	
-
-func fire():
-	# Check if there are too many left lemons.
-	if get_tree().get_nodes_in_group("BULLETS_LEFT").size() < bullet_max:
-		# Fire left lemon.
-		var lem_l = LEMON.instance()
-		lem_l.add_collision_exception_with(self)
-		lem_l.rotation = rotation
-		lem_l.global_position = global_position + CANNON_LEFT_POS.rotated(rotation)
-		lem_l.add_to_group("BULLETS_LEFT")
-		get_parent().add_child(lem_l)
+	if gamepad:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	
-	# Check if there are too many right lemons.
-	if get_tree().get_nodes_in_group("BULLETS_RIGHT").size() < bullet_max:
-		# Fire right lemon.
-		var lem_r = LEMON.instance()
-		lem_r.add_collision_exception_with(self)
-		lem_r.rotation = rotation
-		lem_r.global_position = global_position + CANNON_RIGHT_POS.rotated(rotation)
-		lem_r.add_to_group("BULLETS_RIGHT")
-		get_parent().add_child(lem_r)
+	# Update values for next frame.
+	mouse_last_pos = mouse_pos
+
+func get_directional_input():
+	
+	var input = Vector2()
+	var empty = Vector2()
+	
+	# Keyboard input.
+	if Input.is_action_pressed("keyboard_move_up"):
+		gamepad = false
+		input += Vector2(0, -1)
+	if Input.is_action_pressed("keyboard_move_down"):
+		gamepad = false
+		input += Vector2(0, 1)
+	if Input.is_action_pressed("keyboard_move_left"):
+		gamepad = false
+		input += Vector2(-1, 0)
+	if Input.is_action_pressed("keyboard_move_right"):
+		gamepad = false
+		input += Vector2(1, 0)
+		
+	# Gamepad input.
+	if Input.is_action_pressed("gamepad_move_up"):
+		gamepad = true
+		input += Vector2(0, -1)
+	if Input.is_action_pressed("gamepad_move_down"):
+		gamepad = true
+		input += Vector2(0, 1)
+	if Input.is_action_pressed("gamepad_move_left"):
+		gamepad = true
+		input += Vector2(-1, 0)
+	if Input.is_action_pressed("gamepad_move_right"):
+		gamepad = true
+		input += Vector2(1, 0)
+	
+	if input == empty:
+		# Joystick input.
+		input = get_joystick_axis(0, JOY_AXIS_0)
+	
+	return input
+
+func get_rotation():
+	var rot
+	var input = get_joystick_axis(0, JOY_AXIS_3)
+	
+	if input != Vector2():
+		gamepad = true
+		rot = input.angle()
+	else:
+		rot = rotation
+		if mouse_pos != mouse_last_pos:
+			gamepad = false
+	
+	if !gamepad:
+		if position.distance_to(mouse_pos) > 3:
+			rot = mouse_pos.angle_to_point(get_global_transform_with_canvas().origin)
+		else:
+			rot = rotation
+	
+	return rot
+
+func get_joystick_axis(device, joystick):
+	var input = Vector2(Input.get_joy_axis(device, joystick), Input.get_joy_axis(device, joystick + 1))
+	if input.length() < JOYSTICK_DEADZONE:
+		input = Vector2()
+	else:
+		gamepad = true
+	return input
+
+func apply_motion():
+	if input != Vector2():
+		speed = clamp(speed + MOVE_SPEED_ACCEL, 0, MOVE_SPEED_MAX)
+	else:
+		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
+	input = input.normalized() * speed * speed_multiplier
+	return move_and_slide(input)
+
+func fire(ammount):
+	if ammount % 2 == 1:
+		shoot_projectile(LEMON, "BULLETS_CENTRE", CANNON_CENTRE_POS)
+	if ammount >= 2:
+		shoot_projectile(LEMON, "BULLETS_LEFT", CANNON_LEFT_POS)
+		shoot_projectile(LEMON, "BULLETS_RIGHT", CANNON_RIGHT_POS)
+		
+func shoot_projectile(projectile, group, pos):
+	# Check if there are too many projectiles.
+	if get_tree().get_nodes_in_group(group).size() < bullet_max:
+		# Fire projectile.
+		var inst = projectile.instance()
+		inst.add_collision_exception_with(self)
+		inst.rotation = rotation
+		inst.global_position = global_position + pos.rotated(rotation)
+		inst.add_to_group(group)
+		get_parent().add_child(inst)
