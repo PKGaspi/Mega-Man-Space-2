@@ -56,7 +56,7 @@ var MEGASHIP
 
 func _ready():
 	
-	MEGASHIP = get_tree().get_root().get_child(0).get_node("Megaship")
+	MEGASHIP = get_node("/root/Main/Megaship")
 	# Create random generator.
 	random = RandomNumberGenerator.new()
 	random.seed *= OS.get_ticks_usec()

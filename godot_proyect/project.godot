@@ -19,6 +19,10 @@ config/name="Mega Man Space 2"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+library="*res://scripts/library.gd"
+
 [display]
 
 window/size/width=480

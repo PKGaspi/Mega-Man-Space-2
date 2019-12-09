@@ -1,6 +1,12 @@
 extends KinematicBody2D
 
 # Constants.
+
+# Resources.
+const LEMON = preload("res://scenes/lemon.tscn")
+onready var AUDIO = get_node("AudioStreamPlayer2D")
+onready var LIB = get_node("/root/library")
+
 # Moving speed.
 const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 50 # In pixels/second^2.
@@ -14,8 +20,6 @@ const CANNON_RIGHT_POS = Vector2(7, -5)
 const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
 
 const JOYSTICK_DEADZONE = .1
-
-const LEMON = preload("res://scenes/lemon.tscn")
 
 var gamepad = false
 var mouse_pos
@@ -31,6 +35,8 @@ var auto_fire = 0 # Seconds since last fire.
 
 # Motion variables.
 var speed = 0 # Speed at this frame.
+
+var random
 
 func _physics_process(delta):
 	# Movement.
@@ -139,15 +145,21 @@ func get_motion(input):
 	return motion
 
 func fire(ammount):
+	var shooted = false
 	if ammount % 2 == 1:
-		shoot_projectile(LEMON, "BULLETS_CENTRE", CANNON_CENTRE_POS)
+		shooted = shoot_projectile(LEMON, "BULLETS_CENTRE", CANNON_CENTRE_POS) or shooted
 	if ammount >= 2:
-		shoot_projectile(LEMON, "BULLETS_LEFT", CANNON_LEFT_POS)
-		shoot_projectile(LEMON, "BULLETS_RIGHT", CANNON_RIGHT_POS)
+		shooted = shoot_projectile(LEMON, "BULLETS_LEFT", CANNON_LEFT_POS) or shooted
+		shooted = shoot_projectile(LEMON, "BULLETS_RIGHT", CANNON_RIGHT_POS) or shooted
 		
+	if shooted:
+		# Play sound.
+		LIB.play_audio_random_pitch(AUDIO, Vector2(.9, 1.1))
+
 func shoot_projectile(projectile, group, pos):
+	var shooted = get_tree().get_nodes_in_group(group).size() < bullet_max
 	# Check if there are too many projectiles.
-	if get_tree().get_nodes_in_group(group).size() < bullet_max:
+	if shooted:
 		# Fire projectile.
 		var inst = projectile.instance()
 		inst.add_collision_exception_with(self)
@@ -155,3 +167,6 @@ func shoot_projectile(projectile, group, pos):
 		inst.global_position = global_position + pos.rotated(rotation)
 		inst.add_to_group(group)
 		get_parent().add_child(inst)
+		
+	return shooted
+	

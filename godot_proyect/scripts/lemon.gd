@@ -6,7 +6,6 @@ var damage = 10
 signal collide
 
 func _ready():
-	# TODO: Make sound.
 	add_collision_exception_with(self)
 	get_node("VisibilityNotifier2D").connect("screen_exited", self, "_on_screen_exited")
 

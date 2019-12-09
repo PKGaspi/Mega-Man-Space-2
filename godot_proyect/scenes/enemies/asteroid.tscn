@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/enemies/asteroid.png" type="Texture" id=2]
+[ext_resource path="res://assets/sfx/generic/hit.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.44082
 
-[node name="Enemy" type="KinematicBody2D" groups=[
+[node name="Asteroid" type="KinematicBody2D" groups=[
 "ENEMIES",
 ]]
 script = ExtResource( 1 )
@@ -17,3 +18,6 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
