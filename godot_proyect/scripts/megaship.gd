@@ -23,21 +23,21 @@ var mouse_last_pos
 
 # Upgrades and atributes.
 # Speeds.
-var speed_multiplier = 1
+var speed_multiplier = 1 # This applies to max speed and accelerations.
 # Bullets.
-var n_shoots = 3
+var n_shoots = 3 # Number of active cannons.
 var bullet_max = 7 # Max bullets per cannon on screen.
 var auto_fire = 0 # Seconds since last fire.
 
 # Motion variables.
 var speed = 0 # Speed at this frame.
-var input = Vector2() ## How much to move this frame.
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	# Movement.
-	input = get_directional_input()
-	apply_motion()
-	
+	var input = get_directional_input()
+	var motion = get_motion(input)
+	move_and_slide(motion)
+
 func _process(delta):
 	
 	# Get new values of this frame.
@@ -52,6 +52,7 @@ func _process(delta):
 		fire(n_shoots)
 		auto_fire = 0
 	
+	# Check mouse mode.
 	if gamepad:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	else:
@@ -127,13 +128,15 @@ func get_joystick_axis(device, joystick):
 		gamepad = true
 	return input
 
-func apply_motion():
+func get_motion(input):
 	if input != Vector2():
+		# Accelerate.
 		speed = clamp(speed + MOVE_SPEED_ACCEL, 0, MOVE_SPEED_MAX)
 	else:
+		# Deaccelerate.
 		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
-	input = input.normalized() * speed * speed_multiplier
-	return move_and_slide(input)
+	var motion = input.normalized() * speed * speed_multiplier
+	return motion
 
 func fire(ammount):
 	if ammount % 2 == 1:

@@ -2,16 +2,16 @@ extends ParallaxBackground
 
 # Preloaded sprites of all the stars.
 const STARS = [
-	preload("res://assets/sprites/star_0.png"),
-	preload("res://assets/sprites/star_1.png"),
-	preload("res://assets/sprites/star_2.png"),
-	preload("res://assets/sprites/star_3.png"),
-	preload("res://assets/sprites/star_4.png"),
-	preload("res://assets/sprites/star_5.png"),
-	preload("res://assets/sprites/star_6.png"),
-	preload("res://assets/sprites/star_7.png"),
-	preload("res://assets/sprites/star_8.png"),
-	preload("res://assets/sprites/star_9.png"),
+	preload("res://assets/sprites/background/star_0.png"),
+	preload("res://assets/sprites/background/star_1.png"),
+	preload("res://assets/sprites/background/star_2.png"),
+	preload("res://assets/sprites/background/star_3.png"),
+	preload("res://assets/sprites/background/star_4.png"),
+	preload("res://assets/sprites/background/star_5.png"),
+	preload("res://assets/sprites/background/star_6.png"),
+	preload("res://assets/sprites/background/star_7.png"),
+	preload("res://assets/sprites/background/star_8.png"),
+	preload("res://assets/sprites/background/star_9.png"),
 ]
 # The sizes of the stars. This array means that, stars
 # until the index 3 star (star_0 - star_3) have a size of
@@ -19,7 +19,7 @@ const STARS = [
 const STAR_SIZES = [3, 5, 7, 9]
 
 const PLANETS = [
-	preload("res://assets/sprites/planet_0.png"),
+	preload("res://assets/sprites/background/planet_0.png"),
 ]
 
 # Initialize runtime constants.
@@ -89,7 +89,7 @@ func _process(delta):
 				if !stars.has(new_sector):
 					create_stars(new_sector)
 		prev_sector = sector
-
+	
 
 func pos_to_sector(pos):
 	# Vector2 pos: position to check if is on the sector.

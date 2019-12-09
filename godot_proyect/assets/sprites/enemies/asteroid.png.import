@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star_2.png-c9b50a8af5e5ef4515d8ea436e103b27.stex"
+path="res://.import/asteroid.png-5430f593917fb0cd9ddd836b92c296fc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/star_2.png"
-dest_files=[ "res://.import/star_2.png-c9b50a8af5e5ef4515d8ea436e103b27.stex" ]
+source_file="res://assets/sprites/enemies/asteroid.png"
+dest_files=[ "res://.import/asteroid.png-5430f593917fb0cd9ddd836b92c296fc.stex" ]
 
 [params]
 

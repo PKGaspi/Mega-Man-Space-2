@@ -3,14 +3,15 @@
 [ext_resource path="res://scripts/megaship.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/megaship.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12.5, 11 )
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
-[node name="megaship" type="KinematicBody2D"]
+[node name="Megaship" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 0 )
+position = Vector2( -3, -0.5 )
+rotation = 1.5708
+scale = Vector2( 1.3, 1.88 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
