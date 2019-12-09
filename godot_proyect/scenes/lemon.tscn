@@ -1,9 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/lemon.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/lemon.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/megaship/lemon.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.54087
+height = 0.310454
 
 [node name="Lemon" type="KinematicBody2D" groups=[
 "PLAYER_BULLETS",

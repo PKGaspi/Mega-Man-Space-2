@@ -29,8 +29,8 @@ var mouse_last_pos
 # Speeds.
 var speed_multiplier = 1 # This applies to max speed and accelerations.
 # Bullets.
-var n_shoots = 3 # Number of active cannons.
-var bullet_max = 7 # Max bullets per cannon on screen.
+var n_shoots = 1 # Number of active cannons.
+var bullet_max = 3 # Max bullets per cannon on screen.
 var auto_fire = 0 # Seconds since last fire.
 
 # Motion variables.
@@ -42,6 +42,7 @@ func _physics_process(delta):
 	# Movement.
 	var input = get_directional_input()
 	var motion = get_motion(input)
+	set_fire_sprite()
 	move_and_slide(motion)
 
 func _process(delta):
@@ -66,6 +67,19 @@ func _process(delta):
 	
 	# Update values for next frame.
 	mouse_last_pos = mouse_pos
+
+func set_fire_sprite():
+	if speed == 0:
+		pass
+		$FireSprite.visible = false
+	else:
+		$FireSprite.visible = true
+		if speed == MOVE_SPEED_MAX * speed_multiplier:
+			$FireSprite.play("max")
+		else:
+			$FireSprite.play("accelerate")
+			$FireSprite.frame = float(speed) / (MOVE_SPEED_MAX * speed_multiplier) * $FireSprite.frames.get_frame_count("accelerate")
+			
 
 func get_directional_input():
 	
