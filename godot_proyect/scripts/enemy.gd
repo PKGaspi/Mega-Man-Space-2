@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var AUDIO = get_node("AudioStreamPlayer2D")
+onready var SND_HIT = get_node("SndHit")
 onready var LIB = get_node("/root/library")
 
 const INVENCIBILITY_TIME = .5 # In seconds.
@@ -10,10 +10,6 @@ var max_hp = 30
 var hp = max_hp
 var invencibitity_timer = 0 # Seconds until this enemy can be hit again.
 var flickering_timer = 0 # Seconds until a toggle on visibility is made.
-
-func _ready():
-	AUDIO.volume_db = -15
-	pass
 
 func _process(delta):
 	# Calculate invencibility and filckering.
@@ -37,7 +33,7 @@ func hit(bullet):
 		take_damage(bullet.damage)
 	
 func take_damage(damage):
-	LIB.play_audio_random_pitch(AUDIO, Vector2(.90, 1.10))
+	LIB.play_audio_random_pitch(SND_HIT, Vector2(.9, 1.1))
 	hp -= damage
 	invencibitity_timer = INVENCIBILITY_TIME
 	check_death()

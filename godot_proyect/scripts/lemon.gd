@@ -3,11 +3,12 @@ extends KinematicBody2D
 const MOTION_SPEED = 560 # Pixels/second.
 
 var damage = 10
-signal collide
 
 func _ready():
 	add_collision_exception_with(self)
-	get_node("VisibilityNotifier2D").connect("screen_exited", self, "_on_screen_exited")
+	var err = get_node("VisibilityNotifier2D").connect("screen_exited", self, "_on_screen_exited")
+	if err != OK:
+		print("Error connecting signal")
 
 func _on_screen_exited():
 	# Destroy itself if it has exited the screen.

@@ -4,7 +4,7 @@ extends KinematicBody2D
 
 # Resources.
 const LEMON = preload("res://scenes/lemon.tscn")
-onready var AUDIO = get_node("AudioStreamPlayer2D")
+onready var SND_SHOOT = get_node("SndShoot")
 onready var LIB = get_node("/root/library")
 
 # Moving speed.
@@ -35,8 +35,6 @@ var auto_fire = 0 # Seconds since last fire.
 
 # Motion variables.
 var speed = 0 # Speed at this frame.
-
-var random
 
 func _physics_process(delta):
 	# Movement.
@@ -168,7 +166,7 @@ func fire(ammount):
 		
 	if shooted:
 		# Play sound.
-		LIB.play_audio_random_pitch(AUDIO, Vector2(.9, 1.1))
+		LIB.play_audio_random_pitch(SND_SHOOT, Vector2(.98, 1.02))
 
 func shoot_projectile(projectile, group, pos):
 	var shooted = get_tree().get_nodes_in_group(group).size() < bullet_max
