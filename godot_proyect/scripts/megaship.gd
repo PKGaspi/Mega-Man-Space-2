@@ -15,6 +15,16 @@ const MOVE_SPEED_MAX = 260 # In pixels/second.
 const CANNON_CENTRE_POS = Vector2(15, -.5)
 const CANNON_LEFT_POS = Vector2(7, 4)
 const CANNON_RIGHT_POS = Vector2(7, -5)
+
+# Upgrades max.
+# Speeds.
+var SPEED_MULTIPLIER_MAX = 3 # Max speed multiplier.
+# Ship.
+var HP_MAX_MAX = 28 # Max max HP.
+# Bullets.
+var N_SHOOTS_MAX = 3 # Max number of active cannons.
+var BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
+
 # Auto fire cooldown. Maybe do this a variable so
 # you can get upgrades to improve it.
 const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
@@ -26,11 +36,17 @@ var mouse_pos
 var mouse_last_pos
 
 # Upgrades and atributes.
+
 # Speeds.
 var speed_multiplier = 1 # This applies to max speed and accelerations.
+# Ship.
+var hp_max = 28 # Max HP.
 # Bullets.
 var n_shoots = 1 # Number of active cannons.
 var bullet_max = 3 # Max bullets per cannon on screen.
+
+
+var hp = hp_max # Current HP.
 var auto_fire = 0 # Seconds since last fire.
 
 # Motion variables.
@@ -38,12 +54,16 @@ var speed = 0 # Speed at this frame.
 
 var random
 
+func _ready():
+	global.MEGASHIP = self
+
 func _physics_process(delta):
 	# Movement.
 	var input = get_directional_input()
 	var motion = get_motion(input)
 	set_fire_sprite()
 	move_and_slide(motion)
+
 
 func _process(delta):
 	
@@ -184,3 +204,11 @@ func shoot_projectile(projectile, group, pos):
 		
 	return shooted
 	
+func upgrade(type, ammount):
+	var value = get(type)
+	var value_max = get(type.to_upper() + "_MAX")
+	if value ==  value_max:
+		# TODO: Add some points ore something.
+		pass
+	else:
+		set(type, min(value_max, value + ammount))

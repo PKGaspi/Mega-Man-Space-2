@@ -26,6 +26,7 @@ const PLANETS = [
 var STAR_MAX_SIZE = len(STAR_SIZES)
 var N_STAR_SPRITES = len(STARS)
 
+const Z_INDEX_OFFSET = 100
 const N_LAYERS = 50
 const MIN_MOTION_SCALE = .4
 const MAX_MOTION_SCALE = 1
@@ -69,7 +70,7 @@ func _ready():
 		var t = float(i + 1) / N_LAYERS
 		var scale = MIN_MOTION_SCALE * (1 - t) + MAX_MOTION_SCALE * t
 		layer.motion_scale = Vector2(scale, scale)
-		layer.z_index = i
+		layer.z_index = Z_INDEX_OFFSET + i
 		add_child(layer)
 		layers.append(layer)
 		

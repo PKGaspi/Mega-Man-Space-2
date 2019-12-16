@@ -14,4 +14,4 @@ func toggle_fullscreen():
 
 func play_audio_random_pitch(snd, interval):
 	snd.play(0)
-	snd.pitch_scale = random.randi_range(interval.x, interval.y)
+	snd.pitch_scale = random.randf_range(interval.x, interval.y)

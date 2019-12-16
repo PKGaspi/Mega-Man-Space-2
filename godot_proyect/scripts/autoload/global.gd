@@ -5,6 +5,7 @@ onready var LIB = get_node("/root/library")
 const EXITING_TIME = 1 # In seconds.
 var exiting_timer = 0 # Time that the exit key has been pressed.
 
+var MEGASHIP
 func _ready():
 	pass
 
