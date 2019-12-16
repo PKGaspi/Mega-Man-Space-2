@@ -22,3 +22,4 @@ texture = ExtResource( 2 )
 [node name="SndHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -15.0
+bus = "Sfx"

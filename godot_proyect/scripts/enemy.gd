@@ -15,7 +15,6 @@ var invencibitity_timer = 0 # Seconds until this enemy can be hit again.
 var flickering_timer = 0 # Seconds until a toggle on visibility is made.
 var dead = false
 
-
 func _process(delta):
 	if !dead:
 		# Calculate invencibility and filckering.

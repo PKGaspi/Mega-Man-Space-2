@@ -27,7 +27,6 @@ func _ready():
 	var index =  random.randi_range(0, ENUM_LENGTH - 1)
 	type = UPGRADE_TYPES[index]
 	
-	print(index)
 	print(type)
 	#type = UPGRADE_TYPES[N_SHOOTS]
 	ammount = 1
