@@ -19,8 +19,7 @@ func _physics_process(delta):
 	var motion = Vector2(cos(rotation), sin(rotation)) * MOTION_SPEED
 	var collision = move_and_collide(motion * delta)
 	
-	if collision and collision.collider.is_in_group("ENEMIES"):
-		# TODO: take damage on the collided node.
-		# Destroy itself if it has exited the screen.
+	if collision:
+		# TODO: Move hitting sound to here.
 		collision.collider.hit(self)
 		queue_free()

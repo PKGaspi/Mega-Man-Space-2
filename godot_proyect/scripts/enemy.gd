@@ -19,7 +19,7 @@ func _process(delta):
 	if !dead:
 		# Calculate invencibility and filckering.
 		invencibitity_timer = max(invencibitity_timer - delta, 0)
-		if invencibitity_timer > 0:
+		if is_invincible():
 			if flickering_timer <= 0:
 				# Toggle flicker.
 				$Sprite.visible = !$Sprite.visible
@@ -36,6 +36,12 @@ func _process(delta):
 
 func init(pos):
 	global_position = pos
+
+func set_visibility(value):
+	$Sprite.visible = value
+	
+func toggle_visibility():
+	$Sprite.visible = !$Sprite.visible
 
 func hit(bullet):
 	if !is_invincible():

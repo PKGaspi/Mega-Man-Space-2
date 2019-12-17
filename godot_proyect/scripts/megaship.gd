@@ -20,10 +20,19 @@ const CANNON_RIGHT_POS = Vector2(7, -5)
 # Speeds.
 var SPEED_MULTIPLIER_MAX = 3 # Max speed multiplier.
 # Ship.
-var HP_MAX_MAX = 28 # Max max HP.
+var HP_MAX_MAX = 38 # Max max HP.
 # Bullets.
-var N_SHOOTS_MAX = 3 # Max number of active cannons.
+var N_CANNONS_MAX = 3 # Max number of active cannons.
 var BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
+
+# Upgrades min.
+# Speeds.
+var SPEED_MULTIPLIER_MIN = .6 # Min speed multiplier.
+# Ship.
+var HP_MAX_MIN = 18 # Min max HP.
+# Bullets.
+var N_CANNONS_MIN = 1 # Min number of active cannons.
+var BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 
 # Auto fire cooldown. Maybe do this a variable so
 # you can get upgrades to improve it.
@@ -42,7 +51,7 @@ var speed_multiplier = 1 # This applies to max speed and accelerations.
 # Ship.
 var hp_max = 28 # Max HP.
 # Bullets.
-var n_shoots = 1 # Number of active cannons.
+var n_cannons = 1 # Number of active cannons.
 var bullet_max = 3 # Max bullets per cannon on screen.
 
 
@@ -76,7 +85,7 @@ func _process(delta):
 	# Check if we are firing.
 	auto_fire += delta
 	if Input.is_action_pressed("shoot") and auto_fire >= AUTO_FIRE_INTERVAL:
-		fire(n_shoots)
+		fire(n_cannons)
 		auto_fire = 0
 	
 	# Check mouse mode.
@@ -196,7 +205,7 @@ func shoot_projectile(projectile, group, pos):
 	if shooted:
 		# Fire projectile.
 		var inst = projectile.instance()
-		inst.add_collision_exception_with(self)
+		#inst.add_collision_exception_with(self)
 		inst.rotation = rotation
 		inst.global_position = global_position + pos.rotated(rotation)
 		inst.add_to_group(group)
@@ -208,7 +217,8 @@ func upgrade(type, ammount):
 	var value = get(type)
 	var value_max = get(type.to_upper() + "_MAX")
 	if value ==  value_max:
-		# TODO: Add some points ore something.
+		# TODO: Add some points ore something. Play points sound.
 		pass
 	else:
+		# TODO: Play upgrade sound.
 		set(type, min(value_max, value + ammount))

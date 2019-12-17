@@ -121,6 +121,19 @@ toggle_fullscreen={
  ]
 }
 
+[layer_names]
+
+2d_render/layer_1="player"
+2d_physics/layer_1="player"
+2d_render/layer_2="bullets"
+2d_physics/layer_2="player_bullets"
+2d_render/layer_3="enemies"
+2d_physics/layer_3="enemies"
+2d_render/layer_4="pickups"
+2d_physics/layer_4="enemy_bullets"
+2d_physics/layer_5="pickups"
+2d_render/layer_20="stars"
+
 [rendering]
 
 quality/2d/use_pixel_snap=true
