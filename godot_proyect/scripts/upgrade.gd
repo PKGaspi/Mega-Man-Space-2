@@ -3,13 +3,13 @@ extends KinematicBody2D
 const SPR_SHELL_POS = preload("res://assets/sprites/upgrades/upgrade_shell_0.png")
 const SPR_SHELL_NEG = preload("res://assets/sprites/upgrades/upgrade_shell_1.png")
 
-const NEGATIVE_FREQUENCY = .5
+const NEGATIVE_FREQUENCY = 1
 
 const MOVE_SPEED_POS = 10
 const MOVE_SPEED_NEG = 40
 
 const SHINE_TIME_MIN = 2 # In seconds.
-const SHINE_TIME_MAX = 10 # In seconds.
+const SHINE_TIME_MAX = 5 # In seconds.
 
 const INVENCIBILITY_TIME = .5 # In seconds.
 const FLICKERING_INTERVAL = .05 # In seconds.
@@ -58,6 +58,7 @@ var shine_time = 0 # Seconds for the next shine to happen.
 
 var random
 
+# TODO: Destroy upgrades after x seconds. <---- Esto lo ha escrito Álex.
 func _ready():
 	random = RandomNumberGenerator.new()
 	random.seed *= OS.get_ticks_usec()

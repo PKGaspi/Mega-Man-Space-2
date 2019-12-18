@@ -216,9 +216,10 @@ func shoot_projectile(projectile, group, pos):
 func upgrade(type, ammount):
 	var value = get(type)
 	var value_max = get(type.to_upper() + "_MAX")
+	var value_min = get(type.to_upper() + "_MIN")
 	if value ==  value_max:
 		# TODO: Add some points ore something. Play points sound.
 		pass
 	else:
 		# TODO: Play upgrade sound.
-		set(type, min(value_max, value + ammount))
+		set(type, min(value_max, max(value + ammount, value_min)))
