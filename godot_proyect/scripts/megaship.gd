@@ -61,8 +61,6 @@ var auto_fire = 0 # Seconds since last fire.
 # Motion variables.
 var speed = 0 # Speed at this frame.
 
-var random
-
 func _ready():
 	global.MEGASHIP = self
 

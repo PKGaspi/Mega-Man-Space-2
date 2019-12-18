@@ -18,3 +18,8 @@ func _process(delta):
 		exiting_timer += delta
 	else:
 		exiting_timer = max(exiting_timer - delta, 0)
+		
+func init_random():
+	var random = RandomNumberGenerator.new()
+	random.seed = random.seed * OS.get_ticks_usec()
+	return random

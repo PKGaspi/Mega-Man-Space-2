@@ -21,8 +21,7 @@ var enemies_generated = [
 ]
 
 func _ready():
-	random = RandomNumberGenerator.new()
-	random.seed *= OS.get_ticks_usec()
+	random = global.init_random()
 
 func _process(delta):
 	while n_enemies < min(max_enemies, total_enemies):
@@ -49,5 +48,6 @@ func create_enemy(pos, enemy_index):
 		add_child(inst)
 
 func count_death():
+	# TODO: Play death sound here.
 	n_enemies -= 1
 	total_enemies -= 1

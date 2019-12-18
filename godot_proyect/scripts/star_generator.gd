@@ -53,14 +53,10 @@ var layers = [] # Array of layers.
 
 var prev_sector = Vector2(1000, 1000) # Megaship last sector.
 
-var MEGASHIP
-
 func _ready():
 	
-	MEGASHIP = get_node("/root/Main/Megaship")
 	# Create random generator.
-	random = RandomNumberGenerator.new()
-	random.seed *= OS.get_ticks_usec()
+	random = global.init_random()
 	r_seed = random.seed
 	
 	# Create parallax layers.
@@ -77,7 +73,7 @@ func _ready():
 	create_stars(prev_sector)
 	
 func _process(delta):
-	var sector = pos_to_sector(MEGASHIP.position)
+	var sector = pos_to_sector(global.MEGASHIP.position)
 	var sector_x = sector.x
 	var sector_y = sector.y
 	if prev_sector != sector:

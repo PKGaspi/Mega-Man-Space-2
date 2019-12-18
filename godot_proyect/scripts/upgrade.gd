@@ -19,7 +19,7 @@ const LIFE_TIME = 10 # In seconds.
 const LIFE_FLICKER_TIME = 2 # In seconds.
 var life_timer = LIFE_TIME
 
-var bad = false
+var bad = false # Whether the upgrade is bad or good.
 
 var max_hp = 70
 var hp = max_hp
@@ -62,9 +62,8 @@ var sprite = preload("res://assets/sprites/megaship/lemon.png")
 var random
 
 func _ready():
-	random = RandomNumberGenerator.new()
-	random.seed *= OS.get_ticks_usec()
-	
+	print(get_parent())
+	random = global.init_random()
 	
 	# Set upgrade type.
 	var index = random.randi_range(0, ENUM_LENGTH - 1)
@@ -101,7 +100,7 @@ func _process(delta):
 		shine()
 		shine_timer = random.randf_range(SHINE_TIME_MIN, SHINE_TIME_MAX)
 		
-	# Check if the upgrade is dead.
+	# Check if the upgrade is dead. <-- This was Álex's idea.
 	life_timer -= delta
 	if life_timer <= 0:
 		queue_free()

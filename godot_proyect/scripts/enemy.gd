@@ -48,6 +48,7 @@ func hit(bullet):
 		take_damage(bullet.damage)
 	
 func take_damage(damage):
+	# TODO: Move this sound to the bullet.
 	LIB.play_audio_random_pitch($SndHit, Vector2(.90, 1.10))
 	hp -= damage
 	invencibitity_timer = INVENCIBILITY_TIME
