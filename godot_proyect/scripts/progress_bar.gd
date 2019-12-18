@@ -24,14 +24,21 @@ func init(cell_texture, position, max_value, min_value = 0, value = max_value) -
 	margin_right = 1
 	
 	cell_size = cell_texture.get_size()
-	
-	size = Vector2(cell_size.x + margin_left + margin_right, (cell_size.y + separation) * max_value + margin_top + margin_bottom)
-	
-	bar_rect = Rect2(position, size)
+	calculate_rect()
 
 
 func _draw():
 	draw_rect(bar_rect, bg_color)
-	
 	for i in range(value):
-		draw_texture(cell_texture, Vector2(position.x + margin_left, position.y + size.y - (cell_size.y + separation) * i - margin_bottom))
+		draw_texture(cell_texture, Vector2(position.x + margin_left, position.y + size.y - (cell_size.y + separation) * i - margin_bottom - separation))
+		
+func update_values(new_value, new_max_value):
+	value = new_value
+	max_value = new_max_value
+	calculate_rect()
+	
+	update()
+	
+func calculate_rect():
+	size = Vector2(cell_size.x + margin_left + margin_right, (cell_size.y + separation) * max_value - separation + margin_top + margin_bottom)
+	bar_rect = Rect2(position, size)

@@ -2,8 +2,6 @@ extends KinematicBody2D
 
 const UPGRADE = preload("res://scenes/upgrade.tscn")
 
-onready var LIB = get_node("/root/library")
-
 const INVENCIBILITY_TIME = .5 # In seconds.
 const FLICKERING_INTERVAL = .05 # In seconds.
 
@@ -37,6 +35,10 @@ func _process(delta):
 func init(pos):
 	global_position = pos
 
+#########################
+## Auxiliar functions. ##
+#########################
+
 func set_visibility(value):
 	$Sprite.visible = value
 	
@@ -49,7 +51,7 @@ func hit(bullet):
 	
 func take_damage(damage):
 	# TODO: Move this sound to the bullet.
-	LIB.play_audio_random_pitch($SndHit, Vector2(.90, 1.10))
+	library.play_audio_random_pitch($SndHit, Vector2(.90, 1.10))
 	hp -= damage
 	invencibitity_timer = INVENCIBILITY_TIME
 	check_death()

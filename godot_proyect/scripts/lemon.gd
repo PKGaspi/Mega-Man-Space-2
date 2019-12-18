@@ -23,3 +23,8 @@ func _physics_process(delta):
 		# TODO: Move hitting sound to here.
 		collision.collider.hit(self)
 		queue_free()
+		
+func init(global_position, rotation, group):
+	self.global_position = global_position
+	self.rotation = rotation
+	add_to_group(group)

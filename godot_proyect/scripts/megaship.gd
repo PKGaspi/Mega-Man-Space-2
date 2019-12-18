@@ -2,12 +2,17 @@ extends KinematicBody2D
 
 # Resources.
 const LEMON = preload("res://scenes/lemon.tscn")
-onready var SND_SHOOT = get_node("SndShoot")
-onready var LIB = get_node("/root/library")
-# Health Bar.
+
+# Bars.
 const PROGRESS_BAR = preload("res://scenes/progress_bar.tscn")
+# Health Bar.
 const HP_CELL = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
-const HP_BAR_POS = Vector2(10, 10)
+const HP_BAR_POS = Vector2(5, 5)
+var hp_bar
+# Ammo Bar.
+var ammo_cell = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
+const AMMO_BAR_POS = Vector2(17, 5)
+var ammo_bar
 
 # Moving speed.
 const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
@@ -29,15 +34,18 @@ var mouse_pos
 var mouse_last_pos
 
 # Upgrades and atributes.
-
-# Speeds.
-const SPEED_MULTIPLIER_MAX = 3 # Max speed multiplier.
+# Speed.
+const SPEED_MULTIPLIER_MAX = 2.25 # Max speed multiplier.
 var speed_multiplier = 1 # This applies to max speed and accelerations.
-const SPEED_MULTIPLIER_MIN = .6 # Min speed multiplier.
-# Ship.
+const SPEED_MULTIPLIER_MIN = .75 # Min speed multiplier.
+# HP.
 const HP_MAX_MAX = 38 # Max max HP.
 var hp_max = 28 # Max HP.
 const HP_MAX_MIN = 18 # Min max HP.
+# Ammo.
+const AMMO_MAX_MAX = 38 # Max max ammo.
+var ammo_max = 28 # Max ammo.
+const AMMO_MAX_MIN = 18 # Min max ammo.
 # Cannons.
 const N_CANNONS_MAX = 3 # Max number of active cannons.
 var n_cannons = 1 # Number of active cannons.
@@ -47,10 +55,37 @@ const BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
 var bullet_max = 3 # Max bullets per cannon on screen.
 const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 
+# Powers.
+enum {
+	MEGA,
+	BUBBLE,
+	AIR,
+	QUICK,
+	HEAT,
+	WOOD,
+	METAL,
+	FLASH,
+	CRASH,
+	SIZE,
+}
 
-var hp_bar
+# Unlocked powers.
+var unlocked_powers = {
+	MEGA : true,
+	BUBBLE : false,
+	AIR : false,
+	QUICK : false,
+	HEAT : false,
+	WOOD : false,
+	METAL : false,
+	FLASH : false,
+	CRASH : false,
+}
 
 var hp = hp_max # Current HP.
+var ammo = ammo_max # Current ammo.
+var active_power = MEGA # Current active power.
+
 var auto_fire = 0 # Seconds since last fire.
 
 # Motion variables.
@@ -58,9 +93,15 @@ var speed = 0 # Speed at this frame.
 
 func _ready():
 	global.MEGASHIP = self
+	# Start HP bar.
 	hp_bar = PROGRESS_BAR.instance()
 	hp_bar.init(HP_CELL, HP_BAR_POS, hp_max)
-	$"../CanvasLayer/GUI/Bars/HPBar".add_child(hp_bar)
+	$"../GUILayer".add_child(hp_bar)
+	# Start Ammo bar.
+	ammo_bar = PROGRESS_BAR.instance()
+	ammo_bar.init(ammo_cell, AMMO_BAR_POS, ammo_max)
+	ammo_bar.visible = false
+	$"../GUILayer".add_child(ammo_bar)
 
 func _physics_process(delta):
 	# Movement.
@@ -68,7 +109,6 @@ func _physics_process(delta):
 	var motion = get_motion(input)
 	set_fire_sprite()
 	move_and_slide(motion)
-
 
 func _process(delta):
 	
@@ -93,6 +133,21 @@ func _process(delta):
 	# Update values for next frame.
 	mouse_last_pos = mouse_pos
 
+#########################
+## Auxiliar functions. ##
+#########################
+
+func set_hp_relative(relative_hp):
+	hp += relative_hp
+	update_bars()
+	
+func update_bar(bar, new_value, new_max_value):
+	bar.update_values(new_value, new_max_value)
+	
+func update_bars():
+	hp_bar.update_values(hp, hp_max)
+	ammo_bar.update_values(ammo, ammo_max)
+
 func set_fire_sprite():
 	if speed == 0:
 		pass
@@ -113,32 +168,31 @@ func get_directional_input():
 	
 	# Keyboard input.
 	if Input.is_action_pressed("keyboard_move_up"):
-		gamepad = false
 		input += Vector2(0, -1)
 	if Input.is_action_pressed("keyboard_move_down"):
-		gamepad = false
 		input += Vector2(0, 1)
 	if Input.is_action_pressed("keyboard_move_left"):
-		gamepad = false
 		input += Vector2(-1, 0)
 	if Input.is_action_pressed("keyboard_move_right"):
-		gamepad = false
 		input += Vector2(1, 0)
 		
+	if input != Vector2():
+		gamepad = false
+		
+	var prev_input = input
 	# Gamepad input.
 	if Input.is_action_pressed("gamepad_move_up"):
-		gamepad = true
 		input += Vector2(0, -1)
 	if Input.is_action_pressed("gamepad_move_down"):
-		gamepad = true
 		input += Vector2(0, 1)
 	if Input.is_action_pressed("gamepad_move_left"):
-		gamepad = true
 		input += Vector2(-1, 0)
 	if Input.is_action_pressed("gamepad_move_right"):
-		gamepad = true
 		input += Vector2(1, 0)
-	
+		
+	if input != prev_input:
+		gamepad = true
+		
 	if input == empty:
 		# Joystick input.
 		input = get_joystick_axis(0, JOY_AXIS_0)
@@ -192,8 +246,8 @@ func fire(ammount):
 		shooted = shoot_projectile(LEMON, "BULLETS_RIGHT", CANNON_RIGHT_POS) or shooted
 		
 	if shooted:
-		# Play sound.
-		LIB.play_audio_random_pitch(SND_SHOOT, Vector2(.98, 1.02))
+		# Play sound only once.
+		library.play_audio_random_pitch($SndShoot, Vector2(.98, 1.02))
 
 func shoot_projectile(projectile, group, pos):
 	var shooted = get_tree().get_nodes_in_group(group).size() < bullet_max
@@ -201,10 +255,7 @@ func shoot_projectile(projectile, group, pos):
 	if shooted:
 		# Fire projectile.
 		var inst = projectile.instance()
-		#inst.add_collision_exception_with(self)
-		inst.rotation = rotation
-		inst.global_position = global_position + pos.rotated(rotation)
-		inst.add_to_group(group)
+		inst.init(global_position + pos.rotated(rotation), rotation, group)
 		get_parent().add_child(inst)
 		
 	return shooted
@@ -214,8 +265,10 @@ func upgrade(type, ammount):
 	var value_max = get(type.to_upper() + "_MAX")
 	var value_min = get(type.to_upper() + "_MIN")
 	if value ==  value_max:
-		# TODO: Add some points ore something. Play points sound.
+		# TODO: Add some points or something. Play points sound.
 		pass
 	else:
 		# TODO: Play upgrade sound.
 		set(type, min(value_max, max(value + ammount, value_min)))
+		if type == "hp" or type == "ammo":
+			update_bars()

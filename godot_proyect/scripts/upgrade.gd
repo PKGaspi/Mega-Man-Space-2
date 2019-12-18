@@ -42,8 +42,8 @@ var UPGRADE_TYPES = {
 }
 
 var UPGRADE_AMMOUNTS = {
-	HP: 1,
-	SPEED: .4,
+	HP: 2,
+	SPEED: .25,
 	N_SHOOTS: 1,
 	BULLET_MAX: 1,
 }
@@ -62,7 +62,6 @@ var sprite = preload("res://assets/sprites/megaship/lemon.png")
 var random
 
 func _ready():
-	print(get_parent())
 	random = global.init_random()
 	
 	# Set upgrade type.
@@ -117,6 +116,10 @@ func _process(delta):
 	else:
 		# Stop at a visible state.
 		set_visibility(true)
+
+#########################
+## Auxiliar functions. ##
+#########################
 
 func shine():
 	if !bad:

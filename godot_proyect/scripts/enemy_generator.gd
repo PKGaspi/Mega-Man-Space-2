@@ -40,6 +40,10 @@ func init(total_enemies, max_enemies, region_centre):
 	# TODO: Create warning alert pointing region_centre.
 	print("More enemies at " + str(region_centre))
 
+#########################
+## Auxiliar functions. ##
+#########################
+
 func create_enemy(pos, enemy_index):
 	if enemies_generated[enemy_index]:
 		n_enemies += 1

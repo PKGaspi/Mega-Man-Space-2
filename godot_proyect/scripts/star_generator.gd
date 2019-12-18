@@ -88,6 +88,10 @@ func _process(delta):
 		prev_sector = sector
 	
 
+#########################
+## Auxiliar functions. ##
+#########################
+
 func pos_to_sector(pos):
 	# Vector2 pos: position to check if is on the sector.
 	var sector_x = int(pos.x / SECTOR_WIDTH)

@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/megaship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/enemy_generator.gd" type="Script" id=2]
+[ext_resource path="res://scripts/star_generator.gd" type="Script" id=3]
+[ext_resource path="res://scenes/upgrade.tscn" type="PackedScene" id=4]
+
+[node name="Space" type="Node"]
+
+[node name="Megaship" parent="." instance=ExtResource( 1 )]
+position = Vector2( 240, 135 )
+
+[node name="EnemyGenerator" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
+margin_left = -2270.62
+margin_top = -2086.5
+margin_right = 1825.38
+margin_bottom = 2009.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.117647, 0.0196078, 0.231373, 1 )
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="Upgrade" parent="." instance=ExtResource( 4 )]
+position = Vector2( 278.16, 187.406 )
+
+[node name="Upgrade2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 195.788, 44.9055 )
+
+[node name="Upgrade3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 170.641, 110.168 )
+
+[node name="Upgrade4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 173.635, 185.011 )
+
+[node name="Upgrade6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 348.851, 162.143 )
+
+[node name="Upgrade5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 315.92, 66.9433 )
