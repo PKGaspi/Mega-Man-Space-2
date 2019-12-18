@@ -6,6 +6,9 @@ extends KinematicBody2D
 const LEMON = preload("res://scenes/lemon.tscn")
 onready var SND_SHOOT = get_node("SndShoot")
 onready var LIB = get_node("/root/library")
+# Health Bar.
+const HP_CELL = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
+const HP_BAR_POS = Vector2(10, 10)
 
 # Moving speed.
 const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
@@ -63,6 +66,7 @@ var speed = 0 # Speed at this frame.
 
 func _ready():
 	global.MEGASHIP = self
+	$HealthBar.init(HP_CELL, HP_BAR_POS, hp_max)
 
 func _physics_process(delta):
 	# Movement.
