@@ -3,7 +3,7 @@ extends KinematicBody2D
 const SPR_SHELL_POS = preload("res://assets/sprites/upgrades/upgrade_shell_0.png")
 const SPR_SHELL_NEG = preload("res://assets/sprites/upgrades/upgrade_shell_1.png")
 
-const NEGATIVE_FREQUENCY = 1
+const NEGATIVE_FREQUENCY = .5
 
 const MOVE_SPEED_POS = 10
 const MOVE_SPEED_NEG = 40
@@ -13,6 +13,11 @@ const SHINE_TIME_MAX = 5 # In seconds.
 
 const INVENCIBILITY_TIME = .5 # In seconds.
 const FLICKERING_INTERVAL = .05 # In seconds.
+var shine_timer = 0 # Seconds for the next shine to happen.
+
+const LIFE_TIME = 10 # In seconds.
+const LIFE_FLICKER_TIME = 2 # In seconds.
+var life_timer = LIFE_TIME
 
 var bad = false
 
@@ -54,11 +59,8 @@ var type
 var ammount
 var sprite = preload("res://assets/sprites/megaship/lemon.png")
 
-var shine_time = 0 # Seconds for the next shine to happen.
-
 var random
 
-# TODO: Destroy upgrades after x seconds. <---- Esto lo ha escrito Álex.
 func _ready():
 	random = RandomNumberGenerator.new()
 	random.seed *= OS.get_ticks_usec()
@@ -78,11 +80,13 @@ func _ready():
 		$SprShine.play("shine")
 		
 func _physics_process(delta):
+	# Move towards the Mega Ship.
 	var dir = global_position.direction_to(global.MEGASHIP.global_position)
 	dir.normalized()
 	var motion = dir * (MOVE_SPEED_NEG if bad else MOVE_SPEED_POS)
 	move_and_slide(motion)
 	
+	# Check for Mega Ship collision.
 	for i in range(get_slide_count()):
 		var collider = get_slide_collision(i).collider
 		if collider == global.MEGASHIP:
@@ -91,14 +95,20 @@ func _physics_process(delta):
 			break
 			
 func _process(delta):
-	shine_time -= delta
-	if !bad and shine_time <= 0:
+	# Decrement shine timer
+	shine_timer -= delta
+	if !bad and shine_timer <= 0:
 		shine()
-		shine_time = random.randf_range(SHINE_TIME_MIN, SHINE_TIME_MAX)
+		shine_timer = random.randf_range(SHINE_TIME_MIN, SHINE_TIME_MAX)
 		
+	# Check if the upgrade is dead.
+	life_timer -= delta
+	if life_timer <= 0:
+		queue_free()
+	
 	# Calculate invencibility and filckering.
 	invencibitity_timer = max(invencibitity_timer - delta, 0)
-	if is_invincible():
+	if is_invincible() or life_timer <= LIFE_FLICKER_TIME:
 		if flickering_timer <= 0:
 			# Toggle flicker.
 			toggle_visibility()
@@ -124,6 +134,7 @@ func toggle_visibility():
 	$SprShine.visible = !$SprShine.visible
 
 func toggle_upgrade():
+	life_timer = LIFE_TIME
 	ammount = -ammount
 	bad = !bad
 	if bad:
