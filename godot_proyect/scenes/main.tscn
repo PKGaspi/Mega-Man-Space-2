@@ -4,21 +4,37 @@
 [ext_resource path="res://scripts/star_generator.gd" type="Script" id=2]
 [ext_resource path="res://scripts/enemy_generator.gd" type="Script" id=3]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node"]
 
 [node name="Megaship" parent="." instance=ExtResource( 1 )]
+position = Vector2( 240, 135 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
-margin_left = -2034.72
-margin_top = -2040.4
-margin_right = 2061.28
-margin_bottom = 2055.6
+margin_left = -2267.63
+margin_top = -2086.5
+margin_right = 1828.37
+margin_bottom = 2009.5
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.117647, 0.0196078, 0.231373, 1 )
 
 [node name="EnemyGenerator" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="MarginContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Tween" type="Tween" parent="CanvasLayer/GUI"]
+
+[node name="Bars" type="HBoxContainer" parent="CanvasLayer/GUI"]
+margin_right = 480.0
+margin_bottom = 270.0
+
+[node name="HPBar" type="VBoxContainer" parent="CanvasLayer/GUI/Bars"]
+margin_bottom = 270.0

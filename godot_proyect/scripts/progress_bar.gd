@@ -18,8 +18,8 @@ func init(cell_texture, position, max_value, min_value = 0, value = max_value) -
 	self.value = value
 	
 	separation = 1 # Separation between cells.
-	margin_top = -1
-	margin_bottom = 2
+	margin_top = 1
+	margin_bottom = 1
 	margin_left = 1
 	margin_right = 1
 	

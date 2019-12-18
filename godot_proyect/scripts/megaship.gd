@@ -1,12 +1,11 @@
 extends KinematicBody2D
 
-# Constants.
-
 # Resources.
 const LEMON = preload("res://scenes/lemon.tscn")
 onready var SND_SHOOT = get_node("SndShoot")
 onready var LIB = get_node("/root/library")
 # Health Bar.
+const PROGRESS_BAR = preload("res://scenes/progress_bar.tscn")
 const HP_CELL = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
 const HP_BAR_POS = Vector2(10, 10)
 
@@ -18,24 +17,6 @@ const MOVE_SPEED_MAX = 260 # In pixels/second.
 const CANNON_CENTRE_POS = Vector2(15, -.5)
 const CANNON_LEFT_POS = Vector2(7, 4)
 const CANNON_RIGHT_POS = Vector2(7, -5)
-
-# Upgrades max.
-# Speeds.
-var SPEED_MULTIPLIER_MAX = 3 # Max speed multiplier.
-# Ship.
-var HP_MAX_MAX = 38 # Max max HP.
-# Bullets.
-var N_CANNONS_MAX = 3 # Max number of active cannons.
-var BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
-
-# Upgrades min.
-# Speeds.
-var SPEED_MULTIPLIER_MIN = .6 # Min speed multiplier.
-# Ship.
-var HP_MAX_MIN = 18 # Min max HP.
-# Bullets.
-var N_CANNONS_MIN = 1 # Min number of active cannons.
-var BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 
 # Auto fire cooldown. Maybe do this a variable so
 # you can get upgrades to improve it.
@@ -50,13 +31,24 @@ var mouse_last_pos
 # Upgrades and atributes.
 
 # Speeds.
+const SPEED_MULTIPLIER_MAX = 3 # Max speed multiplier.
 var speed_multiplier = 1 # This applies to max speed and accelerations.
+const SPEED_MULTIPLIER_MIN = .6 # Min speed multiplier.
 # Ship.
+const HP_MAX_MAX = 38 # Max max HP.
 var hp_max = 28 # Max HP.
-# Bullets.
+const HP_MAX_MIN = 18 # Min max HP.
+# Cannons.
+const N_CANNONS_MAX = 3 # Max number of active cannons.
 var n_cannons = 1 # Number of active cannons.
+const N_CANNONS_MIN = 1 # Min number of active cannons.
+# Bullets.
+const BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
 var bullet_max = 3 # Max bullets per cannon on screen.
+const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 
+
+var hp_bar
 
 var hp = hp_max # Current HP.
 var auto_fire = 0 # Seconds since last fire.
@@ -66,7 +58,9 @@ var speed = 0 # Speed at this frame.
 
 func _ready():
 	global.MEGASHIP = self
-	$HealthBar.init(HP_CELL, HP_BAR_POS, hp_max)
+	hp_bar = PROGRESS_BAR.instance()
+	hp_bar.init(HP_CELL, HP_BAR_POS, hp_max)
+	$"../CanvasLayer/GUI/Bars/HPBar".add_child(hp_bar)
 
 func _physics_process(delta):
 	# Movement.
