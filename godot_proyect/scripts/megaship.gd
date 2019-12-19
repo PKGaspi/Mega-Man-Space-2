@@ -14,9 +14,11 @@ var ammo_cell = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
 const AMMO_BAR_POS = Vector2(17, 5)
 var ammo_bar
 
+const POWERS = global.powers
+
 # Moving speed.
 const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
-const MOVE_SPEED_DEACCEL = 50 # In pixels/second^2.
+const MOVE_SPEED_DEACCEL = 20 # In pixels/second^2.
 const MOVE_SPEED_MAX = 260 # In pixels/second.
 # Cannons positions.
 const CANNON_CENTRE_POS = Vector2(15, -.5)
@@ -55,41 +57,28 @@ const BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
 var bullet_max = 3 # Max bullets per cannon on screen.
 const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 
-# Powers.
-enum {
-	MEGA,
-	BUBBLE,
-	AIR,
-	QUICK,
-	HEAT,
-	WOOD,
-	METAL,
-	FLASH,
-	CRASH,
-	SIZE,
-}
-
 # Unlocked powers.
 var unlocked_powers = {
-	MEGA : true,
-	BUBBLE : false,
-	AIR : false,
-	QUICK : false,
-	HEAT : false,
-	WOOD : false,
-	METAL : false,
-	FLASH : false,
-	CRASH : false,
+	POWERS.MEGA : true,
+	POWERS.BUBBLE : false,
+	POWERS.AIR : false,
+	POWERS.QUICK : false,
+	POWERS.HEAT : false,
+	POWERS.WOOD : false,
+	POWERS.METAL : false,
+	POWERS.FLASH : false,
+	POWERS.CRASH : false,
 }
 
 var hp = hp_max # Current HP.
 var ammo = ammo_max # Current ammo.
-var active_power = MEGA # Current active power.
+var active_power = POWERS.MEGA # Current active power.
 
 var auto_fire = 0 # Seconds since last fire.
 
 # Motion variables.
 var speed = 0 # Speed at this frame.
+var motion_dir = Vector2()
 
 func _ready():
 	global.MEGASHIP = self
@@ -231,10 +220,11 @@ func get_motion(input):
 	if input != Vector2():
 		# Accelerate.
 		speed = clamp(speed + MOVE_SPEED_ACCEL, 0, MOVE_SPEED_MAX)
+		motion_dir = input
 	else:
 		# Deaccelerate.
 		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
-	var motion = input.normalized() * speed * speed_multiplier
+	var motion = motion_dir.normalized() * speed * speed_multiplier
 	return motion
 
 func fire(ammount):
@@ -272,3 +262,20 @@ func upgrade(type, ammount):
 		set(type, min(value_max, max(value + ammount, value_min)))
 		if type == "hp" or type == "ammo":
 			update_bars()
+			
+func set_power(power):
+	if unlocked_powers[power]:
+		# TODO: Play sound, set color palette, change bullets, etc.
+		active_power = power
+
+func next_power():
+	var power = (active_power + 1) % POWERS.SIZE
+	while !unlocked_powers[power]:
+		power = (power + 1) % POWERS.SIZE
+	set_power(power)
+
+func previous_power():
+	var power = (active_power - 1) % POWERS.SIZE
+	while !unlocked_powers[power]:
+		power = (power - 1) % POWERS.SIZE
+	set_power(power)

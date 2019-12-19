@@ -5,6 +5,21 @@ onready var LIB = get_node("/root/library")
 const EXITING_TIME = 1 # In seconds.
 var exiting_timer = 0 # Time that the exit key has been pressed.
 
+# Powers.
+enum powers {
+	MEGA,
+	BUBBLE,
+	AIR,
+	QUICK,
+	HEAT,
+	WOOD,
+	METAL,
+	FLASH,
+	CRASH,
+	SIZE,
+}
+
+
 var MEGASHIP
 func _ready():
 	pass

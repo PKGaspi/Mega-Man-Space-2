@@ -144,13 +144,11 @@ func toggle_upgrade():
 		$SprShell.texture = SPR_SHELL_NEG
 		set_collision_layer_bit(2, true)
 		set_collision_mask_bit(1, true)
-		set_collision_mask_bit(4, false)
 	else:
 		$SprShine.play("shine")
 		$SprShell.texture = SPR_SHELL_POS
 		set_collision_layer_bit(2, false)
 		set_collision_mask_bit(1, false)
-		set_collision_mask_bit(4, true)
 		
 func hit(bullet):
 	if !is_invincible():
