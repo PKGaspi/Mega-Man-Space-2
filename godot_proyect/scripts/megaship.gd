@@ -2,16 +2,16 @@ extends KinematicBody2D
 
 # Resources.
 const LEMON = preload("res://scenes/lemon.tscn")
-
+const MASK = preload("res://assets/sprites/megaship/megaship_mask.png")
 # Bars.
 const PROGRESS_BAR = preload("res://scenes/progress_bar.tscn")
 # Health Bar.
 const HP_CELL = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
-const HP_BAR_POS = Vector2(5, 5)
+const HP_BAR_POS = Vector2(16, 24)
 var hp_bar
 # Ammo Bar.
 var ammo_cell = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
-const AMMO_BAR_POS = Vector2(17, 5)
+const AMMO_BAR_POS = Vector2(23, 24)
 var ammo_bar
 
 const POWERS = global.powers
@@ -60,14 +60,14 @@ const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 # Unlocked powers.
 var unlocked_powers = {
 	POWERS.MEGA : true,
-	POWERS.BUBBLE : false,
-	POWERS.AIR : false,
-	POWERS.QUICK : false,
-	POWERS.HEAT : false,
-	POWERS.WOOD : false,
+	POWERS.BUBBLE : true,
+	POWERS.AIR : true,
+	POWERS.QUICK : true,
+	POWERS.HEAT : true,
+	POWERS.WOOD : true,
 	POWERS.METAL : true,
-	POWERS.FLASH : false,
-	POWERS.CRASH : false,
+	POWERS.FLASH : true,
+	POWERS.CRASH : true,
 }
 
 export(SpriteFrames) var palettes = null
@@ -93,6 +93,9 @@ func _ready():
 	ammo_bar.init(ammo_cell, AMMO_BAR_POS, ammo_max)
 	ammo_bar.visible = false
 	$"../GUILayer".add_child(ammo_bar)
+	
+	$ShipSprite.material.set_shader_param("mask", MASK)
+	$ShipSprite.material.set_shader_param("palette", palettes.get_frame("default", 0))
 
 func _physics_process(delta):
 	# Movement.
@@ -142,6 +145,8 @@ func update_bar(bar, new_value, new_max_value):
 	bar.update_values(new_value, new_max_value)
 	
 func update_bars():
+	hp = min(hp, hp_max)
+	ammo = min(ammo, ammo_max)
 	hp_bar.update_values(hp, hp_max)
 	ammo_bar.update_values(ammo, ammo_max)
 
@@ -268,25 +273,35 @@ func upgrade(type, ammount):
 	else:
 		# TODO: Play upgrade sound.
 		set(type, min(value_max, max(value + ammount, value_min)))
-		if type == "hp" or type == "ammo":
+		if type == "hp_max":
+			ammo_max = min(value_max, max(value + ammount, value_min))
 			update_bars()
 			
-func set_power(power):
+func set_power(power) -> bool:
 	if unlocked_powers[power]:
-		# TODO: Play sound, set color palette, change bullets, etc.
+		# TODO: Play sound, set ammo bar palette, change bullets, etc.
 		active_power = power
-		if power_palettes[power].texture is Texture:
-			print("jaja")
-		material.set_shader_param("palette", power_palettes[power])
+		# Set color palette.
+		$ShipSprite.material.set_shader_param("palette", palettes.get_frame("default", power))
+		# Show ammo.
+		ammo_bar.set_palette(power)
+		ammo_bar.visible = power != 0
+		return true
+	return false
+		
 
 func next_power():
+	# WARNING: This only works as wexpected if at least one power
+	# is unlocked. Mega is unlocked by default and at all time.
 	var power = max((active_power + 1) % POWERS.SIZE, 0)
-	while !unlocked_powers[power]:
-		power = (power + 1) % POWERS.SIZE
-	set_power(power)
+	while !set_power(power):
+		pass
 
 func previous_power():
-	var power = max((active_power - 1) % POWERS.SIZE, 0)
-	while !unlocked_powers[power]:
-		power = (power - 1) % POWERS.SIZE
-	set_power(power)
+	# WARNING: This only works as wexpected if at least one power
+	# is unlocked. Mega is unlocked by default and at all time.
+	var power = (active_power - 1) % POWERS.SIZE
+	if power < 0: 
+		power = POWERS.SIZE - 1
+	while !set_power(power):
+		pass
