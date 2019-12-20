@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const MOTION_SPEED = 560 # Pixels/second.
 
-var damage = 10
+var damage = 15
 
 func _ready():
 	add_collision_exception_with(self)

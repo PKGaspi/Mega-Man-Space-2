@@ -5,9 +5,9 @@ const UPGRADE = preload("res://scenes/upgrade.tscn")
 const INVENCIBILITY_TIME = .5 # In seconds.
 const FLICKERING_INTERVAL = .05 # In seconds.
 
-var upgrade_chance = .2
+const UPGRADE_CHANCE = .2
 
-var max_hp = 30
+export(float) var max_hp = 28
 var hp = max_hp
 var invencibitity_timer = 0 # Seconds until this enemy can be hit again.
 var flickering_timer = 0 # Seconds until a toggle on visibility is made.
@@ -63,8 +63,8 @@ func check_death():
 func die():
 	# Tell the enemy generator I died.
 	get_parent().count_death()
-	# Generate and upgrade at random.
-	if randf() <= .2:
+	# Generate an upgrade at random.
+	if randf() <= UPGRADE_CHANCE:
 		var inst = UPGRADE.instance()
 		inst.global_position = global_position
 		get_tree().root.add_child(inst)

@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/sprites/gui/palettes/hp_cell_palette_8.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/gui/palettes/hp_cell_palette_9.png" type="Texture" id=14]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
@@ -23,7 +23,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": true,
@@ -38,5 +38,5 @@ margin_top = 20.0379
 margin_right = 70.1357
 margin_bottom = 60.0379
 script = ExtResource( 2 )
-cell_masks = SubResource( 2 )
-cell_palettes = SubResource( 1 )
+cell_masks = SubResource( 1 )
+cell_palettes = SubResource( 2 )

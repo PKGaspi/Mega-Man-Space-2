@@ -26,7 +26,6 @@ void fragment() {
 "
 
 [sub_resource type="StreamTexture" id=2]
-load_path = "res://.import/hp_cell_mask.png-6be446598d367d1a544b64a3fe6d74be.stex"
 
 [resource]
 shader = SubResource( 1 )

@@ -37,9 +37,9 @@ var mouse_last_pos
 
 # Upgrades and atributes.
 # Speed.
-const SPEED_MULTIPLIER_MAX = 2.25 # Max speed multiplier.
+const SPEED_MULTIPLIER_MAX = 1.8 # Max speed multiplier.
 var speed_multiplier = 1 # This applies to max speed and accelerations.
-const SPEED_MULTIPLIER_MIN = .75 # Min speed multiplier.
+const SPEED_MULTIPLIER_MIN = .6 # Min speed multiplier.
 # HP.
 const HP_MAX_MAX = 38 # Max max HP.
 var hp_max = 28 # Max HP.
@@ -73,7 +73,18 @@ var unlocked_powers = {
 export(SpriteFrames) var palettes = null
 
 var hp = hp_max # Current HP.
-var ammo = ammo_max # Current ammo.
+
+var ammo = {
+	POWERS.MEGA : ammo_max,
+	POWERS.BUBBLE : ammo_max,
+	POWERS.AIR : ammo_max,
+	POWERS.QUICK : ammo_max,
+	POWERS.HEAT : ammo_max,
+	POWERS.WOOD : ammo_max,
+	POWERS.METAL : ammo_max,
+	POWERS.FLASH : ammo_max,
+	POWERS.CRASH : ammo_max,
+}
 var active_power = POWERS.MEGA # Current active power.
 
 var auto_fire = 0 # Seconds since last fire.
@@ -139,16 +150,18 @@ func _process(delta):
 
 func set_hp_relative(relative_hp):
 	hp += relative_hp
-	update_bars()
+	update_bar(hp_bar, hp, hp_max)
+	
+func set_ammo_relative(relative_ammo):
+	ammo[active_power] += relative_ammo
+	update_bar(ammo_bar, ammo[active_power], ammo_max)
 	
 func update_bar(bar, new_value, new_max_value):
 	bar.update_values(new_value, new_max_value)
 	
 func update_bars():
-	hp = min(hp, hp_max)
-	ammo = min(ammo, ammo_max)
-	hp_bar.update_values(hp, hp_max)
-	ammo_bar.update_values(ammo, ammo_max)
+	update_bar(hp_bar, hp, hp_max)
+	update_bar(ammo_bar, ammo[active_power], ammo_max)
 
 func set_fire_sprite():
 	if speed == 0:
@@ -274,8 +287,9 @@ func upgrade(type, ammount):
 		# TODO: Play upgrade sound.
 		set(type, min(value_max, max(value + ammount, value_min)))
 		if type == "hp_max":
+			set_hp_relative(ammount)
 			ammo_max = min(value_max, max(value + ammount, value_min))
-			update_bars()
+			set_ammo_relative(value)
 			
 func set_power(power) -> bool:
 	if unlocked_powers[power]:
@@ -286,6 +300,8 @@ func set_power(power) -> bool:
 		# Show ammo.
 		ammo_bar.set_palette(power)
 		ammo_bar.visible = power != 0
+		# Set ammo value under max.
+		ammo[active_power] = min(ammo[active_power], ammo_max)
 		return true
 	return false
 		

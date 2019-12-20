@@ -43,7 +43,7 @@ var UPGRADE_TYPES = {
 
 var UPGRADE_AMMOUNTS = {
 	HP: 2,
-	SPEED: .25,
+	SPEED: .2,
 	N_SHOOTS: 1,
 	BULLET_MAX: 1,
 }
