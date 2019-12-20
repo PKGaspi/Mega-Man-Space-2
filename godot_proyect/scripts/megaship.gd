@@ -65,10 +65,12 @@ var unlocked_powers = {
 	POWERS.QUICK : false,
 	POWERS.HEAT : false,
 	POWERS.WOOD : false,
-	POWERS.METAL : false,
+	POWERS.METAL : true,
 	POWERS.FLASH : false,
 	POWERS.CRASH : false,
 }
+
+export(SpriteFrames) var palettes = null
 
 var hp = hp_max # Current HP.
 var ammo = ammo_max # Current ammo.
@@ -118,6 +120,12 @@ func _process(delta):
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	
+	########## TEST
+	if Input.is_action_just_pressed("ui_down"):
+		previous_power()
+	if Input.is_action_just_pressed("ui_up"):
+		next_power()
 	
 	# Update values for next frame.
 	mouse_last_pos = mouse_pos
@@ -267,15 +275,18 @@ func set_power(power):
 	if unlocked_powers[power]:
 		# TODO: Play sound, set color palette, change bullets, etc.
 		active_power = power
+		if power_palettes[power].texture is Texture:
+			print("jaja")
+		material.set_shader_param("palette", power_palettes[power])
 
 func next_power():
-	var power = (active_power + 1) % POWERS.SIZE
+	var power = max((active_power + 1) % POWERS.SIZE, 0)
 	while !unlocked_powers[power]:
 		power = (power + 1) % POWERS.SIZE
 	set_power(power)
 
 func previous_power():
-	var power = (active_power - 1) % POWERS.SIZE
+	var power = max((active_power - 1) % POWERS.SIZE, 0)
 	while !unlocked_powers[power]:
 		power = (power - 1) % POWERS.SIZE
 	set_power(power)

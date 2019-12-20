@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/megaship_fire_0.png-a4b4e4839cd311f3450716161c43ab73.stex"
+path="res://.import/megaship_fire_0.png-0905bc1b3f29ba0b534e8f00c945bd67.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/megaship/megaship_fire_0.png"
-dest_files=[ "res://.import/megaship_fire_0.png-a4b4e4839cd311f3450716161c43ab73.stex" ]
+source_file="res://assets/sprites/megaship/fire/megaship_fire_0.png"
+dest_files=[ "res://.import/megaship_fire_0.png-0905bc1b3f29ba0b534e8f00c945bd67.stex" ]
 
 [params]
 
