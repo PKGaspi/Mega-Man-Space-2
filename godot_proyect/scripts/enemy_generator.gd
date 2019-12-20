@@ -1,55 +1,66 @@
 extends Node2D
 
-const ENEMIES = [
-	preload("res://scenes/enemies/asteroid.tscn")
-]
+# List of all enemies to generate.
+export(Array) var enemies = null
+onready var enemies_len = len(enemies)
 
-const WIDTH = 100
-const HEIGHT = 100
+# Zone where enemies spawn.
+const AREA_SIZE = Vector2(200, 200)
+const AREA_LIMITS = Rect2(Vector2(-400, -400), Vector2(800, 800))
+var spawn_area 	: Rect2
+var width		: float
+var height 		: float
+var centre 		: Vector2
 
 var total_enemies = 10
 var n_enemies = 0
 var max_enemies = 4
 
-var region_centre = Vector2(100, 100)
+const TOTAL_ENEMIES_RANDOM_RANGE = Vector2(8, 15)
+const MAX_ENEMIES_RANDOM_RANGE = Vector2(3, 6)
 
 var random
 
-# A true/false array for the enemies this generator can spawn
-var enemies_generated = [
-	true
-]
-
 func _ready():
 	random = global.init_random()
+	new_random_horde(AREA_LIMITS, TOTAL_ENEMIES_RANDOM_RANGE, MAX_ENEMIES_RANDOM_RANGE)
 
 func _process(delta):
 	while n_enemies < min(max_enemies, total_enemies):
-		var x = random.randf_range(- WIDTH / 2, WIDTH / 2) + region_centre.x
-		var y = random.randf_range(- HEIGHT / 2, HEIGHT / 2) + region_centre.y
-		create_enemy(Vector2(x, y), 0)
+		var x = random.randf_range(- width / 2, width / 2) + centre.x
+		var y = random.randf_range(- height / 2, height / 2) + centre.y
+		create_enemy(Vector2(x, y), random.randi_range(0, enemies_len - 1))
 	if total_enemies == 0:
-		init(random.randi_range(8, 15), random.randi_range(3, 6), Vector2(random.randi_range(-200, 200), random.randi_range(-200, 200)))
+		new_random_horde(AREA_LIMITS, TOTAL_ENEMIES_RANDOM_RANGE, MAX_ENEMIES_RANDOM_RANGE)
 		
 		pass # Generate a new round or the boss.
 
-func init(total_enemies, max_enemies, region_centre):
+func new_horde(new_spawn, total_enemies, max_enemies):	
+	self.spawn_area = new_spawn
+	self.width = spawn_area.size.x
+	self.height = spawn_area.size.y
+	self.centre = spawn_area.position.linear_interpolate(spawn_area.end, .5)
 	self.total_enemies = total_enemies
 	self.max_enemies = max_enemies
-	self.region_centre = region_centre
-	# TODO: Create warning alert pointing region_centre.
-	print("More enemies at " + str(region_centre))
+	# TODO: Create warning alert pointing centre.
+	print("More enemies at " + str(centre))
+
+func new_random_horde(area_limits, total_enemies_range, max_enemies_range):
+		var new_spawn = Rect2(Vector2(random.randf_range(area_limits.position.x, area_limits.end.x), random.randf_range(area_limits.position.y, area_limits.end.y)), AREA_SIZE)
+		var total_enemies = random.randi_range(total_enemies_range.x, total_enemies_range.y)
+		var max_enemies = random.randi_range(max_enemies_range.x, max_enemies_range.y)
+		new_horde(new_spawn, total_enemies, max_enemies)
+	
 
 #########################
 ## Auxiliar functions. ##
 #########################
 
 func create_enemy(pos, enemy_index):
-	if enemies_generated[enemy_index]:
-		n_enemies += 1
-		var inst = ENEMIES[enemy_index].instance()
-		inst.init(pos)
-		add_child(inst)
+	n_enemies += 1
+	var inst = enemies[enemy_index].instance()
+	inst.init(pos)
+	add_child(inst)
 
 func count_death():
 	# TODO: Play death sound here.

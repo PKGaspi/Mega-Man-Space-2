@@ -1,30 +1,18 @@
 extends ParallaxBackground
 
 # Preloaded sprites of all the stars.
-const STARS = [
-	preload("res://assets/sprites/background/star_0.png"),
-	preload("res://assets/sprites/background/star_1.png"),
-	preload("res://assets/sprites/background/star_2.png"),
-	preload("res://assets/sprites/background/star_3.png"),
-	preload("res://assets/sprites/background/star_4.png"),
-	preload("res://assets/sprites/background/star_5.png"),
-	preload("res://assets/sprites/background/star_6.png"),
-	preload("res://assets/sprites/background/star_7.png"),
-	preload("res://assets/sprites/background/star_8.png"),
-	preload("res://assets/sprites/background/star_9.png"),
-]
+
+export(Array) var star_textures = null
+export(Array) var planet_textures = null
+
 # The sizes of the stars. This array means that, stars
 # until the index 3 star (star_0 - star_3) have a size of
 # one, stars from index 3+1 to 6 have a size of 2, etc.
 const STAR_SIZES = [3, 5, 7, 9]
 
-const PLANETS = [
-	preload("res://assets/sprites/background/planet_0.png"),
-]
-
 # Initialize runtime constants.
-var STAR_MAX_SIZE = len(STAR_SIZES)
-var N_STAR_SPRITES = len(STARS)
+onready var STAR_MAX_SIZE = len(STAR_SIZES)
+onready var N_STAR_TEXTURES = len(star_textures)
 
 const Z_INDEX_OFFSET = 100
 const N_LAYERS = 50
@@ -137,7 +125,7 @@ func create_stars(sector):
 				var layer = random.randi_range(0, N_LAYERS - 1)
 				
 				# Calculate sprite from layer.
-				var star_index = min(int((layer * 100) / (N_STAR_SPRITES * N_LAYERS)), N_STAR_SPRITES - 1)
+				var star_index = min(int((layer * 100) / (N_STAR_TEXTURES * N_LAYERS)), N_STAR_TEXTURES - 1)
 				var prev_size = 0
 				var star_size
 				for k in range(0, STAR_MAX_SIZE):
@@ -146,12 +134,12 @@ func create_stars(sector):
 						star_size = k
 						break
 					prev_size = STAR_SIZES[k] + 1
-				var sprite = STARS[star_index]
+				var sprite = star_textures[star_index]
 				# This star might be a planet!
 				if (star_size == 0 && random.randf() < PLANET_FREQUENCY && n_planets < MAX_PLANETS_PER_SECTOR):
 					# IT'S A PLANET!!
 					n_planets += 1
-					sprite = PLANETS[random.randi_range(0, len(PLANETS) - 1)]
+					sprite = planet_textures[random.randi_range(0, len(planet_textures) - 1)]
 				# Create the star.
 				stars[sector].append(create_star(Vector2(x, y), layer, sprite))
 

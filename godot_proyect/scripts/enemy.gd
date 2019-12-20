@@ -47,11 +47,13 @@ func toggle_visibility():
 
 func hit(bullet):
 	if !is_invincible():
-		take_damage(bullet.damage)
+		# TODO: Calculate damage with enemy weakness and bullet weapon type.
+		var damage = bullet.damage
+		take_damage(damage)
 	
 func take_damage(damage):
 	# TODO: Move this sound to the bullet.
-	library.play_audio_random_pitch($SndHit, Vector2(.90, 1.10))
+	global.play_audio_random_pitch($SndHit, Vector2(.90, 1.10))
 	hp -= damage
 	invencibitity_timer = INVENCIBILITY_TIME
 	check_death()

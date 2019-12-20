@@ -1,8 +1,11 @@
 extends KinematicBody2D
 
-# Resources.
+################
+## Resources. ##
+################
 const LEMON = preload("res://scenes/lemon.tscn")
 const MASK = preload("res://assets/sprites/megaship/megaship_mask.png")
+export(SpriteFrames) var palettes = null
 # Bars.
 const PROGRESS_BAR = preload("res://scenes/progress_bar.tscn")
 # Health Bar.
@@ -14,8 +17,9 @@ var ammo_cell = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
 const AMMO_BAR_POS = Vector2(23, 24)
 var ammo_bar
 
-const POWERS = global.powers
-
+######################
+## Gameplay values. ##
+######################
 # Moving speed.
 const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 20 # In pixels/second^2.
@@ -35,7 +39,9 @@ var gamepad = false
 var mouse_pos
 var mouse_last_pos
 
-# Upgrades and atributes.
+###########################
+# Upgrades and atributes. #
+###########################
 # Speed.
 const SPEED_MULTIPLIER_MAX = 1.8 # Max speed multiplier.
 var speed_multiplier = 1 # This applies to max speed and accelerations.
@@ -57,41 +63,46 @@ const BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
 var bullet_max = 3 # Max bullets per cannon on screen.
 const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 
-# Unlocked powers.
-var unlocked_powers = {
-	POWERS.MEGA : true,
-	POWERS.BUBBLE : true,
-	POWERS.AIR : true,
-	POWERS.QUICK : true,
-	POWERS.HEAT : true,
-	POWERS.WOOD : true,
-	POWERS.METAL : true,
-	POWERS.FLASH : true,
-	POWERS.CRASH : true,
+###########
+# WEAPONS. #
+###########
+var WEAPONS = global.WEAPONS # WEAPONS enum.
+var active_weapon = WEAPONS.MEGA # Current active weapon.
+# Unlocked WEAPONS.
+var unlocked_WEAPONS = {
+	WEAPONS.MEGA : true,
+	WEAPONS.BUBBLE : true,
+	WEAPONS.AIR : true,
+	WEAPONS.QUICK : true,
+	WEAPONS.HEAT : true,
+	WEAPONS.WOOD : true,
+	WEAPONS.METAL : true,
+	WEAPONS.FLASH : true,
+	WEAPONS.CRASH : true,
 }
 
-export(SpriteFrames) var palettes = null
-
+##############
+# HP & ammo. #
+##############
 var hp = hp_max # Current HP.
-
-var ammo = {
-	POWERS.MEGA : ammo_max,
-	POWERS.BUBBLE : ammo_max,
-	POWERS.AIR : ammo_max,
-	POWERS.QUICK : ammo_max,
-	POWERS.HEAT : ammo_max,
-	POWERS.WOOD : ammo_max,
-	POWERS.METAL : ammo_max,
-	POWERS.FLASH : ammo_max,
-	POWERS.CRASH : ammo_max,
+var ammo = { # Current ammo for each weapon.
+	WEAPONS.MEGA : ammo_max,
+	WEAPONS.BUBBLE : ammo_max,
+	WEAPONS.AIR : ammo_max,
+	WEAPONS.QUICK : ammo_max,
+	WEAPONS.HEAT : ammo_max,
+	WEAPONS.WOOD : ammo_max,
+	WEAPONS.METAL : ammo_max,
+	WEAPONS.FLASH : ammo_max,
+	WEAPONS.CRASH : ammo_max,
 }
-var active_power = POWERS.MEGA # Current active power.
 
+########################
+# Mechanics variables. #
+########################
 var auto_fire = 0 # Seconds since last fire.
-
-# Motion variables.
 var speed = 0 # Speed at this frame.
-var motion_dir = Vector2()
+var motion_dir = Vector2() # Direction of the last movement.
 
 func _ready():
 	global.MEGASHIP = self
@@ -137,9 +148,9 @@ func _process(delta):
 	
 	########## TEST
 	if Input.is_action_just_pressed("ui_down"):
-		previous_power()
+		previous_weapon()
 	if Input.is_action_just_pressed("ui_up"):
-		next_power()
+		next_weapon()
 	
 	# Update values for next frame.
 	mouse_last_pos = mouse_pos
@@ -153,15 +164,15 @@ func set_hp_relative(relative_hp):
 	update_bar(hp_bar, hp, hp_max)
 	
 func set_ammo_relative(relative_ammo):
-	ammo[active_power] += relative_ammo
-	update_bar(ammo_bar, ammo[active_power], ammo_max)
+	ammo[active_weapon] += relative_ammo
+	update_bar(ammo_bar, ammo[active_weapon], ammo_max)
 	
 func update_bar(bar, new_value, new_max_value):
 	bar.update_values(new_value, new_max_value)
 	
 func update_bars():
 	update_bar(hp_bar, hp, hp_max)
-	update_bar(ammo_bar, ammo[active_power], ammo_max)
+	update_bar(ammo_bar, ammo[active_weapon], ammo_max)
 
 func set_fire_sprite():
 	if speed == 0:
@@ -183,13 +194,13 @@ func get_directional_input():
 	
 	# Keyboard input.
 	if Input.is_action_pressed("keyboard_move_up"):
-		input += Vector2(0, -1)
+		input += Vector2.UP
 	if Input.is_action_pressed("keyboard_move_down"):
-		input += Vector2(0, 1)
+		input += Vector2.DOWN
 	if Input.is_action_pressed("keyboard_move_left"):
-		input += Vector2(-1, 0)
+		input += Vector2.LEFT
 	if Input.is_action_pressed("keyboard_move_right"):
-		input += Vector2(1, 0)
+		input += Vector2.RIGHT
 		
 	if input != Vector2():
 		gamepad = false
@@ -197,13 +208,13 @@ func get_directional_input():
 	var prev_input = input
 	# Gamepad input.
 	if Input.is_action_pressed("gamepad_move_up"):
-		input += Vector2(0, -1)
+		input += Vector2.UP
 	if Input.is_action_pressed("gamepad_move_down"):
-		input += Vector2(0, 1)
+		input += Vector2.DOWN
 	if Input.is_action_pressed("gamepad_move_left"):
-		input += Vector2(-1, 0)
+		input += Vector2.LEFT
 	if Input.is_action_pressed("gamepad_move_right"):
-		input += Vector2(1, 0)
+		input += Vector2.RIGHT
 		
 	if input != prev_input:
 		gamepad = true
@@ -263,7 +274,7 @@ func fire(ammount):
 		
 	if shooted:
 		# Play sound only once.
-		library.play_audio_random_pitch($SndShoot, Vector2(.98, 1.02))
+		global.play_audio_random_pitch($SndShoot, Vector2(.98, 1.02))
 
 func shoot_projectile(projectile, group, pos):
 	var shooted = get_tree().get_nodes_in_group(group).size() < bullet_max
@@ -291,33 +302,33 @@ func upgrade(type, ammount):
 			ammo_max = min(value_max, max(value + ammount, value_min))
 			set_ammo_relative(value)
 			
-func set_power(power) -> bool:
-	if unlocked_powers[power]:
+func set_weapon(weapon) -> bool:
+	if unlocked_WEAPONS[weapon]:
 		# TODO: Play sound, set ammo bar palette, change bullets, etc.
-		active_power = power
+		active_weapon = weapon
 		# Set color palette.
-		$ShipSprite.material.set_shader_param("palette", palettes.get_frame("default", power))
+		$ShipSprite.material.set_shader_param("palette", palettes.get_frame("default", weapon))
 		# Show ammo.
-		ammo_bar.set_palette(power)
-		ammo_bar.visible = power != 0
+		ammo_bar.set_palette(weapon)
+		ammo_bar.visible = weapon != 0
 		# Set ammo value under max.
-		ammo[active_power] = min(ammo[active_power], ammo_max)
+		ammo[active_weapon] = min(ammo[active_weapon], ammo_max)
 		return true
 	return false
 		
 
-func next_power():
-	# WARNING: This only works as wexpected if at least one power
+func next_weapon():
+	# WARNING: This only works as wexpected if at least one weapon
 	# is unlocked. Mega is unlocked by default and at all time.
-	var power = max((active_power + 1) % POWERS.SIZE, 0)
-	while !set_power(power):
+	var weapon = max((active_weapon + 1) % WEAPONS.SIZE, 0)
+	while !set_weapon(weapon):
 		pass
 
-func previous_power():
-	# WARNING: This only works as wexpected if at least one power
+func previous_weapon():
+	# WARNING: This only works as wexpected if at least one weapon
 	# is unlocked. Mega is unlocked by default and at all time.
-	var power = (active_power - 1) % POWERS.SIZE
-	if power < 0: 
-		power = POWERS.SIZE - 1
-	while !set_power(power):
+	var weapon = (active_weapon - 1) % WEAPONS.SIZE
+	if weapon < 0: 
+		weapon = WEAPONS.SIZE - 1
+	while !set_weapon(weapon):
 		pass
