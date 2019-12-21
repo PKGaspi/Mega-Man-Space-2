@@ -1,5 +1,7 @@
 # Mega Man Space 2
 
+![alt text][logo]
+
 ## Introduction
 Mega Man Space 2 is a Mega Man based fangame with a drastic
 change on the genre, tanking the blue bomber into an arcade-like
@@ -81,3 +83,5 @@ Color palette swap shader for [Godot]: https://github.com/HeartoLazor/godot_pale
 [Game Maker Studio]: https://www.yoyogames.com/gamemaker
 [Aseprite]: https://www.aseprite.org/
 [Alfedi]: https://github.com/Alfedi
+
+[logo]: https://github.com/rapsaGnauJ/Mega-Man-Space-2/markdown/logo.png "Game Logo"
