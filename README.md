@@ -15,11 +15,13 @@ on it, please buy the official games or merchandising. Thank you.
 ## State of the game
 As of today the game is in development on a non playable state. You can
 download the code and make a build, but fun is not garanteed. Sugestions,
-feedback, issues and any kind of idea in general is well received.
+feedback and any kind of idea in general is well received. Please, feel
+free to open an issue if you have anything useful for the game.
 
 Check this repo or my sites below to stay tuned about the latest updates.
-If you can't wait any longer (which I doubt) I suggest you to check the
-prequel, [Mega Man Space].
+Every monday I do a weekly report on [my Twitter](https://twitter.com/PK_Gaspi).
+If you can't wait any longer to play the game (which I doubt) I suggest
+you to check the prequel, [Mega Man Space].
 
 ## Tools
 The game is being developed using [Godot], an open source game engine.  
@@ -29,12 +31,12 @@ Sprites are elaborated with inspiration on the original Mega Man 2 game
 sprites is [Aseprite].  
 
 Music and sound efects will be directly taken from the original Mega Man 2,
-with no new themes being planned for the project.
+with no new themes being planned for the project... But who knows??
 
 ## Changes over Mega Man Space
 Mega Man Space 2 is very different to Mega Man Space. Appart from the
 new assets and game engine ([Godot] replacing [Game Maker Studio]), there
-is a key change in gameplay. In Mega Man Space there were only one enemy
+is a key change in gameplay. In Mega Man Space there was only one enemy
 at a time, and it rarely moved away from the top of the screen. In Mega 
 Man Space 2 the enemies will come from everywhere, so you need to react
 fast to their position, aim at them, and fire!  
@@ -69,7 +71,13 @@ a ship.
 Q: Do you like spaghetti?  
 A: Yes.
 
+### Credits
+Main designer, developer, artist and tester: I
+Ideas and feedback: friends and family
+Color palette swap shader for [Godot]: https://github.com/HeartoLazor/godot_palette_swap
+
 [Mega Man Space]: https://gaspi.itch.io/mega-man-space
 [Godot]: https://godotengine.org/
 [Game Maker Studio]: https://www.yoyogames.com/gamemaker
 [Aseprite]: https://www.aseprite.org/
+[Alfedi]: https://github.com/Alfedi
