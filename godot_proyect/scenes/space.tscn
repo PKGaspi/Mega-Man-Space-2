@@ -51,6 +51,6 @@ margin_right = 480.0
 margin_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color( 0.113725, 0.0666667, 0.207843, 1 )
+color = Color( 0.117647, 0.0588235, 0.196078, 1 )
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
