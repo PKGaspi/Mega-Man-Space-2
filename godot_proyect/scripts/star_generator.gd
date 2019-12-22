@@ -6,7 +6,7 @@ export(SpriteFrames) var star_masks = null
 export(SpriteFrames) var star_palettes = null
 export(SpriteFrames) var planet_textures = null
 
-var texture = preload("res://assets/sprites/background/star_0.png")
+var texture = preload("res://assets/sprites/background/empty.png")
 var material = preload("res://other/palette_swap_material.tres")
 
 # Initialize runtime constants.
@@ -20,17 +20,17 @@ const MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
-const STAR_FREQUENCY = .4
+const STAR_FREQUENCY = .5
 const PLANET_FREQUENCY = -1
 const MAX_PLANETS_PER_SECTOR = 1
 
-const SECTOR_WIDTH = global.SCREEN_SIZE.x  # Sector width.
-const SECTOR_HEIGHT = global.SCREEN_SIZE.y  # Sector height.
+const SECTOR_WIDTH = global.SCREEN_SIZE.x # Sector width.
+const SECTOR_HEIGHT = global.SCREEN_SIZE.y # Sector height.
 const SECTOR_ROWS = 4 # Number of sectors loaded at the same time on a row.
 const SECTOR_COLUMNS = 4 # Number of sectors loaded at the same time on a column.
-const TILES_X = 4 # Max stars in a sector row.
-const TILES_Y = 4 # Max stars in a sector column.
-const TILE_OFFSET = 10 # Offset for columns and rows.
+const TILES_X = 3 # Max stars in a sector row.
+const TILES_Y = 3 # Max stars in a sector column.
+const TILE_OFFSET = 20 # Offset for columns and rows.
 
 var random # Base randomizer.
 var r_seed # Base random seed.
@@ -129,7 +129,6 @@ func create_stars(sector):
 				
 				# Calculate sprite from layer.
 				var star_mask = floor((float(layer) / (N_LAYERS)) * N_STAR_MASKS)
-				print(star_mask)
 				var star_palette = random.randi_range(0, N_STAR_PALETTES - 1)
 				# This star might be a planet!
 				if (star_mask == 0 && random.randf() < PLANET_FREQUENCY && n_planets < MAX_PLANETS_PER_SECTOR):
