@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/megaship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/enemy_generator.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/sprites/background/star_palette_4.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/background/star_palette_5.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/background/star_palette_6.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/background/planet_0.png" type="Texture" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -27,6 +28,14 @@ animations = [ {
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 16 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -45,6 +54,7 @@ enemies = [ ExtResource( 3 ) ]
 script = ExtResource( 4 )
 star_masks = SubResource( 1 )
 star_palettes = SubResource( 2 )
+planet_textures = SubResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground"]
 margin_right = 480.0

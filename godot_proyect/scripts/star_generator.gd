@@ -6,7 +6,8 @@ export(SpriteFrames) var star_masks = null
 export(SpriteFrames) var star_palettes = null
 export(SpriteFrames) var planet_textures = null
 
-var texture = preload("res://assets/sprites/background/empty.png")
+var empty_star_texture
+var empty_planet_texture
 var material = preload("res://other/palette_swap_material.tres")
 
 # Initialize runtime constants.
@@ -45,6 +46,21 @@ func _ready():
 	# Create random generator.
 	random = global.init_random()
 	r_seed = random.seed
+	
+	# Create empty textures for stars and planets.
+	empty_star_texture = ImageTexture.new()
+	empty_planet_texture = ImageTexture.new()
+	var empty_image = Image.new()
+	
+	var size = star_masks.get_frame("default", 0).get_size()
+	empty_image.create(size.x, size.y, false, Image.FORMAT_BPTC_RGBA)
+	empty_image.fill(Color(0, 0, 0, 0))
+	empty_star_texture.create_from_image(empty_image)
+	
+	size = planet_textures.get_frame("default", 0).get_size()
+	empty_image.create(size.x, size.y, false, Image.FORMAT_BPTC_RGBA)
+	empty_image.fill(Color(0, 0, 0, 0))
+	empty_planet_texture.create_from_image(empty_image)
 	
 	# Create parallax layers.
 	for i in range(N_LAYERS):
@@ -85,7 +101,7 @@ func pos_to_sector(pos):
 	var sector_y = int(pos.y / SECTOR_HEIGHT)
 	return Vector2(sector_x, sector_y)
 
-func create_star(pos, layer, mask, palette):
+func create_star(pos, layer, texture, mask, palette):
 	# Vector2 pos: position of the star.
 	# int layer: layer index to place the star.
 	# String sprite: route of the texture of the star.
@@ -93,8 +109,8 @@ func create_star(pos, layer, mask, palette):
 	star.texture = texture
 	star.z_index = layers[layer].z_index
 	star.position = pos * layers[layer].motion_scale
-	material.set_shader_param("mask", star_masks.get_frame("default", mask))
-	material.set_shader_param("palette", star_palettes.get_frame("default", palette))
+	material.set_shader_param("mask", mask)
+	material.set_shader_param("palette", palette)
 	star.material = material.duplicate(true)
 	star.visible = true
 	layers[layer].add_child(star)
@@ -130,13 +146,14 @@ func create_stars(sector):
 				# Calculate sprite from layer.
 				var star_mask = floor((float(layer) / (N_LAYERS)) * N_STAR_MASKS)
 				var star_palette = random.randi_range(0, N_STAR_PALETTES - 1)
+				var texture = empty_star_texture
 				# This star might be a planet!
 				if (star_mask == 0 && random.randf() < PLANET_FREQUENCY && n_planets < MAX_PLANETS_PER_SECTOR):
 					# IT'S A PLANET!!
 					n_planets += 1
 				
 				# Create the star.
-				stars[sector].append(create_star(Vector2(x, y), layer, star_mask, star_palette))
+				stars[sector].append(create_star(Vector2(x, y), layer, texture, star_masks.get_frame("default", star_mask), star_palettes.get_frame("default", star_palette)))
 
 func destroy_stars(sector):
 	# Calculate sector coordinates.
