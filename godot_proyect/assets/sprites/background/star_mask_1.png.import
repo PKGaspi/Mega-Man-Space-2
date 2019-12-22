@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/star_1.png-25978357ecbad2134e0e0c75c7c71b39.stex"
+path="res://.import/star_mask_1.png-734df55cb9928722ce41df3fd987e332.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/background/star_1.png"
-dest_files=[ "res://.import/star_1.png-25978357ecbad2134e0e0c75c7c71b39.stex" ]
+source_file="res://assets/sprites/background/star_mask_1.png"
+dest_files=[ "res://.import/star_mask_1.png-734df55cb9928722ce41df3fd987e332.stex" ]
 
 [params]
 

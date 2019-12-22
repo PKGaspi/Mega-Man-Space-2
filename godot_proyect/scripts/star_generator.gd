@@ -2,17 +2,16 @@ extends ParallaxBackground
 
 # Preloaded sprites of all the stars.
 
-export(Array) var star_textures = null
-export(Array) var planet_textures = null
+export(SpriteFrames) var star_masks = null
+export(SpriteFrames) var star_palettes = null
+export(SpriteFrames) var planet_textures = null
 
-# The sizes of the stars. This array means that, stars
-# until the index 3 star (star_0 - star_3) have a size of
-# one, stars from index 3+1 to 6 have a size of 2, etc.
-const STAR_SIZES = [3, 5, 7, 9]
+var texture = preload("res://assets/sprites/background/star_0.png")
+var material = preload("res://other/palette_swap_material.tres")
 
 # Initialize runtime constants.
-onready var STAR_MAX_SIZE = len(STAR_SIZES)
-onready var N_STAR_TEXTURES = len(star_textures)
+onready var N_STAR_MASKS = star_masks.get_frame_count("default")
+onready var N_STAR_PALETTES = star_palettes.get_frame_count("default")
 
 const Z_INDEX_OFFSET = 100
 const N_LAYERS = 50
@@ -21,17 +20,17 @@ const MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
-const STAR_FREQUENCY = .1
-const PLANET_FREQUENCY = .0004
+const STAR_FREQUENCY = .4
+const PLANET_FREQUENCY = -1
 const MAX_PLANETS_PER_SECTOR = 1
 
-const SECTOR_WIDTH = 160 # Sector width.
-const SECTOR_HEIGHT = 100 # Sector height.
-const SECTOR_ROWS = 10 # Number of sectors loaded at the same time on a row.
-const SECTOR_COLUMNS = 10 # Number of sectors loaded at the same time on a column.
+const SECTOR_WIDTH = global.SCREEN_SIZE.x  # Sector width.
+const SECTOR_HEIGHT = global.SCREEN_SIZE.y  # Sector height.
+const SECTOR_ROWS = 4 # Number of sectors loaded at the same time on a row.
+const SECTOR_COLUMNS = 4 # Number of sectors loaded at the same time on a column.
 const TILES_X = 4 # Max stars in a sector row.
 const TILES_Y = 4 # Max stars in a sector column.
-const TILE_OFFSET = 5 # Offset for columns and rows.
+const TILE_OFFSET = 10 # Offset for columns and rows.
 
 var random # Base randomizer.
 var r_seed # Base random seed.
@@ -86,14 +85,18 @@ func pos_to_sector(pos):
 	var sector_y = int(pos.y / SECTOR_HEIGHT)
 	return Vector2(sector_x, sector_y)
 
-func create_star(pos, layer, sprite):
+func create_star(pos, layer, mask, palette):
 	# Vector2 pos: position of the star.
 	# int layer: layer index to place the star.
 	# String sprite: route of the texture of the star.
 	var star = Sprite.new()
+	star.texture = texture
 	star.z_index = layers[layer].z_index
 	star.position = pos * layers[layer].motion_scale
-	star.texture = sprite
+	material.set_shader_param("mask", star_masks.get_frame("default", mask))
+	material.set_shader_param("palette", star_palettes.get_frame("default", palette))
+	star.material = material.duplicate(true)
+	star.visible = true
 	layers[layer].add_child(star)
 	return star
 
@@ -125,23 +128,16 @@ func create_stars(sector):
 				var layer = random.randi_range(0, N_LAYERS - 1)
 				
 				# Calculate sprite from layer.
-				var star_index = min(int((layer * 100) / (N_STAR_TEXTURES * N_LAYERS)), N_STAR_TEXTURES - 1)
-				var prev_size = 0
-				var star_size
-				for k in range(0, STAR_MAX_SIZE):
-					if (star_index <= STAR_SIZES[k]):
-						star_index = random.randi_range(prev_size, STAR_SIZES[k])
-						star_size = k
-						break
-					prev_size = STAR_SIZES[k] + 1
-				var sprite = star_textures[star_index]
+				var star_mask = floor((float(layer) / (N_LAYERS)) * N_STAR_MASKS)
+				print(star_mask)
+				var star_palette = random.randi_range(0, N_STAR_PALETTES - 1)
 				# This star might be a planet!
-				if (star_size == 0 && random.randf() < PLANET_FREQUENCY && n_planets < MAX_PLANETS_PER_SECTOR):
+				if (star_mask == 0 && random.randf() < PLANET_FREQUENCY && n_planets < MAX_PLANETS_PER_SECTOR):
 					# IT'S A PLANET!!
 					n_planets += 1
-					sprite = planet_textures[random.randi_range(0, len(planet_textures) - 1)]
+				
 				# Create the star.
-				stars[sector].append(create_star(Vector2(x, y), layer, sprite))
+				stars[sector].append(create_star(Vector2(x, y), layer, star_mask, star_palette))
 
 func destroy_stars(sector):
 	# Calculate sector coordinates.
