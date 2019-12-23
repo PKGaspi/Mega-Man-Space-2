@@ -24,9 +24,9 @@ const MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
-const STAR_FREQUENCY = .3
-const PLANET_FREQUENCY = .01
-const MAX_PLANETS_PER_SECTOR = 1
+export(float) var STAR_FREQUENCY = .3
+export(float) var PLANET_FREQUENCY = .01
+export(int) var MAX_PLANETS_PER_SECTOR = 1
 
 const SECTOR_SIZE = global.SCREEN_SIZE * .35 # Sector size.
 const SECTOR_ROWS = 10 # Number of sectors loaded at the same time on a row.
