@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends "res://scripts/character.gd"
 
 const SPR_SHELL_POS = preload("res://assets/sprites/upgrades/upgrade_shell_0.png")
 const SPR_SHELL_NEG = preload("res://assets/sprites/upgrades/upgrade_shell_1.png")
@@ -15,16 +15,7 @@ const INVENCIBILITY_TIME = .5 # In seconds.
 const FLICKERING_INTERVAL = .05 # In seconds.
 var shine_timer = 0 # Seconds for the next shine to happen.
 
-const LIFE_TIME = 10 # In seconds.
-const LIFE_FLICKER_TIME = 2 # In seconds.
-var life_timer = LIFE_TIME
-
 var bad = false # Whether the upgrade is bad or good.
-
-var max_hp = 70
-var hp = max_hp
-var invencibitity_timer = 0 # Seconds until this enemy can be hit again.
-var flickering_timer = 0 # Seconds until a toggle on visibility is made.
 
 enum {
 	HP,
@@ -64,6 +55,8 @@ var random
 func _ready():
 	random = global.init_random()
 	
+	snd_hit = $"../SndHit" # The hit sound is played by the parent.
+	
 	# Set upgrade type.
 	var index = random.randi_range(0, ENUM_LENGTH - 1)
 	type = UPGRADE_TYPES[index]
@@ -99,23 +92,6 @@ func _process(delta):
 		shine()
 		shine_timer = random.randf_range(SHINE_TIME_MIN, SHINE_TIME_MAX)
 		
-	# Check if the upgrade is dead. <-- This was Álex's idea.
-	life_timer -= delta
-	if life_timer <= 0:
-		queue_free()
-	
-	# Calculate invencibility and filckering.
-	invencibitity_timer = max(invencibitity_timer - delta, 0)
-	if is_invincible() or life_timer <= LIFE_FLICKER_TIME:
-		if flickering_timer <= 0:
-			# Toggle flicker.
-			toggle_visibility()
-			flickering_timer = FLICKERING_INTERVAL
-		else:
-			flickering_timer = max(flickering_timer - delta, 0)
-	else:
-		# Stop at a visible state.
-		set_visibility(true)
 
 #########################
 ## Auxiliar functions. ##
@@ -125,18 +101,7 @@ func shine():
 	if !bad:
 		$SprShine.frame = 0 # Shine.
 
-func set_visibility(value):
-	$SprIcon.visible = value
-	$SprShell.visible = value
-	$SprShine.visible = value
-	
-func toggle_visibility():
-	$SprIcon.visible = !$SprIcon.visible
-	$SprShell.visible = !$SprShell.visible
-	$SprShine.visible = !$SprShine.visible
-
 func toggle_upgrade():
-	life_timer = LIFE_TIME
 	ammount = -ammount
 	bad = !bad
 	if bad:
@@ -150,19 +115,7 @@ func toggle_upgrade():
 		set_collision_layer_bit(2, false)
 		set_collision_mask_bit(1, false)
 		
-func hit(bullet):
-	if !is_invincible():
-		take_damage(bullet.damage)
-	
-func take_damage(damage):
-	global.play_audio_random_pitch($"../SndHit", Vector2(.90, 1.10))
-	hp -= damage
-	invencibitity_timer = INVENCIBILITY_TIME
-	check_death()
-
-func check_death():
-	if hp <= 0:
-		toggle_upgrade()
-
-func is_invincible():
-	return invencibitity_timer > 0
+func die():
+	life_timer = 0 # Reset life_timer.
+	hp = hp_max
+	toggle_upgrade()

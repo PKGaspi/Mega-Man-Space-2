@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends "res://scripts/character.gd"
 
 ################
 ## Resources. ##
@@ -33,7 +33,7 @@ const CANNON_RIGHT_POS = Vector2(7, -5)
 # you can get upgrades to improve it.
 const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
 
-const JOYSTICK_DEADZONE = .1
+const JOYSTICK_DEADZONE = .3
 
 var mouse_pos
 var mouse_last_pos
@@ -47,7 +47,7 @@ var speed_multiplier = 1 # This applies to max speed and accelerations.
 const SPEED_MULTIPLIER_MIN = .6 # Min speed multiplier.
 # HP.
 const HP_MAX_MAX = 38 # Max max HP.
-var hp_max = 28 # Max HP.
+# var hp_max = 28 # Max HP. This is in character.gd.
 const HP_MAX_MIN = 18 # Min max HP.
 # Ammo.
 const AMMO_MAX_MAX = 38 # Max max ammo.
@@ -83,7 +83,7 @@ var unlocked_WEAPONS = {
 ##############
 # HP & ammo. #
 ##############
-var hp = hp_max # Current HP.
+# var hp = hp_max # Current HP. This is in character.gd.
 var ammo = { # Current ammo for each weapon.
 	WEAPONS.MEGA : ammo_max,
 	WEAPONS.BUBBLE : ammo_max,
@@ -105,16 +105,18 @@ var motion_dir = Vector2() # Direction of the last movement.
 
 func _ready():
 	global.MEGASHIP = self
-	# Start HP bar.
+	
+	# Init HP bar.
 	hp_bar = PROGRESS_BAR.instance()
 	hp_bar.init(HP_CELL, HP_BAR_POS, hp_max)
 	$"../GUILayer".add_child(hp_bar)
-	# Start Ammo bar.
+	# Init Ammo bar.
 	ammo_bar = PROGRESS_BAR.instance()
 	ammo_bar.init(ammo_cell, AMMO_BAR_POS, ammo_max)
 	ammo_bar.visible = false
 	$"../GUILayer".add_child(ammo_bar)
 	
+	$ShipSprite.texture = global.create_empty_image(MASK.get_size())
 	$ShipSprite.material.set_shader_param("mask", MASK)
 	$ShipSprite.material.set_shader_param("palette", palettes.get_frame("default", 0))
 
@@ -205,14 +207,14 @@ func get_directional_input():
 		global.gamepad = false
 		
 	var prev_input = input
-	# global.gamepad input.
-	if Input.is_action_pressed("global.gamepad_move_up"):
+	# Gamepad input.
+	if Input.is_action_pressed("gamepad_move_up"):
 		input += Vector2.UP
-	if Input.is_action_pressed("global.gamepad_move_down"):
+	if Input.is_action_pressed("gamepad_move_down"):
 		input += Vector2.DOWN
-	if Input.is_action_pressed("global.gamepad_move_left"):
+	if Input.is_action_pressed("gamepad_move_left"):
 		input += Vector2.LEFT
-	if Input.is_action_pressed("global.gamepad_move_right"):
+	if Input.is_action_pressed("gamepad_move_right"):
 		input += Vector2.RIGHT
 		
 	if input != prev_input:
@@ -262,10 +264,6 @@ func get_motion(input):
 		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
 	var motion = motion_dir.normalized() * speed * speed_multiplier
 	return motion
-
-func take_damage(damage):
-	set_hp_relative(-damage)
-	$SndHit.play()
 
 func fire(ammount):
 	var shooted = false

@@ -49,19 +49,8 @@ func _ready():
 	r_seed = random.seed
 	
 	# Create empty textures for stars and planets.
-	empty_star_texture = ImageTexture.new()
-	empty_planet_texture = ImageTexture.new()
-	var empty_image = Image.new()
-	
-	var size = star_masks.get_frame("default", 0).get_size()
-	empty_image.create(size.x, size.y, false, Image.FORMAT_BPTC_RGBA)
-	empty_image.fill(Color(0, 0, 0, 0))
-	empty_star_texture.create_from_image(empty_image)
-	
-	size = planet_masks.get_frame("default", 0).get_size()
-	empty_image.create(size.x, size.y, false, Image.FORMAT_BPTC_RGBA)
-	empty_image.fill(Color(0, 0, 0, 0))
-	empty_planet_texture.create_from_image(empty_image)
+	empty_star_texture = global.create_empty_image(star_masks.get_frame("default", 0).get_size())
+	empty_planet_texture = global.create_empty_image(planet_masks.get_frame("default", 0).get_size())
 	
 	# Create materials.
 	create_materials(star_masks, star_palettes)

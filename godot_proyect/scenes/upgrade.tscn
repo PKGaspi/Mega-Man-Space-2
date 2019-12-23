@@ -29,6 +29,8 @@ light_mask = 8
 collision_layer = 16
 collision_mask = 21
 script = ExtResource( 1 )
+flicker_before_timeout = true
+dissapear_on_timeout = true
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, -0.5 )
