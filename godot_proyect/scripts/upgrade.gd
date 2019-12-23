@@ -155,6 +155,7 @@ func hit(bullet):
 		take_damage(bullet.damage)
 	
 func take_damage(damage):
+	global.play_audio_random_pitch($"../SndHit", Vector2(.90, 1.10))
 	hp -= damage
 	invencibitity_timer = INVENCIBILITY_TIME
 	check_death()

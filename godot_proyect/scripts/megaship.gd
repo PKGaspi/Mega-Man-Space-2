@@ -35,7 +35,6 @@ const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
 
 const JOYSTICK_DEADZONE = .1
 
-var gamepad = false
 var mouse_pos
 var mouse_last_pos
 
@@ -141,7 +140,7 @@ func _process(delta):
 		auto_fire = 0
 	
 	# Check mouse mode.
-	if gamepad:
+	if global.gamepad:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
@@ -203,21 +202,21 @@ func get_directional_input():
 		input += Vector2.RIGHT
 		
 	if input != Vector2():
-		gamepad = false
+		global.gamepad = false
 		
 	var prev_input = input
-	# Gamepad input.
-	if Input.is_action_pressed("gamepad_move_up"):
+	# global.gamepad input.
+	if Input.is_action_pressed("global.gamepad_move_up"):
 		input += Vector2.UP
-	if Input.is_action_pressed("gamepad_move_down"):
+	if Input.is_action_pressed("global.gamepad_move_down"):
 		input += Vector2.DOWN
-	if Input.is_action_pressed("gamepad_move_left"):
+	if Input.is_action_pressed("global.gamepad_move_left"):
 		input += Vector2.LEFT
-	if Input.is_action_pressed("gamepad_move_right"):
+	if Input.is_action_pressed("global.gamepad_move_right"):
 		input += Vector2.RIGHT
 		
 	if input != prev_input:
-		gamepad = true
+		global.gamepad = true
 		
 	if input == empty:
 		# Joystick input.
@@ -230,14 +229,14 @@ func get_rotation():
 	var input = get_joystick_axis(0, JOY_AXIS_3)
 	
 	if input != Vector2():
-		gamepad = true
+		global.gamepad = true
 		rot = input.angle()
 	else:
 		rot = rotation
 		if mouse_pos != mouse_last_pos:
-			gamepad = false
+			global.gamepad = false
 	
-	if !gamepad:
+	if !global.gamepad:
 		if position.distance_to(mouse_pos) > 3:
 			rot = mouse_pos.angle_to_point(get_global_transform_with_canvas().origin)
 		else:
@@ -250,7 +249,7 @@ func get_joystick_axis(device, joystick):
 	if input.length() < JOYSTICK_DEADZONE:
 		input = Vector2()
 	else:
-		gamepad = true
+		global.gamepad = true
 	return input
 
 func get_motion(input):
@@ -263,6 +262,10 @@ func get_motion(input):
 		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
 	var motion = motion_dir.normalized() * speed * speed_multiplier
 	return motion
+
+func take_damage(damage):
+	set_hp_relative(-damage)
+	$SndHit.play()
 
 func fire(ammount):
 	var shooted = false
@@ -291,20 +294,24 @@ func upgrade(type, ammount):
 	var value = get(type)
 	var value_max = get(type.to_upper() + "_MAX")
 	var value_min = get(type.to_upper() + "_MIN")
-	if value ==  value_max:
+	if value == value_max:
 		# TODO: Add some points or something. Play points sound.
 		pass
-	else:
+	if ammount > 0:
 		# TODO: Play upgrade sound.
-		set(type, min(value_max, max(value + ammount, value_min)))
-		if type == "hp_max":
-			set_hp_relative(ammount)
-			ammo_max = min(value_max, max(value + ammount, value_min))
-			set_ammo_relative(value)
+		$SndUpgrade.play()
+	if ammount < 0:
+		take_damage(3)
+	set(type, min(value_max, max(value + ammount, value_min)))
+	if type == "hp_max":
+		set_hp_relative(ammount)
+		ammo_max = min(value_max, max(value + ammount, value_min))
+		set_ammo_relative(value)
 			
 func set_weapon(weapon) -> bool:
 	if unlocked_WEAPONS[weapon]:
-		# TODO: Play sound, set ammo bar palette, change bullets, etc.
+		# TODO: Change bullets.
+		$SndWeaponSwap.play()
 		active_weapon = weapon
 		# Set color palette.
 		$ShipSprite.material.set_shader_param("palette", palettes.get_frame("default", weapon))
@@ -318,14 +325,14 @@ func set_weapon(weapon) -> bool:
 		
 
 func next_weapon():
-	# WARNING: This only works as wexpected if at least one weapon
+	# WARNING: This only works as expected if at least one weapon
 	# is unlocked. Mega is unlocked by default and at all time.
 	var weapon = max((active_weapon + 1) % WEAPONS.SIZE, 0)
 	while !set_weapon(weapon):
 		pass
 
 func previous_weapon():
-	# WARNING: This only works as wexpected if at least one weapon
+	# WARNING: This only works as expected if at least one weapon
 	# is unlocked. Mega is unlocked by default and at all time.
 	var weapon = (active_weapon - 1) % WEAPONS.SIZE
 	if weapon < 0: 

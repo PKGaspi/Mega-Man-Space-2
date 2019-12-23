@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scripts/megaship.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_0.png" type="Texture" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://assets/sprites/megaship/fire/megaship_fire_1.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/megaship/megaship_mask.png" type="Texture" id=18]
 [ext_resource path="res://assets/sfx/megaship/megaship_shoot.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sfx/generic/hit.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/sfx/generic/menu_select.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -104,3 +107,19 @@ editor_draw_drag_margin = true
 [node name="SndShoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 19 )
 volume_db = -20.0
+bus = "Sfx"
+
+[node name="SndHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 20 )
+volume_db = -10.0
+bus = "Sfx"
+
+[node name="SndWeaponSwap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 21 )
+volume_db = -10.0
+bus = "Sfx"
+
+[node name="SndUpgrade" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 22 )
+volume_db = -10.0
+bus = "Sfx"

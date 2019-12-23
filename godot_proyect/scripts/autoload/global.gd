@@ -45,8 +45,13 @@ func init_random():
 	
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
+	fix_mouse_mode()
+
+func fix_mouse_mode():
+	# This shit is a workaround for the mouse not being able to
+	# leave a section of the screen when toggling fullscreen.
 	var tmp = Input.get_mouse_mode()
-	Input.set_mouse_mode(tmp - 1)
+	Input.set_mouse_mode(0)
 	Input.set_mouse_mode(tmp)
 
 func play_audio_random_pitch(snd, interval):

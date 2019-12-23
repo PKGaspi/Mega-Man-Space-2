@@ -11,26 +11,20 @@ export(float) var max_hp = 28
 var hp = max_hp
 var invencibitity_timer = 0 # Seconds until this enemy can be hit again.
 var flickering_timer = 0 # Seconds until a toggle on visibility is made.
-var dead = false
 
 func _process(delta):
-	if !dead:
-		# Calculate invencibility and filckering.
-		invencibitity_timer = max(invencibitity_timer - delta, 0)
-		if is_invincible():
-			if flickering_timer <= 0:
-				# Toggle flicker.
-				$Sprite.visible = !$Sprite.visible
-				flickering_timer = FLICKERING_INTERVAL
-			else:
-				flickering_timer = max(flickering_timer - delta, 0)
+	# Calculate invencibility and filckering.
+	invencibitity_timer = max(invencibitity_timer - delta, 0)
+	if is_invincible():
+		if flickering_timer <= 0:
+			# Toggle flicker.
+			$Sprite.visible = !$Sprite.visible
+			flickering_timer = FLICKERING_INTERVAL
 		else:
-			# Stop at a visible state.
-			$Sprite.visible = true
+			flickering_timer = max(flickering_timer - delta, 0)
 	else:
-		if !$SndHit.playing:
-			# Destroy totally when sound stops.
-			queue_free()
+		# Stop at a visible state.
+		$Sprite.visible = true
 
 func init(pos):
 	global_position = pos
@@ -53,7 +47,7 @@ func hit(bullet):
 	
 func take_damage(damage):
 	# TODO: Move this sound to the bullet.
-	global.play_audio_random_pitch($SndHit, Vector2(.90, 1.10))
+	global.play_audio_random_pitch($"../SndHit", Vector2(.90, 1.10))
 	hp -= damage
 	invencibitity_timer = INVENCIBILITY_TIME
 	check_death()
@@ -69,11 +63,9 @@ func die():
 	if randf() <= UPGRADE_CHANCE:
 		var inst = UPGRADE.instance()
 		inst.global_position = global_position
-		get_tree().root.add_child(inst)
+		get_parent().add_child(inst)
 	# Destroy myself.
-	dead = true
-	$CollisionShape2D.queue_free()
-	$Sprite.queue_free()
+	queue_free()
 	
 func is_invincible():
 	return invencibitity_timer > 0
