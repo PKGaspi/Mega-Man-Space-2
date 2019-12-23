@@ -24,20 +24,21 @@ const MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
-const STAR_FREQUENCY = .7
-const PLANET_FREQUENCY = .06
+const STAR_FREQUENCY = .3
+const PLANET_FREQUENCY = .01
 const MAX_PLANETS_PER_SECTOR = 1
 
-const SECTOR_SIZE = global.SCREEN_SIZE * 1.2 # Sector size.
-const SECTOR_ROWS = 4 # Number of sectors loaded at the same time on a row.
-const SECTOR_COLUMNS = 4 # Number of sectors loaded at the same time on a column.
-const STARS_PER_SECTOR = 6 # Number of stars to attempt to generate per sector.
+const SECTOR_SIZE = global.SCREEN_SIZE * .35 # Sector size.
+const SECTOR_ROWS = 10 # Number of sectors loaded at the same time on a row.
+const SECTOR_COLUMNS = 10 # Number of sectors loaded at the same time on a column.
+const STARS_PER_SECTOR = 5 # Number of stars to attempt to generate per sector.
 
 var random # Base randomizer.
 var r_seed # Base random seed.
 var seeds = {} # Seeds for each sector.
 var stars = {} # Dictionary with lists of stars for each sector.
 var layers = [] # Array of layers.
+var materials = {}
 
 var prev_sector = Vector2(1000, 1000) # Megaship last sector.
 
@@ -61,6 +62,10 @@ func _ready():
 	empty_image.create(size.x, size.y, false, Image.FORMAT_BPTC_RGBA)
 	empty_image.fill(Color(0, 0, 0, 0))
 	empty_planet_texture.create_from_image(empty_image)
+	
+	# Create materials.
+	create_materials(star_masks, star_palettes)
+	create_materials(planet_masks, planet_palettes)
 	
 	# Create parallax layers.
 	for i in range(N_LAYERS):
@@ -95,6 +100,18 @@ func _process(delta):
 ## Auxiliar functions. ##
 #########################
 
+func create_materials(masks : SpriteFrames, palettes : SpriteFrames) -> void:
+	for i in range(masks.get_frame_count("default")):
+		for j in range(palettes.get_frame_count("default")):
+			create_material(masks.get_frame("default", i), palettes.get_frame("default", j))
+
+func create_material(mask : Texture, palette : Texture) -> Material:
+	var new_material = material.duplicate()
+	new_material.set_shader_param("mask", mask)
+	new_material.set_shader_param("palette", palette)
+	materials[[mask, palette]] = new_material
+	return new_material
+
 func pos_to_sector(pos):
 	# Vector2 pos: position to check if is on the sector.
 	var sector_x = int(pos.x / SECTOR_SIZE.x)
@@ -109,9 +126,7 @@ func create_star(pos, layer, texture, mask, palette):
 	star.texture = texture
 	star.z_index = layers[layer].z_index
 	star.position = pos * layers[layer].motion_scale
-	material.set_shader_param("mask", mask)
-	material.set_shader_param("palette", palette)
-	star.material = material.duplicate(true)
+	star.material = materials[[mask, palette]]
 	star.visible = true
 	layers[layer].add_child(star)
 	return star
