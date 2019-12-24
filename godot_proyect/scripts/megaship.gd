@@ -128,7 +128,6 @@ func _physics_process(delta):
 	move_and_slide(motion)
 
 func _process(delta):
-	
 	# Get new values of this frame.
 	mouse_pos = get_viewport().get_mouse_position()
 	

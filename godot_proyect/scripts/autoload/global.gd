@@ -66,8 +66,8 @@ func fix_mouse_mode():
 	Input.set_mouse_mode(0)
 	Input.set_mouse_mode(tmp)
 
-func is_on_screen(pos : Vector2) -> bool:
-	var screen = get_viewport().get_visible_rect()
+func is_on_screen(viewport : Viewport, pos : Vector2) -> bool:
+	var screen = viewport.get_visible_rect()
 	return screen.has_point(pos)
 	
 
