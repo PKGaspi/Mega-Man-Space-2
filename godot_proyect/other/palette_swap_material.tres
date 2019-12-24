@@ -1,6 +1,9 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
-[ext_resource path="res://assets/sprites/gui/palettes/hp_cell_palette_0.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/gui/bar/bar_cell_palette_0.png" type="Texture" id=1]
+
+
+
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;

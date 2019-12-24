@@ -8,12 +8,11 @@ const MASK = preload("res://assets/sprites/megaship/megaship_mask.png")
 export(SpriteFrames) var palettes = null
 # Bars.
 const PROGRESS_BAR = preload("res://scenes/progress_bar.tscn")
+const BAR_CELL_SIZE = Vector2(7, 2)
 # Health Bar.
-const HP_CELL = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
 const HP_BAR_POS = Vector2(16, 24)
 var hp_bar
 # Ammo Bar.
-var ammo_cell = preload("res://assets/sprites/gui/hp_cell_yellowwhite.png")
 const AMMO_BAR_POS = Vector2(23, 24)
 var ammo_bar
 
@@ -108,11 +107,11 @@ func _ready():
 	
 	# Init HP bar.
 	hp_bar = PROGRESS_BAR.instance()
-	hp_bar.init(HP_CELL, HP_BAR_POS, hp_max)
+	hp_bar.init(BAR_CELL_SIZE, HP_BAR_POS, hp_max)
 	$"../GUILayer".add_child(hp_bar)
 	# Init Ammo bar.
 	ammo_bar = PROGRESS_BAR.instance()
-	ammo_bar.init(ammo_cell, AMMO_BAR_POS, ammo_max)
+	ammo_bar.init(BAR_CELL_SIZE, AMMO_BAR_POS, ammo_max)
 	ammo_bar.visible = false
 	$"../GUILayer".add_child(ammo_bar)
 	

@@ -8,9 +8,9 @@ var size			: Vector2
 var cell_size		: Vector2
 var position		: Vector2
 
-func init(cell_texture, position, max_value, min_value = 0, value = max_value) -> void:
+func init(cell_size, position, max_value, min_value = 0, value = max_value) -> void:
 	
-	self.cell_texture = cell_texture
+	self.cell_texture = global.create_empty_image(cell_size)
 	self.position = position
 	self.max_value = max_value
 	self.min_value = min_value
@@ -27,7 +27,7 @@ func init(cell_texture, position, max_value, min_value = 0, value = max_value) -
 	margin_left = 0
 	margin_right = 0
 	
-	cell_size = cell_texture.get_size()
+	self.cell_size = cell_size
 	calculate_size()
 
 
