@@ -115,9 +115,10 @@ func _ready():
 	ammo_bar.visible = false
 	$"../GUILayer".add_child(ammo_bar)
 	
-	$ShipSprite.texture = global.create_empty_image(MASK.get_size())
-	$ShipSprite.material.set_shader_param("mask", MASK)
-	$ShipSprite.material.set_shader_param("palette", palettes.get_frame("default", 0))
+	$SprShip.texture = global.create_empty_image(MASK.get_size())
+	$SprShip.material.set_shader_param("mask", MASK)
+	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
+
 
 func _physics_process(delta):
 	# Movement.
@@ -177,14 +178,14 @@ func update_bars():
 func set_fire_sprite():
 	if speed == 0:
 		pass
-		$FireSprite.visible = false
+		$SprFire.visible = false
 	else:
-		$FireSprite.visible = true
+		$SprFire.visible = true
 		if speed == MOVE_SPEED_MAX * speed_multiplier:
-			$FireSprite.play("max")
+			$SprFire.play("max")
 		else:
-			$FireSprite.play("accelerate")
-			$FireSprite.frame = float(speed) / (MOVE_SPEED_MAX * speed_multiplier) * $FireSprite.frames.get_frame_count("accelerate")
+			$SprFire.play("accelerate")
+			$SprFire.frame = float(speed) / (MOVE_SPEED_MAX * speed_multiplier) * $SprFire.frames.get_frame_count("accelerate")
 			
 
 func get_directional_input():
@@ -311,7 +312,7 @@ func set_weapon(weapon) -> bool:
 		$SndWeaponSwap.play()
 		active_weapon = weapon
 		# Set color palette.
-		$ShipSprite.material.set_shader_param("palette", palettes.get_frame("default", weapon))
+		$SprShip.material.set_shader_param("palette", palettes.get_frame("default", weapon))
 		# Show ammo.
 		ammo_bar.set_palette(weapon)
 		ammo_bar.visible = weapon != 0

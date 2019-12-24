@@ -16,6 +16,8 @@ var total_enemies = 10
 var n_enemies = 0
 var max_enemies = 4
 
+var warning = null
+
 const TOTAL_ENEMIES_RANDOM_RANGE = Vector2(8, 15)
 const MAX_ENEMIES_RANDOM_RANGE = Vector2(3, 6)
 
@@ -35,7 +37,9 @@ func _process(delta):
 		
 		pass # Generate a new round or the boss.
 
-func new_horde(new_spawn, total_enemies, max_enemies):	
+func new_horde(new_spawn, total_enemies, max_enemies):
+	if warning != null:
+		warning.queue_free()
 	self.spawn_area = new_spawn
 	self.width = spawn_area.size.x
 	self.height = spawn_area.size.y
