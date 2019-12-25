@@ -6,6 +6,8 @@ const SCREEN_SIZE = Vector2(480, 270)
 const EXITING_TIME = .3 # In seconds.
 var exiting_timer = 0 # Time that the exit key has been pressed.
 
+var pause = false
+
 # Weapons.
 enum WEAPONS {
 	MEGA,

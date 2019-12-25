@@ -1,16 +1,16 @@
 extends Node
 
-var starting = true
-
 func _enter_tree() -> void:
-	#get_tree().paused = true
+	global.pause = true
+	$GUILayer/CenterContainer.set_animation("ready", 2.5, self, "_on_animation_finished")
 	pass
 
 func _process(delta : float) -> void:
-	if starting:
-		get_tree().paused = true
-		if $GUILayer/CenterContainer.process_ready_text(delta):
-			starting = false
-			get_tree().paused = false
-			$GameLayer/EnemyGenerator.new_random_horde()
+	# Set pause
+	get_tree().paused = global.pause
 	pass
+	
+func _on_animation_finished(animation):
+	if animation == "ready":
+		$GameLayer/EnemyGenerator.new_random_horde()
+		global.pause = false

@@ -10,6 +10,8 @@ export(SpriteFrames)var warning_palettes
 var warning_material = preload("res://other/palette_swap_material.tres").duplicate()
 var warning_texture
 
+onready var CENTER_TEXT = $"/root/Space/GUILayer/CenterContainer"
+
 # Zone where enemies spawn.
 const AREA_SIZE = Vector2(200, 200)
 const AREA_LIMITS = Rect2(Vector2(-400, -400), Vector2(800, 800))
@@ -23,6 +25,7 @@ var n_enemies : int = 0
 var max_enemies : int = 4
 
 var warning : Sprite = null
+var warning_animation : bool = false
 var visibility_notifier : VisibilityNotifier2D = null
 
 const TOTAL_ENEMIES_RANDOM_RANGE = Vector2(8, 15)
@@ -37,8 +40,6 @@ func _ready():
 	warning_texture = global.create_empty_image(mask.get_size())
 	warning_material.set_shader_param("mask", mask)
 	warning_material.set_shader_param("palette", warning_palettes.get_frame("default", 0))
-	
-	#new_random_horde(AREA_LIMITS, TOTAL_ENEMIES_RANDOM_RANGE, MAX_ENEMIES_RANDOM_RANGE)
 
 func _process(delta):
 	while n_enemies < min(max_enemies, total_enemies):
@@ -46,7 +47,7 @@ func _process(delta):
 		var y = random.randf_range(- height / 2, height / 2) + centre.y
 		create_enemy(Vector2(x, y), random.randi_range(0, enemies_len - 1))
 	if total_enemies == 0:
-		new_random_horde(AREA_LIMITS, TOTAL_ENEMIES_RANDOM_RANGE, MAX_ENEMIES_RANDOM_RANGE)
+		new_random_horde()
 		
 		pass # Generate a new round or the boss.
 
@@ -75,6 +76,7 @@ func new_random_horde(area_limits = AREA_LIMITS, total_enemies_range = TOTAL_ENE
 #########################
 
 func create_warning(centre : Vector2) -> void:
+	CENTER_TEXT.set_animation("warning", 3)
 	warning = WARNING.new()
 	warning.init(warning_texture, centre, null, Vector2(), global.MEGASHIP)
 	warning.material = warning_material

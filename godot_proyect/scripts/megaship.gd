@@ -105,7 +105,9 @@ var speed = 0 # Speed at this frame.
 var motion_dir = Vector2() # Direction of the last movement.
 
 func _ready():
-	global.MEGASHIP = self
+	global.MEGASHIP = self # Set global reference.
+	
+	rotation = Vector2(0,-1).angle()
 	
 	# Init HP bar.
 	hp_bar = PROGRESS_BAR.instance()
@@ -117,6 +119,7 @@ func _ready():
 	ammo_bar.visible = false
 	GUILAYER.add_child(ammo_bar)
 	
+	# Init material.
 	$SprShip.texture = global.create_empty_image(MASK.get_size())
 	$SprShip.material.set_shader_param("mask", MASK)
 	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
@@ -300,16 +303,17 @@ func upgrade(type, ammount):
 	if value == value_max:
 		# TODO: Add some points or something. Play points sound.
 		pass
-	if ammount > 0:
-		# TODO: Play upgrade sound.
-		$SndUpgrade.play()
-	if ammount < 0:
-		take_damage(3)
-	set(type, min(value_max, max(value + ammount, value_min)))
-	if type == "hp_max":
-		set_hp_relative(ammount)
-		ammo_max = min(value_max, max(value + ammount, value_min))
-		set_ammo_relative(value)
+	else:
+		if ammount > 0:
+			# TODO: Play upgrade sound.
+			$SndUpgrade.play()
+		if ammount < 0:
+			take_damage(3)
+		set(type, min(value_max, max(value + ammount, value_min)))
+		if type == "hp_max":
+			set_hp_relative(ammount)
+			ammo_max = min(value_max, max(value + ammount, value_min))
+			set_ammo_relative(value)
 			
 func set_weapon(weapon) -> bool:
 	if unlocked_WEAPONS[weapon]:
