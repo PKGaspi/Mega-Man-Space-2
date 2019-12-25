@@ -1,6 +1,7 @@
 extends Node
 
 const FONT = preload("res://other/font.tres")
+const CURSOR = preload("res://assets/sprites/gui/cursor.png")
 const SCREEN_SIZE = Vector2(480, 270)
 
 const EXITING_TIME = .3 # In seconds.
@@ -29,6 +30,7 @@ var random 		: RandomNumberGenerator # Used for general randomness.
 func _ready():
 	random = init_random()
 	pause_mode = Node.PAUSE_MODE_PROCESS
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func _process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):

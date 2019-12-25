@@ -145,12 +145,6 @@ func _process(delta):
 		fire(n_cannons)
 		auto_fire = 0
 	
-	# Check mouse mode.
-	if global.gamepad:
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-	
 	########## TEST
 	if Input.is_action_just_pressed("ui_down"):
 		previous_weapon()

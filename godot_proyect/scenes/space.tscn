@@ -1,41 +1,43 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scripts/level.gd" type="Script" id=1]
-[ext_resource path="res://scenes/centre_text.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scripts/centre_text.gd" type="Script" id=3]
-[ext_resource path="res://scenes/megaship.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scripts/enemy_generator.gd" type="Script" id=5]
-[ext_resource path="res://scenes/enemies/asteroid.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sprites/gui/warning/warning_mask.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/gui/warning/warning_palette_0.png" type="Texture" id=8]
-[ext_resource path="res://assets/sfx/generic/hit.wav" type="AudioStream" id=9]
-[ext_resource path="res://scripts/star_generator.gd" type="Script" id=10]
-[ext_resource path="res://assets/sprites/background/star_mask_0.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/background/star_mask_1.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/background/star_mask_2.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/background/star_mask_3.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/background/palettes/star_palette_0.png" type="Texture" id=15]
-[ext_resource path="res://assets/sprites/background/palettes/star_palette_1.png" type="Texture" id=16]
-[ext_resource path="res://assets/sprites/background/palettes/star_palette_2.png" type="Texture" id=17]
-[ext_resource path="res://assets/sprites/background/palettes/star_palette_3.png" type="Texture" id=18]
-[ext_resource path="res://assets/sprites/background/palettes/star_palette_4.png" type="Texture" id=19]
-[ext_resource path="res://assets/sprites/background/palettes/star_palette_5.png" type="Texture" id=20]
-[ext_resource path="res://assets/sprites/background/palettes/star_palette_6.png" type="Texture" id=21]
-[ext_resource path="res://assets/sprites/background/planet_mask_0.png" type="Texture" id=22]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_0.png" type="Texture" id=23]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_1.png" type="Texture" id=24]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_2.png" type="Texture" id=25]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_3.png" type="Texture" id=26]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_4.png" type="Texture" id=27]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_5.png" type="Texture" id=28]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_6.png" type="Texture" id=29]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_7.png" type="Texture" id=30]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_8.png" type="Texture" id=31]
-[ext_resource path="res://assets/sprites/background/palettes/planet_palette_9.png" type="Texture" id=32]
+[ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
+[ext_resource path="res://scripts/aimer.gd" type="Script" id=3]
+[ext_resource path="res://other/font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scripts/centre_text.gd" type="Script" id=5]
+[ext_resource path="res://scenes/megaship.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/enemy_generator.gd" type="Script" id=7]
+[ext_resource path="res://scenes/enemies/asteroid.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/sprites/gui/warning/warning_mask.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/gui/warning/warning_palette_0.png" type="Texture" id=10]
+[ext_resource path="res://assets/sfx/generic/hit.wav" type="AudioStream" id=11]
+[ext_resource path="res://scripts/star_generator.gd" type="Script" id=12]
+[ext_resource path="res://assets/sprites/background/star_mask_0.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/background/star_mask_1.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/background/star_mask_2.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/background/star_mask_3.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/background/palettes/star_palette_0.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/background/palettes/star_palette_1.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/background/palettes/star_palette_2.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/background/palettes/star_palette_3.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/background/palettes/star_palette_4.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/background/palettes/star_palette_5.png" type="Texture" id=22]
+[ext_resource path="res://assets/sprites/background/palettes/star_palette_6.png" type="Texture" id=23]
+[ext_resource path="res://assets/sprites/background/planet_mask_0.png" type="Texture" id=24]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_0.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_1.png" type="Texture" id=26]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_2.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_3.png" type="Texture" id=28]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_4.png" type="Texture" id=29]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_5.png" type="Texture" id=30]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_6.png" type="Texture" id=31]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_7.png" type="Texture" id=32]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_8.png" type="Texture" id=33]
+[ext_resource path="res://assets/sprites/background/palettes/planet_palette_9.png" type="Texture" id=34]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -43,7 +45,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -51,7 +53,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -59,7 +61,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -67,7 +69,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 22 ) ],
+"frames": [ ExtResource( 24 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -75,7 +77,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ) ],
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -87,27 +89,44 @@ script = ExtResource( 1 )
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 
-[node name="CenterContainer" parent="GUILayer" instance=ExtResource( 2 )]
+[node name="Aimer" type="TextureRect" parent="GUILayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
 script = ExtResource( 3 )
+
+[node name="CenterContainer" type="CenterContainer" parent="GUILayer"]
+margin_right = 480.0
+margin_bottom = 270.0
+
+[node name="CenterText" type="Label" parent="GUILayer/CenterContainer"]
+margin_left = 240.0
+margin_top = 131.0
+margin_right = 240.0
+margin_bottom = 139.0
+custom_fonts/font = ExtResource( 4 )
+align = 1
+valign = 1
+script = ExtResource( 5 )
 
 [node name="GameLayer" type="Node2D" parent="."]
 pause_mode = 1
 
-[node name="Megaship" parent="GameLayer" instance=ExtResource( 4 )]
+[node name="Megaship" parent="GameLayer" instance=ExtResource( 6 )]
 
 [node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
-script = ExtResource( 5 )
-enemies = [ ExtResource( 6 ) ]
+script = ExtResource( 7 )
+enemies = [ ExtResource( 8 ) ]
 warning_masks = SubResource( 1 )
 warning_palettes = SubResource( 2 )
 
 [node name="SndHit" type="AudioStreamPlayer" parent="GameLayer/EnemyGenerator"]
-stream = ExtResource( 9 )
+stream = ExtResource( 11 )
 volume_db = -15.0
 
 [node name="ParallaxBackgroundLayer" type="ParallaxBackground" parent="."]
 pause_mode = 2
-script = ExtResource( 10 )
+script = ExtResource( 12 )
 star_masks = SubResource( 3 )
 star_palettes = SubResource( 4 )
 planet_masks = SubResource( 5 )

@@ -1,9 +1,14 @@
-extends CenterContainer
+extends Label
+
+const FONT = preload("res://other/font.tres")
 
 const READY_TEXT = "- READY -"
-const READY_COLOR = Color.white
-const WARNING_TEXT = "WARNING"
-const WARNING_COLOR = Color.red
+const READY_COLOR = Color("ebebeb")
+const READY_SIZE = 8
+
+const WARNING_TEXT = "_WARNING_"
+const WARNING_COLOR = Color("b21030")
+const WARNING_SIZE = 16
 
 var animation_time : float  = 3
 var animation_timer : float = 0
@@ -30,7 +35,6 @@ func _process(delta: float) -> void:
 #################
 
 func ready_animation(delta : float) -> void:
-	set_label(READY_TEXT, READY_COLOR)
 	
 	flickering_timer += delta
 	if flickering_timer >= flickering_interval:
@@ -38,19 +42,18 @@ func ready_animation(delta : float) -> void:
 		toggle_label_visibility()
 
 func ready_init() -> void:
-	set_label(READY_TEXT, READY_COLOR)
+	set_label(READY_TEXT, READY_COLOR, READY_SIZE)
 
 func warning_animation(delta : float) -> void:
-	set_label(WARNING_TEXT, WARNING_COLOR)
 	set_label_visibility(true)
 	
 	alpha = clamp(alpha + delta * alpha_multiplier, alpha_min, alpha_max)
-	$Label.modulate.a = alpha
+	modulate.a = alpha
 	if alpha == alpha_max or alpha == alpha_min:
 		alpha_multiplier *= -1
 
 func warning_init() -> void:
-	set_label(WARNING_TEXT, WARNING_COLOR)
+	set_label(WARNING_TEXT, WARNING_COLOR, WARNING_SIZE)
 	
 func none_animation(delta):
 	pass
@@ -79,11 +82,12 @@ func set_animation(animation : String, duration : float = 3, listener : Object =
 		connect("animation_finished", listener, listener_method)
 
 func toggle_label_visibility() -> void:
-	set_label_visibility(!$Label.visible)
+	set_label_visibility(!visible)
 
 func set_label_visibility(value : bool) -> void:
-	$Label.visible = value
+	visible = value
 	
-func set_label(text : String, color : Color) -> void:
-	$Label.text = text
-	$Label.modulate = color
+func set_label(text : String, color : Color, size : float) -> void:
+	self.text = text
+	self.modulate = color
+	FONT.size = size
