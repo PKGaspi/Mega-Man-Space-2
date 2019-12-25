@@ -3,5 +3,5 @@
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 10
+size = 8
 font_data = ExtResource( 1 )

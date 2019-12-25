@@ -26,6 +26,7 @@ var random 		: RandomNumberGenerator # Used for general randomness.
 
 func _ready():
 	random = init_random()
+	pause_mode = Node.PAUSE_MODE_PROCESS
 
 func _process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):

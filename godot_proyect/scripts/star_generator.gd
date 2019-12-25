@@ -66,9 +66,8 @@ func _ready():
 		layer.z_index = Z_INDEX_OFFSET + i
 		add_child(layer)
 		layers.append(layer)
-		
-	create_stars(prev_sector)
 	
+
 func _process(delta):
 	var sector = pos_to_sector(global.MEGASHIP.position)
 	var sector_x = sector.x

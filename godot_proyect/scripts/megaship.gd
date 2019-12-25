@@ -6,6 +6,8 @@ extends "res://scripts/character.gd"
 const LEMON = preload("res://scenes/lemon.tscn")
 const MASK = preload("res://assets/sprites/megaship/megaship_mask.png")
 export(SpriteFrames) var palettes = null
+
+onready var GUILAYER = $"/root/Space/GUILayer"
 # Bars.
 const PROGRESS_BAR = preload("res://scenes/progress_bar.tscn")
 const BAR_CELL_SIZE = Vector2(7, 2)
@@ -108,12 +110,12 @@ func _ready():
 	# Init HP bar.
 	hp_bar = PROGRESS_BAR.instance()
 	hp_bar.init(BAR_CELL_SIZE, HP_BAR_POS, hp_max)
-	$"../GUILayer".add_child(hp_bar)
+	GUILAYER.add_child(hp_bar)
 	# Init Ammo bar.
 	ammo_bar = PROGRESS_BAR.instance()
 	ammo_bar.init(BAR_CELL_SIZE, AMMO_BAR_POS, ammo_max)
 	ammo_bar.visible = false
-	$"../GUILayer".add_child(ammo_bar)
+	GUILAYER.add_child(ammo_bar)
 	
 	$SprShip.texture = global.create_empty_image(MASK.get_size())
 	$SprShip.material.set_shader_param("mask", MASK)

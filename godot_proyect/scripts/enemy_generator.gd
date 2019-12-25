@@ -38,7 +38,7 @@ func _ready():
 	warning_material.set_shader_param("mask", mask)
 	warning_material.set_shader_param("palette", warning_palettes.get_frame("default", 0))
 	
-	new_random_horde(AREA_LIMITS, TOTAL_ENEMIES_RANDOM_RANGE, MAX_ENEMIES_RANDOM_RANGE)
+	#new_random_horde(AREA_LIMITS, TOTAL_ENEMIES_RANDOM_RANGE, MAX_ENEMIES_RANDOM_RANGE)
 
 func _process(delta):
 	while n_enemies < min(max_enemies, total_enemies):
@@ -63,7 +63,7 @@ func new_horde(new_spawn, total_enemies, max_enemies):
 	self.max_enemies = max_enemies
 	create_warning(centre)
 	
-func new_random_horde(area_limits, total_enemies_range, max_enemies_range):
+func new_random_horde(area_limits = AREA_LIMITS, total_enemies_range = TOTAL_ENEMIES_RANDOM_RANGE, max_enemies_range = MAX_ENEMIES_RANDOM_RANGE):
 		var new_spawn = Rect2(Vector2(random.randf_range(area_limits.position.x, area_limits.end.x), random.randf_range(area_limits.position.y, area_limits.end.y)), AREA_SIZE)
 		var total_enemies = random.randi_range(total_enemies_range.x, total_enemies_range.y)
 		var max_enemies = random.randi_range(max_enemies_range.x, max_enemies_range.y)
