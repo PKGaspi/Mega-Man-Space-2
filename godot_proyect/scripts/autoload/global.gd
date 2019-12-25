@@ -1,5 +1,6 @@
 extends Node
 
+const FONT = preload("res://other/font.tres")
 const SCREEN_SIZE = Vector2(480, 270)
 
 const EXITING_TIME = .3 # In seconds.

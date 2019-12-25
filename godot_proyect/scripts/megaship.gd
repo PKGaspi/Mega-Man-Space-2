@@ -174,6 +174,10 @@ func update_bars():
 	update_bar(hp_bar, hp, hp_max)
 	update_bar(ammo_bar, ammo[active_weapon], ammo_max)
 
+func take_damage(damage):
+	.take_damage(damage)
+	update_bar(hp_bar, hp, hp_max)
+
 func set_fire_sprite():
 	if speed == 0:
 		pass

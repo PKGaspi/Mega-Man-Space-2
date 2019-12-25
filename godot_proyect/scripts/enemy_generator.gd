@@ -5,22 +5,25 @@ export(Array) var enemies = null
 onready var enemies_len = len(enemies)
 
 const WARNING = preload("res://scripts/pointing_sprite.gd")
-const TEST = preload("res://assets/sprites/gui/warning/warning_mask.png")
+export(SpriteFrames)var warning_masks
+export(SpriteFrames)var warning_palettes
+var warning_material = preload("res://other/palette_swap_material.tres").duplicate()
+var warning_texture
 
 # Zone where enemies spawn.
 const AREA_SIZE = Vector2(200, 200)
 const AREA_LIMITS = Rect2(Vector2(-400, -400), Vector2(800, 800))
-var spawn_area 	: Rect2
-var width		: float
-var height 		: float
-var centre 		: Vector2
+var spawn_area : Rect2
+var width : float
+var height : float
+var centre : Vector2
 
-var total_enemies = 10
-var n_enemies = 0
-var max_enemies = 4
+var total_enemies : int = 10
+var n_enemies : int = 0
+var max_enemies : int = 4
 
-var warning = null
-var visibility_notifier = null
+var warning : Sprite = null
+var visibility_notifier : VisibilityNotifier2D = null
 
 const TOTAL_ENEMIES_RANDOM_RANGE = Vector2(8, 15)
 const MAX_ENEMIES_RANDOM_RANGE = Vector2(3, 6)
@@ -29,6 +32,12 @@ var random
 
 func _ready():
 	random = global.init_random()
+	
+	var mask = warning_masks.get_frame("default", 0)
+	warning_texture = global.create_empty_image(mask.get_size())
+	warning_material.set_shader_param("mask", mask)
+	warning_material.set_shader_param("palette", warning_palettes.get_frame("default", 0))
+	
 	new_random_horde(AREA_LIMITS, TOTAL_ENEMIES_RANDOM_RANGE, MAX_ENEMIES_RANDOM_RANGE)
 
 func _process(delta):
@@ -42,6 +51,7 @@ func _process(delta):
 		pass # Generate a new round or the boss.
 
 func new_horde(new_spawn, total_enemies, max_enemies):
+	# TODO: play new horde sound.
 	if warning != null:
 		warning.queue_free()
 		visibility_notifier.queue_free()
@@ -66,8 +76,8 @@ func new_random_horde(area_limits, total_enemies_range, max_enemies_range):
 
 func create_warning(centre : Vector2) -> void:
 	warning = WARNING.new()
-	warning.init(centre, null, Vector2(), global.MEGASHIP)
-	warning.texture = TEST
+	warning.init(warning_texture, centre, null, Vector2(), global.MEGASHIP)
+	warning.material = warning_material
 	visibility_notifier = VisibilityNotifier2D.new()
 	visibility_notifier. global_position = centre
 	visibility_notifier.connect("screen_entered", warning, "_on_pointing_to_enters_screen")
