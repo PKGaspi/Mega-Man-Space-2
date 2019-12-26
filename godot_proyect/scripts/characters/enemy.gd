@@ -1,6 +1,6 @@
-extends "res://scripts/character.gd"
+extends "res://scripts/characters/character.gd"
 
-const UPGRADE = preload("res://scenes/upgrade.tscn")
+const UPGRADE = preload("res://scenes/characters/upgrade.tscn")
 const UPGRADE_CHANCE = .2
 
 func _ready():
@@ -22,6 +22,6 @@ func die():
 		var inst = UPGRADE.instance()
 		inst.global_position = global_position
 		get_parent().add_child(inst)
-	# Destroy myself.
-	queue_free()
+	# Super method.
+	.die()
 	

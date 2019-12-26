@@ -1,4 +1,4 @@
-extends "res://scripts/character.gd"
+extends "res://scripts/characters/character.gd"
 
 const SPR_SHELL_POS = preload("res://assets/sprites/upgrades/upgrade_shell_0.png")
 const SPR_SHELL_NEG = preload("res://assets/sprites/upgrades/upgrade_shell_1.png")

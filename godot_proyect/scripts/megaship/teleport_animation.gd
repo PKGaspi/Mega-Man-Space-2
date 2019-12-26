@@ -1,6 +1,6 @@
 extends AnimatedSprite
 
-const MEGASHIP = preload("res://scenes/megaship.tscn")
+const MEGASHIP = preload("res://scenes/characters/megaship/megaship.tscn")
 const TELEPORT_SPEED = 400 # In pixels per second.
 
 export(SpriteFrames) var masks = null
@@ -26,9 +26,10 @@ func _physics_process(delta: float) -> void:
 	var distance_to_move = global_position.distance_to(global_position + movement)
 	if distance_to_move < distance_total:
 		global_position += movement
-	else:
+	elif animation == "falling":
 		global_position = destination
 		play("landing")
+		$"../SndTeleport".play()
 		
 func _process(delta: float) -> void:
 	material.set_shader_param("mask", masks.get_frame(animation, frame))

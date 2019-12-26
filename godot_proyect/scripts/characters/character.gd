@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
-onready var snd_hit = $SndHit # Node with the hit sound.
-onready var snd_death = $"../SndDeath"
+export(NodePath) var snd_hit
+
+export(PackedScene) var death_instance = null
 
 export(int) var hp_max = 28 # Max hp.
 var hp = hp_max # Hp.
@@ -61,7 +62,7 @@ func hit(bullet):
 
 func take_damage(damage):
 	# Play hit sound.
-	global.play_audio_random_pitch(snd_hit, Vector2(.90, 1.10))
+	global.play_audio_random_pitch(get_node(snd_hit), Vector2(.90, 1.10))
 	hp -= damage
 	invencibitity_timer = invencibility_time
 	check_death()
@@ -73,7 +74,10 @@ func check_death():
 
 func die():
 	# Destroy myself by default.
-	snd_death.play()
+	if death_instance != null:
+		var inst = death_instance.instance()
+		inst.position = position
+		get_parent().add_child(inst)
 	queue_free()
 	
 func disappear():

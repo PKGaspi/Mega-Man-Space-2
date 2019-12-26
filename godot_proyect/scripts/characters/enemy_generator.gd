@@ -4,7 +4,7 @@ extends Node2D
 export(Array) var enemies = null
 onready var enemies_len = len(enemies)
 
-const WARNING = preload("res://scripts/pointing_sprite.gd")
+const WARNING = preload("res://scripts/gui/pointing_sprite.gd")
 export(SpriteFrames)var warning_masks
 export(SpriteFrames)var warning_palettes
 var warning_material = preload("res://other/palette_swap_material.tres").duplicate()

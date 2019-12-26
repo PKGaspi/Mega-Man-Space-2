@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/hit.wav-e3a9479c81ca96f87f01bae6a4525d71.sample"
+path="res://.import/shoot.wav-05c7bc65d482b8cb8ce553738706fa56.sample"
 
 [deps]
 
-source_file="res://assets/sfx/generic/hit.wav"
-dest_files=[ "res://.import/hit.wav-e3a9479c81ca96f87f01bae6a4525d71.sample" ]
+source_file="res://assets/sfx/megaship/shoot.wav"
+dest_files=[ "res://.import/shoot.wav-05c7bc65d482b8cb8ce553738706fa56.sample" ]
 
 [params]
 

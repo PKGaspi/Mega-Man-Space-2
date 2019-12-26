@@ -1,15 +1,15 @@
-extends "res://scripts/character.gd"
+extends "res://scripts/characters/character.gd"
 
 ################
 ## Resources. ##
 ################
-const LEMON = preload("res://scenes/lemon.tscn")
+const LEMON = preload("res://scenes/characters/megaship/lemon.tscn")
 const MASK = preload("res://assets/sprites/megaship/megaship_mask.png")
 export(SpriteFrames) var palettes = null
 
 onready var GUILAYER = $"/root/Space/GUILayer"
 # Bars.
-const PROGRESS_BAR = preload("res://scenes/progress_bar.tscn")
+const PROGRESS_BAR = preload("res://scenes/gui/progress_bar.tscn")
 const BAR_CELL_SIZE = Vector2(7, 2)
 # Health Bar.
 const HP_BAR_POS = Vector2(16, 24)
