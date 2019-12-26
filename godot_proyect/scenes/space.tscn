@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/aimer.gd" type="Script" id=3]
 [ext_resource path="res://other/font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scripts/centre_text.gd" type="Script" id=5]
-[ext_resource path="res://scenes/megaship.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/teleport_animation.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/enemy_generator.gd" type="Script" id=7]
 [ext_resource path="res://scenes/enemies/asteroid.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/sprites/gui/warning/warning_mask.png" type="Texture" id=9]
@@ -112,7 +112,9 @@ script = ExtResource( 5 )
 [node name="GameLayer" type="Node2D" parent="."]
 pause_mode = 1
 
-[node name="Megaship" parent="GameLayer" instance=ExtResource( 6 )]
+[node name="TeleportAnimation" parent="GameLayer" instance=ExtResource( 6 )]
+position = Vector2( 240, -100 )
+destination = Vector2( 240, 135 )
 
 [node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
 script = ExtResource( 7 )
@@ -120,9 +122,13 @@ enemies = [ ExtResource( 8 ) ]
 warning_masks = SubResource( 1 )
 warning_palettes = SubResource( 2 )
 
-[node name="SndHit" type="AudioStreamPlayer" parent="GameLayer/EnemyGenerator"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="GameLayer/EnemyGenerator"]
 stream = ExtResource( 11 )
 volume_db = -15.0
+
+[node name="Camera2D" type="Camera2D" parent="GameLayer"]
+position = Vector2( 240, 135 )
+current = true
 
 [node name="ParallaxBackgroundLayer" type="ParallaxBackground" parent="."]
 pause_mode = 2
@@ -138,3 +144,4 @@ margin_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.117647, 0.0588235, 0.196078, 1 )
+[connection signal="tree_exiting" from="GameLayer/TeleportAnimation" to="." method="_on_teleport_animation_tree_exiting"]

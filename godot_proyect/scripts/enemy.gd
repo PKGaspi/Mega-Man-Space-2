@@ -4,7 +4,8 @@ const UPGRADE = preload("res://scenes/upgrade.tscn")
 const UPGRADE_CHANCE = .2
 
 func _ready():
-	snd_hit = $"../SndHit" # The hit sound is played by the parent.
+	pass
+	#snd_hit = $"../SndHit" # The hit sound is played by the parent.
 
 func init(pos):
 	global_position = pos

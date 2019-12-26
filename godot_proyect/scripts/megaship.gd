@@ -107,8 +107,6 @@ var motion_dir = Vector2() # Direction of the last movement.
 func _ready():
 	global.MEGASHIP = self # Set global reference.
 	
-	rotation = Vector2(0,-1).angle()
-	
 	# Init HP bar.
 	hp_bar = PROGRESS_BAR.instance()
 	hp_bar.init(BAR_CELL_SIZE, HP_BAR_POS, hp_max)

@@ -55,8 +55,6 @@ var random
 func _ready():
 	random = global.init_random()
 	
-	snd_hit = $"../SndHit" # The hit sound is played by the parent.
-	
 	# Set upgrade type.
 	var index = random.randi_range(0, ENUM_LENGTH - 1)
 	type = UPGRADE_TYPES[index]

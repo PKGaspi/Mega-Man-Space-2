@@ -1,9 +1,9 @@
 extends Node
 
 func _enter_tree() -> void:
+	# TODO: Play level music.
 	global.pause = true
-	$GUILayer/CenterContainer/CenterText.set_animation("ready", 2.5, self, "_on_animation_finished")
-	pass
+	$GUILayer/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
 
 func _process(delta : float) -> void:
 	# Set pause
@@ -12,5 +12,8 @@ func _process(delta : float) -> void:
 	
 func _on_animation_finished(animation):
 	if animation == "ready":
-		$GameLayer/EnemyGenerator.new_random_horde()
 		global.pause = false
+		$GameLayer/Camera2D.current = false
+
+func _on_teleport_animation_tree_exiting() -> void:
+	$GameLayer/EnemyGenerator.new_random_horde()

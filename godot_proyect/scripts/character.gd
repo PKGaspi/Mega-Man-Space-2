@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var snd_hit = $SndHit # Node with the hit sound.
+onready var snd_death = $"../SndDeath"
 
 export(int) var hp_max = 28 # Max hp.
 var hp = hp_max # Hp.
@@ -72,6 +73,7 @@ func check_death():
 
 func die():
 	# Destroy myself by default.
+	snd_death.play()
 	queue_free()
 	
 func disappear():

@@ -14,12 +14,15 @@ onready var CENTER_TEXT = $"/root/Space/GUILayer/CenterContainer/CenterText"
 
 # Zone where enemies spawn.
 const AREA_SIZE = Vector2(200, 200)
-const AREA_LIMITS = Rect2(Vector2(-400, -400), Vector2(800, 800))
+const AREA_LIMITS = Rect2(Vector2(-2000, -2000), Vector2(4000, 4000))
+var min_distance : float = AREA_LIMITS.size.length() / 4
+var max_distance : float = AREA_LIMITS.size.length() / 2
 var spawn_area : Rect2
 var width : float
 var height : float
 var centre : Vector2
 
+var horde : bool = false
 var total_enemies : int = 10
 var n_enemies : int = 0
 var max_enemies : int = 4
@@ -42,17 +45,20 @@ func _ready():
 	warning_material.set_shader_param("palette", warning_palettes.get_frame("default", 0))
 
 func _process(delta):
-	while n_enemies < min(max_enemies, total_enemies):
-		var x = random.randf_range(- width / 2, width / 2) + centre.x
-		var y = random.randf_range(- height / 2, height / 2) + centre.y
-		create_enemy(Vector2(x, y), random.randi_range(0, enemies_len - 1))
-	if total_enemies == 0:
-		new_random_horde()
+	if horde:
+		while n_enemies < min(max_enemies, total_enemies):
+			var x = random.randf_range(- width / 2, width / 2) + centre.x
+			var y = random.randf_range(- height / 2, height / 2) + centre.y
+			create_enemy(Vector2(x, y), random.randi_range(0, enemies_len - 1))
+		if total_enemies == 0:
+			horde = false
+			new_random_horde()
 		
 		pass # Generate a new round or the boss.
 
 func new_horde(new_spawn, total_enemies, max_enemies):
 	# TODO: play new horde sound.
+	horde = true
 	if warning != null:
 		warning.queue_free()
 		visibility_notifier.queue_free()
@@ -65,10 +71,16 @@ func new_horde(new_spawn, total_enemies, max_enemies):
 	create_warning(centre)
 	
 func new_random_horde(area_limits = AREA_LIMITS, total_enemies_range = TOTAL_ENEMIES_RANDOM_RANGE, max_enemies_range = MAX_ENEMIES_RANDOM_RANGE):
-		var new_spawn = Rect2(Vector2(random.randf_range(area_limits.position.x, area_limits.end.x), random.randf_range(area_limits.position.y, area_limits.end.y)), AREA_SIZE)
-		var total_enemies = random.randi_range(total_enemies_range.x, total_enemies_range.y)
-		var max_enemies = random.randi_range(max_enemies_range.x, max_enemies_range.y)
-		new_horde(new_spawn, total_enemies, max_enemies)
+	var new_pos = Vector2(random.randf_range(area_limits.position.x, area_limits.end.x), random.randf_range(area_limits.position.y, area_limits.end.y))
+	var distance = spawn_area.position.distance_to(new_pos)
+	while !(distance > min_distance and distance < max_distance):
+		# Keep looking for a new location until it is in between max and min distance.
+		new_pos = Vector2(random.randf_range(area_limits.position.x, area_limits.end.x), random.randf_range(area_limits.position.y, area_limits.end.y))
+		distance = spawn_area.position.distance_to(new_pos)
+	var new_spawn = Rect2(new_pos, AREA_SIZE)
+	var total_enemies = random.randi_range(total_enemies_range.x, total_enemies_range.y)
+	var max_enemies = random.randi_range(max_enemies_range.x, max_enemies_range.y)
+	new_horde(new_spawn, total_enemies, max_enemies)
 	
 
 #########################
