@@ -1,6 +1,6 @@
 extends "res://scripts/characters/character.gd"
 
-const UPGRADE = preload("res://scenes/characters/upgrade.tscn")
+var UPGRADE = load("res://scenes/characters/upgrade.tscn")
 const UPGRADE_CHANCE = .2
 
 func _ready():

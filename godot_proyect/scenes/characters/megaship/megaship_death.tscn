@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/sprites/megaship/lemon.png" type="Texture" id=1]
 [ext_resource path="res://scripts/characters/character_death.gd" type="Script" id=2]
 
-[node name="Sprite" type="Sprite"]
+[node name="Death" type="Particles2D"]
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 

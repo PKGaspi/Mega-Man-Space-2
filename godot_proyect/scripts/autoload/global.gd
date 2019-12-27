@@ -55,6 +55,11 @@ func create_empty_image(size : Vector2) -> ImageTexture:
 	empty_texture.create_from_image(empty_image)
 	return empty_texture
 	
+func create_timer(name : String) -> Timer:
+	var timer = Timer.new()
+	timer.name = name
+	return timer
+	
 func init_random():
 	var random = RandomNumberGenerator.new()
 	random.seed = random.seed * OS.get_ticks_usec()
@@ -77,5 +82,6 @@ func is_on_screen(viewport : Viewport, pos : Vector2) -> bool:
 	
 
 func play_audio_random_pitch(snd, interval):
-	snd.play(0)
-	snd.pitch_scale = random.randf_range(interval.x, interval.y)
+	if snd.has_method("play"):
+		snd.play(0)
+		snd.pitch_scale = random.randf_range(interval.x, interval.y)

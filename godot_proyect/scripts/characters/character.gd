@@ -1,14 +1,17 @@
 extends KinematicBody2D
 
-export(NodePath) var snd_hit
+export(NodePath) var snd_hit = "SndHit"
 
 export(PackedScene) var death_instance = null
 
 export(int) var hp_max = 28 # Max hp.
 var hp = hp_max # Hp.
 
+var invencible : bool = false
+var flickering : bool = false
+var disappearing : bool = false
+
 var invencibility_time = .5 # Seconds the character is invencible after hit.
-var invencibitity_timer = 0 # Seconds until this enemy can be hit again.
 
 var flickering_interval = .05 # Seconds between each visibility toggle when flickering.
 var flickering_timer = 0 # Seconds until a toggle on visibility is made.
@@ -20,29 +23,32 @@ var life_timer = 0
 export(bool) var flicker_before_timeout = false
 export(bool) var dissapear_on_timeout = false
 
-func _ready():
+func _ready() -> void:
+	if flicker_before_timeout:
+		$LifeFlickeringTimer.start(life_flicker_time)
+	if dissapear_on_timeout:
+		$LifeTimer.start(life_time)
 	pass
 
-func _process(delta):
-	# Check if the character disapears this frame. <-- This was Álex's idea.
-	life_timer += delta
-	if dissapear_on_timeout and life_timer >= life_time:
-		disappear()
-		
-	# Calculate invencibility and filckering.
-	invencibitity_timer = max(invencibitity_timer - delta, 0)
-	if is_invincible() or (life_timer >= life_flicker_time and flicker_before_timeout):
-		# Flicker.
-		if flickering_timer <= 0:
-			# Toggle flicker.
-			toggle_visibility()
-			flickering_timer = flickering_interval
-		else:
-			flickering_timer = max(flickering_timer - delta, 0)
+func _process(delta : float) -> void:
+	pass
+
+func _on_flickering_timer_timeout():
+	if flickering:
+		flicker()
 	else:
-		# Stop flickering.
 		set_visibility(true)
 
+func _on_invencibility_timer_timeout():
+	flickering = disappearing
+	set_invencible(false)
+
+func _on_life_timer_timeout():
+	disappear()
+
+func _on_life_flickering_timer_timeout():
+	disappearing = true
+	flicker()
 
 #########################
 ## Auxiliar functions. ##
@@ -54,8 +60,13 @@ func set_visibility(value):
 func toggle_visibility():
 	visible = !visible
 
+func flicker(interval = flickering_interval):
+	flickering = true
+	toggle_visibility()
+	$FlickeringTimer.start(interval)
+
 func hit(bullet):
-	if !is_invincible():
+	if !invencible:
 		# TODO: Calculate damage with enemy weakness and bullet weapon type.
 		var damage = bullet.damage
 		take_damage(damage)
@@ -64,8 +75,14 @@ func take_damage(damage):
 	# Play hit sound.
 	global.play_audio_random_pitch(get_node(snd_hit), Vector2(.90, 1.10))
 	hp -= damage
-	invencibitity_timer = invencibility_time
+	set_invencible(true)
 	check_death()
+
+func set_invencible(value : bool) -> void:
+	invencible = value
+	if value:
+		$InvencibilityTimer.start(invencibility_time)
+		flicker()
 
 func check_death():
 	if hp <= 0:
@@ -83,6 +100,3 @@ func die():
 func disappear():
 	# Destroy myself by default.
 	queue_free()
-
-func is_invincible() -> bool:
-	return invencibitity_timer > 0
