@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/stage_heatman.ogg-bc97f27534b8ef8951faa1b0906898bc.oggstr"
+
+[deps]
+
+source_file="res://assets/music/stage_heatman.ogg"
+dest_files=[ "res://.import/stage_heatman.ogg-bc97f27534b8ef8951faa1b0906898bc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -22,30 +22,29 @@
 [ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_11.png" type="Texture" id=20]
 [ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_12.png" type="Texture" id=21]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), null ],
-"loop": false,
-"name": "landing",
-"speed": 60.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
 "name": "falling",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), null ],
+"loop": false,
+"name": "landing",
+"speed": 60.0
 } ]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": false,
-"name": "landing",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": false,
 "name": "falling",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "landing",
 "speed": 5.0
 } ]
 

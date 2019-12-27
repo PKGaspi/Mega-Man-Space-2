@@ -8,4 +8,3 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="SndDeath" type="AudioStreamPlayer2D" parent="."]
-volume_db = -10.0

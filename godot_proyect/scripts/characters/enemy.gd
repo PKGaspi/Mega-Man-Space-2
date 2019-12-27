@@ -16,7 +16,8 @@ func init(pos):
 
 func die():
 	# Tell the enemy generator I died.
-	get_parent().count_death()
+	if get_parent().has_method("count_death"):
+		get_parent().count_death()
 	# Generate an upgrade at random.
 	if randf() <= UPGRADE_CHANCE:
 		var inst = UPGRADE.instance()

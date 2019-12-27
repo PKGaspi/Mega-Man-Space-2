@@ -173,6 +173,7 @@ func update_bars():
 
 func take_damage(damage):
 	.take_damage(damage)
+	$HitParticles.emitting = true
 	update_bar(hp_bar, hp, hp_max)
 
 func set_fire_sprite():

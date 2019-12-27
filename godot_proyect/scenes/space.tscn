@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://assets/sprites/background/palettes/planet_palette_7.png" type="Texture" id=32]
 [ext_resource path="res://assets/sprites/background/palettes/planet_palette_8.png" type="Texture" id=33]
 [ext_resource path="res://assets/sprites/background/palettes/planet_palette_9.png" type="Texture" id=34]
+[ext_resource path="res://assets/music/stage_heatman.ogg" type="AudioStream" id=35]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -118,7 +119,6 @@ destination = Vector2( 240, 135 )
 
 [node name="SndTeleport" type="AudioStreamPlayer" parent="GameLayer"]
 stream = ExtResource( 7 )
-volume_db = -10.0
 bus = "Sfx"
 
 [node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
@@ -145,4 +145,8 @@ margin_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color( 0.117647, 0.0588235, 0.196078, 1 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 35 )
+bus = "Music"
 [connection signal="tree_exiting" from="GameLayer/TeleportAnimation" to="." method="_on_teleport_animation_tree_exiting"]

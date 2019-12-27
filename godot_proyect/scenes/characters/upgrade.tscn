@@ -57,4 +57,3 @@ texture = ExtResource( 10 )
 
 [node name="SndHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 11 )
-volume_db = -15.0
