@@ -58,6 +58,10 @@ func warning_init() -> void:
 func none_animation(delta):
 	pass
 
+func none_init():
+	visible = false
+	pass
+
 #########################
 ## Auxiliar functions. ##
 #########################
@@ -72,7 +76,7 @@ func add_and_check_animation_time(delta : float) -> bool:
 		set_label_visibility(false)
 	return reached_time
 
-func set_animation(animation : String, duration : float = 3, listener : Object = null, listener_method : String = "") -> void:
+func set_animation(animation : String, duration : float = 3.0, listener : Object = null, listener_method : String = "") -> void:
 	self.animation = animation
 	self.animation_time = duration
 	self.animation_timer = 0

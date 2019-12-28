@@ -15,7 +15,10 @@ var opacity_on_distance : bool = true
 var radius : float = 70
 
 func _ready() -> void:
-	pass
+	if to_owner != null:
+		to_owner.connect("tree_exiting", self, "_on_to_owner_tree_exiting")
+	if from_owner != null:
+		from_owner.connect("tree_exiting", self, "_on_from_owner_tree_exiting")
 
 func _process(delta: float) -> void:
 	pointing_from = start_position()
@@ -34,14 +37,20 @@ func init(texture, pointing_to, to_owner = null, pointing_from = Vector2(), from
 	self.from_owner = from_owner
 	initial_distance = start_position().distance_to(end_position())
 
+func _on_to_owner_tree_exiting():
+	to_owner = null
+
+func _on_from_owner_tree_exiting():
+	from_owner = null
+
 func start_position() -> Vector2:
 	if from_owner != null:
-		return from_owner.global_position
+		pointing_from =  from_owner.global_position
 	return pointing_from
 		
 func end_position() -> Vector2:
 	if to_owner != null:
-		return to_owner.global_position
+		pointing_to = to_owner.global_position
 	return pointing_to
 
 func _on_pointing_to_enters_screen() -> void:

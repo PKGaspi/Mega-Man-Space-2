@@ -28,7 +28,7 @@ export(float) var STAR_FREQUENCY = .3
 export(float) var PLANET_FREQUENCY = .01
 export(int) var MAX_PLANETS_PER_SECTOR = 1
 
-const SECTOR_SIZE = global.SCREEN_SIZE * .35 # Sector size.
+var SECTOR_SIZE = global.SCREEN_SIZE * .35 # Sector size.
 const SECTOR_ROWS = 10 # Number of sectors loaded at the same time on a row.
 const SECTOR_COLUMNS = 10 # Number of sectors loaded at the same time on a column.
 const STARS_PER_SECTOR = 5 # Number of stars to attempt to generate per sector.
@@ -69,19 +69,19 @@ func _ready():
 	
 
 func _process(delta):
-	var sector = pos_to_sector(global.MEGASHIP.position)
-	var sector_x = sector.x
-	var sector_y = sector.y
-	if prev_sector != sector:
-		for s in stars.keys():
-			if sector.distance_to(s) >= 2:
-				destroy_stars(s)
-		for i in range(-SECTOR_ROWS / 2, SECTOR_ROWS / 2):
-			for j in range(-SECTOR_COLUMNS / 2, SECTOR_COLUMNS / 2):
-				var new_sector = Vector2(sector_x + i, sector_y + j)
-				if !stars.has(new_sector):
-					create_stars(new_sector)
-		prev_sector = sector
+	if global.MEGASHIP != null:
+		var sector = pos_to_sector(global.MEGASHIP.position)
+		if prev_sector != sector:
+			var active_sectors = Rect2(sector.x - SECTOR_COLUMNS / 2, sector.y - SECTOR_ROWS / 2, SECTOR_COLUMNS, SECTOR_COLUMNS)
+			for s in stars.keys():
+				if !active_sectors.has_point(s):
+					destroy_stars(s)
+			for i in range(-SECTOR_ROWS / 2, SECTOR_ROWS / 2):
+				for j in range(-SECTOR_COLUMNS / 2, SECTOR_COLUMNS / 2):
+					var new_sector = Vector2(sector.x + i, sector.y + j)
+					if !stars.has(new_sector):
+						create_stars(new_sector)
+			prev_sector = sector
 	
 
 #########################

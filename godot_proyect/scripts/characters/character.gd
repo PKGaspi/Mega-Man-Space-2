@@ -5,13 +5,13 @@ export(NodePath) var snd_hit = "SndHit"
 export(PackedScene) var death_instance = null
 
 export(int) var hp_max = 28 # Max hp.
-var hp = hp_max # Hp.
+var hp : int # Hp.
 
 var invencible : bool = false
 var flickering : bool = false
 var disappearing : bool = false
 
-var invencibility_time = .5 # Seconds the character is invencible after hit.
+export (float) var invencibility_time = .5 # Seconds the character is invencible after hit.
 
 var flickering_interval = .05 # Seconds between each visibility toggle when flickering.
 var flickering_timer = 0 # Seconds until a toggle on visibility is made.
@@ -23,7 +23,11 @@ var life_timer = 0
 export(bool) var flicker_before_timeout = false
 export(bool) var dissapear_on_timeout = false
 
+# Signals.
+signal death
+
 func _ready() -> void:
+	hp = hp_max
 	if flicker_before_timeout:
 		$LifeFlickeringTimer.start(life_flicker_time)
 	if dissapear_on_timeout:
@@ -91,7 +95,9 @@ func check_death():
 
 func die():
 	# Destroy myself by default.
+	emit_signal("death")
 	if death_instance != null:
+		# Creat death scene.
 		var inst = death_instance.instance()
 		inst.position = position
 		get_parent().add_child(inst)

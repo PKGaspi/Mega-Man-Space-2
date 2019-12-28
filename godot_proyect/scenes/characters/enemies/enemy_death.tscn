@@ -27,7 +27,7 @@ frame_3/delay_sec = 0.0
 [node name="Death" type="Particles2D"]
 emitting = false
 amount = 1
-lifetime = 0.4
+lifetime = 0.3
 one_shot = true
 process_material = SubResource( 1 )
 texture = SubResource( 2 )

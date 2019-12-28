@@ -127,7 +127,7 @@ enemies = [ ExtResource( 9 ) ]
 warning_masks = SubResource( 1 )
 warning_palettes = SubResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="GameLayer"]
+[node name="StaticCamera" type="Camera2D" parent="GameLayer"]
 position = Vector2( 240, 135 )
 current = true
 

@@ -31,6 +31,7 @@ func _ready():
 	random = init_random()
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	
 
 func _process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):
@@ -43,7 +44,10 @@ func _process(delta):
 		exiting_timer += delta
 	else:
 		exiting_timer = max(exiting_timer - delta, 0)
-		
+
+func _on_megaship_tree_exiting():
+	MEGASHIP = null
+
 ##########################
 ### Library functions. ###
 ##########################
@@ -62,7 +66,7 @@ func create_timer(name : String) -> Timer:
 	
 func init_random():
 	var random = RandomNumberGenerator.new()
-	random.seed = random.seed * OS.get_ticks_usec()
+	random.randomize()
 	return random
 	
 func toggle_fullscreen():
@@ -79,7 +83,6 @@ func fix_mouse_mode():
 func is_on_screen(viewport : Viewport, pos : Vector2) -> bool:
 	var screen = viewport.get_visible_rect()
 	return screen.has_point(pos)
-	
 
 func play_audio_random_pitch(snd, interval):
 	if snd.has_method("play"):

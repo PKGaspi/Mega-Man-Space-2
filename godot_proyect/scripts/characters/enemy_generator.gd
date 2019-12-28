@@ -14,7 +14,7 @@ onready var CENTER_TEXT = $"/root/Space/GUILayer/CenterContainer/CenterText"
 
 # Zone where enemies spawn.
 const AREA_SIZE = Vector2(200, 200)
-const AREA_LIMITS = Rect2(Vector2(-2000, -2000), Vector2(4000, 4000))
+const AREA_LIMITS = Rect2(Vector2(-200, -200), Vector2(400, 400))
 var min_distance : float = AREA_LIMITS.size.length() / 4
 var max_distance : float = AREA_LIMITS.size.length() / 2
 var spawn_area : Rect2
@@ -55,6 +55,9 @@ func _process(delta):
 			new_random_horde()
 		
 		pass # Generate a new round or the boss.
+
+func _on_enemy_death():
+	count_death()
 
 func new_horde(new_spawn, total_enemies, max_enemies):
 	# TODO: play new horde sound.
@@ -104,6 +107,7 @@ func create_enemy(pos, enemy_index):
 	n_enemies += 1
 	var inst = enemies[enemy_index].instance()
 	inst.init(pos)
+	inst.connect("death", self, "_on_enemy_death")
 	add_child(inst)
 
 func count_death():

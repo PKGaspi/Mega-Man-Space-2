@@ -28,7 +28,7 @@
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=26]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=27]
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
@@ -96,13 +96,14 @@ frame_1/delay_sec = 0.0
 frame_2/texture = ExtResource( 23 )
 frame_2/delay_sec = 0.0
 
-[node name="Megaship" instance=ExtResource( 1 )]
+[node name="Megaship" index="0" instance=ExtResource( 1 )]
 rotation = -1.5708
 collision_layer = 1
-collision_mask = 12
+collision_mask = 28
 script = ExtResource( 2 )
 death_instance = ExtResource( 3 )
-palettes = SubResource( 8 )
+invencibility_time = 1.2
+palettes = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, -0.5 )

@@ -1,4 +1,4 @@
-extends "res://scripts/characters/character.gd"
+extends "res://scripts/characters/pickable.gd"
 
 const SPR_SHELL_POS = preload("res://assets/sprites/upgrades/upgrade_shell_0.png")
 const SPR_SHELL_NEG = preload("res://assets/sprites/upgrades/upgrade_shell_1.png")
@@ -10,10 +10,6 @@ const MOVE_SPEED_NEG = 40
 
 const SHINE_TIME_MIN = 2 # In seconds.
 const SHINE_TIME_MAX = 5 # In seconds.
-
-const INVENCIBILITY_TIME = .5 # In seconds.
-const FLICKERING_INTERVAL = .05 # In seconds.
-var shine_timer = 0 # Seconds for the next shine to happen.
 
 var bad = false # Whether the upgrade is bad or good.
 
@@ -50,10 +46,8 @@ var type
 var ammount
 var sprite = preload("res://assets/sprites/megaship/lemon.png")
 
-var random
-
 func _ready():
-	random = global.init_random()
+	dir = Vector2(random.randf(), random.randf()).normalized()
 	
 	# Set upgrade type.
 	var index = random.randi_range(0, ENUM_LENGTH - 1)
@@ -63,32 +57,12 @@ func _ready():
 	
 	# Maybe this upgrade is negative.
 	if random.randf() <= NEGATIVE_FREQUENCY:
+		# The upgrade is bad.
 		toggle_upgrade()
 	else:
+		# The upgrade is good.
 		# Shine for the first time.
 		$SprShine.play("shine")
-		
-func _physics_process(delta):
-	# Move towards the Mega Ship.
-	var dir = global_position.direction_to(global.MEGASHIP.global_position)
-	dir.normalized()
-	var motion = dir * (MOVE_SPEED_NEG if bad else MOVE_SPEED_POS)
-	move_and_slide(motion)
-	
-	# Check for Mega Ship collision.
-	for i in range(get_slide_count()):
-		var collider = get_slide_collision(i).collider
-		if collider == global.MEGASHIP:
-			collider.upgrade(type, ammount)
-			queue_free()
-			break
-			
-func _process(delta):
-	# Decrement shine timer
-	shine_timer -= delta
-	if !bad and shine_timer <= 0:
-		shine()
-		shine_timer = random.randf_range(SHINE_TIME_MIN, SHINE_TIME_MAX)
 		
 
 #########################
@@ -96,24 +70,39 @@ func _process(delta):
 #########################
 
 func shine():
+	$SprShine.frame = 0 # Shine.
 	if !bad:
-		$SprShine.frame = 0 # Shine.
+		$SprShine.play("default")
+		$ShineTimer.start(random.randf_range(SHINE_TIME_MIN, SHINE_TIME_MAX))
+	else:
+		$SprShine.stop()
 
 func toggle_upgrade():
 	ammount = -ammount
 	bad = !bad
+	set_collision_layer_bit(2, bad)
+	set_collision_mask_bit(1, bad)
 	if bad:
+		to_follow = global.MEGASHIP
 		$SprShine.stop()
 		$SprShell.texture = SPR_SHELL_NEG
-		set_collision_layer_bit(2, true)
-		set_collision_mask_bit(1, true)
+		move_speed = MOVE_SPEED_NEG
 	else:
+		to_follow = null
 		$SprShine.play("shine")
 		$SprShell.texture = SPR_SHELL_POS
-		set_collision_layer_bit(2, false)
-		set_collision_mask_bit(1, false)
-		
+		move_speed = MOVE_SPEED_POS
+
 func die():
 	life_timer = 0 # Reset life_timer.
 	hp = hp_max
 	toggle_upgrade()
+	
+func collide(collider):
+	collider.upgrade(type, ammount)
+	if bad:
+		.collide(collider)
+	queue_free()
+
+func _on_shine_timer_timeout() -> void:
+	shine()

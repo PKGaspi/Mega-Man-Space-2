@@ -106,6 +106,8 @@ var motion_dir = Vector2() # Direction of the last movement.
 
 func _ready():
 	global.MEGASHIP = self # Set global reference.
+	connect("death", $"/root/Space", "_on_megaship_death")
+	connect("tree_exiting", global, "_on_megaship_tree_exiting")
 	
 	# Init HP bar.
 	hp_bar = PROGRESS_BAR.instance()
@@ -129,6 +131,8 @@ func _physics_process(delta):
 	var motion = get_motion(input)
 	set_fire_sprite()
 	move_and_slide(motion)
+	
+	# TODO: Move pickup collision detection to here.
 
 func _process(delta):
 	# Get new values of this frame.
@@ -339,3 +343,7 @@ func previous_weapon():
 		weapon = WEAPONS.SIZE - 1
 	while !set_weapon(weapon):
 		pass
+
+func die():
+	$"../StaticCamera".global_position = $Camera2D.position
+	.die()

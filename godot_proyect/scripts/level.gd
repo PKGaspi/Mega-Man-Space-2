@@ -1,6 +1,6 @@
 extends Node
 
-func _enter_tree() -> void:
+func _ready() -> void:
 	$Music.play()
 	global.pause = true
 	$GUILayer/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
@@ -14,7 +14,16 @@ func _on_animation_finished(animation):
 	if animation == "ready":
 		global.pause = false
 		# Disable static camera.
-		$GameLayer/Camera2D.current = false
+		$GameLayer/StaticCamera.current = false
 
 func _on_teleport_animation_tree_exiting() -> void:
 	$GameLayer/EnemyGenerator.new_random_horde()
+
+func _on_megaship_death() -> void:
+	print("game_over")
+	game_over()
+
+func game_over() -> void:
+	$GUILayer/CenterContainer/CenterText.set_animation("none")
+	$Music.stop()
+	# TODO: Start timer for game over screen or something like that.
