@@ -7,14 +7,15 @@
 [ext_resource path="res://assets/sprites/enemies/enemy_death_particle_3.png" type="Texture" id=5]
 [ext_resource path="res://assets/sfx/megaship/death.wav" type="AudioStream" id=6]
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=1]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 25.0
+initial_velocity = 50.0
+angular_velocity = 1.05
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = -5.0
+linear_accel = -10.0
 
 [sub_resource type="AnimatedTexture" id=2]
 frames = 4
@@ -27,23 +28,25 @@ frame_2/delay_sec = 0.0
 frame_3/texture = ExtResource( 5 )
 frame_3/delay_sec = 0.0
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 50.0
+initial_velocity = 100.0
+angular_velocity = 1.06531e-038
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = -7.0
+linear_accel = -14.0
 
 [sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 50.0
+initial_velocity = 100.0
+angular_velocity = 0.000169926
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-linear_accel = -7.0
+linear_accel = -14.0
 angle = 45.0
 
 [node name="Death" type="Node2D"]
@@ -55,7 +58,7 @@ amount = 1
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 3 )
+process_material = SubResource( 1 )
 texture = SubResource( 2 )
 
 [node name="InnerParticles90" type="Particles2D" parent="."]
@@ -65,7 +68,7 @@ amount = 1
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 3 )
+process_material = SubResource( 1 )
 texture = SubResource( 2 )
 
 [node name="InnerParticles180" type="Particles2D" parent="."]
@@ -75,7 +78,7 @@ amount = 1
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 3 )
+process_material = SubResource( 1 )
 texture = SubResource( 2 )
 
 [node name="InnerParticles270" type="Particles2D" parent="."]
@@ -85,7 +88,7 @@ amount = 1
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 3 )
+process_material = SubResource( 1 )
 texture = SubResource( 2 )
 
 [node name="ExternParticles0" type="Particles2D" parent="."]
@@ -94,7 +97,7 @@ amount = 1
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )
 texture = SubResource( 2 )
 
 [node name="ExternParticles45" type="Particles2D" parent="."]
@@ -114,7 +117,7 @@ amount = 1
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )
 texture = SubResource( 2 )
 
 [node name="ExternParticles135" type="Particles2D" parent="."]
@@ -134,7 +137,7 @@ amount = 1
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )
 texture = SubResource( 2 )
 
 [node name="ExternParticles225" type="Particles2D" parent="."]
@@ -154,7 +157,7 @@ amount = 1
 lifetime = 5.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )
 texture = SubResource( 2 )
 
 [node name="ExternParticles315" type="Particles2D" parent="."]

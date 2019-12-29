@@ -31,8 +31,6 @@ func _physics_process(delta: float) -> void:
 		dir = global_position.direction_to(to_follow.global_position)
 	var motion = dir * move_speed
 	move_and_slide(motion)
-	
-	hp_bar.position = hp_bar_offset
 
 func init(pos):
 	global_position = pos

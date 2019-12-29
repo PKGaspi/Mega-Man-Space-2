@@ -156,6 +156,11 @@ func _process(delta):
 		fire(n_cannons)
 		auto_fire = 0
 	
+	# Emit propulsion particles.
+	$PropulsionParticles.emitting = speed != 0
+	var propulsion_dir = - motion_dir
+	$PropulsionParticles.global_rotation = propulsion_dir.angle()
+	
 	########## TEST
 	if Input.is_action_just_pressed("ui_down"):
 		previous_weapon()
@@ -177,6 +182,12 @@ func set_ammo_relative(relative_ammo):
 	ammo[active_weapon] += relative_ammo
 	update_bar(ammo_bar, ammo[active_weapon], ammo_max)
 	
+func set_visibility(value):
+	$SprShip.visible = value
+	
+func get_visibility():
+	return $SprShip.visible
+
 func update_bars():
 	update_bar(hp_bar, hp, hp_max)
 	update_bar(ammo_bar, ammo[active_weapon], ammo_max)
@@ -184,14 +195,15 @@ func update_bars():
 func take_damage(damage):
 	.take_damage(damage)
 	$HitParticles.emitting = true
+	$HitParticles.restart()
 	update_bar(hp_bar, hp, hp_max)
 
 func set_fire_sprite():
 	if speed == 0:
 		pass
-		$SprFire.visible = false
+		#$SprFire.visible = false
 	else:
-		$SprFire.visible = true
+		#$SprFire.visible = true
 		if speed == MOVE_SPEED_MAX * speed_multiplier:
 			$SprFire.play("max")
 		else:
@@ -361,6 +373,7 @@ func die():
 	
 	var new_sprite = $SprShip.duplicate()
 	new_sprite.global_rotation = global_rotation
+	new_sprite.visible = true
 	inst.add_child(new_sprite)
 	
 	# Tell everyone that I'm dead.

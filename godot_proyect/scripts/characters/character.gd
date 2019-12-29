@@ -62,8 +62,11 @@ func _on_life_flickering_timer_timeout():
 func set_visibility(value):
 	visible = value
 
+func get_visibility():
+	return visible
+
 func toggle_visibility():
-	visible = !visible
+	set_visibility(!get_visibility())
 
 func update_bar(bar, new_value, new_max_value):
 	bar.update_values(new_value, new_max_value)

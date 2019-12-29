@@ -14,7 +14,7 @@ onready var CENTER_TEXT = $"/root/Space/GUILayer/CenterContainer/CenterText"
 
 # Zone where enemies spawn.
 const AREA_SIZE = Vector2(200, 200)
-const AREA_LIMITS = Rect2(Vector2(-200, -200), Vector2(400, 400))
+const AREA_LIMITS = Rect2(Vector2(-2000, -2000), Vector2(4000, 4000))
 var min_distance : float = AREA_LIMITS.size.length() / 4
 var max_distance : float = AREA_LIMITS.size.length() / 2
 var spawn_area : Rect2
