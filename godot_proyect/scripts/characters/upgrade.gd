@@ -47,7 +47,6 @@ var ammount
 var sprite = preload("res://assets/sprites/megaship/lemon.png")
 
 func _ready():
-	dir = Vector2(random.randf(), random.randf()).normalized()
 	
 	# Set upgrade type.
 	var index = random.randi_range(0, ENUM_LENGTH - 1)
@@ -82,13 +81,13 @@ func toggle_upgrade():
 	ammount = -ammount
 	bad = !bad
 	set_collision_layer_bit(2, bad)
-	set_collision_mask_bit(1, bad)
 	$LifeTimer.start(life_time)
 	$LifeFlickeringTimer.start(life_flicker_time)
 	hp_bar.visible = bad # Hide hp bar if good.
 	flickering = false
 	if bad:
 		to_follow = global.MEGASHIP
+		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
 		$SprShine.stop()
 		$Sprite.texture = SPR_SHELL_NEG
 		move_speed = MOVE_SPEED_NEG

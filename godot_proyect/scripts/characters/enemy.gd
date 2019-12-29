@@ -24,7 +24,10 @@ func _ready():
 	hp_bar_offset = Vector2(sprite_size.x / 2 + BAR_CELL_SIZE.x, - sprite_size.y / 2)
 	hp_bar.init(BAR_CELL_SIZE, hp_bar_offset, hp_max)
 	add_child(hp_bar)
-	pass
+	
+	# Connect to_follow exit_tree signal
+	if to_follow != null:
+		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
 	
 func _physics_process(delta: float) -> void:
 	if to_follow != null:
@@ -34,6 +37,9 @@ func _physics_process(delta: float) -> void:
 
 func init(pos):
 	global_position = pos
+
+func _on_to_follow_tree_exiting():
+	to_follow = null
 
 #########################
 ## Auxiliar functions. ##

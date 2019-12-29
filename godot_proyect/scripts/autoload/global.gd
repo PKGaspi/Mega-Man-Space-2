@@ -85,6 +85,6 @@ func is_on_screen(viewport : Viewport, pos : Vector2) -> bool:
 	return screen.has_point(pos)
 
 func play_audio_random_pitch(snd, interval):
-	if snd.has_method("play"):
+	if snd != null and snd.has_method("play"):
 		snd.play(0)
 		snd.pitch_scale = random.randf_range(interval.x, interval.y)

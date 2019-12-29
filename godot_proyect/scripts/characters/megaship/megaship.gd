@@ -139,9 +139,7 @@ func _physics_process(delta):
 		var collider = get_slide_collision(i).collider
 		if collider is CHARACTER:
 			collider.collide(self)
-			break
 	
-	# TODO: Move pickup collision detection to here.
 
 func _process(delta):
 	# Get new values of this frame.
@@ -320,10 +318,7 @@ func upgrade(type, ammount):
 		pass
 	else:
 		if ammount > 0:
-			# TODO: Play upgrade sound.
 			$SndUpgrade.play()
-		if ammount < 0:
-			take_damage(3)
 		set(type, min(value_max, max(value + ammount, value_min)))
 		if type == "hp_max":
 			set_hp_relative(ammount)
