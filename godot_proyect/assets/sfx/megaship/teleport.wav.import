@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/teleport.wav-b173324d36499c1aaaafca937b10de86.sample"
+path="res://.import/teleport.wav-b6630a01e8a43c0c114e718d0f6fcf73.sample"
 
 [deps]
 
-source_file="res://assets/sfx/other/teleport.wav"
-dest_files=[ "res://.import/teleport.wav-b173324d36499c1aaaafca937b10de86.sample" ]
+source_file="res://assets/sfx/megaship/teleport.wav"
+dest_files=[ "res://.import/teleport.wav-b6630a01e8a43c0c114e718d0f6fcf73.sample" ]
 
 [params]
 

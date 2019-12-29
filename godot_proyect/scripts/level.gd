@@ -1,5 +1,7 @@
 extends Node
 
+const GAME_OVER_WAIT_TIME = 5 # In seconds.
+
 func _ready() -> void:
 	$Music.play()
 	global.pause = true
@@ -14,16 +16,24 @@ func _on_animation_finished(animation):
 	if animation == "ready":
 		global.pause = false
 		# Disable static camera.
-		$GameLayer/StaticCamera.current = false
+		$GameLayer/StaticCamera.queue_free()
 
 func _on_teleport_animation_tree_exiting() -> void:
 	$GameLayer/EnemyGenerator.new_random_horde()
 
 func _on_megaship_death() -> void:
-	print("game_over")
 	game_over()
+
+func _on_boss_death() -> void:
+	# TODO: Go to the select screen.
+	pass
+	
+func _on_game_over_timer_timeout() -> void:
+	# TODO: check number of lifes.
+	get_tree().reload_current_scene()
 
 func game_over() -> void:
 	$GUILayer/CenterContainer/CenterText.set_animation("none")
 	$Music.stop()
+	$GameOverTimer.start(GAME_OVER_WAIT_TIME)
 	# TODO: Start timer for game over screen or something like that.

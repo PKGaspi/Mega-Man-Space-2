@@ -41,6 +41,7 @@ func _on_flickering_timer_timeout():
 	if flickering:
 		flicker()
 	else:
+		$FlickeringTimer.stop()
 		set_visibility(true)
 
 func _on_invencibility_timer_timeout():
@@ -65,9 +66,9 @@ func toggle_visibility():
 	visible = !visible
 
 func flicker(interval = flickering_interval):
+	$FlickeringTimer.start(interval)
 	flickering = true
 	toggle_visibility()
-	$FlickeringTimer.start(interval)
 
 func hit(bullet):
 	if !invencible:
@@ -99,7 +100,7 @@ func die():
 	if death_instance != null:
 		# Creat death scene.
 		var inst = death_instance.instance()
-		inst.position = position
+		inst.global_position = global_position
 		get_parent().add_child(inst)
 	queue_free()
 	

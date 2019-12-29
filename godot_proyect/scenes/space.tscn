@@ -6,7 +6,7 @@
 [ext_resource path="res://other/font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scripts/gui/centre_text.gd" type="Script" id=5]
 [ext_resource path="res://scenes/characters/megaship/teleport_animation.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sfx/other/teleport.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sfx/megaship/teleport.wav" type="AudioStream" id=7]
 [ext_resource path="res://scripts/characters/enemy_generator.gd" type="Script" id=8]
 [ext_resource path="res://scenes/characters/enemies/asteroid.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/sprites/gui/warning/warning_mask.png" type="Texture" id=10]
@@ -149,4 +149,7 @@ color = Color( 0.117647, 0.0588235, 0.196078, 1 )
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 35 )
 bus = "Music"
+
+[node name="GameOverTimer" type="Timer" parent="."]
 [connection signal="tree_exiting" from="GameLayer/TeleportAnimation" to="." method="_on_teleport_animation_tree_exiting"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]

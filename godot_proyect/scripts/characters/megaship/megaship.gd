@@ -345,5 +345,19 @@ func previous_weapon():
 		pass
 
 func die():
-	$"../StaticCamera".global_position = $Camera2D.position
-	.die()
+	# Save the camera position.
+	$Camera2D.current = false
+	
+	# Generate death sequence.
+	var inst = death_instance.instance()
+	inst.global_position = global_position
+	get_parent().add_child(inst)
+	
+	var new_sprite = $SprShip.duplicate()
+	new_sprite.global_rotation = global_rotation
+	inst.add_child(new_sprite)
+	
+	# Tell everyone that I'm dead.
+	emit_signal("death")
+	# Die already.
+	queue_free()
