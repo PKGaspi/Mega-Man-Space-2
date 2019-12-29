@@ -177,9 +177,6 @@ func set_ammo_relative(relative_ammo):
 	ammo[active_weapon] += relative_ammo
 	update_bar(ammo_bar, ammo[active_weapon], ammo_max)
 	
-func update_bar(bar, new_value, new_max_value):
-	bar.update_values(new_value, new_max_value)
-	
 func update_bars():
 	update_bar(hp_bar, hp, hp_max)
 	update_bar(ammo_bar, ammo[active_weapon], ammo_max)

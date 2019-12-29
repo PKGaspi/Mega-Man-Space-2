@@ -24,7 +24,7 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[node name="Upgrade" index="0" instance=ExtResource( 1 )]
+[node name="Upgrade" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 flicker_before_timeout = true
 dissapear_on_timeout = true
@@ -45,7 +45,7 @@ animation = "shine"
 [node name="SprIcon" type="Sprite" parent="." index="2"]
 z_index = 4
 
-[node name="SprShell" type="Sprite" parent="." index="3"]
+[node name="Sprite" type="Sprite" parent="." index="3"]
 z_index = 3
 texture = ExtResource( 10 )
 

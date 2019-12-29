@@ -29,8 +29,7 @@ func init(cell_size, position, max_value, min_value = 0, value = max_value) -> v
 	
 	self.cell_size = cell_size
 	calculate_size()
-
-
+	
 func _draw():
 	for child in get_children():
 		child.queue_free()

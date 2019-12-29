@@ -63,6 +63,7 @@ func _ready():
 		# The upgrade is good.
 		# Shine for the first time.
 		$SprShine.play("shine")
+		hp_bar.visible = false # Hide hp bar if good.
 		
 
 #########################
@@ -82,15 +83,19 @@ func toggle_upgrade():
 	bad = !bad
 	set_collision_layer_bit(2, bad)
 	set_collision_mask_bit(1, bad)
+	$LifeTimer.start(life_time)
+	$LifeFlickeringTimer.start(life_flicker_time)
+	hp_bar.visible = bad # Hide hp bar if good.
+	flickering = false
 	if bad:
 		to_follow = global.MEGASHIP
 		$SprShine.stop()
-		$SprShell.texture = SPR_SHELL_NEG
+		$Sprite.texture = SPR_SHELL_NEG
 		move_speed = MOVE_SPEED_NEG
 	else:
 		to_follow = null
 		$SprShine.play("shine")
-		$SprShell.texture = SPR_SHELL_POS
+		$Sprite.texture = SPR_SHELL_POS
 		move_speed = MOVE_SPEED_POS
 
 func die():

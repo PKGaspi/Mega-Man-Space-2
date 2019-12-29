@@ -4,7 +4,7 @@ export(NodePath) var snd_hit = "SndHit"
 
 export(PackedScene) var death_instance = null
 
-export(int) var hp_max = 28 # Max hp.
+export(float) var hp_max = 10 # Max hp.
 var hp : int # Hp.
 
 var invencible : bool = false
@@ -64,6 +64,9 @@ func set_visibility(value):
 
 func toggle_visibility():
 	visible = !visible
+
+func update_bar(bar, new_value, new_max_value):
+	bar.update_values(new_value, new_max_value)
 
 func flicker(interval = flickering_interval):
 	$FlickeringTimer.start(interval)
