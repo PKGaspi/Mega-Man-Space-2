@@ -20,12 +20,6 @@ func _physics_process(delta: float) -> void:
 	var motion = dir * move_speed
 	move_and_slide(motion)
 	
-	# Check for Mega Ship collision.
-	for i in range(get_slide_count()):
-		var collider = get_slide_collision(i).collider
-		if collider == global.MEGASHIP:
-			collide(collider)
-			break
 
 func init(pos):
 	global_position = pos

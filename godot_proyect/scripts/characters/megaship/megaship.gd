@@ -3,6 +3,8 @@ extends "res://scripts/characters/character.gd"
 ################
 ## Resources. ##
 ################
+const CHARACTER = preload("res://scripts/characters/character.gd")
+
 const LEMON = preload("res://scenes/characters/megaship/lemon.tscn")
 const MASK = preload("res://assets/sprites/megaship/megaship_mask.png")
 export(SpriteFrames) var palettes = null
@@ -131,6 +133,13 @@ func _physics_process(delta):
 	var motion = get_motion(input)
 	set_fire_sprite()
 	move_and_slide(motion)
+	
+	# Check for collision.
+	for i in range(get_slide_count()):
+		var collider = get_slide_collision(i).collider
+		if collider is CHARACTER:
+			collider.collide(self)
+			break
 	
 	# TODO: Move pickup collision detection to here.
 
