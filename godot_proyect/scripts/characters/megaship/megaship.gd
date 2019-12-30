@@ -24,7 +24,7 @@ var ammo_bar
 ## Gameplay values. ##
 ######################
 # Moving speed.
-const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
+const MOVE_SPEED_ACCEL = 10 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 20 # In pixels/second^2.
 const MOVE_SPEED_MAX = 260 # In pixels/second.
 # Cannons positions.
@@ -158,6 +158,7 @@ func _process(delta):
 	$PropulsionParticles.emitting = speed != 0
 	var propulsion_dir = - motion_dir
 	$PropulsionParticles.global_rotation = propulsion_dir.angle()
+	$PropulsionParticles.process_material.initial_velocity = speed / 4
 	
 	########## TEST
 	if Input.is_action_just_pressed("ui_down"):

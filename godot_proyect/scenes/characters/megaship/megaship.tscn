@@ -101,7 +101,7 @@ emission_sphere_radius = 4.0
 flag_disable_z = true
 spread = 50.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 50.0
+initial_velocity = 20.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -5.0
@@ -112,7 +112,7 @@ data = PoolByteArray( 154, 249, 151, 249, 186, 37, 189, 37, 15, 105, 15, 105, 11
 format = 1
 stereo = true
 
-[node name="Megaship" instance=ExtResource( 1 )]
+[node name="Megaship" index="0" instance=ExtResource( 1 )]
 rotation = -1.5708
 collision_layer = 1
 collision_mask = 28
@@ -155,7 +155,6 @@ texture = SubResource( 7 )
 position = Vector2( -0.5, -0.5 )
 rotation = 3.14159
 z_index = -3
-emitting = false
 amount = 100
 preprocess = 0.15
 randomness = 0.3
