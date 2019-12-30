@@ -24,7 +24,7 @@ var ammo_bar
 ## Gameplay values. ##
 ######################
 # Moving speed.
-const MOVE_SPEED_ACCEL = 10 # In pixels/second^2.
+const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 20 # In pixels/second^2.
 const MOVE_SPEED_MAX = 260 # In pixels/second.
 # Cannons positions.
@@ -65,9 +65,9 @@ const BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
 var bullet_max = 3 # Max bullets per cannon on screen.
 const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 
-###########
+############
 # WEAPONS. #
-###########
+############
 var WEAPONS = global.WEAPONS # WEAPONS enum.
 var active_weapon = WEAPONS.MEGA # Current active weapon.
 # Unlocked WEAPONS.
