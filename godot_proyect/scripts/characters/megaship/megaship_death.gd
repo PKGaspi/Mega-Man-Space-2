@@ -4,7 +4,6 @@ func explode():
 	$SndDeath.play()
 	$SprShip.visible = false
 	for node in get_children():
-		print(node.name)
 		if node is Particles2D:
 			node.emitting = true
 

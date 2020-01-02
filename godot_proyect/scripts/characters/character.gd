@@ -79,7 +79,6 @@ func flicker(interval = flickering_interval):
 func hit(bullet):
 	if !invencible:
 		# TODO: Calculate damage with enemy weakness and bullet weapon type.
-		print("wow")
 		var damage = bullet.damage
 		take_damage(damage)
 

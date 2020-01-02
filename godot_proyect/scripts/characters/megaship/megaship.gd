@@ -138,7 +138,9 @@ func _physics_process(delta):
 	for i in range(get_slide_count()):
 		var collider = get_slide_collision(i).collider
 		if collider is CHARACTER:
+			print(collider)
 			collider.collide(self)
+			break
 	
 
 func _process(delta):
