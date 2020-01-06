@@ -1,36 +1,93 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scenes/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/characters/megaship/megaship.gd" type="Script" id=2]
 [ext_resource path="res://scenes/characters/megaship/megaship_death.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_0.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_1.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_2.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_3.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_4.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_5.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_6.png" type="Texture" id=10]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_7.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_8.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_9.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_10.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_11.png" type="Texture" id=15]
-[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_12.png" type="Texture" id=16]
-[ext_resource path="res://assets/sprites/megaship/fire/megaship_fire_2.png" type="Texture" id=17]
-[ext_resource path="res://assets/sprites/megaship/fire/megaship_fire_0.png" type="Texture" id=18]
-[ext_resource path="res://assets/sprites/megaship/fire/megaship_fire_1.png" type="Texture" id=19]
-[ext_resource path="res://assets/sprites/megaship/megaship.png" type="Texture" id=20]
-[ext_resource path="res://assets/sprites/megaship/megaship_hit_particle_0.png" type="Texture" id=21]
-[ext_resource path="res://assets/sprites/megaship/megaship_hit_particle_1.png" type="Texture" id=22]
-[ext_resource path="res://assets/sprites/megaship/megaship_hit_particle_2.png" type="Texture" id=23]
-[ext_resource path="res://assets/sfx/megaship/shoot.wav" type="AudioStream" id=24]
-[ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=25]
-[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=26]
-[ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_0.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_3.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_5.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_8.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_2.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_7.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_1.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_6.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/megaship/megaship_mask_4.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_0.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_1.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_2.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_3.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_4.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_5.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_6.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_7.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_8.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_9.png" type="Texture" id=22]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_10.png" type="Texture" id=23]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_11.png" type="Texture" id=24]
+[ext_resource path="res://assets/sprites/megaship/palettes/megaship_palette_12.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/megaship/fire/megaship_fire_2.png" type="Texture" id=26]
+[ext_resource path="res://assets/sprites/megaship/fire/megaship_fire_0.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites/megaship/fire/megaship_fire_1.png" type="Texture" id=28]
+[ext_resource path="res://assets/sprites/megaship/megaship.png" type="Texture" id=29]
+[ext_resource path="res://assets/sprites/megaship/megaship_hit_particle_0.png" type="Texture" id=30]
+[ext_resource path="res://assets/sprites/megaship/megaship_hit_particle_1.png" type="Texture" id=31]
+[ext_resource path="res://assets/sprites/megaship/megaship_hit_particle_2.png" type="Texture" id=32]
+[ext_resource path="res://assets/sfx/megaship/shoot.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=34]
+[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=35]
+[ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=36]
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "iddle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "180",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "225",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "315",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "270",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "45",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "90",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "135",
+"speed": 5.0
+} ]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -40,12 +97,12 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 17 ) ],
+"frames": [ ExtResource( 26 ) ],
 "loop": true,
 "name": "max",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 17 ) ],
+"frames": [ ExtResource( 27 ), ExtResource( 28 ), ExtResource( 26 ) ],
 "loop": false,
 "name": "accelerate",
 "speed": 0.0
@@ -89,10 +146,10 @@ orbit_velocity_random = 0.0
 
 [sub_resource type="AnimatedTexture" id=7]
 frames = 3
-frame_0/texture = ExtResource( 21 )
-frame_1/texture = ExtResource( 22 )
+frame_0/texture = ExtResource( 30 )
+frame_1/texture = ExtResource( 31 )
 frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 23 )
+frame_2/texture = ExtResource( 32 )
 frame_2/delay_sec = 0.0
 
 [sub_resource type="ParticlesMaterial" id=8]
@@ -102,6 +159,7 @@ flag_disable_z = true
 spread = 50.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 20.0
+angular_velocity = 1.08444e-19
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -5.0
@@ -120,6 +178,7 @@ script = ExtResource( 2 )
 death_instance = ExtResource( 3 )
 hp_max = 28.0
 invencibility_time = 1.2
+masks = SubResource( 10 )
 palettes = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -138,7 +197,7 @@ animation = "max"
 [node name="SprShip" type="Sprite" parent="." index="2"]
 material = SubResource( 5 )
 z_index = -2
-texture = ExtResource( 20 )
+texture = ExtResource( 29 )
 
 [node name="HitParticles" type="Particles2D" parent="." index="3"]
 z_index = 1
@@ -162,19 +221,19 @@ local_coords = false
 process_material = SubResource( 8 )
 
 [node name="SndShoot" type="AudioStreamPlayer2D" parent="." index="5"]
-stream = ExtResource( 24 )
+stream = ExtResource( 33 )
 
 [node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="6"]
 stream = SubResource( 9 )
 
 [node name="SndHit" type="AudioStreamPlayer2D" parent="." index="7"]
-stream = ExtResource( 25 )
+stream = ExtResource( 34 )
 
 [node name="SndWeaponSwap" type="AudioStreamPlayer2D" parent="." index="8"]
-stream = ExtResource( 26 )
+stream = ExtResource( 35 )
 
 [node name="SndUpgrade" type="AudioStreamPlayer2D" parent="." index="9"]
-stream = ExtResource( 27 )
+stream = ExtResource( 36 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="14"]
 current = true

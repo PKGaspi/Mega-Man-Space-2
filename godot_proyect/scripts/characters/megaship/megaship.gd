@@ -6,7 +6,7 @@ extends "res://scripts/characters/character.gd"
 const CHARACTER = preload("res://scripts/characters/character.gd")
 
 const LEMON = preload("res://scenes/characters/megaship/lemon.tscn")
-const MASK = preload("res://assets/sprites/megaship/megaship_mask.png")
+export(SpriteFrames) var masks = null
 export(SpriteFrames) var palettes = null
 
 onready var GUILAYER = $"/root/Space/GUILayer"
@@ -104,7 +104,9 @@ var ammo = { # Current ammo for each weapon.
 ########################
 var auto_fire = 0 # Seconds since last fire.
 var speed = 0 # Speed at this frame.
+var motion = Vector2() # Ammount to move.
 var motion_dir = Vector2() # Direction of the last movement.
+var input_dir = Vector2() # Direction that the user inputs.
 
 func _ready():
 	global.MEGASHIP = self # Set global reference.
@@ -122,18 +124,17 @@ func _ready():
 	GUILAYER.add_child(ammo_bar)
 	
 	# Init material.
-	$SprShip.texture = global.create_empty_image(MASK.get_size())
-	$SprShip.material.set_shader_param("mask", MASK)
+	$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
+	$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
 	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
 
 
 func _physics_process(delta):
 	# Movement.
-	var input = get_directional_input()
-	var motion = get_motion(input)
+	input_dir = get_directional_input()
+	motion = get_motion(input_dir)
 	set_fire_sprite()
 	move_and_slide(motion)
-	
 	# Check for collision.
 	for i in range(get_slide_count()):
 		var collider = get_slide_collision(i).collider
@@ -147,7 +148,7 @@ func _process(delta):
 	# Get new values of this frame.
 	mouse_pos = get_viewport().get_mouse_position()
 	
-	# Calculate rotation.
+	# Calculate rotation and sprite.
 	rotation = get_rotation()
 	
 	# Check if we are firing.
@@ -254,6 +255,7 @@ func get_rotation():
 	var rot
 	var input = get_joystick_axis(0, JOY_AXIS_3)
 	
+	# Calculate rotation.
 	if input != Vector2():
 		global.gamepad = true
 		rot = input.angle()
@@ -267,6 +269,24 @@ func get_rotation():
 			rot = mouse_pos.angle_to_point(get_global_transform_with_canvas().origin)
 		else:
 			rot = rotation
+	
+	# Set rotation sprite.
+	if input_dir == Vector2():
+		$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
+	else:
+		var sprite_angle = int(round(rad2deg(input_dir.angle() - rot)))
+		# Work only with positive angles.
+		if sprite_angle < 0:
+			sprite_angle += 360
+		# Make the angle change in an interval of 45 / 2 degs.
+		if sprite_angle % 45 >= 45 / 2:
+			sprite_angle += 45 - sprite_angle % 45
+		else:
+			sprite_angle -= sprite_angle % 45
+		sprite_angle %= 360
+		# Set the corresponding mask
+		$SprShip.material.set_shader_param("mask", masks.get_frame(str(sprite_angle), 0))
+		
 	
 	return rot
 
