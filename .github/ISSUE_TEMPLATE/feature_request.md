@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[BALANCE REQUEST] ..."
+title: "[FEATURE REQUEST] ..."
 labels: ''
 assignees: ''
 
