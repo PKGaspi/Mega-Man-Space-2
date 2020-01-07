@@ -1,0 +1,59 @@
+[gd_resource type="SpriteFrames" load_steps=10 format=2]
+
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_5.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_4.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_6.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_8.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_7.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_3.png" type="Texture" id=9]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "iddle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "90",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "270",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "225",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "135",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "0",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "315",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "45",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "180",
+"speed": 5.0
+} ]

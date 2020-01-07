@@ -16,21 +16,33 @@ _global_script_class_icons={
 [application]
 
 config/name="Mega Man Space 2"
-run/main_scene="res://scenes/space.tscn"
+run/main_scene="res://src/rooms/space/space.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-global="*res://scripts/autoload/global.gd"
+global="*res://src/global.gd"
+
+[debug]
+
+gdscript/warnings/unassigned_variable=false
+gdscript/warnings/unused_class_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/integer_division=false
 
 [display]
 
 window/size/width=480
 window/size/height=270
 window/dpi/allow_hidpi=true
-mouse_cursor/custom_image="res://assets/sprites/gui/real_cursor.png"
+mouse_cursor/custom_image="res://assets/sprites/gui/empty_cursor.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[gui]
+
+theme/use_hidpi=true
 
 [importer_defaults]
 

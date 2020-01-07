@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/characters/enemies/enemy_death.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/characters/enemies/asteroid.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.44082
+
+[node name="Enemy" index="0" instance=ExtResource( 1 )]
+death_instance = ExtResource( 2 )
+hp_max = 5.0
+
+[node name="CollisionBox" type="CollisionShape2D" parent="." index="4"]
+position = Vector2( -0.376133, 0.268669 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="5"]
+texture = ExtResource( 3 )
