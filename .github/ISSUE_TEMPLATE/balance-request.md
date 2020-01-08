@@ -1,9 +1,9 @@
 ---
 name: Balance request
 about: Suggest a change in balance for the game
-title: "[BALANCE REQUEST] ..."
-labels: ''
-assignees: ''
+title: "[BALANCE REQUEST]"
+labels: balance, request
+assignees: rapsaGnauJ
 
 ---
 
