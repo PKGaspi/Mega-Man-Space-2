@@ -2,7 +2,7 @@
 name: Enemy request
 about: Suggest a new enemy to add to the game
 title: "[ENEMY REQUEST]"
-labels: balance, feature, request
+labels: assets, balance, feature, request
 assignees: rapsaGnauJ
 
 ---
