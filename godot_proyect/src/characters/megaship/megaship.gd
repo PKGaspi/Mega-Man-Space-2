@@ -139,7 +139,6 @@ func _physics_process(delta):
 	for i in range(get_slide_count()):
 		var collider = get_slide_collision(i).collider
 		if collider is CHARACTER:
-			print(collider)
 			collider.collide(self)
 			break
 	
@@ -158,10 +157,7 @@ func _process(delta):
 		auto_fire = 0
 	
 	# Emit propulsion particles.
-	$PropulsionParticles.emitting = speed != 0
-	var propulsion_dir = - motion_dir
-	$PropulsionParticles.global_rotation = propulsion_dir.angle()
-	$PropulsionParticles.process_material.initial_velocity = speed / 4
+	propulsion_particles(speed)
 	
 	########## TEST
 	if Input.is_action_just_pressed("ui_down"):
@@ -319,7 +315,18 @@ func shoot_projectile(projectile, group, pos):
 		get_parent().add_child(inst)
 		
 	return shooted
+
+func propulsion_particles(speed):
+	var propulsion_dir = - motion_dir
 	
+	$PropulsionParticles1.emitting = speed != 0
+	$PropulsionParticles1.global_rotation = propulsion_dir.angle()
+	$PropulsionParticles1.process_material.initial_velocity = speed / 4
+	
+	$PropulsionParticles2.emitting = speed != 0
+	$PropulsionParticles2.global_rotation = propulsion_dir.angle()
+	$PropulsionParticles2.process_material.initial_velocity = speed / 4
+
 func upgrade(type, ammount):
 	var value = get(type)
 	var value_max = get(type.to_upper() + "_MAX")
@@ -338,16 +345,26 @@ func upgrade(type, ammount):
 			
 func set_weapon(weapon) -> bool:
 	if unlocked_WEAPONS[weapon]:
-		# TODO: Change bullets.
 		$SndWeaponSwap.play()
 		active_weapon = weapon
 		# Set color palette.
-		$SprShip.material.set_shader_param("palette", palettes.get_frame("default", weapon))
+		var new_palette = palettes.get_frame("default", weapon)
+		$SprShip.material.set_shader_param("palette", new_palette)
+		# Set propulsion particles new color.
+		var image = new_palette.get_data()
+		image.lock()
+		var new_color_1 = image.get_pixel(2, 0)
+		var new_color_2 = image.get_pixel(3, 0)
+		$PropulsionParticles1.process_material.color = new_color_1
+		$PropulsionParticles2.process_material.color = new_color_2
+		image.unlock()
 		# Show ammo.
 		ammo_bar.set_palette(weapon)
 		ammo_bar.visible = weapon != 0
 		# Set ammo value under max.
 		ammo[active_weapon] = min(ammo[active_weapon], ammo_max)
+		# TODO: Change bullets.
+		
 		return true
 	return false
 		

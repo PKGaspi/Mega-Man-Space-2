@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bar_cell_palette_6.png-98ffc8d03c4a8b2bbb6dba0af61c88f6.stex"
+path="res://.import/palette_6.png-6d67e169881a93b7dff9239d5bd03a7c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/gui/progress_bar/bar_cell_palette_6.png"
-dest_files=[ "res://.import/bar_cell_palette_6.png-98ffc8d03c4a8b2bbb6dba0af61c88f6.stex" ]
+source_file="res://assets/sprites/palettes/palette_6.png"
+dest_files=[ "res://.import/palette_6.png-6d67e169881a93b7dff9239d5bd03a7c.stex" ]
 
 [params]
 

@@ -1,68 +1,16 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/gui/progress_bar.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_mask_0.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_mask_1.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_0.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_1.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_2.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_3.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_4.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_5.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_6.png" type="Texture" id=10]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_7.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_8.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell_palette_9.png" type="Texture" id=13]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-//The palette used
-uniform sampler2D palette;
-//how many horizontal pixels has the palette
-uniform float palette_size;
-//Mask for wich color use from palette
-uniform sampler2D mask;
-
-void fragment() {
-	vec4 mask_color = texture(mask,UV);
-	vec4 output = texture(TEXTURE,UV);
-	if(mask_color.r != 1.0)
-	{
-		highp float color_r = mask_color.r;
-		//If an inconsistency appears between Intel and Amd/Nvidia, feel free to fix it and commit, but take this as a warning for production use
-		output = texture(palette,vec2((color_r*255.0+0.5)/255.0,0.0));
-	}
-	COLOR.rgba = output;
-}
-"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/palette_size = 8.0
-
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=4]
-animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[ext_resource path="res://resources/palette_swap_material.tres" type="Material" id=1]
+[ext_resource path="res://src/gui/progress_bar.gd" type="Script" id=2]
+[ext_resource path="res://resources/gui/progress_bar_masks.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://resources/gui/progress_bar_palettes.tres" type="SpriteFrames" id=4]
 
 [node name="TextureProgress" type="TextureProgress"]
-material = SubResource( 2 )
+material = ExtResource( 1 )
 margin_left = 30.1357
 margin_top = 20.0379
 margin_right = 70.1357
 margin_bottom = 60.0379
-script = ExtResource( 1 )
-cell_masks = SubResource( 3 )
-cell_palettes = SubResource( 4 )
+script = ExtResource( 2 )
+cell_masks = ExtResource( 3 )
+cell_palettes = ExtResource( 4 )

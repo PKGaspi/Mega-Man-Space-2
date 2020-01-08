@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/warning_palette_0.png-f921a32254f1c59183d136be3fa09f95.stex"
+path="res://.import/palette_13.png-bd85152ee5875bbe666c14287a4b4614.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/gui/warning/warning_palette_0.png"
-dest_files=[ "res://.import/warning_palette_0.png-f921a32254f1c59183d136be3fa09f95.stex" ]
+source_file="res://assets/sprites/palettes/palette_13.png"
+dest_files=[ "res://.import/palette_13.png-bd85152ee5875bbe666c14287a4b4614.stex" ]
 
 [params]
 

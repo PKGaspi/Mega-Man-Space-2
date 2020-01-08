@@ -2,6 +2,9 @@ extends Node
 
 const GAME_OVER_WAIT_TIME = 5 # In seconds.
 
+var lvl_id = 0 # This is set when selecting the level.
+
+
 func _ready() -> void:
 	$Music.play()
 	global.pause = true

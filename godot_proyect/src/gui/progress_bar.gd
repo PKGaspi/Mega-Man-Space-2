@@ -8,6 +8,8 @@ var size			: Vector2
 var cell_size		: Vector2
 var position		: Vector2
 
+var materials = {}
+
 func init(cell_size, position, max_value, min_value = 0, value = max_value) -> void:
 	
 	self.cell_texture = global.create_empty_image(cell_size)
@@ -17,9 +19,15 @@ func init(cell_size, position, max_value, min_value = 0, value = max_value) -> v
 	self.value = value
 	
 	# Color palette shader setup.
-	material = material.duplicate(true)
-	set_mask(0)
+	material = material.duplicate()
 	set_palette(0)
+	set_mask(1)
+	var material_empty = material.duplicate(true)
+	materials = {
+		true: material,
+		false: material_empty
+	}
+	set_mask(0)
 	
 	separation = 0 # Separation between cells.
 	margin_top = 0
@@ -34,17 +42,15 @@ func _draw():
 	for child in get_children():
 		child.queue_free()
 	# Draw full cells.
-	set_mask(0)
 	for i in range(value):
-		create_cell(Vector2(position.x + margin_left, position.y + size.y - (cell_size.y + separation) * i - margin_bottom - separation))
+		create_cell(Vector2(position.x + margin_left, position.y + size.y - (cell_size.y + separation) * i - margin_bottom - separation), true)
 	# Draw empty cells.
-	set_mask(1)
 	for i in range(value, max_value):
-		create_cell(Vector2(position.x + margin_left, position.y + size.y - (cell_size.y + separation) * i - margin_bottom - separation))
+		create_cell(Vector2(position.x + margin_left, position.y + size.y - (cell_size.y + separation) * i - margin_bottom - separation), false)
 
-func create_cell(position):
+func create_cell(position: Vector2, full: bool):
 	var spr = Sprite.new()
-	spr.material = material.duplicate(true)
+	spr.material = materials[full]
 	spr.texture = cell_texture
 	spr.position = position
 	add_child(spr)
@@ -57,10 +63,11 @@ func update_values(new_value, new_max_value):
 	
 func set_palette(new_palette) -> void:
 	material.set_shader_param("palette", cell_palettes.get_frame("default", new_palette))
-	update()
+	#update()
 	
 func set_mask(new_mask) -> void:
 	material.set_shader_param("mask", cell_masks.get_frame("default", new_mask))
+	#update()
 	
 func calculate_size():
 	size = Vector2(cell_size.x + margin_left + margin_right, (cell_size.y + separation) * max_value - separation + margin_top + margin_bottom)

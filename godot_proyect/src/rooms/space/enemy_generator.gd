@@ -42,7 +42,7 @@ func _ready():
 	var mask = warning_masks.get_frame("default", 0)
 	warning_texture = global.create_empty_image(mask.get_size())
 	warning_material.set_shader_param("mask", mask)
-	warning_material.set_shader_param("palette", warning_palettes.get_frame("default", 0))
+	warning_material.set_shader_param("palette", warning_palettes.get_frame("default", $"/root/Space".lvl_id))
 
 func _process(delta):
 	if horde:
