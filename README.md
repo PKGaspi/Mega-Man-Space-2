@@ -84,4 +84,4 @@ Color palette swap shader for [Godot]: https://github.com/HeartoLazor/godot_pale
 [Aseprite]: https://www.aseprite.org/
 [Alfedi]: https://github.com/Alfedi
 
-[logo]: https://github.com/rapsaGnauJ/Mega-Man-Space-2/blob/master/markdown/logo.png "Game Logo"
+[logo]: https://github.com/rapsaGnauJ/Mega-Man-Space-2/blob/master/assets/markdown/logo.png "Game Logo"
