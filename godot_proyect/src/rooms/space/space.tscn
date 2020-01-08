@@ -36,7 +36,7 @@
 [ext_resource path="res://assets/sprites/background/planets/planet_palette_9.png" type="Texture" id=34]
 [ext_resource path="res://assets/music/stage_heatman.ogg" type="AudioStream" id=35]
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=1]
 size = 8
 font_data = ExtResource( 4 )
 
@@ -109,7 +109,7 @@ margin_left = 240.0
 margin_top = 131.0
 margin_right = 240.0
 margin_bottom = 139.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 1 )
 align = 1
 valign = 1
 script = ExtResource( 5 )

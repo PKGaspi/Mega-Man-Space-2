@@ -286,15 +286,15 @@ func get_joystick_axis(device, joystick):
 		global.gamepad = true
 	return input
 
-func get_motion(input):
-	if input != Vector2():
+func get_motion(dir):
+	if dir != Vector2():
 		# Accelerate.
 		speed = clamp(speed + MOVE_SPEED_ACCEL, 0, MOVE_SPEED_MAX)
-		motion_dir = input
+		motion_dir = dir
 	else:
 		# Deaccelerate.
 		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
-	var motion = motion_dir.normalized() * speed * speed_multiplier
+	var motion = min(1, motion_dir.length()) * motion_dir.normalized() * speed * speed_multiplier
 	return motion
 
 func fire(ammount):
