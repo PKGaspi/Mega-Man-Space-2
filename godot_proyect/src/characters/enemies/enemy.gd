@@ -9,8 +9,8 @@ var hp_bar
 
 export(float) var move_speed = 0
 
-export(PackedScene) var drop = load("res://src/characters/pickups/upgrade.tscn")
-export(float) var upgrade_chance = .2
+var drop = load("res://src/characters/pickups/pickup_randomizer.gd")
+export(float) var drop_chance = .2
 
 export(float) var damage = 4 # Collision damage.
 
@@ -18,12 +18,13 @@ var to_follow : Node2D = null
 var dir : Vector2 = Vector2()
 
 func _ready():
-	var sprite_size = $Sprite.texture.get_size()
-	# Init HP bar.
-	hp_bar = PROGRESS_BAR.instance()
-	hp_bar_offset = Vector2(sprite_size.x / 2 + BAR_CELL_SIZE.x, - sprite_size.y / 2)
-	hp_bar.init(BAR_CELL_SIZE, hp_bar_offset, hp_max)
-	add_child(hp_bar)
+	if has_node("Sprite"):
+		var sprite_size = $Sprite.texture.get_size()
+		# Init HP bar.
+		hp_bar = PROGRESS_BAR.instance()
+		hp_bar_offset = Vector2(sprite_size.x / 2 + BAR_CELL_SIZE.x, - sprite_size.y / 2)
+		hp_bar.init(BAR_CELL_SIZE, hp_bar_offset, hp_max)
+		add_child(hp_bar)
 	
 	# Connect to_follow exit_tree signal
 	if to_follow != null:
@@ -51,8 +52,8 @@ func take_damage(damage):
 
 func die():
 	# Generate an upgrade at random.
-	if randf() <= upgrade_chance:
-		var inst = drop.instance()
+	if randf() <= drop_chance:
+		var inst = drop.new()
 		inst.global_position = global_position
 		get_parent().call_deferred("add_child", inst)
 	# Super method.

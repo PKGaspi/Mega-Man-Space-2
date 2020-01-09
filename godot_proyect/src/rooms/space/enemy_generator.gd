@@ -5,8 +5,8 @@ export(Array) var enemies = null
 onready var enemies_len = len(enemies)
 
 const WARNING = preload("res://src/gui/pointing_sprite.gd")
-export(SpriteFrames)var warning_masks
-export(SpriteFrames)var warning_palettes
+export(SpriteFrames) var warning_masks
+export(SpriteFrames) var warning_palettes
 var warning_material = preload("res://resources/palette_swap_material.tres").duplicate()
 var warning_texture
 
@@ -53,8 +53,6 @@ func _process(delta):
 		if total_enemies == 0:
 			horde = false
 			new_random_horde()
-		
-		pass # Generate a new round or the boss.
 
 func _on_enemy_death():
 	count_death()

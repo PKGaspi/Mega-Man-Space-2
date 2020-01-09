@@ -1,8 +1,5 @@
 extends "res://src/characters/pickups/pickup.gd"
 
-const SPR_SHELL_POS = preload("res://assets/sprites/characters/pickups/upgrades/shells/upgrade_shell_0.png")
-const SPR_SHELL_NEG = preload("res://assets/sprites/characters/pickups/upgrades/shells/upgrade_shell_1.png")
-
 const NEGATIVE_FREQUENCY = .5
 
 const MOVE_SPEED_POS = 10
@@ -11,21 +8,19 @@ const MOVE_SPEED_NEG = 40
 const SHINE_TIME_MIN = 2 # In seconds.
 const SHINE_TIME_MAX = 5 # In seconds.
 
-var bad = false # Whether the upgrade is bad or good.
-
 enum {
 	HP,
 	SPEED,
 	N_SHOOTS,
 	BULLET_MAX,
-	ENUM_LENGTH,
+	UPGRADES_LENGTH,
 }
 
 var UPGRADE_TYPES = {
 	HP: "hp_max",
-	SPEED: "speed_multiplier",
+	SPEED: "UPGRADES.SPEED_multiplier",
 	N_SHOOTS: "n_cannons",
-	BULLET_MAX: "bullet_max",
+	BULLET_MAX: "UPGRADES.BULLET_MAX",
 }
 
 var UPGRADE_AMMOUNTS = {
@@ -35,23 +30,14 @@ var UPGRADE_AMMOUNTS = {
 	BULLET_MAX: 1,
 }
 
-var UPGRADE_SPRITES = {
-	HP: preload("res://assets/sprites/characters/pickups/upgrades/icons/upgrade_icon_hp.png"),
-	SPEED: preload("res://assets/sprites/characters/pickups/upgrades/icons/upgrade_icon_speed.png"),
-	N_SHOOTS: preload("res://assets/sprites/characters/pickups/upgrades/icons/upgrade_icon_cannons.png"),
-	BULLET_MAX: preload("res://assets/sprites/characters/pickups/upgrades/icons/upgrade_icon_bullets.png"),
-}
+const SPRITES = preload("res://resources/pickups/upgrades_sprites.tres")
 
-var type
-var ammount
+var index = -1
 
 func _ready():
 	
-	# Set upgrade type.
-	var index = random.randi_range(0, ENUM_LENGTH - 1)
-	type = UPGRADE_TYPES[index]
-	ammount = UPGRADE_AMMOUNTS[index]
-	$SprIcon.texture = UPGRADE_SPRITES[index]
+	if index < 0:
+		set_random_upgrade()
 	
 	# Maybe this upgrade is negative.
 	if random.randf() <= NEGATIVE_FREQUENCY:
@@ -61,39 +47,65 @@ func _ready():
 		# The upgrade is good.
 		# Shine for the first time.
 		$SprShine.play("shine")
-		hp_bar.visible = false # Hide hp bar if good.
+		hp_bar.visible = false # Hide UPGRADES.HP bar if good.
 		
+func init(pos : Vector2, index : int = -1, ammount : float = 0) -> void:
+	self.global_position = pos
+	if index >= 0:
+		set_type(index)
+	else:
+		set_random_upgrade()
+	if ammount != 0:
+		self.ammount = ammount
 
 #########################
 ## Auxiliar functions. ##
 #########################
 
+func set_random_upgrade() -> void:
+	set_type(random.randi_range(0, UPGRADES_LENGTH - 1))
+
+func set_type(new_index) -> void:
+	self.index = new_index
+	type = UPGRADE_TYPES[index]
+	ammount = get_default_ammount()
+	bad = ammount <= 0
+	set_sprites()
+
+func get_default_ammount(index : int = self.index) -> float:
+	return UPGRADE_AMMOUNTS[index]
+
+func set_sprites():
+	$SprIcon.texture = SPRITES.get_frame("icons", index)
+	$Sprite.texture = SPRITES.get_frame("shells", 1 if bad else 0)
+	
 func shine():
 	$SprShine.frame = 0 # Shine.
 	if !bad:
 		$SprShine.play("default")
-		$ShineTimer.start(random.randf_range(SHINE_TIME_MIN, SHINE_TIME_MAX))
 	else:
 		$SprShine.stop()
 
 func toggle_upgrade():
+	# Change values.
 	ammount = -ammount
 	bad = !bad
-	set_collision_layer_bit(2, bad)
+	# Restart timer.
 	$LifeTimer.start(life_time)
 	$LifeFlickeringTimer.start(life_flicker_time)
-	hp_bar.visible = bad # Hide hp bar if good.
+	# Set collision, sprites and more.
+	set_collision_layer_bit(2, bad)
+	set_sprites()
+	hp_bar.visible = bad # Hide UPGRADES.HP bar if good.
 	flickering = false
 	if bad:
 		to_follow = global.MEGASHIP
 		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
 		$SprShine.stop()
-		$Sprite.texture = SPR_SHELL_NEG
 		move_speed = MOVE_SPEED_NEG
 	else:
 		to_follow = null
 		$SprShine.play("shine")
-		$Sprite.texture = SPR_SHELL_POS
 		move_speed = MOVE_SPEED_POS
 
 func die():
@@ -101,11 +113,6 @@ func die():
 	hp = hp_max
 	toggle_upgrade()
 	
-func collide(collider):
-	collider.upgrade(type, ammount)
-	if bad:
-		.collide(collider)
-	queue_free()
 
 func _on_shine_timer_timeout() -> void:
 	shine()
