@@ -25,6 +25,6 @@ scale = Vector2( 0.4, 0.3 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -2.38419e-007 )
+position = Vector2( 0, -2.38419e-07 )
 scale = Vector2( 0.4, 0.3 )
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -54,7 +54,7 @@ func die():
 	if randf() <= upgrade_chance:
 		var inst = drop.instance()
 		inst.global_position = global_position
-		get_parent().add_child(inst)
+		get_parent().call_deferred("add_child", inst)
 	# Super method.
 	.die()
 	

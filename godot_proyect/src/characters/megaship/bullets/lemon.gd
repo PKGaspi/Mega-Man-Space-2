@@ -30,6 +30,5 @@ func move(to_move):
 	global_position += to_move
 
 func _on_body_entered(body: PhysicsBody2D) -> void:
-	# TODO: Move hitting sound to here.
 	body.hit(self)
 	queue_free()
