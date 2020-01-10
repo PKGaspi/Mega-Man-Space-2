@@ -67,8 +67,11 @@ func get_visibility():
 func toggle_visibility():
 	set_visibility(!get_visibility())
 
-func update_bar(bar, new_value, new_max_value):
-	bar.update_values(new_value, new_max_value)
+func update_bar(bar, new_value, new_max_value, pause : bool = false) -> void:
+	if pause:
+		bar.update_values(new_value, new_max_value)
+	else:
+		bar.update_values(new_value, new_max_value, 0)
 
 func flicker(interval = flickering_interval):
 	$FlickeringTimer.start(interval)

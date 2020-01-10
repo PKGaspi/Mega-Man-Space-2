@@ -22,6 +22,13 @@ enum WEAPONS {
 	SIZE,
 }
 
+const LIFES_DEFAULT = 2
+var lifes = LIFES_DEFAULT # The number of extra lifes.
+const MAX_LIFES = 9
+const ETANKS_DEFAULT = 0
+var etanks = 0 # The number of extra lifes.
+const MAX_ETANKS = 4
+
 var MEGASHIP # The megaship instance for easy global access.
 var gamepad 	: bool # Wheter the game is being played with a gamepad or a keyboard.
 var random 		: RandomNumberGenerator # Used for general randomness.
@@ -51,6 +58,12 @@ func _on_megaship_tree_exiting():
 ### Library functions. ###
 ##########################
 
+func game_over() -> void:
+	lifes = LIFES_DEFAULT
+	etanks = ETANKS_DEFAULT
+	# TODO: Load game over scene.
+	
+
 func create_empty_image(size : Vector2) -> ImageTexture:
 	var empty_image = Image.new()
 	var empty_texture = ImageTexture.new()
@@ -78,6 +91,14 @@ func fix_mouse_mode():
 	var tmp = Input.get_mouse_mode()
 	Input.set_mouse_mode(0)
 	Input.set_mouse_mode(tmp)
+
+func obtain_1up():
+	# TODO: play 1up sound.
+	lifes = min(lifes + 1, MAX_LIFES)
+	
+func obtain_etank():
+	# TODO: play e-tank sound.
+	etanks = min(etanks + 1, MAX_ETANKS)
 
 func is_on_screen(viewport : Viewport, pos : Vector2) -> bool:
 	var screen = viewport.get_visible_rect()

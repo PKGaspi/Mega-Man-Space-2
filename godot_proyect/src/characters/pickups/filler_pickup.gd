@@ -60,7 +60,6 @@ func set_random_type() -> bool:
 	var val = random.randf()
 	var total_val = 0
 	for key in CHANCES.keys():
-		var chance = CHANCES[key]
 		total_val += CHANCES[key]
 		if val <= total_val:
 			self.type = key
@@ -68,8 +67,7 @@ func set_random_type() -> bool:
 	self.ammount = AMMOUNTS[type]
 	
 	if HAS_SMALL[type] && random.randf() < SMALL_CHANCE:
-		self.prefix = "small_"
-		self.ammount -= SMALL_AMMOUNT_OFFSET
+		self.ammount += SMALL_AMMOUNT_OFFSET
 		small = true
 	return small
 

@@ -25,18 +25,23 @@ func _on_teleport_animation_tree_exiting() -> void:
 	$GameLayer/EnemyGenerator.new_random_horde()
 
 func _on_megaship_death() -> void:
-	game_over()
+	death()
 
 func _on_boss_death() -> void:
 	# TODO: Go to the select screen.
 	pass
 	
 func _on_game_over_timer_timeout() -> void:
-	# TODO: check number of lifes.
+	global.lifes -= 1
+	if global.lifes < 0:
+		print(":(")
+		global.game_over()
+		# TODO: Go to game over screen and reset points.
 	get_tree().reload_current_scene()
 
-func game_over() -> void:
+func death() -> void:
 	$GUILayer/CenterContainer/CenterText.set_animation("none")
 	$Music.stop()
 	$GameOverTimer.start(GAME_OVER_WAIT_TIME)
+	
 	# TODO: Start timer for game over screen or something like that.

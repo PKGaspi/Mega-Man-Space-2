@@ -134,6 +134,8 @@ func _ready():
 	$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
 	$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
 	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
+	
+	
 
 
 func _physics_process(delta):
@@ -178,23 +180,20 @@ func _process(delta):
 ## Auxiliar functions. ##
 #########################
 
-func set_hp_relative(relative_hp):
+func set_hp_relative(relative_hp, pause = false):
 	hp += relative_hp
-	update_bar(hp_bar, hp, hp_max)
+	update_bar(hp_bar, hp, hp_max, pause)
 	
-func set_ammo_relative(relative_ammo):
-	ammo[active_weapon] += relative_ammo
-	update_bar(ammo_bar, ammo[active_weapon], ammo_max)
+func set_ammo_relative(relative_ammo, pause = false):
+	if active_weapon != WEAPONS.MEGA:
+		ammo[active_weapon] += relative_ammo
+		update_bar(ammo_bar, ammo[active_weapon], ammo_max, pause)
 	
 func set_visibility(value):
 	$SprShip.visible = value
 	
 func get_visibility():
 	return $SprShip.visible
-
-func update_bars():
-	update_bar(hp_bar, hp, hp_max)
-	update_bar(ammo_bar, ammo[active_weapon], ammo_max)
 
 func take_damage(damage):
 	.take_damage(damage)
@@ -333,7 +332,14 @@ func propulsion_particles(speed):
 	$PropulsionParticles2.process_material.initial_velocity = speed / 4
 
 func fill(type, ammount):
-	print("fill")
+	if type == "1up":
+		global.obtain_1up()
+	elif type == "e-tank":
+		global.obtain_etank()
+	elif type == "heal":
+		set_hp_relative(ammount, true)
+	elif type == "ammo":
+		set_ammo_relative(ammount, true)
 	
 func upgrade(type, ammount):
 	var value = get(type)
