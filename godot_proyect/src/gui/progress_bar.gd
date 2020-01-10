@@ -48,6 +48,9 @@ func _draw():
 	for i in range(value, max_value):
 		create_cell(Vector2(position.x + margin_left, position.y + size.y - (cell_size.y + separation) * i - margin_bottom - separation), false)
 
+func _on_megaship_palette_change(palette_index):
+	set_palette(palette_index)
+
 func create_cell(position: Vector2, full: bool):
 	var spr = Sprite.new()
 	spr.material = materials[full]

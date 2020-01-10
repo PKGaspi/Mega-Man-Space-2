@@ -109,6 +109,11 @@ var motion = Vector2() # Ammount to move.
 var motion_dir = Vector2() # Direction of the last movement.
 var input_dir = Vector2() # Direction that the user inputs.
 
+##############
+## Singals. ##
+##############
+signal palette_change
+
 func _ready():
 	global.MEGASHIP = self # Set global reference.
 	connect("death", $"/root/Space", "_on_megaship_death")
@@ -122,6 +127,7 @@ func _ready():
 	ammo_bar = PROGRESS_BAR.instance()
 	ammo_bar.init(BAR_CELL_SIZE, AMMO_BAR_POS, ammo_max)
 	ammo_bar.visible = false
+	connect("palette_change", ammo_bar, "_on_megaship_palette_change")
 	GUILAYER.add_child(ammo_bar)
 	
 	# Init material.
@@ -195,7 +201,6 @@ func take_damage(damage):
 	$HitParticles.emitting = true
 	$HitParticles.restart()
 	update_bar(hp_bar, hp, hp_max)
-
 
 func get_directional_input():
 	
@@ -343,24 +348,29 @@ func upgrade(type, ammount):
 			ammo_max = min(value_max, max(value + ammount, value_min))
 			set_ammo_relative(value)
 			
-func set_weapon(weapon) -> bool:
-	if unlocked_WEAPONS[weapon]:
+func set_palette(weapon_index : int) -> void:
+	# Set color palette.
+	var new_palette = palettes.get_frame("default", weapon_index)
+	$SprShip.material.set_shader_param("palette", new_palette)
+	# Set propulsion particles new color.
+	var image = new_palette.get_data()
+	image.lock()
+	var new_color_1 = image.get_pixel(2, 0)
+	var new_color_2 = image.get_pixel(3, 0)
+	$PropulsionParticles1.process_material.color = new_color_1
+	$PropulsionParticles2.process_material.color = new_color_2
+	image.unlock()
+	
+	# Emit palette change signal.
+	emit_signal("palette_change", weapon_index)
+
+func set_weapon(weapon_index : int) -> bool:
+	if unlocked_WEAPONS[weapon_index]:
 		$SndWeaponSwap.play()
-		active_weapon = weapon
-		# Set color palette.
-		var new_palette = palettes.get_frame("default", weapon)
-		$SprShip.material.set_shader_param("palette", new_palette)
-		# Set propulsion particles new color.
-		var image = new_palette.get_data()
-		image.lock()
-		var new_color_1 = image.get_pixel(2, 0)
-		var new_color_2 = image.get_pixel(3, 0)
-		$PropulsionParticles1.process_material.color = new_color_1
-		$PropulsionParticles2.process_material.color = new_color_2
-		image.unlock()
+		active_weapon = weapon_index
+		set_palette(weapon_index)
 		# Show ammo.
-		ammo_bar.set_palette(weapon)
-		ammo_bar.visible = weapon != 0
+		ammo_bar.visible = weapon_index != 0
 		# Set ammo value under max.
 		ammo[active_weapon] = min(ammo[active_weapon], ammo_max)
 		# TODO: Change bullets.
