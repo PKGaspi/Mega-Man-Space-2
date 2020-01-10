@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/e-tank_mask.png-f2f958d8629fca528ba939e63fdc8c9d.stex"
+path="res://.import/e-tank_mask_1.png-879e9424f95cf747c2d8a5514278259b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/pickups/e-tank_mask.png"
-dest_files=[ "res://.import/e-tank_mask.png-f2f958d8629fca528ba939e63fdc8c9d.stex" ]
+source_file="res://assets/sprites/characters/pickups/e-tank/e-tank_mask_1.png"
+dest_files=[ "res://.import/e-tank_mask_1.png-879e9424f95cf747c2d8a5514278259b.stex" ]
 
 [params]
 

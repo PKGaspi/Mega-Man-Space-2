@@ -51,7 +51,7 @@ func _on_to_follow_tree_exiting():
 
 func take_damage(damage):
 	.take_damage(damage)
-	update_bar(hp_bar, hp, hp_max)
+	hp_bar.update_values(hp, hp_max, 0)
 
 func die():
 	# Generate an upgrade at random.

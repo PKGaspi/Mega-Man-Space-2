@@ -67,11 +67,11 @@ func get_visibility():
 func toggle_visibility():
 	set_visibility(!get_visibility())
 
-func update_bar(bar, new_value, new_max_value, pause : bool = false) -> void:
-	if pause:
-		bar.update_values(new_value, new_max_value)
-	else:
-		bar.update_values(new_value, new_max_value, 0)
+func set_hp(value):
+	hp = clamp(value, 0, hp_max)
+	
+func set_hp_relative(relative_value):
+	set_hp(hp + relative_value)
 
 func flicker(interval = flickering_interval):
 	$FlickeringTimer.start(interval)
@@ -87,7 +87,7 @@ func hit(bullet):
 func take_damage(damage):
 	# Play hit sound.
 	global.play_audio_random_pitch(get_node(snd_hit), Vector2(.90, 1.10))
-	hp -= damage
+	set_hp_relative(-damage)
 	set_invencible(true)
 	check_death()
 

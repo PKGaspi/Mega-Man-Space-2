@@ -17,16 +17,16 @@ enum {
 
 var UPGRADE_TYPES = {
 	HP: "hp_max",
-	SPEED: "UPGRADES.SPEED_multiplier",
+	SPEED: "speed_multiplier",
 	N_SHOOTS: "n_cannons",
-	BULLET_MAX: "UPGRADES.BULLET_MAX",
+	BULLET_MAX: "bullet_max",
 }
 
 var UPGRADE_AMMOUNTS = {
-	HP: 2,
+	HP: 2.0,
 	SPEED: .2,
-	N_SHOOTS: 1,
-	BULLET_MAX: 1,
+	N_SHOOTS: 1.0,
+	BULLET_MAX: 1.0,
 }
 
 const SPRITES = preload("res://resources/characters/pickups/upgrades_sprites.tres")
@@ -54,8 +54,7 @@ func init(pos : Vector2, index : int = -1, ammount : float = 0) -> void:
 		set_type(index)
 	else:
 		set_random_upgrade()
-	if ammount != 0:
-		self.ammount = ammount
+	self.ammount = get_default_ammount(self.index) if ammount == 0 else ammount
 
 func _on_shine_timer_timeout() -> void:
 	shine()

@@ -1,6 +1,6 @@
 extends Range
 
-const DEFAULT_CELL_TIME = .1 # Time between each cell is filled.
+const DEFAULT_CELL_TIME : float = 8.0 / 60.0 # Time between each cell is filled.
 
 # For filling animations.
 var value_to : int
@@ -69,22 +69,22 @@ func create_cell(position: Vector2, full: bool):
 	add_child(spr)
 
 func update_values(new_value, new_max_value = max_value, cell_time = DEFAULT_CELL_TIME):
+	max_value = new_max_value
 	if cell_time == 0:
-		set_values(new_value, new_max_value)
+		set_value(new_value)
 	else: 
 		global.pause = true
 		if value == new_value:
 			global.pause = false
 		else:
-			# TODO: play filling sound.
+			$SndFill.play()
 			value_to = min(new_value, max_value)
 			current_cell_time = cell_time
-			set_values(value + sign(new_value - value), new_max_value)
+			set_value(value + sign(new_value - value))
 			$FillTimer.start(cell_time)
 
-func set_values(new_value, new_max_value = max_value):
-	value = new_value
-	max_value = new_max_value
+func set_value(new_value):
+	value = clamp(new_value, min_value, max_value)
 	calculate_size()
 	update()
 

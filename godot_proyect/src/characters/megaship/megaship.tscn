@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=11]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sfx/other/1up.wav" type="AudioStream" id=13]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -6.5, -6, 13, 0, -6.5, 6 )
@@ -69,7 +70,7 @@ flag_disable_z = true
 spread = 50.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 20.0
-angular_velocity = 1.08444e-19
+angular_velocity = 1.08444e-019
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -5.0
@@ -82,7 +83,7 @@ flag_disable_z = true
 spread = 50.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 20.0
-angular_velocity = 1.08444e-19
+angular_velocity = 1.08444e-019
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -5.0
@@ -164,8 +165,11 @@ stream = SubResource( 9 )
 [node name="SndHit" type="AudioStreamPlayer2D" parent="." index="8"]
 stream = ExtResource( 10 )
 
-[node name="SndWeaponSwap" type="AudioStreamPlayer2D" parent="." index="9"]
+[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 11 )
 
-[node name="SndUpgrade" type="AudioStreamPlayer2D" parent="." index="10"]
+[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource( 12 )
+
+[node name="Snd1Up" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource( 13 )

@@ -180,15 +180,30 @@ func _process(delta):
 ## Auxiliar functions. ##
 #########################
 
-func set_hp_relative(relative_hp, pause = false):
-	hp += relative_hp
-	update_bar(hp_bar, hp, hp_max, pause)
-	
-func set_ammo_relative(relative_ammo, pause = false):
+func set_hp_relative(relative_value, pause = false):
+	.set_hp_relative(relative_value)
+	if pause:
+		hp_bar.update_values(hp, hp_max)
+	else:
+		hp_bar.update_values(hp, hp_max, 0)
+		
+
+func set_ammo_relative(relative_value, pause = false):
 	if active_weapon != WEAPONS.MEGA:
-		ammo[active_weapon] += relative_ammo
-		update_bar(ammo_bar, ammo[active_weapon], ammo_max, pause)
-	
+		set_ammo(get_ammo() + relative_value)
+		if pause:
+			ammo_bar.update_values(get_ammo(), ammo_max)
+		else:
+			ammo_bar.update_values(get_ammo(), ammo_max, 0)
+	else:
+		ammo_bar.update()
+
+func set_ammo(value, weapon = active_weapon):
+	ammo[weapon] = clamp(value, 0, ammo_max)
+
+func get_ammo(weapon = active_weapon) -> float:
+	return ammo[weapon]
+
 func set_visibility(value):
 	$SprShip.visible = value
 	
@@ -199,7 +214,6 @@ func take_damage(damage):
 	.take_damage(damage)
 	$HitParticles.emitting = true
 	$HitParticles.restart()
-	update_bar(hp_bar, hp, hp_max)
 
 func get_directional_input():
 	
@@ -297,7 +311,7 @@ func get_motion(dir):
 	var motion = min(1, motion_dir.length()) * motion_dir.normalized() * speed * speed_multiplier
 	return motion
 
-func fire(ammount):
+func fire(ammount : int) -> void:
 	var shooted = false
 	if ammount % 2 == 1:
 		shooted = shoot_projectile(LEMON, "BULLETS_CENTRE", CANNON_CENTRE_POS) or shooted
@@ -307,6 +321,7 @@ func fire(ammount):
 		
 	if shooted:
 		# Play sound only once.
+		set_ammo_relative(-1)
 		global.play_audio_random_pitch($SndShoot, Vector2(.98, 1.02))
 
 func shoot_projectile(projectile, group, pos):
@@ -333,15 +348,17 @@ func propulsion_particles(speed):
 
 func fill(type, ammount):
 	if type == "1up":
+		$Snd1Up.play()
 		global.obtain_1up()
 	elif type == "e-tank":
+		$Snd1Up.play()
 		global.obtain_etank()
 	elif type == "heal":
 		set_hp_relative(ammount, true)
 	elif type == "ammo":
 		set_ammo_relative(ammount, true)
 	
-func upgrade(type, ammount):
+func upgrade(type : String, ammount : float) -> void:
 	var value = get(type)
 	var value_max = get(type.to_upper() + "_MAX")
 	var value_min = get(type.to_upper() + "_MIN")
@@ -351,11 +368,14 @@ func upgrade(type, ammount):
 	else:
 		if ammount > 0:
 			$SndUpgrade.play()
-		set(type, min(value_max, max(value + ammount, value_min)))
+		set(type, clamp(value + ammount, value_min, value_max))
 		if type == "hp_max":
-			set_hp_relative(ammount)
-			ammo_max = min(value_max, max(value + ammount, value_min))
-			set_ammo_relative(value)
+			# Do extra stuff in this case.
+			ammo_max = clamp(value + ammount, value_min, value_max)
+			set_hp_relative(0)
+			set_ammo_relative(0)
+			hp_bar.update_values(hp, hp_max)
+			ammo_bar.update_values(get_ammo(), ammo_max)
 			
 func set_palette(weapon_index : int) -> void:
 	# Set color palette.
@@ -380,10 +400,10 @@ func set_weapon(weapon_index : int) -> bool:
 		set_palette(weapon_index)
 		# Show ammo.
 		ammo_bar.visible = weapon_index != 0
+		ammo_bar.set_value(get_ammo())
 		# Set ammo value under max.
 		ammo[active_weapon] = min(ammo[active_weapon], ammo_max)
 		# TODO: Change bullets.
-		
 		return true
 	return false
 		

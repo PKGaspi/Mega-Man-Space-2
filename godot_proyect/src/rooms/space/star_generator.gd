@@ -61,7 +61,7 @@ func _ready():
 		var layer = ParallaxLayer.new()
 		# Interpolate motion scale.
 		var t = float(i + 1) / N_LAYERS
-		var scale = MIN_MOTION_SCALE * (1 - t) + MAX_MOTION_SCALE * t
+		var scale = lerp(MIN_MOTION_SCALE, MAX_MOTION_SCALE, t)
 		layer.motion_scale = Vector2(scale, scale)
 		layer.z_index = Z_INDEX_OFFSET + i
 		add_child(layer)
