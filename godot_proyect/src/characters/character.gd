@@ -17,9 +17,8 @@ var flickering_interval = .05 # Seconds between each visibility toggle when flic
 var flickering_timer = 0 # Seconds until a toggle on visibility is made.
 export(bool) var flicker_on_hit = true
 
-const life_time = 10 # Seconds until the character disapears.
-const life_flicker_time = 8 # Start flickering when the character has this many seconds of life.
-var life_timer = 0
+export(float) var life_time = 10 # Seconds until the character disapears.
+export(float) var life_flicker_time = 8 # Start flickering when the character has this many seconds of life.
 export(bool) var flicker_before_timeout = false
 export(bool) var dissapear_on_timeout = false
 

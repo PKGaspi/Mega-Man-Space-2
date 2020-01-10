@@ -1,5 +1,8 @@
 extends "res://src/characters/character.gd"
 
+export (SpriteFrames) var masks
+export (SpriteFrames) var palettes
+
 onready var GUILAYER = $"/root/Space/GUILayer"
 # Bars.
 const PROGRESS_BAR = preload("res://src/gui/progress_bar.tscn")
@@ -10,7 +13,7 @@ var hp_bar
 export(float) var move_speed = 0
 
 var drop = load("res://src/characters/pickups/pickup_randomizer.gd")
-export(float) var drop_chance = .2
+export(float) var drop_chance = 1
 
 export(float) var damage = 4 # Collision damage.
 
@@ -18,7 +21,7 @@ var to_follow : Node2D = null
 var dir : Vector2 = Vector2()
 
 func _ready():
-	if has_node("Sprite"):
+	if has_node("Sprite") and $Sprite.texture != null:
 		var sprite_size = $Sprite.texture.get_size()
 		# Init HP bar.
 		hp_bar = PROGRESS_BAR.instance()

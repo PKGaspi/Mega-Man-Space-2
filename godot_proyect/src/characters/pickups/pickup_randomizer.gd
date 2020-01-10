@@ -1,9 +1,9 @@
 extends Node2D
 
 const UPGRADE = preload("res://src/characters/pickups/upgrade.tscn")
-const PICKUP = preload("res://src/characters/pickups/pickup.tscn")
+const PICKUP = preload("res://src/characters/pickups/filler_pickup.tscn")
 
-const UPGRADE_CHANCE = 1
+const UPGRADE_CHANCE = 0
 
 func _ready():
 	randomize()

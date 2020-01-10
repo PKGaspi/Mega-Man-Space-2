@@ -3,15 +3,7 @@
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/pickups/pickup.gd" type="Script" id=2]
 
-
 [node name="Pickup" instance=ExtResource( 1 )]
 collision_layer = 16
 collision_mask = 21
 script = ExtResource( 2 )
-snd_hit = NodePath("SndHit")
-death_instance = null
-hp_max = 10.0
-invencibility_time = 0.5
-flicker_on_hit = true
-flicker_before_timeout = false
-dissapear_on_timeout = false

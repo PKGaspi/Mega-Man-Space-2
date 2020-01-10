@@ -332,6 +332,9 @@ func propulsion_particles(speed):
 	$PropulsionParticles2.global_rotation = propulsion_dir.angle()
 	$PropulsionParticles2.process_material.initial_velocity = speed / 4
 
+func fill(type, ammount):
+	print("fill")
+	
 func upgrade(type, ammount):
 	var value = get(type)
 	var value_max = get(type.to_upper() + "_MAX")

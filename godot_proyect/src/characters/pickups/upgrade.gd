@@ -5,8 +5,7 @@ const NEGATIVE_FREQUENCY = .5
 const MOVE_SPEED_POS = 10
 const MOVE_SPEED_NEG = 40
 
-const SHINE_TIME_MIN = 2 # In seconds.
-const SHINE_TIME_MAX = 5 # In seconds.
+var bad : bool = ammount < 0 # Whether the pickpup is bad or good.
 
 enum {
 	HP,
@@ -30,7 +29,7 @@ var UPGRADE_AMMOUNTS = {
 	BULLET_MAX: 1,
 }
 
-const SPRITES = preload("res://resources/pickups/upgrades_sprites.tres")
+const SPRITES = preload("res://resources/characters/pickups/upgrades_sprites.tres")
 
 var index = -1
 
@@ -48,7 +47,7 @@ func _ready():
 		# Shine for the first time.
 		$SprShine.play("shine")
 		hp_bar.visible = false # Hide UPGRADES.HP bar if good.
-		
+
 func init(pos : Vector2, index : int = -1, ammount : float = 0) -> void:
 	self.global_position = pos
 	if index >= 0:
@@ -58,6 +57,8 @@ func init(pos : Vector2, index : int = -1, ammount : float = 0) -> void:
 	if ammount != 0:
 		self.ammount = ammount
 
+func _on_shine_timer_timeout() -> void:
+	shine()
 #########################
 ## Auxiliar functions. ##
 #########################
@@ -109,10 +110,12 @@ func toggle_upgrade():
 		move_speed = MOVE_SPEED_POS
 
 func die():
-	life_timer = 0 # Reset life_timer.
 	hp = hp_max
 	toggle_upgrade()
 	
 
-func _on_shine_timer_timeout() -> void:
-	shine()
+func collide(collider):
+	collider.upgrade(type, ammount)
+	if bad:
+		.collide(collider)
+	disappear()
