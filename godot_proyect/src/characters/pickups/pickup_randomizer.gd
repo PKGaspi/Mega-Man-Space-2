@@ -3,7 +3,7 @@ extends Node2D
 const UPGRADE = preload("res://src/characters/pickups/upgrade.tscn")
 const PICKUP = preload("res://src/characters/pickups/filler_pickup.tscn")
 
-const UPGRADE_CHANCE = .4
+const UPGRADE_CHANCE = .2
 
 func _ready():
 	randomize()

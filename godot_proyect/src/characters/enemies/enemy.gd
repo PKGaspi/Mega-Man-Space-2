@@ -27,6 +27,7 @@ func _ready():
 		hp_bar = PROGRESS_BAR.instance()
 		hp_bar_offset = Vector2(sprite_size.x / 2 + BAR_CELL_SIZE.x, - sprite_size.y / 2)
 		hp_bar.init(BAR_CELL_SIZE, hp_bar_offset, hp_max)
+		hp_bar.set_palette(4)
 		add_child(hp_bar)
 	
 	# Connect to_follow exit_tree signal

@@ -10,8 +10,8 @@ const CHANCES = {
 }
 
 const AMMOUNTS = {
-	"heal": 7.0,
-	"ammo": 7.0,
+	"heal": 10.0,
+	"ammo": 10.0,
 	"1up": 1.0,
 	"e-tank": 1.0,
 }
@@ -23,7 +23,7 @@ const HAS_SMALL = {
 	"e-tank": false,
 }
 
-const SMALL_AMMOUNT_OFFSET = -4
+const SMALL_AMMOUNT_OFFSET = -6
 
 const SMALL_CHANCE = .7
 
@@ -57,6 +57,7 @@ func _on_animated_sprite_frame_changed() -> void:
 	set_mask($AnimatedSprite.frame)
 
 func set_random_type() -> bool:
+	randomize()
 	var small = false
 	var val = random.randf()
 	var total_val = 0
