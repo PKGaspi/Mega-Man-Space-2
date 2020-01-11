@@ -74,9 +74,9 @@ Q: Do you like spaghetti?
 A: Yes.
 
 ### Credits
-Main designer, developer, artist and tester: I
-Ideas and feedback: friends and family
-Color palette swap shader for [Godot]: https://github.com/HeartoLazor/godot_palette_swap
+Main designer, developer, artist and tester: I.  
+Ideas and feedback: friends and family.  
+Color palette swap shader for [Godot]: https://github.com/HeartoLazor/godot_palette_swap.
 
 [Mega Man Space]: https://gaspi.itch.io/mega-man-space
 [Godot]: https://godotengine.org/
