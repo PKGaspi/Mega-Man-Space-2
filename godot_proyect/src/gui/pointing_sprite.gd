@@ -15,6 +15,11 @@ var opacity_on_distance : bool = true
 var radius : float = 70
 
 func _ready() -> void:
+	pointing_from = start_position()
+	pointing_to = end_position()
+		
+	global_position = pointing_from + pointing_from.direction_to(pointing_to) * radius
+	
 	if to_owner != null:
 		to_owner.connect("tree_exiting", self, "_on_to_owner_tree_exiting")
 	if from_owner != null:

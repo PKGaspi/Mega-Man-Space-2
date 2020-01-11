@@ -1,6 +1,5 @@
 extends AnimatedSprite
 
-const MEGASHIP = preload("res://src/characters/megaship/megaship.tscn")
 const TELEPORT_SPEED = 400 # In pixels per second.
 
 export(SpriteFrames) var masks = null
@@ -34,10 +33,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	material.set_shader_param("mask", masks.get_frame(animation, frame))
 	if animation == "teleport_landing" and frame == 3:
-		# Destroy and generate the ship.
-		var ship = MEGASHIP.instance()
-		ship.global_position = destination
-		get_parent().add_child(ship)
+		# Destroy.
 		queue_free()
 	pass
 	

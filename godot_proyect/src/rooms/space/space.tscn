@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://src/rooms/space/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
@@ -6,35 +6,36 @@
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=5]
 [ext_resource path="res://src/characters/megaship/megaship_teleport.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/sfx/megaship/teleport.wav" type="AudioStream" id=7]
-[ext_resource path="res://src/rooms/space/enemy_generator.gd" type="Script" id=8]
-[ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=9]
-[ext_resource path="res://resources/gui/warning_masks.tres" type="SpriteFrames" id=10]
-[ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=11]
-[ext_resource path="res://src/rooms/space/star_generator.gd" type="Script" id=12]
-[ext_resource path="res://assets/sprites/background/stars/star_mask_0.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/background/stars/star_mask_1.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/background/stars/star_mask_2.png" type="Texture" id=15]
-[ext_resource path="res://assets/sprites/background/stars/star_mask_3.png" type="Texture" id=16]
-[ext_resource path="res://assets/sprites/background/stars/star_palette_0.png" type="Texture" id=17]
-[ext_resource path="res://assets/sprites/background/stars/star_palette_1.png" type="Texture" id=18]
-[ext_resource path="res://assets/sprites/background/stars/star_palette_2.png" type="Texture" id=19]
-[ext_resource path="res://assets/sprites/background/stars/star_palette_3.png" type="Texture" id=20]
-[ext_resource path="res://assets/sprites/background/stars/star_palette_4.png" type="Texture" id=21]
-[ext_resource path="res://assets/sprites/background/stars/star_palette_5.png" type="Texture" id=22]
-[ext_resource path="res://assets/sprites/background/stars/star_palette_6.png" type="Texture" id=23]
-[ext_resource path="res://assets/sprites/background/planets/planet_mask_0.png" type="Texture" id=24]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_0.png" type="Texture" id=25]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_1.png" type="Texture" id=26]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_2.png" type="Texture" id=27]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_3.png" type="Texture" id=28]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_4.png" type="Texture" id=29]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_5.png" type="Texture" id=30]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_6.png" type="Texture" id=31]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_7.png" type="Texture" id=32]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_8.png" type="Texture" id=33]
-[ext_resource path="res://assets/sprites/background/planets/planet_palette_9.png" type="Texture" id=34]
-[ext_resource path="res://assets/music/stage_heatman.ogg" type="AudioStream" id=35]
+[ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sfx/megaship/teleport.wav" type="AudioStream" id=8]
+[ext_resource path="res://src/rooms/space/enemy_generator.gd" type="Script" id=9]
+[ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=10]
+[ext_resource path="res://resources/gui/warning_masks.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://src/rooms/space/star_generator.gd" type="Script" id=13]
+[ext_resource path="res://assets/sprites/background/stars/star_mask_0.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/background/stars/star_mask_1.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/background/stars/star_mask_2.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/background/stars/star_mask_3.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_0.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_1.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_2.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_3.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_4.png" type="Texture" id=22]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_5.png" type="Texture" id=23]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_6.png" type="Texture" id=24]
+[ext_resource path="res://assets/sprites/background/planets/planet_mask_0.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_0.png" type="Texture" id=26]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_1.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_2.png" type="Texture" id=28]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_3.png" type="Texture" id=29]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_4.png" type="Texture" id=30]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_5.png" type="Texture" id=31]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_6.png" type="Texture" id=32]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_7.png" type="Texture" id=33]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_8.png" type="Texture" id=34]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_9.png" type="Texture" id=35]
+[ext_resource path="res://assets/music/stage_heatman.ogg" type="AudioStream" id=36]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -42,7 +43,7 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -50,7 +51,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ) ],
+"frames": [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -58,7 +59,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
-"frames": [ ExtResource( 24 ) ],
+"frames": [ ExtResource( 25 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -66,7 +67,7 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
+"frames": [ ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -105,29 +106,35 @@ pause_mode = 1
 position = Vector2( 240, -100 )
 destination = Vector2( 240, 135 )
 
+[node name="Megaship" parent="GameLayer" instance=ExtResource( 7 )]
+visible = false
+position = Vector2( 240, 135 )
+
 [node name="SndTeleport" type="AudioStreamPlayer" parent="GameLayer"]
-stream = ExtResource( 7 )
+stream = ExtResource( 8 )
 bus = "Sfx"
 
 [node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
-script = ExtResource( 8 )
-enemies = [ ExtResource( 9 ) ]
-warning_masks = ExtResource( 10 )
-warning_palettes = ExtResource( 11 )
+script = ExtResource( 9 )
+enemies = [ ExtResource( 10 ) ]
+warning_masks = ExtResource( 11 )
+warning_palettes = ExtResource( 12 )
 
 [node name="StaticCamera" type="Camera2D" parent="GameLayer"]
+pause_mode = 2
 position = Vector2( 240, 135 )
 current = true
 
-[node name="ParallaxBackgroundLayer" type="ParallaxBackground" parent="."]
+[node name="StarGenerator" type="ParallaxBackground" parent="."]
 pause_mode = 2
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 star_masks = SubResource( 2 )
 star_palettes = SubResource( 3 )
 planet_masks = SubResource( 4 )
 planet_palettes = SubResource( 5 )
+to_follow = NodePath("../GameLayer/Megaship")
 
-[node name="ColorRect" type="ColorRect" parent="ParallaxBackgroundLayer"]
+[node name="BackgroundColor" type="ColorRect" parent="StarGenerator"]
 margin_right = 480.0
 margin_bottom = 270.0
 grow_horizontal = 2
@@ -135,7 +142,7 @@ grow_vertical = 2
 color = Color( 0.117647, 0.0588235, 0.196078, 1 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 35 )
+stream = ExtResource( 36 )
 bus = "Music"
 
 [node name="GameOverTimer" type="Timer" parent="."]

@@ -11,6 +11,8 @@ var empty_star_texture
 var empty_planet_texture
 var material = preload("res://resources/palette_swap_material.tres")
 
+export(NodePath) var to_follow = null
+
 # Initialize runtime constants.
 onready var N_STAR_MASKS = star_masks.get_frame_count("default")
 onready var N_STAR_PALETTES = star_palettes.get_frame_count("default")
@@ -40,10 +42,9 @@ var stars = {} # Dictionary with lists of stars for each sector.
 var layers = [] # Array of layers.
 var materials = {}
 
-var prev_sector = Vector2(1000, 1000) # Megaship last sector.
+var prev_sector = null # Megaship last sector.
 
 func _ready():
-	
 	# Create random generator.
 	random = global.init_random()
 	r_seed = random.seed
@@ -66,12 +67,12 @@ func _ready():
 		layer.z_index = Z_INDEX_OFFSET + i
 		add_child(layer)
 		layers.append(layer)
-	
 
 func _process(delta):
-	if global.MEGASHIP != null:
-		var sector = pos_to_sector(global.MEGASHIP.position)
+	if has_node(to_follow):
+		var sector = pos_to_sector(get_node(to_follow).position)
 		if prev_sector != sector:
+			prev_sector = sector
 			var active_sectors = Rect2(sector.x - SECTOR_COLUMNS / 2, sector.y - SECTOR_ROWS / 2, SECTOR_COLUMNS, SECTOR_COLUMNS)
 			for s in stars.keys():
 				if !active_sectors.has_point(s):
@@ -81,7 +82,6 @@ func _process(delta):
 					var new_sector = Vector2(sector.x + i, sector.y + j)
 					if !stars.has(new_sector):
 						create_stars(new_sector)
-			prev_sector = sector
 	
 
 #########################
@@ -115,7 +115,6 @@ func create_star(pos, layer, texture, mask, palette):
 	star.z_index = layers[layer].z_index
 	star.position = pos * layers[layer].motion_scale
 	star.material = materials[[mask, palette]]
-	star.visible = true
 	layers[layer].add_child(star)
 	return star
 

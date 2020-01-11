@@ -31,10 +31,11 @@ func _ready() -> void:
 	$Sprite.material = $Sprite.material.duplicate()
 	$AnimatedSprite.play(type)
 	$Sprite.texture = global.create_empty_image(masks.get_frame(prefix + type, 0).get_size())
+	set_palette(0)
 	if global.MEGASHIP != null:
 		# Conect palette change signal.
 		global.MEGASHIP.connect("palette_change", self, "_on_megaship_palette_change")
-	set_palette(0)
+		set_palette(global.MEGASHIP.active_weapon)
 	
 func init(pos : Vector2, type : String = "", ammount : float = 0, small : bool = false) -> void:
 	self.global_position = pos

@@ -13,7 +13,7 @@ var hp_bar
 export(float) var move_speed = 0
 
 var drop = load("res://src/characters/pickups/pickup_randomizer.gd")
-export(float) var drop_chance = 1
+export(float) var drop_chance = .5
 
 export(float) var damage = 4 # Collision damage.
 

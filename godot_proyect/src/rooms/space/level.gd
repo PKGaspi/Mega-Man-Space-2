@@ -7,21 +7,19 @@ var lvl_id = 0 # This is set when selecting the level.
 
 func _ready() -> void:
 	$Music.play()
-	global.pause = true
 	$GUILayer/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
-
-func _process(delta : float) -> void:
-	# Set pause
-	get_tree().paused = global.pause
-	pass
+	global.pause()
 	
 func _on_animation_finished(animation):
 	if animation == "ready":
-		global.pause = false
+		$GameLayer/TeleportAnimation.pause_mode = PAUSE_MODE_PROCESS
 		# Disable static camera.
 		$GameLayer/StaticCamera.queue_free()
+		$GameLayer/Megaship/Camera2D.current = true
 
 func _on_teleport_animation_tree_exiting() -> void:
+	global.unpause()
+	$GameLayer/Megaship.visible = true
 	$GameLayer/EnemyGenerator.new_random_horde()
 
 func _on_megaship_death() -> void:
@@ -45,3 +43,4 @@ func death() -> void:
 	$GameOverTimer.start(GAME_OVER_WAIT_TIME)
 	
 	# TODO: Start timer for game over screen or something like that.
+

@@ -30,8 +30,8 @@ var etanks = 0 # The number of extra lifes.
 const MAX_ETANKS = 4
 
 var MEGASHIP # The megaship instance for easy global access.
-var gamepad 	: bool # Wheter the game is being played with a gamepad or a keyboard.
-var random 		: RandomNumberGenerator # Used for general randomness.
+var gamepad : bool # Wheter the game is being played with a gamepad or a keyboard.
+var random : RandomNumberGenerator # Used for general randomness.
 
 func _ready():
 	random = init_random()
@@ -57,6 +57,14 @@ func _on_megaship_tree_exiting():
 ##########################
 ### Library functions. ###
 ##########################
+
+func pause() -> void:
+	pause = true
+	get_tree().paused = true
+
+func unpause() -> void:
+	pause = false
+	get_tree().paused = false
 
 func game_over() -> void:
 	lifes = LIFES_DEFAULT
