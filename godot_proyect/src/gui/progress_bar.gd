@@ -60,6 +60,10 @@ func _on_megaship_palette_change(palette_index : int) -> void:
 
 func _on_fill_timer_timeout() -> void:
 	update_values(value_to, max_value, current_cell_time)
+	
+#########################
+## Auxiliar functions. ##
+#########################
 
 func create_cell(position: Vector2, full: bool):
 	var spr = Sprite.new()
@@ -68,14 +72,14 @@ func create_cell(position: Vector2, full: bool):
 	spr.position = position
 	add_child(spr)
 
-func update_values(new_value, new_max_value = max_value, cell_time = DEFAULT_CELL_TIME):
+func update_values(new_value, new_max_value = max_value, cell_time = DEFAULT_CELL_TIME, pause = true):
 	max_value = new_max_value
 	if cell_time == 0:
 		set_value(new_value)
 	else: 
-		global.pause = true
+		if pause: global.pause()
 		if value == new_value:
-			global.pause = false
+			global.unpause()
 		else:
 			$SndFill.play()
 			value_to = min(new_value, max_value)

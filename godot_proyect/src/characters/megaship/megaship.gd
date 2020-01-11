@@ -10,7 +10,7 @@ const LEMON = preload("res://src/characters/megaship/bullets/lemon.tscn")
 export(SpriteFrames) var masks = null
 export(SpriteFrames) var palettes = null
 
-onready var GUILAYER = $"/root/Space/GUILayer"
+onready var BAR_CONTAINER = $"/root/Space/GUILayer/Container/BarContainer"
 # Bars.
 const PROGRESS_BAR = preload("res://src/gui/progress_bar.tscn")
 const BAR_CELL_SIZE = Vector2(7, 2)
@@ -114,21 +114,23 @@ var input_dir = Vector2() # Direction that the user inputs.
 ##############
 signal palette_change
 
-func _ready():
+func _enter_tree() -> void:
 	global.MEGASHIP = self # Set global reference.
+
+func _ready():
 	connect("death", $"/root/Space", "_on_megaship_death")
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
 	
 	# Init HP bar.
 	hp_bar = PROGRESS_BAR.instance()
 	hp_bar.init(BAR_CELL_SIZE, HP_BAR_POS, hp_max)
-	GUILAYER.add_child(hp_bar)
+	BAR_CONTAINER.add_child(hp_bar)
 	# Init Ammo bar.
 	ammo_bar = PROGRESS_BAR.instance()
 	ammo_bar.init(BAR_CELL_SIZE, AMMO_BAR_POS, ammo_max)
 	ammo_bar.visible = false
 	connect("palette_change", ammo_bar, "_on_megaship_palette_change")
-	GUILAYER.add_child(ammo_bar)
+	BAR_CONTAINER.add_child(ammo_bar)
 	
 	# Init material.
 	$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
@@ -321,7 +323,7 @@ func fire(ammount : int) -> void:
 		
 	if shooted:
 		# Play sound only once.
-		set_ammo_relative(-1)
+		set_ammo_relative(-.2)
 		global.play_audio_random_pitch($SndShoot, Vector2(.98, 1.02))
 
 func shoot_projectile(projectile, group, pos):

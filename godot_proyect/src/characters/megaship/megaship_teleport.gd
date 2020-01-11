@@ -12,7 +12,7 @@ export(Vector2) var destination = Vector2()
 var dir : Vector2
 
 func _ready() -> void:
-	global.MEGASHIP = self
+	global.MEGASHIP.visible = false
 	play("teleport_falling")
 	material.set_shader_param("mask", masks.get_frame(animation, frame))
 	material.set_shader_param("palette", palettes.get_frame("default", palette))
@@ -31,9 +31,11 @@ func _physics_process(delta: float) -> void:
 		$"../SndTeleport".play()
 		
 func _process(delta: float) -> void:
+	print(frames.get_animation_speed(animation))
 	material.set_shader_param("mask", masks.get_frame(animation, frame))
 	if animation == "teleport_landing" and frame == 3:
 		# Destroy.
+		global.MEGASHIP.visible = true
 		queue_free()
 	pass
 	

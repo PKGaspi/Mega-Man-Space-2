@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/sfx/other/energy_fill.wav" type="AudioStream" id=5]
 
 [node name="TextureProgress" type="TextureProgress"]
-pause_mode = 2
 material = ExtResource( 1 )
 margin_left = 30.1357
 margin_top = 20.0379
