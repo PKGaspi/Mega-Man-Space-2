@@ -50,7 +50,7 @@ func _on_global_user_pause(value) -> void:
 		$GameLayer.add_child(inst)
 
 func death() -> void:
-	$GUILayer/CenterContainer/CenterText.set_animation("none")
+	$GUILayer/Container/CenterContainer/CenterText.set_animation("none")
 	$Music.stop()
 	$GameOverTimer.start(GAME_OVER_WAIT_TIME)
 	

@@ -40,10 +40,12 @@ func _ready():
 	
 func _physics_process(delta: float) -> void:
 	if to_follow != null:
-		dir = global_position.direction_to(to_follow.global_position)
-	if follow_max_distance < 0 or global_position.distance_to(to_follow.global_position) <= follow_max_distance:
-		var motion = dir * move_speed
-		move_and_slide(motion)
+		if follow_max_distance < 0 or global_position.distance_to(to_follow.global_position) <= follow_max_distance:
+			dir = global_position.direction_to(to_follow.global_position)
+		else:
+			dir = Vector2()
+	var motion = dir * move_speed
+	move_and_slide(motion)
 
 func init(pos):
 	global_position = pos
