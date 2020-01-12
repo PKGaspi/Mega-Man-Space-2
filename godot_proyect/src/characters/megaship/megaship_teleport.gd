@@ -31,7 +31,6 @@ func _physics_process(delta: float) -> void:
 		$"../SndTeleport".play()
 		
 func _process(delta: float) -> void:
-	print(frames.get_animation_speed(animation))
 	material.set_shader_param("mask", masks.get_frame(animation, frame))
 	if animation == "teleport_landing" and frame == 3:
 		# Destroy.

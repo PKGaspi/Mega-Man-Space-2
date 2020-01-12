@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.44082
 
-[node name="Enemy" index="0" instance=ExtResource( 1 )]
+[node name="Enemy" instance=ExtResource( 1 )]
 death_instance = ExtResource( 2 )
 hp_max = 5.0
 
@@ -17,3 +17,6 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="5"]
 texture = ExtResource( 3 )
+
+[node name="BarPosition" parent="." index="7"]
+position = Vector2( 11, -8 )
