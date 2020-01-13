@@ -1,7 +1,16 @@
 extends KinematicBody2D
 
-export(NodePath) var snd_hit = "SndHit"
+onready var BARCONTAINER = $"/root/Space/GUILayer/Container/BarContainer"
+# Bars.
+const PROGRESS_BAR = preload("res://src/gui/progress_bar.tscn")
+export(bool) var _hp_bar_show = true
+export(bool) var _hp_bar_on_gui = false
+export(int) var _hp_bar_palette = 0
+export(Vector2) var _hp_bar_cell_size = Vector2(4, 2)
+export(Vector2) var _hp_bar_position = Vector2(10, -8)
+var hp_bar
 
+export(NodePath) var snd_hit = "SndHit"
 export(PackedScene) var death_instance = null
 
 export(float) var hp_max = 10 # Max hp.
@@ -27,11 +36,14 @@ signal death
 
 func _ready() -> void:
 	hp = hp_max
+	# Init HP bar.
+	hp_bar = create_progress_bar(_hp_bar_cell_size, _hp_bar_position, hp_max, _hp_bar_show, _hp_bar_on_gui, _hp_bar_palette)
+	
+	# Init timers.
 	if flicker_before_timeout:
 		$LifeFlickeringTimer.start(life_flicker_time)
 	if dissapear_on_timeout:
 		$LifeTimer.start(life_time)
-	pass
 
 func _process(delta : float) -> void:
 	pass
@@ -57,6 +69,19 @@ func _on_life_flickering_timer_timeout():
 #########################
 ## Auxiliar functions. ##
 #########################
+
+func create_progress_bar(cell_size : Vector2, pos : Vector2, max_value : float, show : bool = true, on_gui : bool = false, palette : int = 0):
+	var bar = PROGRESS_BAR.instance()
+	bar.init(cell_size, pos, max_value)
+	bar.visible = show
+	bar.set_palette(palette)
+	
+	if on_gui:
+		BARCONTAINER.add_child(bar)
+	else:
+		add_child(bar)
+		
+	return bar
 
 func set_visibility(value):
 	visible = value

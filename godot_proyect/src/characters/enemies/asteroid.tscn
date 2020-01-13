@@ -17,6 +17,3 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="." index="5"]
 texture = ExtResource( 3 )
-
-[node name="BarPosition" parent="." index="7"]
-position = Vector2( 11, -8 )

@@ -7,10 +7,8 @@
 [node name="Enemy" instance=ExtResource( 1 )]
 collision_layer = 4
 script = ExtResource( 2 )
+_hp_bar_palette = 4
 
 [node name="SndHit" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 3 )
 attenuation = 0.0272047
-
-[node name="BarPosition" type="Node2D" parent="." index="5"]
-position = Vector2( 10, -8 )

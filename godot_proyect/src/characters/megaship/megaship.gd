@@ -12,13 +12,11 @@ export(SpriteFrames) var palettes = null
 
 onready var BAR_CONTAINER = $"/root/Space/GUILayer/Container/BarContainer"
 # Bars.
-const PROGRESS_BAR = preload("res://src/gui/progress_bar.tscn")
-const BAR_CELL_SIZE = Vector2(7, 2)
-# Health Bar.
-const HP_BAR_POS = Vector2(16, 24)
-var hp_bar
-# Ammo Bar.
-const AMMO_BAR_POS = Vector2(23, 24)
+var _ammo_bar_show : bool = false
+var _ammo_bar_on_gui : bool = true
+var _ammo_bar_palette : int = 0
+var _ammo_bar_cell_size : Vector2 = Vector2(7, 2)
+var _ammo_bar_position : Vector2 = Vector2(23, 24)
 var ammo_bar
 
 ######################
@@ -118,26 +116,19 @@ func _enter_tree() -> void:
 	global.MEGASHIP = self # Set global reference.
 
 func _ready():
-	connect("death", $"/root/Space", "_on_megaship_death")
-	connect("tree_exiting", global, "_on_megaship_tree_exiting")
 	
-	# Init HP bar.
-	hp_bar = PROGRESS_BAR.instance()
-	hp_bar.init(BAR_CELL_SIZE, HP_BAR_POS, hp_max)
-	BAR_CONTAINER.add_child(hp_bar)
 	# Init Ammo bar.
-	ammo_bar = PROGRESS_BAR.instance()
-	ammo_bar.init(BAR_CELL_SIZE, AMMO_BAR_POS, ammo_max)
-	ammo_bar.visible = false
-	connect("palette_change", ammo_bar, "_on_megaship_palette_change")
-	BAR_CONTAINER.add_child(ammo_bar)
+	ammo_bar = create_progress_bar(_ammo_bar_cell_size, _ammo_bar_position, ammo_max, _ammo_bar_show, _ammo_bar_on_gui, _ammo_bar_palette)
 	
 	# Init material.
 	$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
 	$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
 	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
 	
-	
+	# Connect signals.
+	connect("death", $"/root/Space", "_on_megaship_death")
+	connect("tree_exiting", global, "_on_megaship_tree_exiting")
+	connect("palette_change", ammo_bar, "_on_megaship_palette_change")
 
 
 func _physics_process(delta):
@@ -379,9 +370,9 @@ func upgrade(type : String, ammount : float) -> void:
 			hp_bar.update_values(hp, hp_max)
 			ammo_bar.update_values(get_ammo(), ammo_max)
 			
-func set_palette(weapon_index : int) -> void:
+func set_palette(palette_index : int) -> void:
 	# Set color palette.
-	var new_palette = palettes.get_frame("default", weapon_index)
+	var new_palette = palettes.get_frame("default", palette_index)
 	$SprShip.material.set_shader_param("palette", new_palette)
 	# Set propulsion particles new color.
 	var image = new_palette.get_data()
@@ -393,7 +384,7 @@ func set_palette(weapon_index : int) -> void:
 	image.unlock()
 	
 	# Emit palette change signal.
-	emit_signal("palette_change", weapon_index)
+	emit_signal("palette_change", palette_index)
 
 func set_weapon(weapon_index : int) -> bool:
 	if unlocked_WEAPONS[weapon_index]:
