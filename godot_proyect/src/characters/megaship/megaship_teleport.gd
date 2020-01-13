@@ -5,8 +5,6 @@ const TELEPORT_SPEED = 400 # In pixels per second.
 export(SpriteFrames) var masks = null
 export(SpriteFrames) var palettes = null
 
-var palette : int = 0
-
 export(Vector2) var destination = Vector2()
 
 var dir : Vector2
@@ -15,7 +13,7 @@ func _ready() -> void:
 	global.MEGASHIP.visible = false
 	play("teleport_falling")
 	material.set_shader_param("mask", masks.get_frame(animation, frame))
-	material.set_shader_param("palette", palettes.get_frame("default", palette))
+	material.set_shader_param("palette", palettes.get_frame("default", global.MEGASHIP.active_weapon))
 	dir = global_position.direction_to(destination)
 	pass
 

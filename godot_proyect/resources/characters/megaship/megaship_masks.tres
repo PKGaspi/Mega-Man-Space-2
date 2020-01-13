@@ -26,6 +26,11 @@ animations = [ {
 "name": "teleport_landing",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "teleport_falling",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "iddle",
@@ -69,10 +74,5 @@ animations = [ {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "315",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 1 ) ],
-"loop": true,
-"name": "teleport_falling",
 "speed": 5.0
 } ]
