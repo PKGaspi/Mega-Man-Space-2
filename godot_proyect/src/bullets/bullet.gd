@@ -1,9 +1,10 @@
 extends Area2D
 
-export(float) var motion_speed = 560 # Pixels/second.
+const gl = preload("res://src/global.gd")
 
-export(float) var damage : float = 2
-var weapon : int = global.WEAPONS.MEGA
+export(float, 0, 1000, 10) var motion_speed = 560 # Pixels/second.
+export(float, 0, 30, .1) var damage : float = 2
+export(gl.WEAPONS) var weapon = gl.WEAPONS.MEGA
 
 var dir
 

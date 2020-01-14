@@ -41,10 +41,6 @@ func _on_to_follow_tree_exiting():
 ## Auxiliar functions. ##
 #########################
 
-func take_damage(damage):
-	.take_damage(damage)
-	hp_bar.update_values(hp, hp_max, 0)
-
 func die():
 	# Generate an upgrade at random.
 	if randf() <= drop_chance:
@@ -57,4 +53,4 @@ func die():
 
 func collide(collider):
 	# Default action on collide.
-	collider.hit(self)
+	collider.hit(damage)

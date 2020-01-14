@@ -10,15 +10,6 @@ const LEMON = preload("res://src/bullets/megaship/lemon.tscn")
 export(SpriteFrames) var masks = null
 export(SpriteFrames) var palettes = null
 
-onready var BAR_CONTAINER = $"/root/Space/GUILayer/Container/BarContainer"
-# Bars.
-var _ammo_bar_show : bool = false
-var _ammo_bar_on_gui : bool = true
-var _ammo_bar_palette : int = 0
-var _ammo_bar_cell_size : Vector2 = Vector2(7, 2)
-var _ammo_bar_position : Vector2 = Vector2(23, 24)
-var ammo_bar
-
 ######################
 ## Gameplay values. ##
 ######################
@@ -53,15 +44,14 @@ const HP_MAX_MAX = 38 # Max max HP.
 const HP_MAX_MIN = 18 # Min max HP.
 # Ammo.
 const AMMO_MAX_MAX = 38 # Max max ammo.
-var ammo_max = 28 # Max ammo.
 const AMMO_MAX_MIN = 18 # Min max ammo.
 # Cannons.
 const N_CANNONS_MAX = 3 # Max number of active cannons.
-var n_cannons = 1 # Number of active cannons.
+# var n_cannons = 1 is in the super class.
 const N_CANNONS_MIN = 1 # Min number of active cannons.
 # Bullets.
 const BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
-var bullet_max = 3 # Max bullets per cannon on screen.
+# var bullets_max = 1 is in the super class.
 const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 
 ############
@@ -86,7 +76,7 @@ var unlocked_WEAPONS = {
 # HP & ammo. #
 ##############
 # var hp = hp_max # Current HP. This is in character.gd.
-var ammo = { # Current ammo for each weapon.
+var weapons_ammo = { # Current ammo for each weapon.
 	WEAPONS.MEGA : ammo_max,
 	WEAPONS.BUBBLE : ammo_max,
 	WEAPONS.AIR : ammo_max,
@@ -117,8 +107,6 @@ func _enter_tree() -> void:
 
 func _ready():
 	
-	# Init Ammo bar.
-	ammo_bar = create_progress_bar(_ammo_bar_cell_size, _ammo_bar_position, ammo_max, _ammo_bar_show, _ammo_bar_on_gui, _ammo_bar_palette)
 	
 	# Init material.
 	$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
@@ -154,7 +142,7 @@ func _process(delta):
 	# Check if we are firing.
 	auto_fire += delta
 	if Input.is_action_pressed("shoot") and auto_fire >= AUTO_FIRE_INTERVAL:
-		fire(n_cannons)
+		fire()
 		auto_fire = 0
 	
 	# Emit propulsion particles.
@@ -173,29 +161,12 @@ func _process(delta):
 ## Auxiliar functions. ##
 #########################
 
-func set_hp_relative(relative_value, pause = false):
-	.set_hp_relative(relative_value)
-	if pause:
-		hp_bar.update_values(hp, hp_max)
-	else:
-		hp_bar.update_values(hp, hp_max, 0)
-		
-
-func set_ammo_relative(relative_value, pause = false):
-	if active_weapon != WEAPONS.MEGA:
-		set_ammo(get_ammo() + relative_value)
-		if pause:
-			ammo_bar.update_values(get_ammo(), ammo_max)
-		else:
-			ammo_bar.update_values(get_ammo(), ammo_max, 0)
-	else:
-		ammo_bar.update()
-
-func set_ammo(value, weapon = active_weapon):
-	ammo[weapon] = clamp(value, 0, ammo_max)
+func set_ammo(value, pause = false, weapon = active_weapon):
+	.set_ammo(value, pause)
+	weapons_ammo[weapon] = ammo
 
 func get_ammo(weapon = active_weapon) -> float:
-	return ammo[weapon]
+	return weapons_ammo[weapon]
 
 func set_visibility(value):
 	$SprShip.visible = value
@@ -304,30 +275,6 @@ func get_motion(dir):
 	var motion = min(1, motion_dir.length()) * motion_dir.normalized() * speed * speed_multiplier
 	return motion
 
-func fire(ammount : int) -> void:
-	var shooted = false
-	if ammount % 2 == 1:
-		shooted = shoot_projectile(LEMON, "BULLETS_CENTRE", CANNON_CENTRE_POS) or shooted
-	if ammount >= 2:
-		shooted = shoot_projectile(LEMON, "BULLETS_LEFT", CANNON_LEFT_POS) or shooted
-		shooted = shoot_projectile(LEMON, "BULLETS_RIGHT", CANNON_RIGHT_POS) or shooted
-		
-	if shooted:
-		# Play sound only once.
-		set_ammo_relative(-.2)
-		global.play_audio_random_pitch($SndShoot, Vector2(.98, 1.02))
-
-func shoot_projectile(projectile, group, pos):
-	var shooted = get_tree().get_nodes_in_group(group).size() < bullet_max
-	# Check if there are too many projectiles.
-	if shooted:
-		# Fire projectile.
-		var inst = projectile.instance()
-		inst.init(global_position + pos.rotated(rotation), rotation, group)
-		get_parent().add_child(inst)
-		
-	return shooted
-
 func propulsion_particles(speed):
 	var propulsion_dir = - motion_dir
 	
@@ -387,18 +334,21 @@ func set_palette(palette_index : int) -> void:
 	emit_signal("palette_change", palette_index)
 
 func set_weapon(weapon_index : int) -> bool:
-	if unlocked_WEAPONS[weapon_index]:
+	var unlocked = unlocked_WEAPONS[weapon_index]
+	if unlocked:
 		$SndWeaponSwap.play()
-		active_weapon = weapon_index
+		# Set palette.
 		set_palette(weapon_index)
-		# Show ammo.
+		# Set ammo_bar visibility.
 		ammo_bar.visible = weapon_index != 0
-		ammo_bar.set_value(get_ammo())
-		# Set ammo value under max.
-		ammo[active_weapon] = min(ammo[active_weapon], ammo_max)
+		# Save ammo value.
+		weapons_ammo[active_weapon] = ammo
 		# TODO: Change bullets.
-		return true
-	return false
+		
+		active_weapon = weapon_index
+		set_ammo(get_ammo())
+		print(ammo)
+	return unlocked
 		
 
 func next_weapon():

@@ -1,7 +1,7 @@
 extends Node2D
 
 # List of all enemies to generate.
-export(Array) var enemies = null
+export(Array, PackedScene) var enemies = null
 onready var enemies_len = len(enemies)
 
 const WARNING = preload("res://src/gui/pointing_sprite.gd")

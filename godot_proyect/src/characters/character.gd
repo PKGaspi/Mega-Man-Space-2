@@ -1,20 +1,32 @@
 extends KinematicBody2D
 
-onready var BARCONTAINER = $"/root/Space/GUILayer/Container/BarContainer"
+onready var BAR_CONTAINER = $"/root/Space/GUILayer/Container/BarContainer"
+
 # Bars.
 const PROGRESS_BAR = preload("res://src/gui/progress_bar.tscn")
+# HP.
 export(bool) var _hp_bar_show = true
 export(bool) var _hp_bar_on_gui = false
 export(int) var _hp_bar_palette = 0
 export(Vector2) var _hp_bar_cell_size = Vector2(4, 2)
 export(Vector2) var _hp_bar_position = Vector2(10, -8)
 var hp_bar
+# Ammo.
+export(bool) var _ammo_bar_show : bool = false
+export(bool) var _ammo_bar_on_gui : bool = false
+export(int) var _ammo_bar_palette : int = 0
+export(Vector2) var _ammo_bar_cell_size : Vector2 = Vector2(4, 2)
+export(Vector2) var _ammo_bar_position : Vector2 = Vector2(15, -8)
+var ammo_bar
 
 export(NodePath) var snd_hit = "SndHit"
+export(NodePath) var snd_shoot = "SndShoot"
 export(PackedScene) var death_instance = null
 
-export(float) var hp_max = 10 # Max hp.
-var hp : int # Hp.
+export(float, 0, 100, 1) var hp_max = 10 # Max hp.
+export(float, 0, 100, 1) var ammo_max = 10 # Max ammo.
+var hp : float # Hp.
+var ammo : float # Ammo.
 
 var invencible : bool = false
 var flickering : bool = false
@@ -31,13 +43,21 @@ export(float) var life_flicker_time = 8 # Start flickering when the character ha
 export(bool) var flicker_before_timeout = false
 export(bool) var dissapear_on_timeout = false
 
+# Bullets.
+export(PackedScene) var bullet = null
+export(Array, Array, Vector2) var cannon_pos = [[Vector2()]]
+export(int) var bullet_max = 3
+export(int) var n_cannons = 1
+
 # Signals.
 signal death
 
 func _ready() -> void:
 	hp = hp_max
-	# Init HP bar.
+	ammo = ammo_max
+	# Init bars.
 	hp_bar = create_progress_bar(_hp_bar_cell_size, _hp_bar_position, hp_max, _hp_bar_show, _hp_bar_on_gui, _hp_bar_palette)
+	ammo_bar = create_progress_bar(_ammo_bar_cell_size, _ammo_bar_position, ammo_max, _ammo_bar_show, _ammo_bar_on_gui, _ammo_bar_palette)
 	
 	# Init timers.
 	if flicker_before_timeout:
@@ -77,7 +97,7 @@ func create_progress_bar(cell_size : Vector2, pos : Vector2, max_value : float, 
 	bar.set_palette(palette)
 	
 	if on_gui:
-		BARCONTAINER.add_child(bar)
+		BAR_CONTAINER.add_child(bar)
 	else:
 		add_child(bar)
 		
@@ -92,11 +112,28 @@ func get_visibility():
 func toggle_visibility():
 	set_visibility(!get_visibility())
 
-func set_hp(value):
+func set_hp(value, pause = false):
 	hp = clamp(value, 0, hp_max)
+	if pause:
+		hp_bar.update_values(hp, hp_max)
+	else:
+		hp_bar.update_values(hp, hp_max, 0)
 	
-func set_hp_relative(relative_value):
-	set_hp(hp + relative_value)
+func set_hp_relative(relative_value, pause = false):
+	set_hp(hp + relative_value, pause)
+
+func get_ammo():
+	return ammo
+
+func set_ammo(value, pause = false):
+	ammo = clamp(value, 0, ammo_max)
+	if pause:
+		ammo_bar.update_values(ammo, ammo_max)
+	else:
+		ammo_bar.update_values(ammo, ammo_max, 0)
+
+func set_ammo_relative(relative_value, pause = false):
+	set_ammo(ammo + relative_value, pause)
 
 func flicker(interval = flickering_interval):
 	$FlickeringTimer.start(interval)
@@ -139,3 +176,26 @@ func die():
 func disappear():
 	# Destroy myself by default.
 	queue_free()
+
+func fire(n_cannons : int = self.n_cannons, used_ammo : float = -.2) -> bool:
+	var shooted = false
+	if ammo > 0:
+		shooted = true
+		var cannons = cannon_pos[n_cannons - 1]
+		for cannon in cannons:
+			shooted = shooted && shoot_projectile(cannon)
+		if shooted:
+			set_ammo_relative(used_ammo)
+			global.play_audio_random_pitch(get_node(snd_shoot), Vector2(.98, 1.02))
+	return shooted
+
+func shoot_projectile(pos : Vector2, projectile = bullet) -> bool:
+	var group = str(pos) + str(self)
+	var shooted = get_tree().get_nodes_in_group(group).size() < bullet_max
+	# Check if there are too many projectiles.
+	if shooted:
+		# Fire projectile.
+		var inst = projectile.instance()
+		inst.init(global_position + pos.rotated(rotation), rotation, group)
+		get_parent().add_child(inst)
+	return shooted

@@ -1,18 +1,19 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
 [ext_resource path="res://src/characters/megaship/megaship_death.tscn" type="PackedScene" id=3]
-[ext_resource path="res://resources/characters/megaship/megaship_masks.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=5]
-[ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_0.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_1.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_2.png" type="Texture" id=8]
-[ext_resource path="res://assets/sfx/megaship/shoot.wav" type="AudioStream" id=9]
-[ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=10]
-[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=11]
-[ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=12]
-[ext_resource path="res://assets/sfx/other/1up.wav" type="AudioStream" id=13]
+[ext_resource path="res://src/bullets/megaship/lemon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/characters/megaship/megaship_masks.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_0.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_1.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_2.png" type="Texture" id=9]
+[ext_resource path="res://assets/sfx/megaship/shoot.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sfx/other/1up.wav" type="AudioStream" id=14]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -6.5, -6, 13, 0, -6.5, 6 )
@@ -57,10 +58,10 @@ orbit_velocity_random = 0.0
 
 [sub_resource type="AnimatedTexture" id=6]
 frames = 3
-frame_0/texture = ExtResource( 6 )
-frame_1/texture = ExtResource( 7 )
+frame_0/texture = ExtResource( 7 )
+frame_1/texture = ExtResource( 8 )
 frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 8 )
+frame_2/texture = ExtResource( 9 )
 frame_2/delay_sec = 0.0
 
 [sub_resource type="ParticlesMaterial" id=7]
@@ -102,11 +103,17 @@ script = ExtResource( 2 )
 _hp_bar_on_gui = true
 _hp_bar_cell_size = Vector2( 7, 2 )
 _hp_bar_position = Vector2( 16, 24 )
+_ammo_bar_on_gui = true
+_ammo_bar_cell_size = Vector2( 7, 2 )
+_ammo_bar_position = Vector2( 23, 24 )
 death_instance = ExtResource( 3 )
 hp_max = 28.0
+ammo_max = 28.0
 invencibility_time = 1.2
-masks = ExtResource( 4 )
-palettes = ExtResource( 5 )
+bullet = ExtResource( 4 )
+cannon_pos = [ [ Vector2( 15, -0.5 ) ], [ Vector2( 7, 4 ), Vector2( 7, -5 ) ], [ Vector2( 15, -0.5 ), Vector2( 7, 4 ), Vector2( 7, -5 ) ] ]
+masks = ExtResource( 5 )
+palettes = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 scale = Vector2( 1.3, 1.76 )
@@ -159,19 +166,19 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="SndShoot" type="AudioStreamPlayer2D" parent="." index="6"]
-stream = ExtResource( 9 )
+stream = ExtResource( 10 )
 
 [node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = SubResource( 9 )
 
 [node name="SndHit" type="AudioStreamPlayer2D" parent="." index="8"]
-stream = ExtResource( 10 )
-
-[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 11 )
 
-[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="10"]
+[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 12 )
 
-[node name="Snd1Up" type="AudioStreamPlayer" parent="." index="11"]
+[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource( 13 )
+
+[node name="Snd1Up" type="AudioStreamPlayer" parent="." index="11"]
+stream = ExtResource( 14 )
