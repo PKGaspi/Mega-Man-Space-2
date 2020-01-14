@@ -6,7 +6,7 @@ extends "res://src/characters/character.gd"
 
 const CHARACTER = preload("res://src/characters/character.gd")
 
-const LEMON = preload("res://src/characters/megaship/bullets/lemon.tscn")
+const LEMON = preload("res://src/bullets/megaship/lemon.tscn")
 export(SpriteFrames) var masks = null
 export(SpriteFrames) var palettes = null
 

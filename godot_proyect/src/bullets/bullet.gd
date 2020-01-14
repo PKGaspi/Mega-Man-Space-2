@@ -1,5 +1,9 @@
-extends "res://src/bullets/bullet.gd"
+extends Area2D
 
+export(float) var motion_speed = 560 # Pixels/second.
+
+export(float) var damage : float = 2
+var weapon : int = global.WEAPONS.MEGA
 
 var dir
 
@@ -7,7 +11,7 @@ func _ready():
 	dir = Vector2(cos(rotation), sin(rotation))
 
 func _physics_process(delta):
-	move(MOTION_SPEED * delta * dir)
+	move(motion_speed * delta * dir)
 
 func _on_screen_exited():
 	# Destroy itself if it has exited the screen.

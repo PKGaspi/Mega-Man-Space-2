@@ -103,10 +103,9 @@ func flicker(interval = flickering_interval):
 	flickering = true
 	toggle_visibility()
 
-func hit(bullet):
+func hit(damage, weapon = global.WEAPONS.MEGA):
 	if !invencible:
-		# TODO: Calculate damage with enemy weakness and bullet weapon type.
-		var damage = bullet.damage
+		# TODO: Calculate damage with enemy weakness and type.
 		take_damage(damage)
 
 func take_damage(damage):
