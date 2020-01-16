@@ -59,8 +59,22 @@ const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 ############
 var WEAPONS = global.WEAPONS # WEAPONS enum.
 var active_weapon = WEAPONS.MEGA # Current active weapon.
+
+# Ammo to consume after every shot on each weapon.
+var ammo_per_shot = {
+	WEAPONS.MEGA : 0,
+	WEAPONS.BUBBLE : -1,
+	WEAPONS.AIR : -1,
+	WEAPONS.QUICK : -1,
+	WEAPONS.HEAT : -1,
+	WEAPONS.WOOD : -1,
+	WEAPONS.METAL : -1,
+	WEAPONS.FLASH : -1,
+	WEAPONS.CRASH : -1,
+}
+
 # Unlocked WEAPONS.
-var unlocked_WEAPONS = {
+var unlocked_weapons = {
 	WEAPONS.MEGA : true,
 	WEAPONS.BUBBLE : true,
 	WEAPONS.AIR : true,
@@ -142,7 +156,7 @@ func _process(delta):
 	# Check if we are firing.
 	auto_fire += delta
 	if Input.is_action_pressed("shoot") and auto_fire >= AUTO_FIRE_INTERVAL:
-		fire()
+		fire(n_cannons, ammo_per_shot[active_weapon])
 		auto_fire = 0
 	
 	# Emit propulsion particles.
@@ -334,7 +348,7 @@ func set_palette(palette_index : int) -> void:
 	emit_signal("palette_change", palette_index)
 
 func set_weapon(weapon_index : int) -> bool:
-	var unlocked = unlocked_WEAPONS[weapon_index]
+	var unlocked = unlocked_weapons[weapon_index]
 	if unlocked:
 		$SndWeaponSwap.play()
 		# Set palette.
@@ -347,7 +361,6 @@ func set_weapon(weapon_index : int) -> bool:
 		
 		active_weapon = weapon_index
 		set_ammo(get_ammo())
-		print(ammo)
 	return unlocked
 		
 

@@ -19,12 +19,13 @@ export(Vector2) var _ammo_bar_cell_size : Vector2 = Vector2(4, 2)
 export(Vector2) var _ammo_bar_position : Vector2 = Vector2(15, -8)
 var ammo_bar
 
+export(float, 0, 100, 1) var hp_max = 10 # Max hp.
+export(float, 0, 100, 1) var ammo_max = 28 # Max ammo.
+
 export(NodePath) var snd_hit = "SndHit"
 export(NodePath) var snd_shoot = "SndShoot"
 export(PackedScene) var death_instance = null
 
-export(float, 0, 100, 1) var hp_max = 10 # Max hp.
-export(float, 0, 100, 1) var ammo_max = 10 # Max ammo.
 var hp : float # Hp.
 var ammo : float # Ammo.
 
