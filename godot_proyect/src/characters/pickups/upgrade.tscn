@@ -9,7 +9,7 @@
 radius = 7.78016
 height = 2.46498
 
-[node name="Upgrade" index="0" instance=ExtResource( 1 )]
+[node name="Upgrade" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 _hp_bar_position = Vector2( 13, -10 )
 flicker_before_timeout = true

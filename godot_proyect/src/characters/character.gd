@@ -66,9 +66,6 @@ func _ready() -> void:
 	if dissapear_on_timeout:
 		$LifeTimer.start(life_time)
 
-func _process(delta : float) -> void:
-	pass
-
 func _on_flickering_timer_timeout():
 	if flickering:
 		flicker()
