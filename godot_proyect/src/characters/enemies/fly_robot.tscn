@@ -1,8 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/enemies/fly_robot.gd" type="Script" id=2]
 [ext_resource path="res://resources/characters/enemies/fly_robot_masks.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_body_mask_0.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_body_mask_2.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_body_mask_1.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_0.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_1.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_2.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_3.png" type="Texture" id=10]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -27,15 +34,55 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 1 )
-shader_param/palette_size = 8.0
-
 [sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/palette_size = 8.0
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/palette_size = 8.0
+
+[sub_resource type="SpriteFrames" id=7]
+resource_local_to_scene = true
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "body_charging",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "propeller",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "body_iddle",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=8]
+resource_local_to_scene = true
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "body_charging",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "propeller",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "body_iddle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 10.5, 18 )
 
 [node name="FlyRobot" index="0" instance=ExtResource( 1 )]
@@ -46,31 +93,31 @@ masks = ExtResource( 3 )
 acceleration = 0.0
 move_speed = 200.0
 rotate_towards_destination = true
+follow_megaship = true
 follow_max_distance = 250.0
 damage = 6.0
 
 [node name="SprBody" type="Sprite" parent="." index="5"]
-material = SubResource( 4 )
+material = SubResource( 5 )
 z_index = -1
 
 [node name="SprPropeller" type="Sprite" parent="." index="6"]
-material = SubResource( 5 )
+material = SubResource( 6 )
 
 [node name="AnimBody" type="AnimatedSprite" parent="." index="7"]
 visible = false
 z_index = -1
-frames = ExtResource( 3 )
-animation = "body"
-frame = 2
+frames = SubResource( 7 )
+animation = "body_iddle"
 playing = true
 
 [node name="AnimPropeller" type="AnimatedSprite" parent="." index="8"]
 visible = false
-frames = ExtResource( 3 )
+frames = SubResource( 8 )
 animation = "propeller"
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="9"]
 position = Vector2( -0.5, 1 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )

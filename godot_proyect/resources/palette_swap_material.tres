@@ -24,5 +24,6 @@ void fragment() {
 "
 
 [resource]
+resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/palette_size = 8.0

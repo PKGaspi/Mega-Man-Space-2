@@ -13,6 +13,7 @@ var to_follow_on_range = false
 var dir : Vector2 = Vector2()
 var follow_destination : bool = true
 var destination : Vector2 = Vector2()
+var motion
 
 var drop = load("res://src/characters/pickups/pickup_randomizer.gd")
 export(float) var drop_chance = .5
@@ -36,7 +37,7 @@ func _physics_process(delta: float) -> void:
 			dir = Vector2()
 	if rotate_towards_destination:
 		rotation = dir.angle() + PI / 2
-	var motion = dir * move_speed * acceleration
+	motion = dir * move_speed * acceleration
 	move_and_slide(motion)
 
 func init(pos):
@@ -70,4 +71,5 @@ func die():
 
 func collide(collider):
 	# Default action on collide.
+	collider.push(motion)
 	collider.hit(damage)

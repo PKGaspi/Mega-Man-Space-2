@@ -50,6 +50,10 @@ export(Array, Array, Vector2) var cannon_pos = [[Vector2()]]
 export(int) var bullet_max = 3
 export(int) var n_cannons = 1
 
+# Motion.
+var momentum : Vector2 = Vector2()
+var friction = .2
+
 # Signals.
 signal death
 
@@ -65,6 +69,10 @@ func _ready() -> void:
 		$LifeFlickeringTimer.start(life_flicker_time)
 	if dissapear_on_timeout:
 		$LifeTimer.start(life_time)
+
+func _physics_process(delta: float) -> void:
+	move_and_slide(momentum)
+	momentum *= friction
 
 func _on_flickering_timer_timeout():
 	if flickering:
@@ -138,6 +146,9 @@ func flicker(interval = flickering_interval):
 	flickering = true
 	toggle_visibility()
 
+func push(motion):
+	momentum += motion
+
 func hit(damage, weapon = global.WEAPONS.MEGA):
 	if !invencible:
 		# TODO: Calculate damage with enemy weakness and type.
@@ -197,3 +208,6 @@ func shoot_projectile(pos : Vector2, projectile = bullet) -> bool:
 		inst.init(global_position + pos.rotated(rotation), rotation, group)
 		get_parent().add_child(inst)
 	return shooted
+
+func is_in_range(object : Node2D, radious):
+	return object != null and (global_position.distance_to(object.global_position) <= radious or radious < 0)

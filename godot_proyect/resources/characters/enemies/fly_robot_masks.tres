@@ -9,14 +9,20 @@
 [ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_3.png" type="Texture" id=7]
 
 [resource]
+resource_local_to_scene = true
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "body",
+"name": "body_charging",
 "speed": 8.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "propeller",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "body_iddle",
+"speed": 5.0
 } ]
