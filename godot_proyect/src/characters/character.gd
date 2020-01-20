@@ -33,16 +33,14 @@ var invencible : bool = false
 var flickering : bool = false
 var disappearing : bool = false
 
-export (float) var invencibility_time = .5 # Seconds the character is invencible after hit.
-
-var flickering_interval = .05 # Seconds between each visibility toggle when flickering.
-var flickering_timer = 0 # Seconds until a toggle on visibility is made.
-export(bool) var flicker_on_hit = true
-
+export(float) var invencibility_time = .5 # Seconds the character is invencible after hit.
 export(float) var life_time = 10 # Seconds until the character disapears.
 export(float) var life_flicker_time = 8 # Start flickering when the character has this many seconds of life.
+export(bool) var flicker_on_hit = true
 export(bool) var flicker_before_timeout = false
 export(bool) var dissapear_on_timeout = false
+var flickering_interval = .05 # Seconds between each visibility toggle when flickering.
+var flickering_timer = 0 # Seconds until a toggle on visibility is made.
 
 # Bullets.
 export(PackedScene) var bullet = null
@@ -50,7 +48,22 @@ export(Array, Array, Vector2) var cannon_pos = [[Vector2()]]
 export(int) var bullet_max = 3
 export(int) var n_cannons = 1
 
+var WEAPONS = global.WEAPONS # WEAPONS enum.
+
+export(Dictionary) var DAMAGE_MULTIPLIERS = { 
+	WEAPONS.MEGA : 1,
+	WEAPONS.BUBBLE : 1,
+	WEAPONS.AIR : 1,
+	WEAPONS.QUICK : 1,
+	WEAPONS.HEAT : 1,
+	WEAPONS.WOOD : 1,
+	WEAPONS.METAL : 1,
+	WEAPONS.FLASH : 1,
+	WEAPONS.CRASH : 1,
+}
+
 # Motion.
+var acceleration = 1
 var momentum : Vector2 = Vector2()
 var friction = .2
 
@@ -149,7 +162,7 @@ func flicker(interval = flickering_interval):
 func push(motion):
 	momentum += motion
 
-func hit(damage, weapon = global.WEAPONS.MEGA):
+func hit(damage, weapon = WEAPONS.MEGA):
 	if !invencible:
 		# TODO: Calculate damage with enemy weakness and type.
 		take_damage(damage)

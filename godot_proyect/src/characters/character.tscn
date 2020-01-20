@@ -2,7 +2,6 @@
 
 [ext_resource path="res://src/characters/character.gd" type="Script" id=1]
 
-
 [node name="Character" type="KinematicBody2D"]
 collision_layer = 5
 collision_mask = 5

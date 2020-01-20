@@ -3,8 +3,8 @@ extends "res://src/characters/character.gd"
 export (SpriteFrames) var masks
 export (SpriteFrames) var palettes
 
-export(float) var acceleration = 1
 export(float) var move_speed = 0
+export(bool) var invert_dir = false
 export(bool) var rotate_towards_destination = false
 export(bool) var follow_megaship = false
 export(float) var follow_max_distance = -1
@@ -13,7 +13,7 @@ var to_follow_on_range = false
 var dir : Vector2 = Vector2()
 var follow_destination : bool = true
 var destination : Vector2 = Vector2()
-var motion
+var motion : Vector2 = Vector2()
 
 var drop = load("res://src/characters/pickups/pickup_randomizer.gd")
 export(float) var drop_chance = .5
@@ -37,6 +37,8 @@ func _physics_process(delta: float) -> void:
 			dir = Vector2()
 	if rotate_towards_destination:
 		rotation = dir.angle() + PI / 2
+	if invert_dir:
+		dir = - dir
 	motion = dir * move_speed * acceleration
 	move_and_slide(motion)
 

@@ -8,6 +8,7 @@
 
 [node name="Enemy" instance=ExtResource( 1 )]
 collision_layer = 4
+collision_mask = 1
 script = ExtResource( 2 )
 _hp_bar_palette = 4
 death_instance = ExtResource( 3 )

@@ -57,7 +57,6 @@ const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 ############
 # WEAPONS. #
 ############
-var WEAPONS = global.WEAPONS # WEAPONS enum.
 var active_weapon = WEAPONS.MEGA # Current active weapon.
 
 # Ammo to consume after every shot on each weapon.
@@ -310,7 +309,8 @@ func fill(type, ammount):
 	elif type == "heal":
 		set_hp_relative(ammount, true)
 	elif type == "ammo":
-		set_ammo_relative(ammount, true)
+		if active_weapon != WEAPONS.MEGA:
+			set_ammo_relative(ammount, true)
 	
 func upgrade(type : String, ammount : float) -> void:
 	var value = get(type)
