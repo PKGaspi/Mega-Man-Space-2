@@ -35,10 +35,10 @@ func _physics_process(delta: float) -> void:
 		to_follow_on_range = follow_max_distance < 0 or global_position.distance_to(destination) <= follow_max_distance
 		if !to_follow_on_range:
 			dir = Vector2()
-	if rotate_towards_destination:
-		rotation = dir.angle() + PI / 2
 	if invert_dir:
 		dir = - dir
+	if rotate_towards_destination and (to_follow_on_range or to_follow == null):
+		rotation = dir.angle() + PI / 2
 	motion = dir * move_speed * acceleration
 	move_and_slide(motion)
 

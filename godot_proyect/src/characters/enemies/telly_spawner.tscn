@@ -1,20 +1,21 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_body_mask_0.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/enemies/telly/telly_spawner.png" type="Texture" id=2]
 [ext_resource path="res://src/other/spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/characters/enemies/telly.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.1065, 19.1009 )
+extents = Vector2( 14.5, 15 )
 
-[node name="TellySpawner" index="0" instance=ExtResource( 1 )]
-_hp_bar_position = Vector2( 15, -14 )
+[node name="TellySpawner" instance=ExtResource( 1 )]
+_hp_bar_position = Vector2( 17, -20 )
 hp_max = 20.0
 snd_hit = NodePath("../TellySpawner/SndHit")
 invencibility_time = 0.3
 move_speed = 10.0
 invert_dir = true
+rotate_towards_destination = true
 follow_megaship = true
 follow_max_distance = 200.0
 damage = 8.0
@@ -23,17 +24,17 @@ damage = 8.0
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
-position = Vector2( 0, -0.0659714 )
+position = Vector2( -0.5, -1 )
 shape = SubResource( 1 )
 
 [node name="LeftSpawner" parent="." index="7" instance=ExtResource( 3 )]
-position = Vector2( -10.7533, 19.7914 )
+position = Vector2( -7.5, 14 )
 to_spawn = ExtResource( 4 )
 max_spawns = 3
 time_between_spawns = 4.0
 
 [node name="RightSpawner" parent="." index="8" instance=ExtResource( 3 )]
-position = Vector2( 8.90612, 19.6594 )
+position = Vector2( 6.5, 14 )
 to_spawn = ExtResource( 4 )
 max_spawns = 3
 time_between_spawns = 4.0

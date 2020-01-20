@@ -5,10 +5,12 @@ const gl = preload("res://src/global.gd")
 export(float, 0, 1000, 10) var motion_speed = 560 # Pixels/second.
 export(float, 0, 30, .1) var damage : float = 2
 export(gl.WEAPONS) var weapon = gl.WEAPONS.MEGA
+export(int) var n_collisions = 1 # Number of collisions before the bullet dissapears. Cero or negative for no max.
 
 var dir
 
 func _ready():
+	print("wuo")
 	dir = Vector2(cos(rotation), sin(rotation))
 
 func _physics_process(delta):
@@ -34,5 +36,9 @@ func move(to_move):
 	global_position += to_move
 
 func collide(character) -> void:
+	print("xd")
 	character.hit(damage, weapon)
-	queue_free()
+	n_collisions -= 1
+	if n_collisions == 0:
+		disconnect("body_entered", self, "_on_body_entered")
+		queue_free()
