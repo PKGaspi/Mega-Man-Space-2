@@ -40,8 +40,6 @@ func _ready():
 	random = init_random()
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-	
-
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
@@ -132,10 +130,6 @@ func obtain_1up():
 func obtain_etank():
 	# TODO: play e-tank sound.
 	etanks = min(etanks + 1, MAX_ETANKS)
-
-func is_on_screen(viewport : Viewport, pos : Vector2) -> bool:
-	var screen = viewport.get_visible_rect()
-	return screen.has_point(pos)
 
 func play_audio_random_pitch(snd, interval):
 	if snd != null and snd.has_method("play"):

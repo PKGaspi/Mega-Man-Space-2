@@ -13,7 +13,7 @@ var warning_texture
 onready var CENTER_TEXT = $"/root/Space/GUILayer/Container/CenterContainer/CenterText"
 
 # Zone where enemies spawn.
-const AREA_SIZE = Vector2(200, 200)
+const AREA_SIZE = Vector2(640, 360)
 const AREA_LIMITS = Rect2(Vector2(-2000, -2000), Vector2(4000, 4000))
 var min_distance : float = AREA_LIMITS.size.length() / 4
 var max_distance : float = AREA_LIMITS.size.length() / 2
@@ -26,6 +26,7 @@ var horde : bool = false
 var total_enemies : int = 10
 var n_enemies : int = 0
 var max_enemies : int = 4
+var min_distance_to_megaship : float = 350
 
 var warning : Sprite = null
 var warning_animation : bool = false
@@ -49,6 +50,9 @@ func _process(delta):
 		while n_enemies < min(max_enemies, total_enemies):
 			var x = random.randf_range(- width / 2, width / 2) + centre.x
 			var y = random.randf_range(- height / 2, height / 2) + centre.y
+			while Vector2(x, y).distance_to(global.MEGASHIP.global_position) < min_distance_to_megaship:
+				x = random.randf_range(- width / 2, width / 2) + centre.x
+				y = random.randf_range(- height / 2, height / 2) + centre.y
 			create_enemy(Vector2(x, y), random.randi_range(0, enemies_len - 1))
 		if total_enemies == 0:
 			horde = false

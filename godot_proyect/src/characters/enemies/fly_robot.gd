@@ -49,12 +49,12 @@ func set_state(new_state):
 	state = new_state
 	match state:
 		STATES.ACCELERATING:
-			follow_destination = true
-			destination = to_follow.global_position
-			dir = global_position.direction_to(destination)
+			dynamic_dir = true
+			#destination = to_follow.global_position
+			#dir = global_position.direction_to(destination)
 			follow_max_distance = -1
 			$AnimBody.play("body_charging")
 		STATES.DEACCELERATING:
 			follow_max_distance = original_follow_max_distance
-			follow_destination = false
+			dynamic_dir = false
 			$AnimBody.play("body_iddle")

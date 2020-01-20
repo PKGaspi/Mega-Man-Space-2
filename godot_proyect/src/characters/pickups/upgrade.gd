@@ -99,8 +99,7 @@ func toggle_upgrade():
 	hp_bar.visible = bad # Hide UPGRADES.HP bar if good.
 	flickering = false
 	if bad:
-		to_follow = global.MEGASHIP
-		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
+		follow_megaship()
 		$SprShine.stop()
 		move_speed = MOVE_SPEED_NEG
 	else:

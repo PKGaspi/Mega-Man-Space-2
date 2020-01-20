@@ -8,10 +8,10 @@ export(bool) var invert_dir = false
 export(bool) var rotate_towards_destination = false
 export(bool) var follow_megaship = false
 export(float) var follow_max_distance = -1
+export(bool) var dynamic_dir : bool = true
 var to_follow = null
 var to_follow_on_range = false
 var dir : Vector2 = Vector2()
-var follow_destination : bool = true
 var destination : Vector2 = Vector2()
 var motion : Vector2 = Vector2()
 
@@ -23,13 +23,19 @@ export(float) var damage = 4 # Collision damage.
 func _ready():
 	# Connect to_follow exit_tree signal
 	if follow_megaship:
-		to_follow = global.MEGASHIP
+		follow_megaship()
 	if to_follow != null:
 		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
+		
 	
+	destination = get_destination()
+	if dynamic_dir:
+		dir = global_position.direction_to(destination)
+	if rotate_towards_destination:
+		rotation = dir.angle() + PI / 2
 func _physics_process(delta: float) -> void:
 	destination = get_destination()
-	if follow_destination:
+	if dynamic_dir:
 		dir = global_position.direction_to(destination)
 	if to_follow != null:
 		to_follow_on_range = follow_max_distance < 0 or global_position.distance_to(destination) <= follow_max_distance
@@ -46,11 +52,20 @@ func init(pos):
 	global_position = pos
 
 func _on_to_follow_tree_exiting():
-	to_follow = null
+	set_to_follow()
 
 #########################
 ## Auxiliar functions. ##
 #########################
+
+func follow_megaship() -> void:
+	set_to_follow(global.MEGASHIP)
+
+func set_to_follow(value = null) -> void:
+	to_follow = value
+	dynamic_dir = value != null
+	if to_follow is Node:
+		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
 
 func get_destination() -> Vector2:
 	if to_follow is Vector2:

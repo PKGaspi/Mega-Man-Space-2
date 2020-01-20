@@ -74,6 +74,7 @@ func set_random_type() -> bool:
 	return small
 
 func collide(collider) -> void:
+	print(dir)
 	collider.fill(type, ammount)
 	disappear()
 

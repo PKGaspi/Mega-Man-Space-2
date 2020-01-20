@@ -17,10 +17,6 @@ export(SpriteFrames) var palettes = null
 const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 20 # In pixels/second^2.
 const MOVE_SPEED_MAX = 260 # In pixels/second.
-# Cannons positions.
-const CANNON_CENTRE_POS = Vector2(15, -.5)
-const CANNON_LEFT_POS = Vector2(7, 4)
-const CANNON_RIGHT_POS = Vector2(7, -5)
 
 # Auto fire cooldown. Maybe do this a variable so
 # you can get upgrades to improve it.

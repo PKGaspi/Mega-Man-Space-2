@@ -8,8 +8,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 15 )
 
-[node name="TellySpawner" instance=ExtResource( 1 )]
-_hp_bar_position = Vector2( 17, -20 )
+[node name="TellySpawner" index="0" instance=ExtResource( 1 )]
+_hp_bar_position = Vector2( 19, -21 )
 hp_max = 20.0
 snd_hit = NodePath("../TellySpawner/SndHit")
 invencibility_time = 0.3

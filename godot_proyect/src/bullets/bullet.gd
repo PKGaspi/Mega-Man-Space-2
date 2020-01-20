@@ -10,7 +10,6 @@ export(int) var n_collisions = 1 # Number of collisions before the bullet dissap
 var dir
 
 func _ready():
-	print("wuo")
 	dir = Vector2(cos(rotation), sin(rotation))
 
 func _physics_process(delta):
@@ -36,7 +35,6 @@ func move(to_move):
 	global_position += to_move
 
 func collide(character) -> void:
-	print("xd")
 	character.hit(damage, weapon)
 	n_collisions -= 1
 	if n_collisions == 0:
