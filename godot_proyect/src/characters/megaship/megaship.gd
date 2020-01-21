@@ -380,9 +380,16 @@ func die():
 	# Save the camera position.
 	$Camera2D.current = false
 	
+	# Get particles color.
+	var palette = palettes.get_frame("default", active_weapon)
+	var image = palette.get_data()
+	image.lock()
+	var color = image.get_pixel(2, 0)
+	
 	# Generate death sequence.
 	var inst = death_instance.instance()
 	inst.global_position = global_position
+	#inst.modulate = color
 	get_parent().add_child(inst)
 	
 	var new_sprite = $SprShip.duplicate()
