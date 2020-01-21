@@ -11,7 +11,6 @@ var state = STATES.ACCELERATING
 var original_follow_max_distance
 
 func _ready() -> void:
-	print("fly robot")
 	destination = to_follow.global_position
 	set_palette(round(randf()))
 	$SprBody.texture = global.create_empty_image(masks.get_frame($AnimBody.animation, 0).get_size())
