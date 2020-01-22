@@ -228,7 +228,7 @@ func get_directional_input():
 
 func get_rotation():
 	var rot
-	var input = get_joystick_axis(0, JOY_AXIS_3)
+	var input = get_joystick_axis(0, JOY_AXIS_2)
 	
 	# Calculate rotation.
 	if input != Vector2():
