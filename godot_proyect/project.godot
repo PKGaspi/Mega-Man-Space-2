@@ -26,11 +26,11 @@ global="*res://src/global.tscn"
 [debug]
 
 gdscript/warnings/unassigned_variable=false
+gdscript/warnings/shadowed_variable=false
 gdscript/warnings/unused_class_variable=false
 gdscript/warnings/unused_argument=false
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/integer_division=false
-gdscript/warnings/shadowed_variable=false
 
 [display]
 

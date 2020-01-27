@@ -42,6 +42,10 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func _input(event: InputEvent) -> void:
+#	if event is InputEventJoypadButton:
+#		printt(event.button_index, event.pressed)
+#	if event is InputEventJoypadMotion:
+#		printt(event.axis, event.axis_value)
 	if event.is_action_pressed("toggle_fullscreen"):
 		# Toggle fullscreen	
 		toggle_fullscreen()
