@@ -12,7 +12,7 @@ var original_follow_max_distance
 
 func _ready() -> void:
 	destination = to_follow.global_position
-	set_palette(round(randf()))
+	set_palette(int(round(randf())))
 	$SprBody.texture = global.create_empty_image(masks.get_frame($AnimBody.animation, 0).get_size())
 	$SprPropeller.texture = global.create_empty_image(masks.get_frame($AnimPropeller.animation, 0).get_size())
 	original_follow_max_distance = follow_max_distance

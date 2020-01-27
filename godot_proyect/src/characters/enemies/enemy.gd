@@ -6,7 +6,7 @@ export (SpriteFrames) var palettes
 export(float) var move_speed = 0
 export(bool) var invert_dir = false
 export(bool) var rotate_towards_destination = false
-export(bool) var follow_megaship = false
+export(bool) var _follow_megaship_at_ready = false
 export(float) var follow_max_distance = -1
 export(bool) var dynamic_dir : bool = true
 var to_follow = null
@@ -22,10 +22,10 @@ export(float) var damage = 4 # Collision damage.
 
 func _ready():
 	# Connect to_follow exit_tree signal
-	if follow_megaship:
-		follow_megaship()
 	if to_follow != null:
-		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
+		set_to_follow(to_follow)
+	elif _follow_megaship_at_ready:
+		follow_megaship()
 		
 	
 	destination = get_destination()
@@ -62,15 +62,17 @@ func follow_megaship() -> void:
 	set_to_follow(global.MEGASHIP)
 
 func set_to_follow(value = null) -> void:
+	if to_follow is Node2D and to_follow.is_connected("tree_exiting", self, "_on_to_follow_tree_exiting"):
+		to_follow.disconnect("tree_exiting", self, "_on_to_follow_tree_exiting")
 	to_follow = value
 	dynamic_dir = value != null
-	if to_follow is Node:
+	if to_follow is Node2D:
 		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
 
 func get_destination() -> Vector2:
 	if to_follow is Vector2:
 		return to_follow
-	elif to_follow != null:
+	elif to_follow != null and to_follow is Node2D:
 		return to_follow.global_position
 	else:
 		return destination

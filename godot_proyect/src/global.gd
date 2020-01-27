@@ -6,7 +6,7 @@ const SCREEN_SIZE = Vector2(480, 270)
 const EXITING_TIME = .3 # In seconds.
 var exiting_timer = 0 # Time that the exit key has been pressed.
 
-var pause = false
+var is_paused = false
 var user_pause = false
 
 # Weapons.
@@ -70,21 +70,22 @@ func unpause() -> void:
 	set_pause(false)
 	
 func set_pause(value) -> void:
-	pause = value
+	is_paused = value
 	get_tree().paused = value
 	
 func pause_toggle() -> void:
-	set_pause(!pause)
+	set_pause(!is_paused)
 
 func user_pause_toggle() -> void:
 	# The user can only pause the game if it is not paused
 	# or if it is paused by him.
-	if user_pause or !pause: 
+	if user_pause or !is_paused: 
 		# TODO: Toggle menus and play sounds.
 		pause_toggle()
-		user_pause = pause
-		emit_signal("user_pause", pause)
-		if pause: $SndPauseMenu.play()
+		user_pause = is_paused
+		emit_signal("user_pause", is_paused)
+		if is_paused:
+			$SndPauseMenu.play()
 	
 
 func game_over() -> void:

@@ -3,7 +3,7 @@ extends Range
 const DEFAULT_CELL_TIME : float = 8.0 / 60.0 # Time between each cell is filled.
 
 # For filling animations.
-var value_to : int
+var value_to : float
 var current_cell_time : float
 
 export(SpriteFrames) var cell_masks = null
@@ -72,7 +72,7 @@ func create_cell(position: Vector2, full: bool):
 	spr.position = position
 	add_child(spr)
 
-func update_values(new_value, new_max_value = max_value, cell_time = DEFAULT_CELL_TIME, pause = true):
+func update_values(new_value : float, new_max_value : float = max_value, cell_time : float = DEFAULT_CELL_TIME, pause : bool = true):
 	max_value = new_max_value
 	if cell_time == 0:
 		set_value(new_value)

@@ -11,12 +11,10 @@ extents = Vector2( 14.5, 15 )
 [node name="TellySpawner" index="0" instance=ExtResource( 1 )]
 _hp_bar_position = Vector2( 19, -21 )
 hp_max = 20.0
-snd_hit = NodePath("../TellySpawner/SndHit")
 invencibility_time = 0.3
 move_speed = 10.0
 invert_dir = true
 rotate_towards_destination = true
-follow_megaship = true
 follow_max_distance = 200.0
 damage = 8.0
 
