@@ -1,13 +1,17 @@
 extends Node
 
 const CURSOR = preload("res://assets/sprites/gui/cursor.png")
+const MOBILE_LAYOUT = preload("res://src/gui/mobile_layout.tscn")
 const SCREEN_SIZE = Vector2(480, 270)
 
 const EXITING_TIME = .3 # In seconds.
 var exiting_timer = 0 # Time that the exit key has been pressed.
 
-var is_paused = false
-var user_pause = false
+var is_paused : bool = false
+var user_pause : bool = false
+var os : String = OS.get_name()
+
+var current_mobile_layout = null
 
 # Weapons.
 enum WEAPONS {
@@ -40,8 +44,13 @@ func _ready():
 	random = init_random()
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadMotion or event is InputEventScreenDrag or event is InputEventScreenTouch:
+		gamepad = false
+	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		gamepad = true
 #	if event is InputEventJoypadButton:
 #		printt(event.button_index, event.pressed)
 #	if event is InputEventJoypadMotion:
@@ -90,7 +99,13 @@ func user_pause_toggle() -> void:
 		emit_signal("user_pause", is_paused)
 		if is_paused:
 			$SndPauseMenu.play()
-	
+
+func is_mobile_os(os = self.os):
+	return os == "Android" or os == "iOS"
+
+func create_mobile_layout(parent : Node = get_parent()):
+	current_mobile_layout = MOBILE_LAYOUT.instance()
+	parent.call_deferred("add_child", current_mobile_layout)
 
 func game_over() -> void:
 	lifes = LIFES_DEFAULT
