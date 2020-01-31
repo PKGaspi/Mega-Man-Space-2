@@ -35,6 +35,7 @@ func _ready():
 		dir = - dir
 	if rotate_towards_destination:
 		rotation = dir.angle() + PI / 2
+
 func _physics_process(delta: float) -> void:
 	destination = get_destination()
 	if dynamic_dir:

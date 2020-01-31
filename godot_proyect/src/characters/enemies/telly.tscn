@@ -26,12 +26,13 @@ _hp_bar_position = Vector2( 11, -8 )
 hp_max = 5.0
 invencibility_time = 0.2
 move_speed = 50.0
+_follow_megaship_at_ready = true
 follow_max_distance = 300.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="5"]
 frames = SubResource( 1 )
 animation = "rotating"
-frame = 6
+frame = 7
 playing = true
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="6"]

@@ -8,13 +8,14 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 15 )
 
-[node name="TellySpawner" index="0" instance=ExtResource( 1 )]
+[node name="TellySpawner" instance=ExtResource( 1 )]
 _hp_bar_position = Vector2( 19, -21 )
 hp_max = 20.0
 invencibility_time = 0.3
 move_speed = 10.0
 invert_dir = true
 rotate_towards_destination = true
+_follow_megaship_at_ready = true
 follow_max_distance = 200.0
 damage = 8.0
 

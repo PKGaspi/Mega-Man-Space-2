@@ -47,15 +47,15 @@ shader_param/palette_size = 8.0
 [sub_resource type="SpriteFrames" id=4]
 resource_local_to_scene = true
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "propeller",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "body_iddle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "propeller",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
@@ -66,15 +66,15 @@ animations = [ {
 [sub_resource type="SpriteFrames" id=5]
 resource_local_to_scene = true
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "propeller",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "body_iddle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "propeller",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
@@ -92,7 +92,7 @@ hp_max = 14.0
 masks = ExtResource( 3 )
 move_speed = 200.0
 rotate_towards_destination = true
-follow_megaship = true
+_follow_megaship_at_ready = true
 follow_max_distance = 500.0
 damage = 6.0
 
@@ -114,7 +114,7 @@ playing = true
 visible = false
 frames = SubResource( 5 )
 animation = "propeller"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="9"]

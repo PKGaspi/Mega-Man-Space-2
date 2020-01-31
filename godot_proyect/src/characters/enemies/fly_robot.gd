@@ -11,7 +11,7 @@ var state = STATES.ACCELERATING
 var original_follow_max_distance
 
 func _ready() -> void:
-	destination = to_follow.global_position
+	destination = get_destination()
 	set_palette(int(round(randf())))
 	$SprBody.texture = global.create_empty_image(masks.get_frame($AnimBody.animation, 0).get_size())
 	$SprPropeller.texture = global.create_empty_image(masks.get_frame($AnimPropeller.animation, 0).get_size())
@@ -49,8 +49,6 @@ func set_state(new_state):
 	match state:
 		STATES.ACCELERATING:
 			dynamic_dir = true
-			#destination = to_follow.global_position
-			#dir = global_position.direction_to(destination)
 			follow_max_distance = -1
 			$AnimBody.play("body_charging")
 		STATES.DEACCELERATING:
