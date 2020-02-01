@@ -138,6 +138,7 @@ func create_empty_image(size : Vector2) -> ImageTexture:
 	var empty_image = Image.new()
 	var empty_texture = ImageTexture.new()
 	empty_image.create(size.x, size.y, false, Image.FORMAT_BPTC_RGBA)
+	empty_image.decompress()
 	empty_texture.create_from_image(empty_image)
 	return empty_texture
 	

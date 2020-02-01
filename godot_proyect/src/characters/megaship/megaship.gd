@@ -182,7 +182,7 @@ func take_damage(damage):
 	$HitParticles.restart()
 
 func get_directional_input():
-	var input : Vector2
+	var input : Vector2 = Vector2.ZERO
 	
 	match global.input_type:
 		
@@ -216,7 +216,6 @@ func get_directional_input():
 			# Touchscreen input.
 			input = get_mobile_joystick_axis(JOYSTICK_LEFT)
 		
-	var prev_input = input
 	return input
 
 func get_rotation():
@@ -270,9 +269,9 @@ func get_joystick_axis(device, joystick):
 
 func get_mobile_joystick_axis(joystick):
 	if joystick == JOYSTICK_LEFT:
-		return global.current_mobile_layout.get_node("LeftJoystick").output
-	else:
-		return global.current_mobile_layout.get_node("RightJoystick").output
+		return global.current_touchscreen_layout.get_node("LeftJoystick").output
+	elif joystick == JOYSTICK_RIGHT:
+		return global.current_touchscreen_layout.get_node("RightJoystick").output
 
 func get_motion(dir):
 	if dir != Vector2():
