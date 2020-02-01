@@ -26,9 +26,6 @@ const JOYSTICK_DEADZONE = .3
 const JOYSTICK_LEFT = JOY_AXIS_0
 const JOYSTICK_RIGHT = JOY_AXIS_2
 
-var mouse_pos
-var mouse_last_pos
-
 ###########################
 # Upgrades and atributes. #
 ###########################
@@ -144,9 +141,6 @@ func _physics_process(delta):
 	
 
 func _process(delta):
-	# Get new values of this frame.
-	mouse_pos = get_viewport().get_mouse_position()
-	
 	# Calculate rotation and sprite.
 	rotation = get_rotation()
 	
@@ -164,9 +158,6 @@ func _process(delta):
 		previous_weapon()
 	if Input.is_action_just_pressed("ui_up"):
 		next_weapon()
-	
-	# Update values for next frame.
-	mouse_last_pos = mouse_pos
 
 #########################
 ## Auxiliar functions. ##
@@ -191,25 +182,11 @@ func take_damage(damage):
 	$HitParticles.restart()
 
 func get_directional_input():
+	var input : Vector2
 	
-	var input = Vector2()
-	var empty = Vector2()
-	
-	if global.gamepad:
-		# Gamepad input.
-		if Input.is_action_pressed("gamepad_move_up"):
-			input += Vector2.UP
-		if Input.is_action_pressed("gamepad_move_down"):
-			input += Vector2.DOWN
-		if Input.is_action_pressed("gamepad_move_left"):
-			input += Vector2.LEFT
-		if Input.is_action_pressed("gamepad_move_right"):
-			input += Vector2.RIGHT
-	else:
-		if global.is_mobile_os():
-			# Mobile input.
-			input = get_mobile_joystick_axis(JOYSTICK_LEFT)
-		else:
+	match global.input_type:
+		
+		global.INPUT_TYPES.KEY_MOUSE:
 			# Keyboard input.
 			if Input.is_action_pressed("keyboard_move_up"):
 				input += Vector2.UP
@@ -219,36 +196,51 @@ func get_directional_input():
 				input += Vector2.LEFT
 			if Input.is_action_pressed("keyboard_move_right"):
 				input += Vector2.RIGHT
+				
+		global.INPUT_TYPES.GAMEPAD:
+			# Gamepad input.
+			if Input.is_action_pressed("gamepad_move_up"):
+				input += Vector2.UP
+			if Input.is_action_pressed("gamepad_move_down"):
+				input += Vector2.DOWN
+			if Input.is_action_pressed("gamepad_move_left"):
+				input += Vector2.LEFT
+			if Input.is_action_pressed("gamepad_move_right"):
+				input += Vector2.RIGHT
+				
+			if input == Vector2.ZERO:
+				# Joystick input.
+				input = get_joystick_axis(0, JOYSTICK_LEFT)
+				
+		global.INPUT_TYPES.TOUCHSCREEN:
+			# Touchscreen input.
+			input = get_mobile_joystick_axis(JOYSTICK_LEFT)
 		
 	var prev_input = input
-
-	if input == empty:
-		# Joystick input.
-		input = get_joystick_axis(0, JOYSTICK_LEFT)
-	
 	return input
 
 func get_rotation():
-	var rot
-	var input
+	var rot : float = rotation
+	var input : Vector2
 	
-	if global.gamepad:
-		# Gamepad input.
-		input = get_joystick_axis(0, JOYSTICK_RIGHT)
-	else:
-		if global.is_mobile_os():
-			# Mobile input.
-			input = get_mobile_joystick_axis(JOYSTICK_RIGHT)
-		else:
+	match global.input_type:
+		
+		global.INPUT_TYPES.KEY_MOUSE:
+			# Keyboard input.
+			var mouse_pos = get_global_mouse_position()
 			if position.distance_to(mouse_pos) > 3:
-				rot = mouse_pos.angle_to_point(get_global_transform_with_canvas().origin)
-			else:
-				rot = rotation
-	
+				input = global_position.direction_to(mouse_pos)
+				
+		global.INPUT_TYPES.GAMEPAD:
+			# Gamepad input.
+			input = get_joystick_axis(0, JOYSTICK_RIGHT)
+				
+		global.INPUT_TYPES.TOUCHSCREEN:
+			# Touchscreen input.
+			input = get_mobile_joystick_axis(JOYSTICK_RIGHT)
+		
 	if input != Vector2.ZERO:
 		rot = input.angle()
-	else:
-		rot = rotation
 	
 	# Set rotation sprite.
 	if input_dir == Vector2():

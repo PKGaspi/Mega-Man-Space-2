@@ -1,7 +1,7 @@
 extends Node
 
 const CURSOR = preload("res://assets/sprites/gui/cursor.png")
-const MOBILE_LAYOUT = preload("res://src/gui/mobile_layout.tscn")
+const TOUCHSCREEN_LAYOUT = preload("res://src/gui/touchscreen_layout.tscn")
 const SCREEN_SIZE = Vector2(480, 270)
 
 const EXITING_TIME = .3 # In seconds.
@@ -11,7 +11,15 @@ var is_paused : bool = false
 var user_pause : bool = false
 var os : String = OS.get_name()
 
-var current_mobile_layout = null
+var current_touchscreen_layout = null
+
+enum INPUT_TYPES {
+	KEY_MOUSE,
+	GAMEPAD,
+	TOUCHSCREEN,
+}
+
+var input_type : int # Wheter the game is being played with a gamepad or a keyboard.
 
 # Weapons.
 enum WEAPONS {
@@ -35,7 +43,6 @@ var etanks = 0 # The number of extra lifes.
 const MAX_ETANKS = 4
 
 var MEGASHIP # The megaship instance for easy global access.
-var gamepad : bool # Wheter the game is being played with a gamepad or a keyboard.
 var random : RandomNumberGenerator # Used for general randomness.
 
 signal user_pause
@@ -47,10 +54,17 @@ func _ready():
 	
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadMotion or event is InputEventScreenDrag or event is InputEventScreenTouch:
-		gamepad = false
-	elif event is InputEventJoypadButton or event is InputEventJoypadMotion:
-		gamepad = true
+	# Set current input method.
+	if input_type != INPUT_TYPES.KEY_MOUSE or event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion:
+		input_type = INPUT_TYPES.KEY_MOUSE
+		set_touchscreen_layout_visibility(false)
+	elif input_type != INPUT_TYPES.GAMEPAD or event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		input_type = INPUT_TYPES.GAMEPAD
+		set_touchscreen_layout_visibility(false)
+	elif input_type != INPUT_TYPES.TOUCHSCREEN or event is InputEventScreenDrag or event is InputEventScreenTouch:
+		input_type = INPUT_TYPES.TOUCHSCREEN
+		set_touchscreen_layout_visibility(true)
+##	Debug gampead input.
 #	if event is InputEventJoypadButton:
 #		printt(event.button_index, event.pressed)
 #	if event is InputEventJoypadMotion:
@@ -103,9 +117,14 @@ func user_pause_toggle() -> void:
 func is_mobile_os(os = self.os):
 	return os == "Android" or os == "iOS"
 
-func create_mobile_layout(parent : Node = get_parent()):
-	current_mobile_layout = MOBILE_LAYOUT.instance()
-	parent.call_deferred("add_child", current_mobile_layout)
+func create_touchscreen_layout(parent : Node = get_parent()):
+	current_touchscreen_layout = TOUCHSCREEN_LAYOUT.instance()
+	parent.call_deferred("add_child", current_touchscreen_layout)
+	set_touchscreen_layout_visibility(input_type == INPUT_TYPES.TOUCHSCREEN)
+
+func set_touchscreen_layout_visibility(value : bool):
+	if current_touchscreen_layout != null:
+		current_touchscreen_layout.visible = value
 
 func game_over() -> void:
 	lifes = LIFES_DEFAULT
