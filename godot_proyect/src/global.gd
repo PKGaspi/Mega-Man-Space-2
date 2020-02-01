@@ -55,13 +55,13 @@ func _ready():
 
 func _input(event: InputEvent) -> void:
 	# Set current input method.
-	if input_type != INPUT_TYPES.KEY_MOUSE or event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion:
+	if input_type != INPUT_TYPES.KEY_MOUSE and (event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion):
 		input_type = INPUT_TYPES.KEY_MOUSE
 		set_touchscreen_layout_visibility(false)
-	elif input_type != INPUT_TYPES.GAMEPAD or event is InputEventJoypadButton or event is InputEventJoypadMotion:
+	elif input_type != INPUT_TYPES.GAMEPAD and (event is InputEventJoypadButton or event is InputEventJoypadMotion):
 		input_type = INPUT_TYPES.GAMEPAD
 		set_touchscreen_layout_visibility(false)
-	elif input_type != INPUT_TYPES.TOUCHSCREEN or event is InputEventScreenDrag or event is InputEventScreenTouch:
+	elif input_type != INPUT_TYPES.TOUCHSCREEN and (event is InputEventScreenDrag or event is InputEventScreenTouch):
 		input_type = INPUT_TYPES.TOUCHSCREEN
 		set_touchscreen_layout_visibility(true)
 ##	Debug gampead input.
