@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background.png" type="Texture" id=1]
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://src/gui/progress_bar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/gui/menus/pager.gd" type="Script" id=4]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -68,22 +69,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="MarginContainer"]
+[node name="Pager" type="Control" parent="MarginContainer"]
 margin_right = 88.0
 margin_bottom = 120.0
+script = ExtResource( 4 )
 
-[node name="Page1" type="HBoxContainer" parent="MarginContainer/Control"]
+[node name="Page1" type="HBoxContainer" parent="MarginContainer/Pager"]
 margin_right = 88.0
 margin_bottom = 120.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Letters" type="VBoxContainer" parent="MarginContainer/Control/Page1"]
+[node name="Letters" type="VBoxContainer" parent="MarginContainer/Pager/Page1"]
 margin_right = 9.0
 margin_bottom = 120.0
 
-[node name=">" type="Label" parent="MarginContainer/Control/Page1/Letters"]
+[node name=">" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_right = 9.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 2 )
@@ -92,49 +94,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="P" type="Label" parent="MarginContainer/Control/Page1/Letters"]
+[node name="P" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_top = 16.0
 margin_right = 9.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 2 )
 text = "P"
 
-[node name="H" type="Label" parent="MarginContainer/Control/Page1/Letters"]
+[node name="H" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_top = 32.0
 margin_right = 9.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "H"
 
-[node name="A" type="Label" parent="MarginContainer/Control/Page1/Letters"]
+[node name="A" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_top = 48.0
 margin_right = 9.0
 margin_bottom = 56.0
 custom_fonts/font = ExtResource( 2 )
 text = "A"
 
-[node name="W" type="Label" parent="MarginContainer/Control/Page1/Letters"]
+[node name="W" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_top = 64.0
 margin_right = 9.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 2 )
 text = "W"
 
-[node name="B" type="Label" parent="MarginContainer/Control/Page1/Letters"]
+[node name="B" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_top = 80.0
 margin_right = 9.0
 margin_bottom = 88.0
 custom_fonts/font = ExtResource( 2 )
 text = "B"
 
-[node name="Q" type="Label" parent="MarginContainer/Control/Page1/Letters"]
+[node name="Q" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_top = 96.0
 margin_right = 9.0
 margin_bottom = 104.0
 custom_fonts/font = ExtResource( 2 )
 text = "Q"
 
-[node name="E-tanks" type="Label" parent="MarginContainer/Control/Page1/Letters"]
+[node name="E-tanks" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_top = 112.0
 margin_right = 9.0
 margin_bottom = 120.0
@@ -144,18 +146,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bars" type="VBoxContainer" parent="MarginContainer/Control/Page1"]
+[node name="Bars" type="VBoxContainer" parent="MarginContainer/Pager/Page1"]
 margin_left = 17.0
 margin_right = 47.0
 margin_bottom = 120.0
 
-[node name="Next" type="Label" parent="MarginContainer/Control/Page1/Bars"]
+[node name="Next" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
 margin_right = 30.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 2 )
 text = "next"
 
-[node name="PBar" parent="MarginContainer/Control/Page1/Bars" instance=ExtResource( 3 )]
+[node name="PBar" parent="MarginContainer/Pager/Page1/Bars" instance=ExtResource( 3 )]
 material = SubResource( 2 )
 margin_top = 16.0
 margin_right = 30.0
@@ -163,7 +165,7 @@ margin_bottom = 17.0
 max_value = 28.0
 value = 28.0
 
-[node name="Page2" type="HBoxContainer" parent="MarginContainer/Control"]
+[node name="Page2" type="HBoxContainer" parent="MarginContainer/Pager"]
 visible = false
 margin_right = 88.0
 margin_bottom = 120.0
@@ -171,11 +173,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Letters" type="VBoxContainer" parent="MarginContainer/Control/Page2"]
+[node name="Letters" type="VBoxContainer" parent="MarginContainer/Pager/Page2"]
 margin_right = 9.0
 margin_bottom = 120.0
 
-[node name=">" type="Label" parent="MarginContainer/Control/Page2/Letters"]
+[node name=">" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_right = 9.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 2 )
@@ -184,49 +186,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="F" type="Label" parent="MarginContainer/Control/Page2/Letters"]
+[node name="F" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_top = 16.0
 margin_right = 9.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 2 )
 text = "F"
 
-[node name="M" type="Label" parent="MarginContainer/Control/Page2/Letters"]
+[node name="M" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_top = 32.0
 margin_right = 9.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "M"
 
-[node name="C" type="Label" parent="MarginContainer/Control/Page2/Letters"]
+[node name="C" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_top = 48.0
 margin_right = 9.0
 margin_bottom = 56.0
 custom_fonts/font = ExtResource( 2 )
 text = "C"
 
-[node name="1" type="Label" parent="MarginContainer/Control/Page2/Letters"]
+[node name="1" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_top = 64.0
 margin_right = 9.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 2 )
 text = "1"
 
-[node name="2" type="Label" parent="MarginContainer/Control/Page2/Letters"]
+[node name="2" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_top = 80.0
 margin_right = 9.0
 margin_bottom = 88.0
 custom_fonts/font = ExtResource( 2 )
 text = "2"
 
-[node name="3" type="Label" parent="MarginContainer/Control/Page2/Letters"]
+[node name="3" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_top = 96.0
 margin_right = 9.0
 margin_bottom = 104.0
 custom_fonts/font = ExtResource( 2 )
 text = "3"
 
-[node name="1ups" type="Label" parent="MarginContainer/Control/Page2/Letters"]
+[node name="1ups" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_top = 112.0
 margin_right = 9.0
 margin_bottom = 120.0
@@ -236,12 +238,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bars" type="VBoxContainer" parent="MarginContainer/Control/Page2"]
+[node name="Bars" type="VBoxContainer" parent="MarginContainer/Pager/Page2"]
 margin_left = 17.0
 margin_right = 47.0
 margin_bottom = 120.0
 
-[node name="Label" type="Label" parent="MarginContainer/Control/Page2/Bars"]
+[node name="Label" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
 margin_right = 30.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 2 )
