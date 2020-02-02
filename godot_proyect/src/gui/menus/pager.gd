@@ -13,12 +13,14 @@ func _ready() -> void:
 		n_pages += 1
 	
 	# Set valid current page.
+# warning-ignore:narrowing_conversion
 	page_index = clamp(page_index, 0, n_pages - 1)
 	pages[page_index].visible = true
 	current_page = pages[page_index]
 
 func set_page(value : int) -> void:
 	pages[page_index].visible = false
+# warning-ignore:narrowing_conversion
 	page_index = clamp(value, 0, n_pages - 1)
 	pages[page_index].visible = true
 	current_page = pages[page_index]

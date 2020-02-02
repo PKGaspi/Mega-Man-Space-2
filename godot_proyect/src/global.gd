@@ -24,13 +24,13 @@ var input_type : int # Wheter the game is being played with a gamepad or a keybo
 # Weapons.
 enum WEAPONS {
 	MEGA,
-	BUBBLE,
-	AIR,
-	QUICK,
 	HEAT,
+	AIR,
 	WOOD,
-	METAL,
+	BUBBLE,
+	QUICK,
 	FLASH,
+	METAL,
 	CRASH,
 	SIZE,
 }

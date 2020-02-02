@@ -2,23 +2,29 @@ extends Control
 
 var entries = []
 var entry : Node
-var entry_index : int = 0
+var entry_index : int = 1
 var n_entries : int = 0
 
 func _ready() -> void:
 	update_entries()
+	global.connect("user_pause", self, "_on_global_user_pause")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if entry_index == 0:
 			next_page()
 		else:
+			# TODO: set correct weapon.
+			global.MEGASHIP.set_weapon(entry_index - 1, false)
 			global.set_user_pause(false)
-			queue_free()
 	if event.is_action_pressed("ui_down"):
 		next_entry()
 	if event.is_action_pressed("ui_up"):
 		previous_entry()
+
+func _on_global_user_pause(value : bool) -> void:
+	if !value:
+		queue_free()
 
 func next_page() -> void:
 	entry.modulate.a = 1
@@ -28,6 +34,7 @@ func next_page() -> void:
 func set_entry(value : int) -> void:
 	$SndMenuSelect.play()
 	entry.modulate.a = 1
+# warning-ignore:narrowing_conversion
 	entry_index = clamp(value, 0, n_entries)
 	entry = entries[entry_index]
 
@@ -35,7 +42,7 @@ func next_entry() -> void:
 	set_entry((entry_index + 1) % n_entries)
 	
 func previous_entry() -> void:
-	set_entry((entry_index - 1) % n_entries)
+	set_entry((entry_index - 1) % n_entries if entry_index > 0 else n_entries - 1)
 
 func update_entries() -> void:
 	entries = []

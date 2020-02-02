@@ -343,10 +343,11 @@ func set_palette(palette_index : int) -> void:
 	# Emit palette change signal.
 	emit_signal("palette_change", palette_index)
 
-func set_weapon(weapon_index : int) -> bool:
+func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 	var unlocked = unlocked_weapons[weapon_index]
 	if unlocked:
-		$SndWeaponSwap.play()
+		if play_sound:
+			$SndWeaponSwap.play()
 		# Set palette.
 		set_palette(weapon_index)
 		# Set ammo_bar visibility.
