@@ -121,8 +121,7 @@ func create_progress_bar(cell_size : Vector2, pos : Vector2, max_value : float, 
 		if name != "":
 			bar.name = name
 		add_child(bar)
-		
-		
+	
 	return bar
 
 func set_visibility(value):

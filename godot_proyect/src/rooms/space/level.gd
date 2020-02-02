@@ -2,8 +2,10 @@ extends Node
 
 const GAME_OVER_WAIT_TIME = 5 # In seconds.
 
-var lvl_id = 0 # This is set when selecting the level.
+const MEGASHIP_TELEPORT = preload("res://src/characters/megaship/megaship_teleport.tscn")
+const WEAPONS_MENU = preload("res://src/gui/menus/weapon_menu.tscn")
 
+var lvl_id = 0 # This is set when selecting the level.
 
 func _ready() -> void:
 	$Music.play()
@@ -46,10 +48,13 @@ func _on_global_user_pause(value) -> void:
 	pause_mode = PAUSE_MODE_STOP if value else PAUSE_MODE_PROCESS
 	if !value:
 		global.MEGASHIP.visible = false
-		var inst = preload("res://src/characters/megaship/megaship_teleport.tscn").instance()
+		var inst = MEGASHIP_TELEPORT.instance()
 		inst.global_position = global.MEGASHIP.global_position
 		inst.destination = inst.global_position
 		$GameLayer.add_child(inst)
+	else:
+		var inst = WEAPONS_MENU.instance()
+		$GUILayer.add_child(inst)
 
 func death() -> void:
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("none")

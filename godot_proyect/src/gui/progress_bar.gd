@@ -20,7 +20,6 @@ var materials = {}
 func _ready() -> void:
 	# Color palette shader setup.
 	material = material.duplicate()
-	set_palette(0)
 	set_mask(1)
 	var material_empty = material.duplicate(true)
 	materials = {
@@ -37,7 +36,6 @@ func init(cell_size, pos, max_value, min_value = 0, value = max_value) -> void:
 	self.min_value = min_value
 	self.value = value
 	
-	
 	margin_bottom = 0
 	margin_left = 0
 	margin_top = 0
@@ -45,8 +43,7 @@ func init(cell_size, pos, max_value, min_value = 0, value = max_value) -> void:
 	
 	self.cell_size = cell_size
 	calculate_size()
-	
-	
+
 func _draw():
 	for child in $Cells.get_children():
 		child.queue_free()

@@ -75,7 +75,7 @@ func _input(event: InputEvent) -> void:
 	
 	# Exit game function.
 	if event.is_action_pressed("exit_game"):
-		user_pause_toggle()
+		toggle_user_pause()
 		$GameExitTimer.start(EXITING_TIME)
 	if event.is_action_released("exit_game"):
 		$GameExitTimer.stop()
@@ -96,23 +96,25 @@ func pause() -> void:
 func unpause() -> void:
 	set_pause(false)
 	
-func set_pause(value) -> void:
+func set_pause(value : bool) -> void:
 	is_paused = value
 	get_tree().paused = value
-	
-func pause_toggle() -> void:
+
+func set_user_pause(value : bool) -> void:
+	# The user can only pause the game if it is not paused
+	# or can unpause it if it is paused by him.
+	if user_pause or !is_paused:
+		set_pause(value)
+		user_pause = value
+		emit_signal("user_pause", value)
+		if value:
+			$SndPauseMenu.play()
+
+func toggle_pause() -> void:
 	set_pause(!is_paused)
 
-func user_pause_toggle() -> void:
-	# The user can only pause the game if it is not paused
-	# or if it is paused by him.
-	if user_pause or !is_paused: 
-		# TODO: Toggle menus and play sounds.
-		pause_toggle()
-		user_pause = is_paused
-		emit_signal("user_pause", is_paused)
-		if is_paused:
-			$SndPauseMenu.play()
+func toggle_user_pause() -> void:
+	set_user_pause(!is_paused)
 
 func is_mobile_os(os = self.os):
 	return os == "Android" or os == "iOS"
