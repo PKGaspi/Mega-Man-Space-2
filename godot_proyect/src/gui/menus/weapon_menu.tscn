@@ -75,6 +75,7 @@ margin_bottom = 120.0
 script = ExtResource( 4 )
 
 [node name="Page1" type="HBoxContainer" parent="MarginContainer/Pager"]
+visible = false
 margin_right = 88.0
 margin_bottom = 120.0
 __meta__ = {
@@ -89,6 +90,9 @@ margin_bottom = 120.0
 margin_right = 9.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = ">"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -99,6 +103,9 @@ margin_top = 16.0
 margin_right = 9.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "P"
 
 [node name="H" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
@@ -106,6 +113,9 @@ margin_top = 32.0
 margin_right = 9.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "H"
 
 [node name="A" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
@@ -113,6 +123,9 @@ margin_top = 48.0
 margin_right = 9.0
 margin_bottom = 56.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "A"
 
 [node name="W" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
@@ -120,6 +133,9 @@ margin_top = 64.0
 margin_right = 9.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "W"
 
 [node name="B" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
@@ -127,6 +143,9 @@ margin_top = 80.0
 margin_right = 9.0
 margin_bottom = 88.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "B"
 
 [node name="Q" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
@@ -134,6 +153,9 @@ margin_top = 96.0
 margin_right = 9.0
 margin_bottom = 104.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "Q"
 
 [node name="E-tanks" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
@@ -141,6 +163,9 @@ margin_top = 112.0
 margin_right = 9.0
 margin_bottom = 120.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "E"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -155,6 +180,9 @@ margin_bottom = 120.0
 margin_right = 30.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "next"
 
 [node name="PBar" parent="MarginContainer/Pager/Page1/Bars" instance=ExtResource( 3 )]
@@ -166,7 +194,6 @@ max_value = 28.0
 value = 28.0
 
 [node name="Page2" type="HBoxContainer" parent="MarginContainer/Pager"]
-visible = false
 margin_right = 88.0
 margin_bottom = 120.0
 __meta__ = {
@@ -181,6 +208,9 @@ margin_bottom = 120.0
 margin_right = 9.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = ">"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -191,6 +221,9 @@ margin_top = 16.0
 margin_right = 9.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "F"
 
 [node name="M" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
@@ -198,6 +231,9 @@ margin_top = 32.0
 margin_right = 9.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "M"
 
 [node name="C" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
@@ -205,6 +241,9 @@ margin_top = 48.0
 margin_right = 9.0
 margin_bottom = 56.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "C"
 
 [node name="1" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
@@ -212,6 +251,9 @@ margin_top = 64.0
 margin_right = 9.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "1"
 
 [node name="2" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
@@ -219,6 +261,9 @@ margin_top = 80.0
 margin_right = 9.0
 margin_bottom = 88.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "2"
 
 [node name="3" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
@@ -226,6 +271,9 @@ margin_top = 96.0
 margin_right = 9.0
 margin_bottom = 104.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "3"
 
 [node name="1ups" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
@@ -233,6 +281,9 @@ margin_top = 112.0
 margin_right = 9.0
 margin_bottom = 120.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "E"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -243,8 +294,11 @@ margin_left = 17.0
 margin_right = 47.0
 margin_bottom = 120.0
 
-[node name="Label" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+[node name="Next" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
 margin_right = 30.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 text = "next"
