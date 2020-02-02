@@ -8,22 +8,16 @@ var current_cell_time : float
 
 export(SpriteFrames) var cell_masks = null
 export(SpriteFrames) var cell_palettes = null
-var cell_texture	: Texture
-var separation		: int
-var size			: Vector2
-var cell_size		: Vector2
-var position		: Vector2
 
+export(float) var separation : float = 0
+export(Vector2) var cell_size : Vector2 = Vector2(7, 2)
+
+var cell_texture : Texture
+var size : Vector2
+var position : Vector2
 var materials = {}
 
-func init(cell_size, position, max_value, min_value = 0, value = max_value) -> void:
-	
-	self.cell_texture = global.create_empty_image(cell_size)
-	self.position = position
-	self.max_value = max_value
-	self.min_value = min_value
-	self.value = value
-	
+func _ready() -> void:
 	# Color palette shader setup.
 	material = material.duplicate()
 	set_palette(0)
@@ -34,11 +28,19 @@ func init(cell_size, position, max_value, min_value = 0, value = max_value) -> v
 		false: material_empty
 	}
 	set_mask(0)
+
+func init(cell_size, pos, max_value, min_value = 0, value = max_value) -> void:
 	
-	separation = 0 # Separation between cells.
-	margin_top = 0
+	self.cell_texture = global.create_empty_image(cell_size)
+	self.position = pos
+	self.max_value = max_value
+	self.min_value = min_value
+	self.value = value
+	
+	
 	margin_bottom = 0
 	margin_left = 0
+	margin_top = 0
 	margin_right = 0
 	
 	self.cell_size = cell_size
@@ -65,12 +67,12 @@ func _on_fill_timer_timeout() -> void:
 ## Auxiliar functions. ##
 #########################
 
-func create_cell(position: Vector2, full: bool):
+func create_cell(pos: Vector2, full: bool):
 	var spr = Sprite.new()
 	spr.material = materials[full]
 	spr.texture = cell_texture
-	spr.position = position
-	add_child(spr)
+	spr.position = pos
+	$Cells.add_child(spr)
 
 func update_values(new_value : float, new_max_value : float = max_value, cell_time : float = DEFAULT_CELL_TIME, pause : bool = true):
 	max_value = new_max_value

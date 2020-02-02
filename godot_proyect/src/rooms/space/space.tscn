@@ -105,8 +105,11 @@ script = ExtResource( 3 )
 
 [node name="BarContainer" type="Control" parent="GUILayer/Container"]
 pause_mode = 2
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Aimer" type="TextureRect" parent="GUILayer/Container"]
 margin_right = 40.0

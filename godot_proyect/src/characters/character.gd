@@ -72,8 +72,8 @@ func _ready() -> void:
 	hp = hp_max
 	ammo = ammo_max
 	# Init bars.
-	hp_bar = create_progress_bar(_hp_bar_cell_size, _hp_bar_position, hp_max, _hp_bar_show, _hp_bar_on_gui, _hp_bar_palette)
-	ammo_bar = create_progress_bar(_ammo_bar_cell_size, _ammo_bar_position, ammo_max, _ammo_bar_show, _ammo_bar_on_gui, _ammo_bar_palette)
+	hp_bar = create_progress_bar(_hp_bar_cell_size, _hp_bar_position, hp_max, _hp_bar_show, _hp_bar_on_gui, _hp_bar_palette, "HpBar")
+	ammo_bar = create_progress_bar(_ammo_bar_cell_size, _ammo_bar_position, ammo_max, _ammo_bar_show, _ammo_bar_on_gui, _ammo_bar_palette, "AmmoBar")
 	
 	# Init timers.
 	if flicker_before_timeout:
@@ -107,16 +107,21 @@ func _on_life_flickering_timer_timeout():
 ## Auxiliar functions. ##
 #########################
 
-func create_progress_bar(cell_size : Vector2, pos : Vector2, max_value : float, show : bool = true, on_gui : bool = false, palette : int = 0):
+func create_progress_bar(cell_size : Vector2, pos : Vector2, max_value : float, show : bool = true, on_gui : bool = false, palette : int = 0, name : String = ""):
 	var bar = PROGRESS_BAR.instance()
 	bar.init(cell_size, pos, max_value)
 	bar.visible = show
 	bar.set_palette(palette)
 	
 	if on_gui:
+		if name != "":
+			bar.name = self.name + name
 		BAR_CONTAINER.add_child(bar)
 	else:
+		if name != "":
+			bar.name = name
 		add_child(bar)
+		
 		
 	return bar
 

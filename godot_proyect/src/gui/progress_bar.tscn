@@ -8,15 +8,14 @@
 
 [node name="TextureProgress" type="TextureProgress"]
 material = ExtResource( 1 )
-margin_left = 30.1357
-margin_top = 20.0379
-margin_right = 70.1357
-margin_bottom = 60.0379
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 cell_masks = ExtResource( 3 )
 cell_palettes = ExtResource( 4 )
 
-[node name="Cells" type="Node" parent="."]
+[node name="Cells" type="Node2D" parent="."]
 
 [node name="FillTimer" type="Timer" parent="."]
 one_shot = true
