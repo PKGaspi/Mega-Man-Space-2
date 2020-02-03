@@ -49,8 +49,9 @@ func _on_global_user_pause(value) -> void:
 	if !value:
 		global.MEGASHIP.visible = false
 		var inst = MEGASHIP_TELEPORT.instance()
-		inst.global_position = global.MEGASHIP.global_position
-		inst.destination = inst.global_position
+		var ship_pos = global.MEGASHIP.global_position
+		inst.global_position = ship_pos
+		inst.destination = ship_pos
 		$GameLayer.add_child(inst)
 	else:
 		var inst = WEAPONS_MENU.instance()
