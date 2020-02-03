@@ -344,6 +344,8 @@ func set_palette(palette_index : int) -> void:
 	emit_signal("palette_change", palette_index)
 
 func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
+	if !unlocked_weapons.has(weapon_index):
+		weapon_index = WEAPONS.MEGA
 	var unlocked = unlocked_weapons[weapon_index]
 	if unlocked:
 		if play_sound:

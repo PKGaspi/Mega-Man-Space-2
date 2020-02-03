@@ -12,10 +12,14 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if entry_index == 0:
+			# Next page.
 			next_page()
+		elif entry_index == 7:
+			# TODO: E-tank or 1up.
+			pass
 		else:
-			# TODO: set correct weapon.
-			global.MEGASHIP.set_weapon(entry_index - 1, false)
+			# TODO: set weapon.
+			global.MEGASHIP.set_weapon($MarginContainer/Pager.page_index * 6 + entry_index - 1, false)
 			global.set_user_pause(false)
 	if event.is_action_pressed("ui_down"):
 		next_entry()
