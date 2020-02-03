@@ -6,7 +6,7 @@
 [ext_resource path="res://src/gui/menus/pager.gd" type="Script" id=4]
 [ext_resource path="res://src/gui/menus/weapon_menu.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=6]
-[ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_palette_2.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_palette_0.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=8]
 
 [sub_resource type="Shader" id=1]
@@ -32,14 +32,14 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 7 )
 shader_param/mask = ExtResource( 8 )
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 //The palette used
@@ -62,9 +62,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
-shader = SubResource( 4 )
+shader = SubResource( 3 )
 shader_param/palette_size = 8.0
 
 [node name="WeaponMenu" type="Control"]
@@ -72,16 +72,16 @@ pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 330.0
-margin_top = 24.0
+margin_top = 23.0
 margin_right = -38.0
-margin_bottom = -86.0
+margin_bottom = -85.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Background" type="NinePatchRect" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
@@ -108,7 +108,7 @@ __meta__ = {
 
 [node name="Pager" type="Control" parent="MarginContainer"]
 margin_right = 88.0
-margin_bottom = 120.0
+margin_bottom = 122.0
 script = ExtResource( 4 )
 
 [node name="Page1" type="HBoxContainer" parent="MarginContainer/Pager"]
@@ -222,7 +222,7 @@ custom_constants/shadow_offset_y = 1
 text = "next"
 
 [node name="PBar" parent="MarginContainer/Pager/Page1/Bars" instance=ExtResource( 3 )]
-material = SubResource( 2 )
+material = SubResource( 4 )
 margin_top = 16.0
 margin_right = 30.0
 margin_bottom = 17.0

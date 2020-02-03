@@ -9,14 +9,13 @@ var lvl_id = 0 # This is set when selecting the level.
 
 func _ready() -> void:
 	$Music.play()
-	# Check os for controlls.
-	global.create_touchscreen_layout($GUILayer)
 	global.connect("user_pause", self, "_on_global_user_pause")
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
 	global.pause()
 	
 func _on_animation_finished(animation):
 	if animation == "ready":
+		global.create_touchscreen_layout($GUILayer/Container)
 		$GameLayer/TeleportAnimation.pause_mode = PAUSE_MODE_PROCESS
 		# Disable static camera.
 		$GameLayer/StaticCamera.queue_free()
