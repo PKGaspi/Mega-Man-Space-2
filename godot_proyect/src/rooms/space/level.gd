@@ -55,6 +55,12 @@ func _on_global_user_pause(value) -> void:
 	else:
 		var inst = WEAPONS_MENU.instance()
 		$GUILayer.add_child(inst)
+		# Set active entry of the current weapon.
+		var weapon_index = global.MEGASHIP.active_weapon
+# warning-ignore:unused_variable
+		for i in range(floor(weapon_index / 6)):
+			inst.next_page()
+		inst.set_entry((weapon_index % 6) + 1)
 
 func death() -> void:
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("none")

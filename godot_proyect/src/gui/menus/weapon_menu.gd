@@ -37,7 +37,8 @@ func next_page() -> void:
 
 func set_entry(value : int) -> void:
 	$SndMenuSelect.play()
-	entry.modulate.a = 1
+	if entry != null:
+		entry.modulate.a = 1
 # warning-ignore:narrowing_conversion
 	entry_index = clamp(value, 0, n_entries)
 	entry = entries[entry_index]
