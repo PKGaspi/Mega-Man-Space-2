@@ -1,0 +1,72 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://src/rooms/space/star_generator.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/background/stars/star_mask_2.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_6.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/background/stars/star_mask_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/background/stars/star_mask_3.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_2.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_3.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_2.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_5.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_7.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_6.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_4.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_0.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_3.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_4.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_8.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_9.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/background/planets/planet_mask_0.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_0.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/background/planets/planet_palette_1.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/background/stars/star_mask_0.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_1.png" type="Texture" id=22]
+[ext_resource path="res://assets/sprites/background/stars/star_palette_5.png" type="Texture" id=23]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 21 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 19 ), ExtResource( 22 ), ExtResource( 6 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 23 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 18 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 20 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 15 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="StarGenerator" type="ParallaxBackground"]
+pause_mode = 2
+script = ExtResource( 1 )
+star_masks = SubResource( 1 )
+star_palettes = SubResource( 2 )
+planet_masks = SubResource( 3 )
+planet_palettes = SubResource( 4 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+margin_right = 480.0
+margin_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color( 0.117647, 0.0588235, 0.196078, 1 )

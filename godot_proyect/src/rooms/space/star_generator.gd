@@ -67,9 +67,13 @@ func _ready():
 		layer.z_index = Z_INDEX_OFFSET + i
 		add_child(layer)
 		layers.append(layer)
+	
+	# Connect to_follow signal.
+	if to_follow != null:
+		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
 
 func _process(delta):
-	if has_node(to_follow):
+	if to_follow != null and to_follow is Node2D:
 		var sector = pos_to_sector(get_node(to_follow).position)
 		if prev_sector != sector:
 			prev_sector = sector
@@ -83,6 +87,9 @@ func _process(delta):
 					if !stars.has(new_sector):
 						create_stars(new_sector)
 	
+
+func _on_to_follow_tree_exiting():
+	to_follow = null
 
 #########################
 ## Auxiliar functions. ##
