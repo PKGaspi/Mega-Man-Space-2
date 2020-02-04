@@ -56,7 +56,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="StarGenerator" type="ParallaxBackground"]
+[node name="SpaceBackground" type="ParallaxBackground"]
 pause_mode = 2
 script = ExtResource( 1 )
 star_masks = SubResource( 1 )
