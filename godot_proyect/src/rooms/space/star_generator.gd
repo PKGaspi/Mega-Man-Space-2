@@ -21,8 +21,8 @@ onready var N_PLANET_PALETTES = planet_palettes.get_frame_count("default")
 
 const Z_INDEX_OFFSET = 100
 const N_LAYERS = 50
-const MIN_MOTION_SCALE = .4
-const MAX_MOTION_SCALE = 1
+export(float) var MIN_MOTION_SCALE = .4
+export(float) var MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
@@ -70,10 +70,10 @@ func _ready():
 	
 	# Connect to_follow signal.
 	if to_follow != null:
-		to_follow.connect("tree_exiting", self, "_on_to_follow_tree_exiting")
+		get_node(to_follow).connect("tree_exiting", self, "_on_to_follow_tree_exiting")
 
 func _process(delta):
-	if to_follow != null and to_follow is Node2D:
+	if to_follow != null and get_node(to_follow) is Node2D:
 		var sector = pos_to_sector(get_node(to_follow).position)
 		if prev_sector != sector:
 			prev_sector = sector
