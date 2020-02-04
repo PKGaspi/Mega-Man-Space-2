@@ -12,7 +12,12 @@ func _ready() -> void:
 	global.connect("user_pause", self, "_on_global_user_pause")
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
 	global.pause()
-	
+
+func _input(event : InputEvent) -> void:
+	if event.is_action_pressed("exit_game"):
+		global.toggle_user_pause()
+
+
 func _on_animation_finished(animation):
 	if animation == "ready":
 		global.create_touchscreen_layout($GUILayer/Container)
@@ -44,7 +49,6 @@ func _on_game_over_timer_timeout() -> void:
 func _on_global_user_pause(value) -> void:
 	$GUILayer/Container.visible = !value
 	$GameLayer.visible = !value
-	pause_mode = PAUSE_MODE_STOP if value else PAUSE_MODE_PROCESS
 	if !value:
 		global.MEGASHIP.visible = false
 		var inst = MEGASHIP_TELEPORT.instance()

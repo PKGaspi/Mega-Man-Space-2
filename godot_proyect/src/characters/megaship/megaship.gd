@@ -115,7 +115,6 @@ func _enter_tree() -> void:
 
 func _ready():
 	
-	
 	# Init material.
 	$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
 	$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
@@ -125,6 +124,8 @@ func _ready():
 	connect("death", $"/root/Space", "_on_megaship_death")
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
 	connect("palette_change", ammo_bar, "_on_megaship_palette_change")
+	
+	global.connect("user_pause", self, "_on_global_user_pause")
 
 
 func _physics_process(delta):
@@ -158,6 +159,10 @@ func _process(delta):
 		previous_weapon()
 	if Input.is_action_just_pressed("ui_up"):
 		next_weapon()
+
+func _on_global_user_pause(value):
+	if !value:
+		speed = 0
 
 #########################
 ## Auxiliar functions. ##

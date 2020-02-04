@@ -75,7 +75,6 @@ func _input(event: InputEvent) -> void:
 	
 	# Exit game function.
 	if event.is_action_pressed("exit_game"):
-		toggle_user_pause()
 		$GameExitTimer.start(EXITING_TIME)
 	if event.is_action_released("exit_game"):
 		$GameExitTimer.stop()

@@ -27,6 +27,7 @@ pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
+pause_mode = 2
 
 [node name="Container" type="Control" parent="GUILayer"]
 anchor_right = 1.0
