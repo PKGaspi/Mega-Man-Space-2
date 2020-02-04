@@ -1,4 +1,8 @@
 
+### Promotional images ###
+
+/assets/promotional/*.png
+
 # Created by https://www.gitignore.io/api/linux,godot,emacs,windows
 # Edit at https://www.gitignore.io/?templates=linux,godot,emacs,windows
 
