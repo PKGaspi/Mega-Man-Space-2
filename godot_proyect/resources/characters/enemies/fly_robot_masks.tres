@@ -11,15 +11,15 @@
 [resource]
 resource_local_to_scene = true
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "body_iddle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "body_charging",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "body_iddle",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
