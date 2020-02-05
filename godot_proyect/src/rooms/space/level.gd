@@ -14,7 +14,7 @@ func _ready() -> void:
 	global.pause()
 
 func _input(event : InputEvent) -> void:
-	if event.is_action_pressed("exit_game"):
+	if event.is_action_pressed("user_pause"):
 		global.toggle_user_pause()
 
 

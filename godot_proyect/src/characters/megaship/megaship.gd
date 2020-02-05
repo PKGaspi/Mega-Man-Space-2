@@ -153,11 +153,11 @@ func _process(delta):
 	
 	# Emit propulsion particles.
 	propulsion_particles(speed)
-	
-	########## TEST
-	if Input.is_action_just_pressed("ui_down"):
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("weapon_prev"):
 		previous_weapon()
-	if Input.is_action_just_pressed("ui_up"):
+	elif event.is_action_pressed("weapon_next"):
 		next_weapon()
 
 func _on_global_user_pause(value):
@@ -190,32 +190,21 @@ func get_directional_input():
 	var input : Vector2 = Vector2.ZERO
 	
 	match global.input_type:
-		
-		global.INPUT_TYPES.KEY_MOUSE:
-			# Keyboard input.
-			if Input.is_action_pressed("keyboard_move_up"):
-				input += Vector2.UP
-			if Input.is_action_pressed("keyboard_move_down"):
-				input += Vector2.DOWN
-			if Input.is_action_pressed("keyboard_move_left"):
-				input += Vector2.LEFT
-			if Input.is_action_pressed("keyboard_move_right"):
-				input += Vector2.RIGHT
-				
 		global.INPUT_TYPES.GAMEPAD:
 			# Gamepad input.
-			if Input.is_action_pressed("gamepad_move_up"):
+			# Joystick input.
+			input = get_joystick_axis(0, JOYSTICK_LEFT)
+			continue
+		global.INPUT_TYPES.KEY_MOUSE, global.INPUT_TYPES.GAMEPAD:
+			# Keyboard input.
+			if Input.is_action_pressed("move_up"):
 				input += Vector2.UP
-			if Input.is_action_pressed("gamepad_move_down"):
+			if Input.is_action_pressed("move_down"):
 				input += Vector2.DOWN
-			if Input.is_action_pressed("gamepad_move_left"):
+			if Input.is_action_pressed("move_left"):
 				input += Vector2.LEFT
-			if Input.is_action_pressed("gamepad_move_right"):
+			if Input.is_action_pressed("move_right"):
 				input += Vector2.RIGHT
-				
-			if input == Vector2.ZERO:
-				# Joystick input.
-				input = get_joystick_axis(0, JOYSTICK_LEFT)
 				
 		global.INPUT_TYPES.TOUCHSCREEN:
 			# Touchscreen input.

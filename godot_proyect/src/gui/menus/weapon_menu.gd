@@ -18,7 +18,7 @@ func _input(event: InputEvent) -> void:
 			# TODO: E-tank or 1up.
 			pass
 		else:
-			# TODO: set weapon.
+			# Set weapon.
 			global.MEGASHIP.set_weapon($MarginContainer/Pager.page_index * 6 + entry_index - 1, false)
 			global.set_user_pause(false)
 	if event.is_action_pressed("ui_down"):
