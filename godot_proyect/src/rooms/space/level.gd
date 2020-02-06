@@ -3,7 +3,7 @@ extends Node
 const GAME_OVER_WAIT_TIME = 5 # In seconds.
 
 const MEGASHIP_TELEPORT = preload("res://src/characters/megaship/megaship_teleport.tscn")
-const WEAPONS_MENU = preload("res://src/gui/menus/weapon_menu.tscn")
+const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
 var lvl_id = 0 # This is set when selecting the level.
 
