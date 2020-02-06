@@ -1,0 +1,54 @@
+[gd_scene format=2]
+
+[node name="PentaBlueBar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -456.0
+margin_bottom = -254.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar1" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_bottom = 1.0
+color = Color( 0.380392, 0.635294, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar2" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_top = 2.0
+margin_bottom = 3.0
+color = Color( 0.380392, 0.635294, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar3" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_top = 4.0
+margin_bottom = 12.0
+color = Color( 0.380392, 0.635294, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar4" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_top = 13.0
+margin_bottom = 14.0
+color = Color( 0.380392, 0.635294, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar5" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_top = 15.0
+margin_bottom = 16.0
+color = Color( 0.380392, 0.635294, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

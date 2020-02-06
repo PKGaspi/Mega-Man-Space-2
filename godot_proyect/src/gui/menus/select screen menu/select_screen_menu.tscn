@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/gui/menus/select screen menu/triple_white_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/gui/menus/select screen menu/penta_blue_bar.tscn" type="PackedScene" id=3]
+
+[node name="SelectStageMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.254902, 0.254902, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleRow" type="Control" parent="."]
+anchor_right = 1.0
+margin_top = 10.0
+margin_bottom = 18.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLable" type="Label" parent="TitleRow"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -44.5
+margin_top = -4.0
+margin_right = 44.5
+margin_bottom = 4.0
+custom_fonts/font = ExtResource( 1 )
+text = "select stage"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleTripleWhiteBarRight" parent="TitleRow" instance=ExtResource( 2 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -187.0
+margin_top = -2.0
+margin_bottom = 2.0
+
+[node name="TitleTripleWhiteBarLeft" parent="TitleRow" instance=ExtResource( 2 )]
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+margin_top = -2.0
+margin_right = 187.0
+margin_bottom = 4.0
+
+[node name="TopRow" type="Control" parent="."]
+anchor_top = 0.2
+anchor_right = 1.0
+anchor_bottom = 0.2
+margin_top = -8.0
+margin_right = 3.05176e-05
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PentaBlueBar" parent="TopRow" instance=ExtResource( 3 )]
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="MiddleRow" type="Control" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -8.0
+margin_right = 3.05176e-05
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PentaBlueBar" parent="MiddleRow" instance=ExtResource( 3 )]
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="BottomRow" type="Control" parent="."]
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 0.8
+margin_top = -8.0
+margin_right = 3.05176e-05
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PentaBlueBar" parent="BottomRow" instance=ExtResource( 3 )]
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="EndRow" type="Control" parent="."]
+anchor_right = 1.0
+margin_top = 254.0
+margin_right = 3.05176e-05
+margin_bottom = 260.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TripleWhiteBar" parent="EndRow" instance=ExtResource( 2 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
