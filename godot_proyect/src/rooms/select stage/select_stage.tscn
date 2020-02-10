@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/rooms/select stage/penta_blue_bar.tscn" type="PackedScene" id=2]
@@ -6,10 +6,14 @@
 [ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/music/stage_select_intro.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/music/stage_select_loop.ogg" type="AudioStream" id=6]
+[ext_resource path="res://src/gui/menus/select stage menu/select_stage_menu.gd" type="Script" id=7]
+[ext_resource path="res://src/rooms/select stage/select_stage.gd" type="Script" id=8]
+[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=9]
 
 [node name="SelectStage" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -124,6 +128,7 @@ anchor_bottom = 1.0
 [node name="SelectStageMenu" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -137,6 +142,8 @@ margin_left = -21.4
 margin_top = -21.0
 margin_right = 22.6
 margin_bottom = 39.0
+column = -1
+row = -1
 
 [node name="FrameContainer" parent="SelectStageMenu/TopLeftEntry" index="0"]
 margin_left = -0.11998
@@ -164,6 +171,7 @@ margin_left = -22.0
 margin_top = -21.0
 margin_right = 22.0
 margin_bottom = 39.0
+row = -1
 
 [node name="TopLabel" parent="SelectStageMenu/TopCenterEntry" index="1"]
 margin_left = 6.0
@@ -182,6 +190,8 @@ margin_left = -21.4
 margin_top = -21.0
 margin_right = 22.6
 margin_bottom = 39.0
+column = 1
+row = -1
 
 [node name="FrameContainer" parent="SelectStageMenu/TopRightEntry" index="0"]
 margin_left = -0.11998
@@ -208,6 +218,7 @@ margin_left = -22.4
 margin_top = -22.0
 margin_right = 21.6
 margin_bottom = 38.0
+column = -1
 
 [node name="TopLabel" parent="SelectStageMenu/MiddleLeftEntry" index="1"]
 margin_left = -2.0
@@ -242,6 +253,7 @@ margin_left = -22.0
 margin_top = -22.0
 margin_right = 22.0
 margin_bottom = 38.0
+column = 1
 
 [node name="TopLabel" parent="SelectStageMenu/MiddleRightEntry" index="1"]
 margin_left = -1.60001
@@ -260,6 +272,8 @@ margin_left = -22.4
 margin_top = -22.0
 margin_right = 21.6
 margin_bottom = 38.0
+column = -1
+row = 1
 
 [node name="TopLabel" parent="SelectStageMenu/BottomLeftEntry" index="1"]
 margin_left = -1.0
@@ -277,6 +291,7 @@ margin_left = -22.0
 margin_top = -22.0
 margin_right = 22.0
 margin_bottom = 38.0
+row = 1
 
 [node name="TopLabel" parent="SelectStageMenu/BottomCenterEntry" index="1"]
 margin_left = -2.0
@@ -294,6 +309,8 @@ margin_left = -22.0
 margin_top = -22.0
 margin_right = 22.0
 margin_bottom = 38.0
+column = 1
+row = 1
 
 [node name="TopLabel" parent="SelectStageMenu/BottomRightEntry" index="1"]
 margin_left = -2.0
@@ -301,6 +318,9 @@ text = "CRASH"
 
 [node name="BottomLabel" parent="SelectStageMenu/BottomRightEntry" index="2"]
 text = "MAN"
+
+[node name="SndSelectionChange" type="AudioStreamPlayer" parent="SelectStageMenu"]
+stream = ExtResource( 9 )
 
 [node name="MusicIntro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

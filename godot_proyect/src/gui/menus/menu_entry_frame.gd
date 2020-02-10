@@ -13,6 +13,7 @@ func set_texture(value : Texture) -> void:
 
 func set_selected(value : bool) -> void:
 	selected = value
+	$Corners.visible = value
 	if selected:
 		$FlickeringTimer.start()
 	else:
