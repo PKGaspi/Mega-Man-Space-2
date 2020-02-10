@@ -59,9 +59,10 @@ as well as an original story by me, Tear.
 
 ### Links of interest:
 - My webpage: (www.gaspi.games) (by now it redirects to my itch.io profile)
+- Game Twitter profile: (https://twitter.com/MegaManSpace)
 - Itch.io profile: (https://gaspi.itch.io/)
 - Gamejolt profile: (https://gamejolt.com/@Gaspi)
-- Twitter profile: (https://twitter.com/PK_Gaspi) (personal, not only gamedev there)
+- Personal Twitter profile: (https://twitter.com/PK_Gaspi) (personal, not only gamedev there)
 
 ### FAQ
 Q: Is that Mega Man shooting with his arms or is it a ship where Mega Man is in?  
