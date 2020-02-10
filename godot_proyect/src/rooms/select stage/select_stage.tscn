@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://src/rooms/select stage/penta_blue_bar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/rooms/select stage/triple_white_bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/music/stage_select_intro.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/music/stage_select_loop.ogg" type="AudioStream" id=6]
 
 [node name="SelectStage" type="Control"]
 anchor_right = 1.0
@@ -299,6 +301,14 @@ text = "CRASH"
 
 [node name="BottomLabel" parent="SelectStageMenu/BottomRightEntry" index="2"]
 text = "MAN"
+
+[node name="MusicIntro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+autoplay = true
+
+[node name="MusicLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+[connection signal="finished" from="MusicIntro" to="MusicLoop" method="play" flags=6]
 
 [editable path="SelectStageMenu/TopLeftEntry"]
 
