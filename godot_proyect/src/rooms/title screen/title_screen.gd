@@ -1,6 +1,6 @@
 extends Control
 
-const SELECT_SCREEN = preload("res://src/rooms/space/space.tscn")
+const SELECT_SCREEN = preload("res://src/rooms/select stage/select_stage.tscn")
 
 var to_move : Vector2 = Vector2(0, 100)
 func _ready() -> void:

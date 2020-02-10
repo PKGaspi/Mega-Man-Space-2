@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/gui/menus/menu_entry_frame.tscn" type="PackedScene" id=2]
+
+[node name="SelectMenuEntry" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -436.0
+margin_bottom = -210.0
+rect_min_size = Vector2( 15, 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FrameContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="FrameContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = 2.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 1 )
+text = "Temp."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 1 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -8,7 +8,7 @@ func _ready() -> void:
 func _on_FlickeringTimer_timeout() -> void:
 	$Corners.visible = !$Corners.visible
 
-func set_image(value : Texture) -> void:
+func set_texture(value : Texture) -> void:
 	$ImageContainer/TextureRect.texture = value
 
 func set_selected(value : bool) -> void:

@@ -1,0 +1,319 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/rooms/select stage/penta_blue_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/rooms/select stage/triple_white_bar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.tscn" type="PackedScene" id=4]
+
+[node name="SelectStage" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.254902, 0.254902, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleRow" type="Control" parent="."]
+anchor_right = 1.0
+margin_top = 4.0
+margin_bottom = 18.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLable" type="Label" parent="TitleRow"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -44.5
+margin_top = -4.0
+margin_right = 44.5
+margin_bottom = 4.0
+custom_fonts/font = ExtResource( 1 )
+text = "select stage"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleTripleWhiteBarRight" parent="TitleRow" instance=ExtResource( 3 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -187.0
+margin_top = -2.0
+margin_bottom = 2.0
+
+[node name="TitleTripleWhiteBarLeft" parent="TitleRow" instance=ExtResource( 3 )]
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+margin_top = -2.0
+margin_right = 187.0
+margin_bottom = 4.0
+
+[node name="TopRow" type="Control" parent="."]
+anchor_top = 0.2
+anchor_right = 1.0
+anchor_bottom = 0.2
+margin_top = -8.0
+margin_right = 3.05176e-05
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PentaBlueBar" parent="TopRow" instance=ExtResource( 2 )]
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="MiddleRow" type="Control" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -8.0
+margin_right = 3.05176e-05
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PentaBlueBar" parent="MiddleRow" instance=ExtResource( 2 )]
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="BottomRow" type="Control" parent="."]
+anchor_top = 0.8
+anchor_right = 1.0
+anchor_bottom = 0.8
+margin_top = -8.0
+margin_right = 3.05176e-05
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PentaBlueBar" parent="BottomRow" instance=ExtResource( 2 )]
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="EndRow" type="Control" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -12.0
+margin_right = 3.05176e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TripleWhiteBar" parent="EndRow" instance=ExtResource( 3 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="SelectStageMenu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopLeftEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.33
+anchor_top = 0.2
+anchor_right = 0.33
+anchor_bottom = 0.2
+margin_left = -21.4
+margin_top = -21.0
+margin_right = 22.6
+margin_bottom = 39.0
+
+[node name="FrameContainer" parent="SelectStageMenu/TopLeftEntry" index="0"]
+margin_left = -0.11998
+margin_top = 3.8147e-06
+margin_right = -0.11998
+
+[node name="MenuEntryFrame" parent="SelectStageMenu/TopLeftEntry/FrameContainer" index="0"]
+margin_bottom = 43.0
+
+[node name="TopLabel" parent="SelectStageMenu/TopLeftEntry" index="1"]
+margin_left = -2.0
+text = "BUBBLE"
+
+[node name="BottomLabel" parent="SelectStageMenu/TopLeftEntry" index="2"]
+margin_left = -1.52588e-05
+margin_right = -1.52588e-05
+text = "MAN"
+
+[node name="TopCenterEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -22.0
+margin_top = -21.0
+margin_right = 22.0
+margin_bottom = 39.0
+
+[node name="TopLabel" parent="SelectStageMenu/TopCenterEntry" index="1"]
+margin_left = 6.0
+text = "AIR"
+
+[node name="BottomLabel" parent="SelectStageMenu/TopCenterEntry" index="2"]
+margin_right = 0.0
+text = "MAN"
+
+[node name="TopRightEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.67
+anchor_top = 0.2
+anchor_right = 0.67
+anchor_bottom = 0.2
+margin_left = -21.4
+margin_top = -21.0
+margin_right = 22.6
+margin_bottom = 39.0
+
+[node name="FrameContainer" parent="SelectStageMenu/TopRightEntry" index="0"]
+margin_left = -0.11998
+margin_top = 3.8147e-06
+margin_right = -0.11998
+
+[node name="MenuEntryFrame" parent="SelectStageMenu/TopRightEntry/FrameContainer" index="0"]
+margin_bottom = 43.0
+
+[node name="TopLabel" parent="SelectStageMenu/TopRightEntry" index="1"]
+margin_left = -2.0
+text = "Quick"
+
+[node name="BottomLabel" parent="SelectStageMenu/TopRightEntry" index="2"]
+margin_bottom = 3.8147e-06
+text = "MAN"
+
+[node name="MiddleLeftEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.33
+anchor_top = 0.5
+anchor_right = 0.33
+anchor_bottom = 0.5
+margin_left = -22.4
+margin_top = -22.0
+margin_right = 21.6
+margin_bottom = 38.0
+
+[node name="TopLabel" parent="SelectStageMenu/MiddleLeftEntry" index="1"]
+margin_left = -2.0
+text = "HEAT"
+
+[node name="BottomLabel" parent="SelectStageMenu/MiddleLeftEntry" index="2"]
+text = "MAN"
+
+[node name="MiddleCenterEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.0
+margin_top = -22.0
+margin_right = 22.0
+margin_bottom = 38.0
+
+[node name="TopLabel" parent="SelectStageMenu/MiddleCenterEntry" index="1"]
+margin_left = 6.0
+text = "D*"
+
+[node name="BottomLabel" parent="SelectStageMenu/MiddleCenterEntry" index="2"]
+text = "wily"
+
+[node name="MiddleRightEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.67
+anchor_top = 0.5
+anchor_right = 0.67
+anchor_bottom = 0.5
+margin_left = -22.0
+margin_top = -22.0
+margin_right = 22.0
+margin_bottom = 38.0
+
+[node name="TopLabel" parent="SelectStageMenu/MiddleRightEntry" index="1"]
+margin_left = -1.60001
+margin_right = -5.60001
+text = "WOOD"
+
+[node name="BottomLabel" parent="SelectStageMenu/MiddleRightEntry" index="2"]
+text = "MAN"
+
+[node name="BottomLeftEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.33
+anchor_top = 0.8
+anchor_right = 0.33
+anchor_bottom = 0.8
+margin_left = -22.4
+margin_top = -22.0
+margin_right = 21.6
+margin_bottom = 38.0
+
+[node name="TopLabel" parent="SelectStageMenu/BottomLeftEntry" index="1"]
+margin_left = -1.0
+text = "METAL"
+
+[node name="BottomLabel" parent="SelectStageMenu/BottomLeftEntry" index="2"]
+text = "MAN"
+
+[node name="BottomCenterEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+margin_left = -22.0
+margin_top = -22.0
+margin_right = 22.0
+margin_bottom = 38.0
+
+[node name="TopLabel" parent="SelectStageMenu/BottomCenterEntry" index="1"]
+margin_left = -2.0
+text = "FLASH"
+
+[node name="BottomLabel" parent="SelectStageMenu/BottomCenterEntry" index="2"]
+text = "MAN"
+
+[node name="BottomRightEntry" parent="SelectStageMenu" instance=ExtResource( 4 )]
+anchor_left = 0.67
+anchor_top = 0.8
+anchor_right = 0.67
+anchor_bottom = 0.8
+margin_left = -22.0
+margin_top = -22.0
+margin_right = 22.0
+margin_bottom = 38.0
+
+[node name="TopLabel" parent="SelectStageMenu/BottomRightEntry" index="1"]
+margin_left = -2.0
+text = "CRASH"
+
+[node name="BottomLabel" parent="SelectStageMenu/BottomRightEntry" index="2"]
+text = "MAN"
+
+[editable path="SelectStageMenu/TopLeftEntry"]
+
+[editable path="SelectStageMenu/TopCenterEntry"]
+
+[editable path="SelectStageMenu/TopRightEntry"]
+
+[editable path="SelectStageMenu/MiddleLeftEntry"]
+
+[editable path="SelectStageMenu/MiddleCenterEntry"]
+
+[editable path="SelectStageMenu/MiddleRightEntry"]
+
+[editable path="SelectStageMenu/BottomLeftEntry"]
+
+[editable path="SelectStageMenu/BottomCenterEntry"]
+
+[editable path="SelectStageMenu/BottomRightEntry"]

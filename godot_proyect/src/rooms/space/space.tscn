@@ -75,20 +75,6 @@ destination = Vector2( 240, 135 )
 
 [node name="Megaship" parent="GameLayer" instance=ExtResource( 7 )]
 position = Vector2( 240, 135 )
-_hp_bar_show = true
-_hp_bar_palette = 0
-ammo_max = 28.0
-_ammo_bar_show = false
-_ammo_bar_palette = 0
-snd_hit = NodePath("SndHit")
-snd_shoot = NodePath("SndShoot")
-life_time = 10.0
-life_flicker_time = 8.0
-flicker_on_hit = true
-flicker_before_timeout = false
-dissapear_on_timeout = false
-bullet_max = 3
-n_cannons = 1
 DAMAGE_MULTIPLIERS = {
 
 }
