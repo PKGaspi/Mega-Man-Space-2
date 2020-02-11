@@ -1,5 +1,7 @@
 extends Control
 
+const PALETTES : SpriteFrames = preload("res://resources/gui/menu_palettes.tres")
+
 var entries = []
 var entry : Node
 var entry_index : int = 1
@@ -30,6 +32,10 @@ func _on_global_user_pause(value : bool) -> void:
 	if !value:
 		queue_free()
 
+func _on_FlickeringTimer_timeout() -> void:
+	entry.modulate.a = 0 if entry.modulate.a == 1 else 1
+	pass # Replace with function body.
+
 func next_page() -> void:
 	entry.modulate.a = 1
 	$MarginContainer/Pager.next_page()
@@ -57,7 +63,6 @@ func update_entries() -> void:
 		n_entries += 1
 	entry = entries[entry_index]
 
-
-func _on_FlickeringTimer_timeout() -> void:
-	entry.modulate.a = 0 if entry.modulate.a == 1 else 1
-	pass # Replace with function body.
+func set_palette(value : int) -> void:
+	if value < PALETTES.get_frame_count("default"):
+		$Background.material.set_shader_param("palette", PALETTES.get_frame("default", value))

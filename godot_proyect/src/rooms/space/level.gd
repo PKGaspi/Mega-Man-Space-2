@@ -28,7 +28,6 @@ func _on_animation_finished(animation):
 
 func _on_teleport_animation_tree_exiting() -> void:
 	global.unpause()
-	#$GameLayer/Megaship.visible = true
 	$GameLayer/EnemyGenerator.new_random_horde()
 
 func _on_megaship_death() -> void:
@@ -58,6 +57,7 @@ func _on_global_user_pause(value) -> void:
 		$GameLayer.add_child(inst)
 	else:
 		var inst = WEAPONS_MENU.instance()
+		inst.set_palette(lvl_id)
 		$GUILayer.add_child(inst)
 		# Set active entry of the current weapon.
 		var weapon_index = global.MEGASHIP.active_weapon
