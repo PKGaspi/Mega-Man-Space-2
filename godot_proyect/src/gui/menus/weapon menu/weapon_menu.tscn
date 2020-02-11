@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_palette_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=2]
 [ext_resource path="res://src/gui/progress_bar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/gui/menus/weapon menu/weapon_menu.gd" type="Script" id=5]
 [ext_resource path="res://src/gui/menus/pager.gd" type="Script" id=6]
@@ -36,7 +35,7 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource( 1 )
 shader_param/palette_size = 8.0
-shader_param/palette = ExtResource( 3 )
+shader_param/palette = ExtResource( 2 )
 shader_param/mask = ExtResource( 7 )
 
 [sub_resource type="Shader" id=3]
@@ -84,7 +83,7 @@ __meta__ = {
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 2 )
+texture = ExtResource( 7 )
 patch_margin_left = 8
 patch_margin_top = 8
 patch_margin_right = 8

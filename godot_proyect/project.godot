@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "Joystick",
 "language": "GDScript",
-"path": "res://joystick/Joystick.gd"
+"path": "res://src/gui/joystick/Joystick.gd"
 } ]
 _global_script_class_icons={
 "Joystick": ""

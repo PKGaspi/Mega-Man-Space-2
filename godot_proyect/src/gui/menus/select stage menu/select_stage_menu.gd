@@ -8,7 +8,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Control:
 			entries[Vector2(child.column, child.row)] = child
-			child.connect("action_executed", parent, "_on_entry_action_executed")
+			child.connect("actioned", parent, "_on_entry_actioned")
 	entries[selected].set_selected(true)
 
 func _input(event: InputEvent) -> void:

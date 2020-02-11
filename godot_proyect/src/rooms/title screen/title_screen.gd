@@ -1,6 +1,6 @@
 extends Control
 
-const SELECT_SCREEN = preload("res://src/rooms/select stage/select_stage.tscn")
+const SELECT_SCREEN = "res://src/rooms/select stage/select_stage.tscn"
 
 var to_move : Vector2 = Vector2(0, 100)
 func _ready() -> void:
@@ -25,5 +25,4 @@ func animate_camera() -> void:
 	tween.start()
 	
 func game_start():
-	get_tree().root.add_child(SELECT_SCREEN.instance())
-	queue_free()
+	get_tree().change_scene(SELECT_SCREEN)

@@ -5,11 +5,9 @@ export(int) var row : int = 0
 
 export(Texture) var texture : Texture = null
 
-export(GDScript) var _action_on_press : GDScript = preload("res://src/gui/menus/menuaction_load_level.gd")
+var selected : bool = false
 
-var selected : bool
-
-signal action_executed
+signal actioned
 
 func _ready() -> void:
 	set_texture(texture)
@@ -25,8 +23,5 @@ func toggle_selected() -> void:
 	set_selected(!selected)
 
 func action() -> void:
-	if _action_on_press != null:
-		var script = _action_on_press.new()
-		script.action(column, row)
-		emit_signal("action_executed", column, row)
-		
+	emit_signal("actioned", column, row)
+	

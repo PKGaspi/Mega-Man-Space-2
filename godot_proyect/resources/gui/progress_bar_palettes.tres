@@ -1,15 +1,26 @@
 [gd_resource type="SpriteFrames" load_steps=11 format=2]
 
-[ext_resource path="res://assets/sprites/palettes/palette_13.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/palettes/palette_1.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/palettes/palette_2.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/palettes/palette_3.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/palettes/palette_4.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/palettes/palette_5.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/palettes/palette_6.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/palettes/palette_7.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/palettes/palette_8.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/palettes/palette_9.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_13.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_3.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_4.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_5.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_6.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_7.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_8.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_9.png" type="Texture" id=10]
+
+
+
+
+
+
+
+
+
+
+
 
 [resource]
 animations = [ {
