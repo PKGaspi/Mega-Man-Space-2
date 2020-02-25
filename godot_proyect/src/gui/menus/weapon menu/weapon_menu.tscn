@@ -359,8 +359,9 @@ text = "next"
 
 [node name="FlickeringTimer" type="Timer" parent="."]
 wait_time = 0.133
-autostart = true
 
 [node name="SndMenuSelect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="timeout" from="FlickeringTimer" to="." method="_on_FlickeringTimer_timeout"]

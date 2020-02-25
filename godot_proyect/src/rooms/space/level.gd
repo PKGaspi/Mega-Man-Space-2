@@ -48,17 +48,18 @@ func _on_game_over_timer_timeout() -> void:
 func _on_global_user_pause(value) -> void:
 	$GUILayer/Container.visible = !value
 	$GameLayer.visible = !value
-	if !value:
+	if !value: # Game is unpaused.
 		global.MEGASHIP.visible = false
 		var inst = MEGASHIP_TELEPORT.instance()
 		var ship_pos = global.MEGASHIP.global_position
 		inst.global_position = ship_pos
 		inst.destination = ship_pos
 		$GameLayer.add_child(inst)
-	else:
+	else: # Game is paused.
 		var inst = WEAPONS_MENU.instance()
 		inst.set_palette(lvl_id)
 		$GUILayer.add_child(inst)
+		yield(inst, "ready")
 		# Set active entry of the current weapon.
 		var weapon_index = global.MEGASHIP.active_weapon
 # warning-ignore:unused_variable

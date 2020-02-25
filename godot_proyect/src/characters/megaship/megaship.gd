@@ -70,10 +70,10 @@ var ammo_per_shot = {
 # Unlocked WEAPONS.
 var unlocked_weapons = {
 	WEAPONS.MEGA : true,
-	WEAPONS.BUBBLE : true,
-	WEAPONS.AIR : true,
-	WEAPONS.QUICK : true,
-	WEAPONS.HEAT : true,
+	WEAPONS.BUBBLE : false,
+	WEAPONS.AIR : false,
+	WEAPONS.QUICK : false,
+	WEAPONS.HEAT : false,
 	WEAPONS.WOOD : true,
 	WEAPONS.METAL : true,
 	WEAPONS.FLASH : true,

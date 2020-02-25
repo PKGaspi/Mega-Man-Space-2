@@ -10,6 +10,7 @@ func _ready() -> void:
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_start"):
+		accept_event()
 		game_start()
 
 func _on_Tween_tween_completed(object: Object, key: NodePath) -> void:
