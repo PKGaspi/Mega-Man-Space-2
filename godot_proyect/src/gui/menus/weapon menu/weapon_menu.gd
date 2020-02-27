@@ -4,12 +4,15 @@ const PALETTES : SpriteFrames = preload("res://resources/gui/menu_palettes.tres"
 
 const OPENNING_TIME = .3
 
+var unlocked_entries : Dictionary
 var entries = []
 var entry : Node
 var entry_index : int = 1
 var n_entries : int = 0
 
 var prev_mouse
+
+signal opened
 
 func _ready() -> void:
 	prev_mouse = Input.get_mouse_mode()
@@ -27,12 +30,12 @@ func _ready() -> void:
 	update_entries()
 	global.connect("user_pause", self, "_on_global_user_pause")
 	$FlickeringTimer.start()
+	emit_signal("opened")
 
 func _exit_tree() -> void:
 	Input.set_mouse_mode(prev_mouse)
 
 func _input(event: InputEvent) -> void:
-	print(rect_size)
 	if event.is_action_pressed("ui_accept"):
 		accept_event()
 		if entry_index == 0:
@@ -86,9 +89,19 @@ func previous_entry() -> void:
 func update_entries() -> void:
 	entries = []
 	n_entries = 0
+	var page = $MarginContainer/Pager.page_index
+	var i = 0 # Entry index getting checked.
 	for entry in $MarginContainer/Pager.current_page.get_node("Letters").get_children():
-		entries.append(entry)
-		n_entries += 1
+		var key = Vector2(page, i)
+		if !unlocked_entries.has(Vector2(key)) or unlocked_entries[key]:
+			# No info about current entry or entry is unlocked.
+			entries.append(entry)
+			n_entries += 1
+		else:
+			# Not unlocked.
+			entry.modulate.a = 0
+		i += 1
+	print(entries)
 	entry = entries[entry_index]
 
 func set_palette(value : int) -> void:

@@ -32,6 +32,9 @@ enum WEAPONS {
 	FLASH,
 	METAL,
 	CRASH,
+	ONE,
+	TWO,
+	THREE,
 	SIZE,
 }
 

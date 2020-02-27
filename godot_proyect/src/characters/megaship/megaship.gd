@@ -78,6 +78,9 @@ var unlocked_weapons = {
 	WEAPONS.METAL : true,
 	WEAPONS.FLASH : true,
 	WEAPONS.CRASH : true,
+	WEAPONS.ONE : false,
+	WEAPONS.TWO : false,
+	WEAPONS.THREE : false,
 }
 
 ##############

@@ -56,16 +56,26 @@ func _on_global_user_pause(value) -> void:
 		inst.destination = ship_pos
 		$GameLayer.add_child(inst)
 	else: # Game is paused.
-		var inst = WEAPONS_MENU.instance()
-		inst.set_palette(lvl_id)
-		$GUILayer.add_child(inst)
-		yield(inst, "ready")
-		# Set active entry of the current weapon.
-		var weapon_index = global.MEGASHIP.active_weapon
+		create_weapons_menu()
+
+func create_weapons_menu() -> void:
+	var inst = WEAPONS_MENU.instance()
+	inst.set_palette(lvl_id)
+	var weapon_index = global.MEGASHIP.active_weapon
+	var unlocked_weapons = global.MEGASHIP.unlocked_weapons
+	var unlocked_entries = {}
+	for i in range(12):
+		# Create dictionary with the unlocked entries. Key is a vector2 with
+		# page-entry and value is a boolean true if unlocked.
+		unlocked_entries[Vector2(floor(i / 6), 1 + i % 6)] = unlocked_weapons[i]
+	inst.unlocked_entries = unlocked_entries
+	$GUILayer.add_child(inst)
+	yield(inst, "opened")
 # warning-ignore:unused_variable
-		for i in range(floor(weapon_index / 6)):
-			inst.next_page()
-		inst.set_entry((weapon_index % 6) + 1)
+	# Set active entry of the current weapon.
+	for i in range(floor(weapon_index / 6)):
+		inst.next_page()
+	inst.set_entry((weapon_index % 6) + 1)
 
 func death() -> void:
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("none")
