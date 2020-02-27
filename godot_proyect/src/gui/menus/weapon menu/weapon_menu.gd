@@ -36,6 +36,12 @@ func _exit_tree() -> void:
 	Input.set_mouse_mode(prev_mouse)
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_down"):
+		accept_event()
+		next_entry()
+	if event.is_action_pressed("ui_up"):
+		accept_event()
+		previous_entry()
 	if event.is_action_pressed("ui_accept"):
 		accept_event()
 		match entry_index:
@@ -53,12 +59,6 @@ func _input(event: InputEvent) -> void:
 				if global.MEGASHIP != null and global.MEGASHIP.has_method("set_weapon"):
 					global.MEGASHIP.set_weapon($MarginContainer/Pager.page_index * 6 + entry_index - 1, false)
 					global.set_user_pause(false)
-	if event.is_action_pressed("ui_down"):
-		accept_event()
-		next_entry()
-	if event.is_action_pressed("ui_up"):
-		accept_event()
-		previous_entry()
 
 func _on_global_user_pause(value : bool) -> void:
 	if !value:
@@ -102,13 +102,20 @@ func update_entries() -> void:
 	var page = $MarginContainer/Pager.page_index
 	for entry in $MarginContainer/Pager.current_page.get_node("Letters").get_children():
 		var key = Vector2(page, n_entries)
+		var node = get_node("MarginContainer/Pager/Page" + str(page) + "/Info/" + entry.name)
 		if !unlocked_entries.has(Vector2(key)) or unlocked_entries[key]:
 			# No info about current entry or entry is unlocked.
 			entries.append(entry)
+			if node != null and node.get("value") != null:
+				var weapon_index = page * 6 + n_entries - 1
+				node.palette = clamp(weapon_index, 0, global.WEAPONS.ONE)
+				node.value = global.MEGASHIP.get_ammo(weapon_index) if weapon_index > 0 else global.MEGASHIP.hp
 		else:
-			# Not unlocked.
+			# Not unlocked. Hide this entry.
 			entries.append(null)
 			entry.modulate.a = 0
+			if node != null:
+				node.modulate.a = 0
 		n_entries += 1
 	entry = entries[entry_index]
 

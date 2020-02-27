@@ -3,6 +3,7 @@ extends Control
 export(float) var max_value: float = 28 setget set_max_value
 export(float) var value: float = max_value setget set_value
 export(Vector2) var cell_size: Vector2 = Vector2(7, 2)
+export(bool) var horizontal: bool = false
 
 export(int) var palette: int = 0 setget set_palette # Current palette index.
 
@@ -13,8 +14,12 @@ func _ready() -> void:
 	update_values()
 
 func update_values():
-	rect_size = Vector2(cell_size.x, cell_size.y * max_value)
-	$Cells.rect_size = Vector2(cell_size.x, cell_size.y * value)
+	if horizontal:
+		rect_size = Vector2(cell_size.x * max_value, cell_size.y)
+		$Cells.rect_size = Vector2(cell_size.x * value, cell_size.y)
+	else:
+		rect_size = Vector2(cell_size.x, cell_size.y * max_value)
+		$Cells.rect_size = Vector2(cell_size.x, cell_size.y * value)
 
 func set_max_value(new_max_value: float) -> void:
 	max_value = new_max_value

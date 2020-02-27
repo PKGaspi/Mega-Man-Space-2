@@ -65,22 +65,25 @@ var ammo_per_shot = {
 	WEAPONS.METAL : -1,
 	WEAPONS.FLASH : -1,
 	WEAPONS.CRASH : -1,
+	WEAPONS.ONE : -1,
+	WEAPONS.TWO : -1,
+	WEAPONS.THREE : -1,
 }
 
 # Unlocked WEAPONS.
 var unlocked_weapons = {
 	WEAPONS.MEGA : true,
-	WEAPONS.BUBBLE : false,
-	WEAPONS.AIR : false,
-	WEAPONS.QUICK : false,
-	WEAPONS.HEAT : false,
+	WEAPONS.BUBBLE : true,
+	WEAPONS.AIR : true,
+	WEAPONS.QUICK : true,
+	WEAPONS.HEAT : true,
 	WEAPONS.WOOD : true,
 	WEAPONS.METAL : true,
 	WEAPONS.FLASH : true,
 	WEAPONS.CRASH : true,
-	WEAPONS.ONE : false,
-	WEAPONS.TWO : false,
-	WEAPONS.THREE : false,
+	WEAPONS.ONE : true,
+	WEAPONS.TWO : true,
+	WEAPONS.THREE : true,
 }
 
 ##############
@@ -97,6 +100,9 @@ var weapons_ammo = { # Current ammo for each weapon.
 	WEAPONS.METAL : ammo_max,
 	WEAPONS.FLASH : ammo_max,
 	WEAPONS.CRASH : ammo_max,
+	WEAPONS.ONE : ammo_max,
+	WEAPONS.TWO : ammo_max,
+	WEAPONS.THREE : ammo_max,
 }
 
 ########################
@@ -126,7 +132,7 @@ func _ready():
 	# Connect signals.
 	connect("death", $"/root/Space", "_on_megaship_death")
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
-	connect("palette_change", ammo_bar, "_on_megaship_palette_change")
+	connect("palette_change", ammo_bar, "set_palette")
 	
 	global.connect("user_pause", self, "_on_global_user_pause")
 
@@ -176,7 +182,7 @@ func set_ammo(value, pause = false, weapon = active_weapon):
 	weapons_ammo[weapon] = ammo
 
 func get_ammo(weapon = active_weapon) -> float:
-	return weapons_ammo[weapon]
+	return weapons_ammo[clamp(weapon, 1, WEAPONS.SIZE)]
 
 func set_visibility(value):
 	$SprShip.visible = value
@@ -348,7 +354,7 @@ func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 		if play_sound:
 			$SndWeaponSwap.play()
 		# Set palette.
-		set_palette(weapon_index)
+		set_palette(clamp(weapon_index, 0, WEAPONS.ONE))
 		# Set ammo_bar visibility.
 		ammo_bar.visible = weapon_index != 0
 		# Save ammo value.
