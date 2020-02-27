@@ -11,17 +11,6 @@
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_8.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_9.png" type="Texture" id=10]
 
-
-
-
-
-
-
-
-
-
-
-
 [resource]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],

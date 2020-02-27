@@ -75,7 +75,7 @@ func create_weapons_menu() -> void:
 	# Set active entry of the current weapon.
 	for i in range(floor(weapon_index / 6)):
 		inst.next_page()
-	inst.set_entry((weapon_index % 6) + 1)
+	inst.set_entry((weapon_index % 6) + 1, false)
 
 func death() -> void:
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("none")

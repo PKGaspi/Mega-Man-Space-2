@@ -72,11 +72,11 @@ func next_page() -> void:
 	$MarginContainer/Pager.next_page()
 	update_entries()
 
-func set_entry(value : int) -> void:
+func set_entry(value : int, play_sound: bool = true) -> void:
 # warning-ignore:narrowing_conversion
 	value = clamp(value, 0, n_entries)
 	if value < entries.size():
-		$SndMenuSelect.play()
+		if play_sound: $SndMenuSelect.play()
 		if entry != null:
 			entry.modulate.a = 1
 		entry_index = value
@@ -84,27 +84,32 @@ func set_entry(value : int) -> void:
 
 func next_entry() -> void:
 	if n_entries != 0:
-		set_entry((entry_index + 1) % n_entries)
+		var new_entry = (entry_index + 1) % n_entries
+		while entries[new_entry] == null:
+			new_entry = (new_entry + 1) % n_entries
+		set_entry(new_entry)
 	
 func previous_entry() -> void:
 	if n_entries != 0:
-		set_entry((entry_index - 1) % n_entries if entry_index > 0 else n_entries - 1)
+		var new_entry = (entry_index - 1) % n_entries if entry_index > 0 else n_entries - 1
+		while entries[new_entry] == null:
+			new_entry = (new_entry - 1) % n_entries if new_entry > 0 else n_entries - 1
+		set_entry(new_entry)
 
 func update_entries() -> void:
 	entries = []
 	n_entries = 0
 	var page = $MarginContainer/Pager.page_index
-	var i = 0 # Entry index getting checked.
 	for entry in $MarginContainer/Pager.current_page.get_node("Letters").get_children():
-		var key = Vector2(page, i)
+		var key = Vector2(page, n_entries)
 		if !unlocked_entries.has(Vector2(key)) or unlocked_entries[key]:
 			# No info about current entry or entry is unlocked.
 			entries.append(entry)
-			n_entries += 1
 		else:
 			# Not unlocked.
+			entries.append(null)
 			entry.modulate.a = 0
-		i += 1
+		n_entries += 1
 	entry = entries[entry_index]
 
 func set_palette(value : int) -> void:
