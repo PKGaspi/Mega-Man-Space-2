@@ -321,8 +321,8 @@ func upgrade(type : String, ammount : float) -> void:
 			ammo_max = clamp(value + ammount, value_min, value_max)
 			set_hp_relative(0)
 			set_ammo_relative(0)
-			hp_bar.update_values(hp, hp_max)
-			ammo_bar.update_values(get_ammo(), ammo_max)
+			hp_bar.value = hp
+			ammo_bar.value = get_ammo()
 			
 func set_palette(palette_index : int) -> void:
 	# Set color palette.

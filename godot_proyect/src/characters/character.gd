@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 # Bars.
-const PROGRESS_BAR = preload("res://src/gui/progress_bar.tscn")
+const TILED_PROGRESS = preload("res://src/gui/tiled_progress.tscn")
 onready var BAR_CONTAINER = $"/root/Space/GUILayer/Container/BarContainer"
 # HP.
 export(float, 0, 100, 1) var hp_max = 10 # Max hp.
@@ -108,10 +108,12 @@ func _on_life_flickering_timer_timeout():
 #########################
 
 func create_progress_bar(cell_size : Vector2, pos : Vector2, max_value : float, show : bool = true, on_gui : bool = false, palette : int = 0, name : String = ""):
-	var bar = PROGRESS_BAR.instance()
-	bar.init(cell_size, pos, max_value)
+	var bar = TILED_PROGRESS.instance()
+	bar.cell_size = cell_size
+	bar.rect_position = pos
+	bar.max_value = max_value
 	bar.visible = show
-	bar.set_palette(palette)
+	bar.palette = palette
 	
 	if on_gui:
 		if name != "":
@@ -135,10 +137,7 @@ func toggle_visibility():
 
 func set_hp(value, pause = false):
 	hp = clamp(value, 0, hp_max)
-	if pause:
-		hp_bar.update_values(hp, hp_max)
-	else:
-		hp_bar.update_values(hp, hp_max, 0)
+	hp_bar.set_value(hp, pause)
 	
 func set_hp_relative(relative_value, pause = false):
 	set_hp(hp + relative_value, pause)
@@ -148,10 +147,7 @@ func get_ammo():
 
 func set_ammo(value, pause = false):
 	ammo = clamp(value, 0, ammo_max)
-	if pause:
-		ammo_bar.update_values(ammo, ammo_max)
-	else:
-		ammo_bar.update_values(ammo, ammo_max, 0)
+	ammo_bar.set_value(value, pause)
 
 func set_ammo_relative(relative_value, pause = false):
 	set_ammo(ammo + relative_value, pause)
