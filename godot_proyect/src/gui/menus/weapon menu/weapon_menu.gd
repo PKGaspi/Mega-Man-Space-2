@@ -38,17 +38,21 @@ func _exit_tree() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		accept_event()
-		if entry_index == 0:
-			# Next page.
-			next_page()
-		elif entry_index == 7:
-			# TODO: E-tank or 1up.
-			pass
-		else:
-			# Set weapon.
-			if global.MEGASHIP != null and global.MEGASHIP.has_method("set_weapon"):
-				global.MEGASHIP.set_weapon($MarginContainer/Pager.page_index * 6 + entry_index - 1, false)
-				global.set_user_pause(false)
+		match entry_index:
+			0:
+				# Next page.
+				next_page()
+			7:
+				# TODO: E-tank or 1up.
+				pass
+			8:
+				# TODO: Open settings menu.
+				pass
+			_:
+				# Set weapon.
+				if global.MEGASHIP != null and global.MEGASHIP.has_method("set_weapon"):
+					global.MEGASHIP.set_weapon($MarginContainer/Pager.page_index * 6 + entry_index - 1, false)
+					global.set_user_pause(false)
 	if event.is_action_pressed("ui_down"):
 		accept_event()
 		next_entry()
@@ -101,7 +105,6 @@ func update_entries() -> void:
 			# Not unlocked.
 			entry.modulate.a = 0
 		i += 1
-	print(entries)
 	entry = entries[entry_index]
 
 func set_palette(value : int) -> void:

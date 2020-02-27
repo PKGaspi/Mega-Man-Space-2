@@ -162,16 +162,13 @@ stream = SubResource( 9 )
 [node name="SndHit" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource( 11 )
 
-[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="8"]
-stream = ExtResource( 12 )
-
-[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="9"]
+[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 13 )
 
-[node name="Snd1Up" type="AudioStreamPlayer" parent="." index="10"]
+[node name="Snd1Up" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 14 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="15"]
+[node name="Camera2D" type="Camera2D" parent="." index="14"]
 process_mode = 0
 smoothing_enabled = true
 smoothing_speed = 8.0
@@ -181,3 +178,6 @@ drag_margin_right = 0.1
 drag_margin_bottom = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="15"]
+stream = ExtResource( 12 )

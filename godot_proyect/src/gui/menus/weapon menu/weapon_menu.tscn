@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=2]
-[ext_resource path="res://src/gui/progress_bar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/gui/menus/weapon menu/weapon_menu.gd" type="Script" id=5]
 [ext_resource path="res://src/gui/menus/pager.gd" type="Script" id=6]
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=7]
@@ -38,34 +37,6 @@ shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 2 )
 shader_param/mask = ExtResource( 7 )
 
-[sub_resource type="Shader" id=3]
-code = "shader_type canvas_item;
-
-//The palette used
-uniform sampler2D palette;
-//how many horizontal pixels has the palette
-uniform float palette_size;
-//Mask for wich color use from palette
-uniform sampler2D mask;
-
-void fragment() {
-	vec4 mask_color = texture(mask,UV);
-	vec4 output = texture(TEXTURE,UV);
-	if(mask_color.r != 1.0)
-	{
-		highp float color_r = mask_color.r;
-		//If an inconsistency appears between Intel and Amd/Nvidia, feel free to fix it and commit, but take this as a warning for production use
-		output = texture(palette,vec2((color_r*255.0+0.5)/255.0,0.0));
-	}
-	COLOR.rgba = output;
-}
-"
-
-[sub_resource type="ShaderMaterial" id=4]
-resource_local_to_scene = true
-shader = SubResource( 3 )
-shader_param/palette_size = 8.0
-
 [node name="WeaponMenu" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
@@ -73,7 +44,7 @@ anchor_bottom = 1.0
 margin_left = 330.0
 margin_top = 23.0
 margin_right = -38.0
-margin_bottom = -85.0
+margin_bottom = -77.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -107,10 +78,11 @@ __meta__ = {
 
 [node name="Pager" type="Control" parent="MarginContainer"]
 margin_right = 88.0
-margin_bottom = 122.0
+margin_bottom = 130.0
 script = ExtResource( 6 )
 
 [node name="Page1" type="HBoxContainer" parent="MarginContainer/Pager"]
+visible = false
 margin_right = 88.0
 margin_bottom = 120.0
 __meta__ = {
@@ -119,7 +91,7 @@ __meta__ = {
 
 [node name="Letters" type="VBoxContainer" parent="MarginContainer/Pager/Page1"]
 margin_right = 9.0
-margin_bottom = 120.0
+margin_bottom = 264.0
 
 [node name=">" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
 margin_right = 9.0
@@ -214,13 +186,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="\?" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+margin_top = 128.0
+margin_right = 9.0
+margin_bottom = 136.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Bars" type="VBoxContainer" parent="MarginContainer/Pager/Page1"]
 margin_left = 17.0
-margin_right = 47.0
-margin_bottom = 120.0
+margin_right = 76.0
+margin_bottom = 264.0
 
 [node name="Next" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
-margin_right = 30.0
+margin_right = 59.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
@@ -229,16 +215,88 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "next"
 
-[node name="PBar" parent="MarginContainer/Pager/Page1/Bars" instance=ExtResource( 4 )]
-material = SubResource( 4 )
+[node name="P" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
 margin_top = 16.0
-margin_right = 30.0
-margin_bottom = 17.0
-max_value = 28.0
-value = 28.0
+margin_right = 59.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="H" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
+margin_top = 32.0
+margin_right = 59.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="A" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
+margin_top = 48.0
+margin_right = 59.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="W" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
+margin_top = 64.0
+margin_right = 59.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="B" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
+margin_top = 80.0
+margin_right = 59.0
+margin_bottom = 88.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="Q" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
+margin_top = 96.0
+margin_right = 59.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="E" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
+margin_top = 112.0
+margin_right = 59.0
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="Settings" type="Label" parent="MarginContainer/Pager/Page1/Bars"]
+margin_top = 128.0
+margin_right = 59.0
+margin_bottom = 136.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "SETTINGS"
 
 [node name="Page2" type="HBoxContainer" parent="MarginContainer/Pager"]
-visible = false
 margin_right = 88.0
 margin_bottom = 120.0
 __meta__ = {
@@ -247,7 +305,7 @@ __meta__ = {
 
 [node name="Letters" type="VBoxContainer" parent="MarginContainer/Pager/Page2"]
 margin_right = 9.0
-margin_bottom = 120.0
+margin_bottom = 136.0
 
 [node name=">" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
 margin_right = 9.0
@@ -342,13 +400,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="\?" type="Label" parent="MarginContainer/Pager/Page2/Letters"]
+margin_top = 128.0
+margin_right = 9.0
+margin_bottom = 136.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Bars" type="VBoxContainer" parent="MarginContainer/Pager/Page2"]
 margin_left = 17.0
-margin_right = 47.0
-margin_bottom = 120.0
+margin_right = 76.0
+margin_bottom = 136.0
 
 [node name="Next" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
-margin_right = 30.0
+margin_right = 59.0
 margin_bottom = 8.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
@@ -356,6 +428,87 @@ custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "next"
+
+[node name="F" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+margin_top = 16.0
+margin_right = 59.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="M" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+margin_top = 32.0
+margin_right = 59.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="C" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+margin_top = 48.0
+margin_right = 59.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="1" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+margin_top = 64.0
+margin_right = 59.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="2" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+margin_top = 80.0
+margin_right = 59.0
+margin_bottom = 88.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="3" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+margin_top = 96.0
+margin_right = 59.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="U" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+margin_top = 112.0
+margin_right = 59.0
+margin_bottom = 120.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="Settings" type="Label" parent="MarginContainer/Pager/Page2/Bars"]
+margin_top = 128.0
+margin_right = 59.0
+margin_bottom = 136.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "SETTINGS"
 
 [node name="FlickeringTimer" type="Timer" parent="."]
 wait_time = 0.133
