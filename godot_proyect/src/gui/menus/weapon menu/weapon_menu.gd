@@ -49,8 +49,11 @@ func _input(event: InputEvent) -> void:
 				# Next page.
 				next_page()
 			7:
-				# TODO: E-tank or 1up.
-				pass
+				# Use an e-tank.
+				if global.MEGASHIP != null and global.etanks > 0:
+					global.etanks -= 1
+					global.MEGASHIP.call_deferred("set_hp", global.MEGASHIP.hp_max, true)
+					global.set_user_pause(false)
 			8:
 				# TODO: Open settings menu.
 				pass
@@ -103,10 +106,19 @@ func update_entries() -> void:
 	for entry in $MarginContainer/Pager.current_page.get_node("Letters").get_children():
 		var key = Vector2(page, n_entries)
 		var node = get_node("MarginContainer/Pager/Page" + str(page) + "/Info/" + entry.name)
-		if !unlocked_entries.has(Vector2(key)) or unlocked_entries[key]:
+		if key == Vector2(0, 7):
+			# e-tank entry.
+			entries.append(entry)
+			for i in range(global.etanks, 4):
+				node.get_node(str(i + 1)).visible = false
+		elif key == Vector2(1, 7):
+			# 1up entry.
+			entries.append(null) # Make this entry non selectable.
+			node.get_node("Text").text = ":  %02d" % global.lifes
+		elif !unlocked_entries.has(Vector2(key)) or unlocked_entries[key]:
 			# No info about current entry or entry is unlocked.
 			entries.append(entry)
-			if node != null and node.get("value") != null:
+			if node != null and node.get("value") != null and global.MEGASHIP != null:
 				var weapon_index = page * 6 + n_entries - 1
 				node.palette = clamp(weapon_index, 0, global.WEAPONS.ONE)
 				node.value = global.MEGASHIP.get_ammo(weapon_index) if weapon_index > 0 else global.MEGASHIP.hp

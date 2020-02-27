@@ -354,6 +354,7 @@ func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 		if play_sound:
 			$SndWeaponSwap.play()
 		# Set palette.
+# warning-ignore:narrowing_conversion
 		set_palette(clamp(weapon_index, 0, WEAPONS.ONE))
 		# Set ammo_bar visibility.
 		ammo_bar.visible = weapon_index != 0

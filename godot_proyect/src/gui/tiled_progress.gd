@@ -37,6 +37,7 @@ func set_value(new_value: float, pause: bool = false) -> void:
 			$SndFill.play()
 			$FillTimer.start()
 			yield(get_node("FillTimer"), "timeout")
+			i += 1
 		global.unpause()
 	value = clamp(new_value, 0, max_value)
 	update_values()

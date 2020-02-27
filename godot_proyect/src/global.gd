@@ -41,8 +41,8 @@ enum WEAPONS {
 const LIFES_DEFAULT = 2
 var lifes = LIFES_DEFAULT # The number of extra lifes.
 const MAX_LIFES = 9
-const ETANKS_DEFAULT = 0
-var etanks = 0 # The number of extra lifes.
+const ETANKS_DEFAULT = 3
+var etanks = ETANKS_DEFAULT # The number of etanks.
 const MAX_ETANKS = 4
 
 var MEGASHIP # The megaship instance for easy global access.
@@ -168,11 +168,9 @@ func fix_mouse_mode():
 	Input.set_mouse_mode(tmp)
 
 func obtain_1up():
-	# TODO: play 1up sound.
 	lifes = min(lifes + 1, MAX_LIFES)
 	
 func obtain_etank():
-	# TODO: play e-tank sound.
 	etanks = min(etanks + 1, MAX_ETANKS)
 
 func play_audio_random_pitch(snd, interval):

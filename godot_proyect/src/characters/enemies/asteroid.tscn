@@ -6,9 +6,8 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.44082
 
-[node name="Asteroid" index="0" instance=ExtResource( 1 )]
+[node name="Asteroid" instance=ExtResource( 1 )]
 hp_max = 5.0
-snd_hit = NodePath("../Asteroid/SndHit")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="4"]
 position = Vector2( -0.376133, 0.268669 )
