@@ -48,6 +48,8 @@ const MAX_ETANKS = 4
 var MEGASHIP # The megaship instance for easy global access.
 var random : RandomNumberGenerator # Used for general randomness.
 
+var prev_mouse_mode
+
 signal user_pause
 
 func _ready():
@@ -111,6 +113,10 @@ func set_user_pause(value : bool) -> void:
 		emit_signal("user_pause", value)
 		if value:
 			$SndPauseMenu.play()
+			prev_mouse_mode = Input.get_mouse_mode() 
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(prev_mouse_mode)
 
 func toggle_pause() -> void:
 	set_pause(!is_paused)

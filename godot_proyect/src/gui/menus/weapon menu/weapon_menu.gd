@@ -10,13 +10,10 @@ var entry : Node
 var entry_index : int = 1
 var n_entries : int = 0
 
-var prev_mouse
-
 signal opened
 
 func _ready() -> void:
-	prev_mouse = Input.get_mouse_mode()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	global.connect("user_pause", self, "_on_global_user_pause")
 	# Start opening animation.
 	$MarginContainer.visible = false
 	$Tween.interpolate_property(self, "rect_size", Vector2.ZERO, rect_size, OPENNING_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -28,12 +25,8 @@ func _ready() -> void:
 	
 	# Load menu entries.
 	update_entries()
-	global.connect("user_pause", self, "_on_global_user_pause")
 	$FlickeringTimer.start()
 	emit_signal("opened")
-
-func _exit_tree() -> void:
-	Input.set_mouse_mode(prev_mouse)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_down"):
@@ -42,6 +35,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_up"):
 		accept_event()
 		previous_entry()
+	if event.is_action_pressed("ui_left"):
+		accept_event()
+		next_page()
+	if event.is_action_pressed("ui_right"):
+		accept_event()
+		previous_page()
 	if event.is_action_pressed("ui_accept"):
 		accept_event()
 		match entry_index:
@@ -73,6 +72,11 @@ func _on_FlickeringTimer_timeout() -> void:
 func next_page() -> void:
 	entry.modulate.a = 1
 	$MarginContainer/Pager.next_page()
+	update_entries()
+
+func previous_page() -> void:
+	entry.modulate.a = 1
+	$MarginContainer/Pager.previous_page()
 	update_entries()
 
 func set_entry(value : int, play_sound: bool = true) -> void:

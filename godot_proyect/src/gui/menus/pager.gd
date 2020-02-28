@@ -27,3 +27,6 @@ func set_page(value : int) -> void:
 
 func next_page() -> void:
 	set_page((page_index + 1) % n_pages)
+
+func previous_page() -> void:
+	set_page((page_index - 1) % n_pages if page_index > 0 else n_pages - 1)
