@@ -21,7 +21,6 @@ func spawn() -> void:
 	n_spawns += 1
 	total_spawns -= 1
 	if total_spawns == 0:
-		print("bye")
 		queue_free()
 
 func _on_spawn_tree_exited() -> void:
