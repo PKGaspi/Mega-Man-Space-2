@@ -11,22 +11,15 @@ var entry_index : int = 1
 var n_entries : int = 0
 
 signal opened
+signal closed
 
 func _ready() -> void:
 	global.connect("user_pause", self, "_on_global_user_pause")
-	# Start opening animation.
-	$MarginContainer.visible = false
-	$Tween.interpolate_property(self, "rect_size", Vector2.ZERO, rect_size, OPENNING_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property(self, "rect_position", rect_position + rect_size / 2, rect_position, OPENNING_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-	yield($Tween, "tween_all_completed") # Wait until the animation is over.
-	$MarginContainer.visible = true
-	# Animation is over.
+	opening_animation()
 	
 	# Load menu entries.
 	update_entries()
 	$FlickeringTimer.start()
-	emit_signal("opened")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_down"):
@@ -64,10 +57,34 @@ func _input(event: InputEvent) -> void:
 
 func _on_global_user_pause(value : bool) -> void:
 	if !value:
+		closing_animation()
+		yield(self, "closed")
 		queue_free()
 
 func _on_FlickeringTimer_timeout() -> void:
 	entry.modulate.a = 0 if entry.modulate.a == 1 else 1
+
+func growing_animation(start_size: Vector2, final_size: Vector2, time: float = OPENNING_TIME):
+	# Start opening animation.
+	$Tween.interpolate_property(self, "rect_size", start_size, final_size, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property(self, "rect_position", rect_position + final_size / 2, rect_position + start_size / 2, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$Tween.start()
+	# Animation is over.
+
+func opening_animation(time = OPENNING_TIME):
+	$MarginContainer.visible = false
+	growing_animation(Vector2.ZERO, rect_size, time)
+	yield($Tween, "tween_all_completed") # Wait until the animation is over.
+	$MarginContainer.visible = true
+	emit_signal("opened")
+
+func closing_animation(time = OPENNING_TIME):
+	$MarginContainer.visible = false
+	growing_animation(rect_size, Vector2.ZERO, time)
+	yield($Tween, "tween_all_completed") # Wait until the animation is over.
+	$MarginContainer.visible = true
+	emit_signal("closed")
+
 
 func next_page() -> void:
 	entry.modulate.a = 1
