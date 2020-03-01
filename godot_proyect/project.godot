@@ -33,7 +33,7 @@ config/icon="res://icon.png"
 [autoload]
 
 global="*res://src/global.tscn"
-debug_menu="*res://src/gui/menus/debug menu/debug_menu.tscn"
+debug_menu="*res://src/gui/menus/debug menu/debug_panel.tscn"
 
 [debug]
 

@@ -20,7 +20,7 @@ var max_distance : float = AREA_LIMITS.size.length() / 2
 var spawn_area : Rect2
 var width : float
 var height : float
-var centre : Vector2
+var center : Vector2
 
 var horde : bool = false
 var total_enemies : int = 10
@@ -48,11 +48,11 @@ func _ready():
 func _process(delta):
 	if horde:
 		while n_enemies < min(max_enemies, total_enemies):
-			var x = random.randf_range(- width / 2, width / 2) + centre.x
-			var y = random.randf_range(- height / 2, height / 2) + centre.y
+			var x = random.randf_range(- width / 2, width / 2) + center.x
+			var y = random.randf_range(- height / 2, height / 2) + center.y
 			while Vector2(x, y).distance_to(global.MEGASHIP.global_position) < min_distance_to_megaship:
-				x = random.randf_range(- width / 2, width / 2) + centre.x
-				y = random.randf_range(- height / 2, height / 2) + centre.y
+				x = random.randf_range(- width / 2, width / 2) + center.x
+				y = random.randf_range(- height / 2, height / 2) + center.y
 			create_enemy(Vector2(x, y), random.randi_range(0, enemies_len - 1))
 		if total_enemies == 0:
 			horde = false
@@ -70,10 +70,10 @@ func new_horde(new_spawn, total_enemies, max_enemies):
 	self.spawn_area = new_spawn
 	self.width = spawn_area.size.x
 	self.height = spawn_area.size.y
-	self.centre = spawn_area.position.linear_interpolate(spawn_area.end, .5)
+	self.center = spawn_area.position.linear_interpolate(spawn_area.end, .5)
 	self.total_enemies = total_enemies
 	self.max_enemies = max_enemies
-	create_warning(centre)
+	create_warning(center)
 	
 func new_random_horde(area_limits = AREA_LIMITS, total_enemies_range = TOTAL_ENEMIES_RANDOM_RANGE, max_enemies_range = MAX_ENEMIES_RANDOM_RANGE):
 	var new_pos = Vector2(random.randf_range(area_limits.position.x, area_limits.end.x), random.randf_range(area_limits.position.y, area_limits.end.y))
@@ -92,13 +92,13 @@ func new_random_horde(area_limits = AREA_LIMITS, total_enemies_range = TOTAL_ENE
 ## Auxiliar functions. ##
 #########################
 
-func create_warning(centre : Vector2) -> void:
+func create_warning(center : Vector2) -> void:
 	CENTER_TEXT.set_animation("warning", 3)
 	warning = WARNING.new()
-	warning.init(warning_texture, centre, null, Vector2(), global.MEGASHIP)
+	warning.init(warning_texture, center, null, Vector2(), global.MEGASHIP)
 	warning.material = warning_material
 	visibility_notifier = VisibilityNotifier2D.new()
-	visibility_notifier. global_position = centre
+	visibility_notifier. global_position = center
 	visibility_notifier.connect("screen_entered", warning, "_on_pointing_to_enters_screen")
 	visibility_notifier.connect("screen_exited", warning, "_on_pointing_to_exits_screen")
 	add_child(warning)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resources/comic_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/fonts/comic.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://src/gui/menus/debug menu/debug_info_filler.gd" type="Script" id=3]
-[ext_resource path="res://src/gui/menus/debug menu/debug_menu.gd" type="Script" id=4]
+[ext_resource path="res://src/gui/menus/debug menu/debug_panel.gd" type="Script" id=4]
+[ext_resource path="res://src/gui/menus/debug menu/debug_menu.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -12,7 +13,7 @@ font_data = ExtResource( 2 )
 [node name="DebugLayer" type="CanvasLayer"]
 pause_mode = 2
 
-[node name="DebugMenu" type="Control" parent="."]
+[node name="DebugContainer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -400.0
@@ -21,7 +22,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="DebugMenu"]
+[node name="ColorRect" type="ColorRect" parent="DebugContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.184314, 0.184314, 0.184314, 0.666667 )
@@ -29,7 +30,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="DebugMenu"]
+[node name="Title" type="Label" parent="DebugContainer"]
 margin_right = 80.0
 margin_bottom = 18.0
 custom_fonts/font = SubResource( 1 )
@@ -41,7 +42,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Entries" type="MarginContainer" parent="DebugMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="DebugContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -52,52 +53,53 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DebugMenu/Entries"]
+[node name="Entries" type="VBoxContainer" parent="DebugContainer/MarginContainer"]
 margin_right = 72.0
 margin_bottom = 246.0
 
-[node name="Options" type="VBoxContainer" parent="DebugMenu/Entries/VBoxContainer"]
+[node name="Options" type="VBoxContainer" parent="DebugContainer/MarginContainer/Entries"]
 margin_right = 72.0
 margin_bottom = 72.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="0" type="Label" parent="DebugMenu/Entries/VBoxContainer/Options"]
+[node name="0" type="Label" parent="DebugContainer/MarginContainer/Entries/Options"]
 margin_right = 72.0
 margin_bottom = 12.0
 custom_fonts/font = ExtResource( 1 )
 text = "Tp to horde"
 
-[node name="1" type="Label" parent="DebugMenu/Entries/VBoxContainer/Options"]
+[node name="1" type="Label" parent="DebugContainer/MarginContainer/Entries/Options"]
 margin_top = 20.0
 margin_right = 72.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 1 )
 text = "Spawn object"
 
-[node name="2" type="Label" parent="DebugMenu/Entries/VBoxContainer/Options"]
+[node name="2" type="Label" parent="DebugContainer/MarginContainer/Entries/Options"]
 margin_top = 40.0
 margin_right = 72.0
 margin_bottom = 52.0
 custom_fonts/font = ExtResource( 1 )
 text = "Remove object"
 
-[node name="3" type="Label" parent="DebugMenu/Entries/VBoxContainer/Options"]
+[node name="3" type="Label" parent="DebugContainer/MarginContainer/Entries/Options"]
 margin_top = 60.0
 margin_right = 72.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 1 )
 text = "Set variables"
 
-[node name="HSeparator" type="HSeparator" parent="DebugMenu/Entries/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="DebugContainer/MarginContainer/Entries"]
 modulate = Color( 1, 1, 1, 0 )
 margin_top = 80.0
 margin_right = 72.0
 margin_bottom = 166.0
 size_flags_vertical = 3
 
-[node name="Info" type="HBoxContainer" parent="DebugMenu/Entries/VBoxContainer"]
+[node name="Info" type="HBoxContainer" parent="DebugContainer/MarginContainer/Entries"]
 margin_top = 174.0
 margin_right = 72.0
 margin_bottom = 246.0
@@ -106,41 +108,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tags" type="VBoxContainer" parent="DebugMenu/Entries/VBoxContainer/Info"]
+[node name="Tags" type="VBoxContainer" parent="DebugContainer/MarginContainer/Entries/Info"]
 margin_right = 31.0
 margin_bottom = 72.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShipPos" type="Label" parent="DebugMenu/Entries/VBoxContainer/Info/Tags"]
+[node name="ShipPos" type="Label" parent="DebugContainer/MarginContainer/Entries/Info/Tags"]
 margin_right = 31.0
 margin_bottom = 12.0
 custom_fonts/font = ExtResource( 1 )
 text = "Ship pos"
 
-[node name="Room" type="Label" parent="DebugMenu/Entries/VBoxContainer/Info/Tags"]
+[node name="Room" type="Label" parent="DebugContainer/MarginContainer/Entries/Info/Tags"]
 margin_top = 20.0
 margin_right = 31.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 1 )
 text = "Room"
 
-[node name="Fps" type="Label" parent="DebugMenu/Entries/VBoxContainer/Info/Tags"]
+[node name="Fps" type="Label" parent="DebugContainer/MarginContainer/Entries/Info/Tags"]
 margin_top = 40.0
 margin_right = 31.0
 margin_bottom = 52.0
 custom_fonts/font = ExtResource( 1 )
 text = "Fps"
 
-[node name="Build" type="Label" parent="DebugMenu/Entries/VBoxContainer/Info/Tags"]
+[node name="Build" type="Label" parent="DebugContainer/MarginContainer/Entries/Info/Tags"]
 margin_top = 60.0
 margin_right = 31.0
 margin_bottom = 72.0
 custom_fonts/font = ExtResource( 1 )
 text = "Build"
 
-[node name="Values" type="VBoxContainer" parent="DebugMenu/Entries/VBoxContainer/Info"]
+[node name="Values" type="VBoxContainer" parent="DebugContainer/MarginContainer/Entries/Info"]
 margin_left = 39.0
 margin_right = 44.0
 margin_bottom = 72.0
@@ -148,27 +150,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ShipPos" type="Label" parent="DebugMenu/Entries/VBoxContainer/Info/Values"]
+[node name="ShipPos" type="Label" parent="DebugContainer/MarginContainer/Entries/Info/Values"]
 margin_right = 5.0
 margin_bottom = 12.0
 custom_fonts/font = ExtResource( 1 )
 text = "x"
 
-[node name="Room" type="Label" parent="DebugMenu/Entries/VBoxContainer/Info/Values"]
+[node name="Room" type="Label" parent="DebugContainer/MarginContainer/Entries/Info/Values"]
 margin_top = 20.0
 margin_right = 5.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 1 )
 text = "x"
 
-[node name="Fps" type="Label" parent="DebugMenu/Entries/VBoxContainer/Info/Values"]
+[node name="Fps" type="Label" parent="DebugContainer/MarginContainer/Entries/Info/Values"]
 margin_top = 40.0
 margin_right = 5.0
 margin_bottom = 52.0
 custom_fonts/font = ExtResource( 1 )
 text = "x"
 
-[node name="Build" type="Label" parent="DebugMenu/Entries/VBoxContainer/Info/Values"]
+[node name="Build" type="Label" parent="DebugContainer/MarginContainer/Entries/Info/Values"]
 margin_top = 60.0
 margin_right = 5.0
 margin_bottom = 72.0
