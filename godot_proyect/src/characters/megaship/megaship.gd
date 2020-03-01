@@ -1,5 +1,5 @@
-extends "res://src/characters/character.gd"
 class_name Megaship
+extends Character
 
 ################
 ## Resources. ##

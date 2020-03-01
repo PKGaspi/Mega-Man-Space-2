@@ -1,4 +1,5 @@
-extends "res://src/characters/character.gd"
+class_name Enemy
+extends Character
 
 export (SpriteFrames) var masks
 export (SpriteFrames) var palettes

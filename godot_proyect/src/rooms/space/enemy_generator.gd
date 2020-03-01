@@ -1,3 +1,4 @@
+class_name EnemyGenerator
 extends Node2D
 
 # List of all enemies to generate.

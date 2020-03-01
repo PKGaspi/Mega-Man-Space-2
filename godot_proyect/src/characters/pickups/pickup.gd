@@ -1,4 +1,5 @@
-extends "res://src/characters/enemies/enemy.gd"
+class_name Pickup
+extends Enemy
 
 var random : RandomNumberGenerator = global.init_random()
 

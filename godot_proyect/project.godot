@@ -9,15 +9,50 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://src/bullets/bullet.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://src/characters/character.gd"
+}, {
+"base": "Character",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://src/characters/enemies/enemy.gd"
+}, {
+"base": "Node2D",
+"class": "EnemyGenerator",
+"language": "GDScript",
+"path": "res://src/rooms/space/enemy_generator.gd"
+}, {
+"base": "Pickup",
+"class": "FillerPickup",
+"language": "GDScript",
+"path": "res://src/characters/pickups/filler_pickup.gd"
+}, {
 "base": "Control",
 "class": "Joystick",
 "language": "GDScript",
 "path": "res://src/gui/joystick/Joystick.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Character",
 "class": "Megaship",
 "language": "GDScript",
 "path": "res://src/characters/megaship/megaship.gd"
+}, {
+"base": "Enemy",
+"class": "Pickup",
+"language": "GDScript",
+"path": "res://src/characters/pickups/pickup.gd"
+}, {
+"base": "Pickup",
+"class": "Upgrade",
+"language": "GDScript",
+"path": "res://src/characters/pickups/upgrade.gd"
 }, {
 "base": "Reference",
 "class": "Weapon",
@@ -25,8 +60,15 @@ _global_script_classes=[ {
 "path": "res://src/weapons.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
+"Character": "",
+"Enemy": "",
+"EnemyGenerator": "",
+"FillerPickup": "",
 "Joystick": "",
 "Megaship": "",
+"Pickup": "",
+"Upgrade": "",
 "Weapon": ""
 }
 

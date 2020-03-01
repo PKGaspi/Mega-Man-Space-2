@@ -1,3 +1,4 @@
+class_name Character
 extends KinematicBody2D
 
 

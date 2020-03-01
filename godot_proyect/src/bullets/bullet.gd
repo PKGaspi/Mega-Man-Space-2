@@ -1,3 +1,4 @@
+class_name Bullet
 extends Area2D
 
 export(float, 0, 1000, 10) var motion_speed = 560 # Pixels/second.

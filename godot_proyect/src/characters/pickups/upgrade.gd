@@ -1,4 +1,5 @@
-extends "res://src/characters/pickups/pickup.gd"
+class_name Upgrade
+extends Pickup
 
 const NEGATIVE_FREQUENCY = .5
 
