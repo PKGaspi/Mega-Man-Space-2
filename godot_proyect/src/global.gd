@@ -23,20 +23,19 @@ enum INPUT_TYPES {
 var input_type : int # Wheter the game is being played with a gamepad or a keyboard.
 
 # Weapons.
-enum WEAPONS {
-	MEGA,
-	HEAT,
-	AIR,
-	WOOD,
-	BUBBLE,
-	QUICK,
-	FLASH,
-	METAL,
-	CRASH,
-	ONE,
-	TWO,
-	THREE,
-	SIZE,
+var unlocked_weapons = {
+	Weapon.TYPES.MEGA : true,
+	Weapon.TYPES.BUBBLE : false,
+	Weapon.TYPES.AIR : false,
+	Weapon.TYPES.QUICK : false,
+	Weapon.TYPES.HEAT : false,
+	Weapon.TYPES.WOOD : false,
+	Weapon.TYPES.METAL : false,
+	Weapon.TYPES.FLASH : false,
+	Weapon.TYPES.CRASH : false,
+	Weapon.TYPES.ONE : false,
+	Weapon.TYPES.TWO : false,
+	Weapon.TYPES.THREE : false,
 }
 
 const LIFES_DEFAULT = 2

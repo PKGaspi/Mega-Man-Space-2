@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Megaship",
 "language": "GDScript",
 "path": "res://src/characters/megaship/megaship.gd"
+}, {
+"base": "Reference",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://src/weapons.gd"
 } ]
 _global_script_class_icons={
 "Joystick": "",
-"Megaship": ""
+"Megaship": "",
+"Weapon": ""
 }
 
 [application]

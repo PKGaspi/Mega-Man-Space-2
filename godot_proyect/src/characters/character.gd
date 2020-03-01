@@ -46,18 +46,16 @@ export(Array, Array, Vector2) var cannon_pos = [[Vector2()]]
 export(int) var bullet_max : int = 3
 export(int) var n_cannons : int = 1
 
-var WEAPONS = global.WEAPONS # WEAPONS enum.
-
 export(Dictionary) var DAMAGE_MULTIPLIERS = { 
-	WEAPONS.MEGA : 1,
-	WEAPONS.BUBBLE : 1,
-	WEAPONS.AIR : 1,
-	WEAPONS.QUICK : 1,
-	WEAPONS.HEAT : 1,
-	WEAPONS.WOOD : 1,
-	WEAPONS.METAL : 1,
-	WEAPONS.FLASH : 1,
-	WEAPONS.CRASH : 1,
+	Weapon.TYPES.MEGA : 1,
+	Weapon.TYPES.BUBBLE : 1,
+	Weapon.TYPES.AIR : 1,
+	Weapon.TYPES.QUICK : 1,
+	Weapon.TYPES.HEAT : 1,
+	Weapon.TYPES.WOOD : 1,
+	Weapon.TYPES.METAL : 1,
+	Weapon.TYPES.FLASH : 1,
+	Weapon.TYPES.CRASH : 1,
 }
 
 # Motion.
@@ -160,7 +158,7 @@ func flicker(interval = flickering_interval):
 func push(motion):
 	momentum += motion
 
-func hit(damage, weapon = WEAPONS.MEGA):
+func hit(damage, weapon = Weapon.TYPES.MEGA):
 	if !invencible:
 		# TODO: Calculate damage with enemy weakness and type.
 		take_damage(damage)

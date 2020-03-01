@@ -1,5 +1,7 @@
+class_name Weapon
+
 # Weapons.
-enum WEAPONS {
+enum TYPES {
 	MEGA,
 	HEAT,
 	AIR,
@@ -14,3 +16,4 @@ enum WEAPONS {
 	THREE,
 	SIZE,
 }
+

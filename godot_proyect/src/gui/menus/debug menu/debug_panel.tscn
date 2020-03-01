@@ -76,7 +76,7 @@ margin_top = 20.0
 margin_right = 72.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 1 )
-text = "Spawn object"
+text = "Unlock weapons"
 
 [node name="2" type="Label" parent="DebugContainer/MarginContainer/Entries/Options"]
 margin_top = 40.0

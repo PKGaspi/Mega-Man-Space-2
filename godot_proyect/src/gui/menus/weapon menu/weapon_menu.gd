@@ -141,7 +141,7 @@ func update_entries() -> void:
 			entries.append(entry)
 			if node != null and node.get("value") != null and global.MEGASHIP != null:
 				var weapon_index = page * 6 + n_entries - 1
-				node.palette = clamp(weapon_index, 0, global.WEAPONS.ONE)
+				node.palette = clamp(weapon_index, 0, Weapon.TYPES.ONE)
 				node.value = global.MEGASHIP.get_ammo(weapon_index) if weapon_index > 0 else global.MEGASHIP.hp
 		else:
 			# Not unlocked. Hide this entry.

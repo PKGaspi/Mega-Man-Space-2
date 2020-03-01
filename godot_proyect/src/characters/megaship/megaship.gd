@@ -53,57 +53,44 @@ const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
 ############
 # WEAPONS. #
 ############
-var active_weapon = WEAPONS.MEGA # Current active weapon.
+var active_weapon = Weapon.TYPES.MEGA # Current active weapon.
 
 # Ammo to consume after every shot on each weapon.
 var ammo_per_shot = {
-	WEAPONS.MEGA : 0,
-	WEAPONS.BUBBLE : -1,
-	WEAPONS.AIR : -1,
-	WEAPONS.QUICK : -1,
-	WEAPONS.HEAT : -1,
-	WEAPONS.WOOD : -1,
-	WEAPONS.METAL : -1,
-	WEAPONS.FLASH : -1,
-	WEAPONS.CRASH : -1,
-	WEAPONS.ONE : -1,
-	WEAPONS.TWO : -1,
-	WEAPONS.THREE : -1,
+	Weapon.TYPES.MEGA : 0,
+	Weapon.TYPES.BUBBLE : -1,
+	Weapon.TYPES.AIR : -1,
+	Weapon.TYPES.QUICK : -1,
+	Weapon.TYPES.HEAT : -1,
+	Weapon.TYPES.WOOD : -1,
+	Weapon.TYPES.METAL : -1,
+	Weapon.TYPES.FLASH : -1,
+	Weapon.TYPES.CRASH : -1,
+	Weapon.TYPES.ONE : -1,
+	Weapon.TYPES.TWO : -1,
+	Weapon.TYPES.THREE : -1,
 }
 
 # Unlocked WEAPONS.
-var unlocked_weapons = {
-	WEAPONS.MEGA : true,
-	WEAPONS.BUBBLE : true,
-	WEAPONS.AIR : true,
-	WEAPONS.QUICK : true,
-	WEAPONS.HEAT : true,
-	WEAPONS.WOOD : true,
-	WEAPONS.METAL : true,
-	WEAPONS.FLASH : true,
-	WEAPONS.CRASH : true,
-	WEAPONS.ONE : true,
-	WEAPONS.TWO : true,
-	WEAPONS.THREE : true,
-}
+var unlocked_weapons = global.unlocked_weapons
 
 ##############
 # HP & ammo. #
 ##############
 # var hp = hp_max # Current HP. This is in character.gd.
 var weapons_ammo = { # Current ammo for each weapon.
-	WEAPONS.MEGA : ammo_max,
-	WEAPONS.BUBBLE : ammo_max,
-	WEAPONS.AIR : ammo_max,
-	WEAPONS.QUICK : ammo_max,
-	WEAPONS.HEAT : ammo_max,
-	WEAPONS.WOOD : ammo_max,
-	WEAPONS.METAL : ammo_max,
-	WEAPONS.FLASH : ammo_max,
-	WEAPONS.CRASH : ammo_max,
-	WEAPONS.ONE : ammo_max,
-	WEAPONS.TWO : ammo_max,
-	WEAPONS.THREE : ammo_max,
+	Weapon.TYPES.MEGA : ammo_max,
+	Weapon.TYPES.BUBBLE : ammo_max,
+	Weapon.TYPES.AIR : ammo_max,
+	Weapon.TYPES.QUICK : ammo_max,
+	Weapon.TYPES.HEAT : ammo_max,
+	Weapon.TYPES.WOOD : ammo_max,
+	Weapon.TYPES.METAL : ammo_max,
+	Weapon.TYPES.FLASH : ammo_max,
+	Weapon.TYPES.CRASH : ammo_max,
+	Weapon.TYPES.ONE : ammo_max,
+	Weapon.TYPES.TWO : ammo_max,
+	Weapon.TYPES.THREE : ammo_max,
 }
 
 ########################
@@ -183,7 +170,7 @@ func set_ammo(value, pause = false, weapon = active_weapon):
 	weapons_ammo[weapon] = ammo
 
 func get_ammo(weapon = active_weapon) -> float:
-	return weapons_ammo[clamp(weapon, 1, WEAPONS.SIZE)]
+	return weapons_ammo[clamp(weapon, 1, Weapon.TYPES.SIZE)]
 
 func set_visibility(value):
 	$SprShip.visible = value
@@ -309,7 +296,7 @@ func fill(type, ammount):
 	elif type == "heal":
 		set_hp_relative(ammount, true)
 	elif type == "ammo":
-		if active_weapon != WEAPONS.MEGA:
+		if active_weapon != Weapon.TYPES.MEGA:
 			set_ammo_relative(ammount, true)
 	
 func upgrade(type : String, ammount : float) -> void:
@@ -349,14 +336,14 @@ func set_palette(palette_index : int) -> void:
 
 func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 	if !unlocked_weapons.has(weapon_index):
-		weapon_index = WEAPONS.MEGA
+		weapon_index = Weapon.TYPES.MEGA
 	var unlocked = unlocked_weapons[weapon_index]
 	if unlocked:
 		if play_sound:
 			$SndWeaponSwap.play()
 		# Set palette.
 # warning-ignore:narrowing_conversion
-		set_palette(clamp(weapon_index, 0, WEAPONS.ONE))
+		set_palette(clamp(weapon_index, 0, Weapon.TYPES.ONE))
 		# Set ammo_bar visibility.
 		ammo_bar.visible = weapon_index != 0
 		# Save ammo value.
@@ -371,16 +358,16 @@ func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 func next_weapon():
 	# WARNING: This only works as expected if at least one weapon
 	# is unlocked. Mega is unlocked by default and at all time.
-	var weapon = max((active_weapon + 1) % WEAPONS.SIZE, 0)
+	var weapon = max((active_weapon + 1) % Weapon.TYPES.SIZE, 0)
 	while !set_weapon(weapon):
 		pass
 
 func previous_weapon():
 	# WARNING: This only works as expected if at least one weapon
 	# is unlocked. Mega is unlocked by default and at all time.
-	var weapon = (active_weapon - 1) % WEAPONS.SIZE
+	var weapon = (active_weapon - 1) % Weapon.TYPES.SIZE
 	if weapon < 0: 
-		weapon = WEAPONS.SIZE - 1
+		weapon = Weapon.TYPES.SIZE - 1
 	while !set_weapon(weapon):
 		pass
 
