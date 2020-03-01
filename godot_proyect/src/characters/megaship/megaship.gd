@@ -1,4 +1,5 @@
 extends "res://src/characters/character.gd"
+class_name Megaship
 
 ################
 ## Resources. ##

@@ -326,9 +326,11 @@ stream = ExtResource( 9 )
 [node name="MusicIntro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 autoplay = true
+bus = "Music"
 
 [node name="MusicLoop" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "Music"
 [connection signal="finished" from="MusicIntro" to="MusicLoop" method="play" flags=6]
 
 [editable path="SelectStageMenu/TopLeftEntry"]

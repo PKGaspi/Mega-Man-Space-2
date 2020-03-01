@@ -2,6 +2,7 @@ extends Node
 
 const CURSOR = preload("res://assets/sprites/gui/cursor.png")
 const TOUCHSCREEN_LAYOUT = preload("res://src/gui/touchscreen_layout.tscn")
+
 const SCREEN_SIZE = Vector2(480, 270)
 
 const EXITING_TIME = .3 # In seconds.
@@ -57,6 +58,7 @@ func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	
+	
 
 func _input(event: InputEvent) -> void:
 	# Set current input method.
@@ -107,7 +109,7 @@ func set_pause(value : bool) -> void:
 func set_user_pause(value : bool) -> void:
 	# The user can only pause the game if it is not paused
 	# or can unpause it if it is paused by him.
-	if user_pause or !is_paused:
+	if (user_pause or !is_paused) and MEGASHIP is Megaship:
 		set_pause(value)
 		user_pause = value
 		emit_signal("user_pause", value)

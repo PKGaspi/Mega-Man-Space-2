@@ -1,10 +1,10 @@
 extends Area2D
 
-const gl = preload("res://src/global.gd")
+const W = preload("res://src/weapons.gd")
 
 export(float, 0, 1000, 10) var motion_speed = 560 # Pixels/second.
 export(float, 0, 30, .1) var damage : float = 2
-export(gl.WEAPONS) var weapon = gl.WEAPONS.MEGA
+export(W.WEAPONS) var weapon = W.WEAPONS.MEGA
 export(int) var n_collisions = 1 # Number of collisions before the bullet dissapears. Cero or negative for no max.
 
 var dir
