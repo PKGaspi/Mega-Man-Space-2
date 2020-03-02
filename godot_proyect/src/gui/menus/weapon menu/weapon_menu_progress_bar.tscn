@@ -44,6 +44,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+value = 28.0
 cell_size = Vector2( 2, 7 )
 horizontal = true
 
@@ -59,10 +60,8 @@ __meta__ = {
 
 [node name="Cells" type="NinePatchRect" parent="."]
 material = SubResource( 2 )
-anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -56.0
 margin_top = 1.0
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 2, 7.31011 )
