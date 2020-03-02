@@ -74,12 +74,12 @@ shader_param/mask = ExtResource( 4 )
 
 [node name="WeaponMenu" type="Control"]
 pause_mode = 2
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 340.194
-margin_top = 43.5179
-margin_right = -43.8057
-margin_bottom = -42.4821
+margin_left = -140.0
+margin_top = 43.0
+margin_right = -44.0
+margin_bottom = 227.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
