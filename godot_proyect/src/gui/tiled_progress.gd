@@ -1,11 +1,11 @@
+tool
 extends Control
 
-export(float) var max_value: float = 28 setget set_max_value
-export(float) var value: float = max_value setget set_value
-export(Vector2) var cell_size: Vector2 = Vector2(7, 2)
-export(bool) var horizontal: bool = false
-
-export(int) var palette: int = 0 setget set_palette # Current palette index.
+export var max_value: float = 28 setget set_max_value
+export var value: float = max_value setget set_value
+export var cell_size: Vector2 = Vector2(7, 2)
+export var horizontal: bool = false
+export(Weapon.TYPES) var palette: int = 0 setget set_palette # Current palette index.
 
 const PALETTES = preload("res://resources/gui/progress_bar_palettes.tres")
 
@@ -14,6 +14,10 @@ func _ready() -> void:
 	update_values()
 
 func update_values():
+	if get_child_count() == 0:
+		call_deferred("update_values")
+		return
+	
 	if horizontal:
 		rect_size = Vector2(cell_size.x * max_value, cell_size.y)
 		$Cells.rect_size = Vector2(cell_size.x * value, cell_size.y)
@@ -40,9 +44,13 @@ func set_value(new_value: float, pause: bool = false) -> void:
 			i += 1
 		global.unpause()
 	value = clamp(new_value, 0, max_value)
-	update_values()
+	call_deferred("update_values")
 
 func set_palette(value: int) -> void:
+	if get_child_count() == 0:
+		call_deferred("set_palette", value)
+		return
+	
 	palette = value
 	$Cells.material.set_shader_param("palette", PALETTES.get_frame("default", value))
 	# TODO: set empty part color.

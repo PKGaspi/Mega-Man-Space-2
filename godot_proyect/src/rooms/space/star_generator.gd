@@ -30,10 +30,11 @@ export(float) var STAR_FREQUENCY = .3
 export(float) var PLANET_FREQUENCY = .01
 export(int) var MAX_PLANETS_PER_SECTOR = 1
 
-var SECTOR_SIZE = global.SCREEN_SIZE * .35 # Sector size.
-const SECTOR_ROWS = 10 # Number of sectors loaded at the same time on a row.
-const SECTOR_COLUMNS = 10 # Number of sectors loaded at the same time on a column.
-const STARS_PER_SECTOR = 5 # Number of stars to attempt to generate per sector.
+const SECTOR_SIZE_MULTIPLIER = .35
+onready var sector_size = get_viewport().size * SECTOR_SIZE_MULTIPLIER # Sector size.
+onready var sector_rows = sector_size.x / 10 # Number of sectors loaded at the same time on a row.
+onready var sector_columns = sector_size.y / 10 # Number of sectors loaded at the same time on a column.
+onready var stars_per_sector = 5 # Number of stars to attempt to generate per sector.
 
 var random # Base randomizer.
 var r_seed # Base random seed.
@@ -71,18 +72,21 @@ func _ready():
 	# Connect to_follow signal.
 	if to_follow != null:
 		get_node(to_follow).connect("tree_exiting", self, "_on_to_follow_tree_exiting")
+	
+	# Connect Viewport size_changes signal.
+	get_viewport().connect("size_changed", self, "_on_viewport_size_changed")
 
 func _process(delta):
 	if to_follow != null and get_node(to_follow) is Node2D:
 		var sector = pos_to_sector(get_node(to_follow).position)
 		if prev_sector != sector:
 			prev_sector = sector
-			var active_sectors = Rect2(sector.x - SECTOR_COLUMNS / 2, sector.y - SECTOR_ROWS / 2, SECTOR_COLUMNS, SECTOR_COLUMNS)
+			var active_sectors = Rect2(sector.x - sector_columns / 2, sector.y - sector_rows / 2, sector_columns, sector_columns)
 			for s in stars.keys():
 				if !active_sectors.has_point(s):
 					destroy_stars(s)
-			for i in range(-SECTOR_ROWS / 2, SECTOR_ROWS / 2):
-				for j in range(-SECTOR_COLUMNS / 2, SECTOR_COLUMNS / 2):
+			for i in range(-sector_rows / 2, sector_rows / 2):
+				for j in range(-sector_columns / 2, sector_columns / 2):
 					var new_sector = Vector2(sector.x + i, sector.y + j)
 					if !stars.has(new_sector):
 						create_stars(new_sector)
@@ -90,6 +94,11 @@ func _process(delta):
 
 func _on_to_follow_tree_exiting():
 	to_follow = null
+
+func _on_viewport_size_changed():
+	$BackgroundColor.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+	sector_size = get_viewport().size * SECTOR_SIZE_MULTIPLIER
+	print(sector_size)
 
 #########################
 ## Auxiliar functions. ##
@@ -109,8 +118,8 @@ func create_material(mask : Texture, palette : Texture) -> Material:
 
 func pos_to_sector(pos):
 	# Vector2 pos: position to check if is on the sector.
-	var sector_x = int(pos.x / SECTOR_SIZE.x)
-	var sector_y = int(pos.y / SECTOR_SIZE.y)
+	var sector_x = int(pos.x / sector_size.x)
+	var sector_y = int(pos.y / sector_size.y)
 	return Vector2(sector_x, sector_y)
 
 func create_star(pos, layer, texture, mask, palette):
@@ -127,7 +136,7 @@ func create_star(pos, layer, texture, mask, palette):
 
 func create_stars(sector):
 	# Calculate sector position (top left corner).
-	var pos = Vector2(SECTOR_SIZE.x * sector.x, SECTOR_SIZE.y * sector.y)
+	var pos = Vector2(sector_size.x * sector.x, sector_size.y * sector.y)
 	
 	# Create list entry in the dictionary of stars.
 	stars[sector] = []
@@ -139,13 +148,13 @@ func create_stars(sector):
 	
 	# Create the stars.
 	var n_planets = 0
-	for i in range(STARS_PER_SECTOR):
+	for i in range(stars_per_sector):
 		# Check if a new star is generated. Every time it's
 		# harder for a new star to generate.
 		if (random.randf() * i < STAR_FREQUENCY):
 			# Generate random position.
-			var x = random.randi_range(pos.x, pos.x + SECTOR_SIZE.x)
-			var y = random.randi_range(pos.y, pos.y + SECTOR_SIZE.y)
+			var x = random.randi_range(pos.x, pos.x + sector_size.x)
+			var y = random.randi_range(pos.y, pos.y + sector_size.y)
 			
 			# Calculate sprite from layer.
 			var star_mask = random.randi_range(0, N_STAR_MASKS - 1)

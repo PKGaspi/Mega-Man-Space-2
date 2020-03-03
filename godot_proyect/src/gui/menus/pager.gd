@@ -1,32 +1,22 @@
+tool
 extends Control
 
-var pages = []
-var n_pages : int = 0
-export(int) var page_index : int = 0
-var current_page : Node
+export(Array, NodePath) var pages = []
+export var page_index: int = 0 setget set_page
+var current_page: Node
 
 func _ready() -> void:
-	# Add pages.
-	for child in get_children():
-		child.visible = false
-		pages.append(child)
-		n_pages += 1
-	
-	# Set valid current page.
-# warning-ignore:narrowing_conversion
-	page_index = clamp(page_index, 0, n_pages - 1)
-	pages[page_index].visible = true
-	current_page = pages[page_index]
+	set_page(page_index)
 
 func set_page(value : int) -> void:
-	pages[page_index].visible = false
+	get_node(pages[page_index]).visible = false
 # warning-ignore:narrowing_conversion
-	page_index = clamp(value, 0, n_pages - 1)
-	pages[page_index].visible = true
-	current_page = pages[page_index]
+	page_index = clamp(value, 0, len(pages) - 1)
+	get_node(pages[page_index]).visible = true
+	current_page = get_node(pages[page_index])
 
 func next_page() -> void:
-	set_page((page_index + 1) % n_pages)
+	set_page((page_index + 1) % len(pages))
 
 func previous_page() -> void:
-	set_page((page_index - 1) % n_pages if page_index > 0 else n_pages - 1)
+	set_page((page_index - 1) if page_index > 0 else len(pages) - 1)

@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/sprites/gui/progress_bar/bar_cell.png" type="Texture" id=4]
 [ext_resource path="res://assets/sfx/other/energy_fill.wav" type="AudioStream" id=5]
 
-
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
@@ -45,6 +44,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
+value = 28.0
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -62,7 +62,7 @@ anchor_bottom = 1.0
 texture = ExtResource( 4 )
 patch_margin_left = 1
 patch_margin_right = 1
-axis_stretch_vertical = 2
+axis_stretch_vertical = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

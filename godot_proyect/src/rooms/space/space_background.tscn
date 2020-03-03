@@ -67,6 +67,7 @@ planet_palettes = SubResource( 4 )
 [node name="BackgroundColor" type="ColorRect" parent="."]
 margin_right = 480.0
 margin_bottom = 270.0
-grow_horizontal = 2
-grow_vertical = 2
 color = Color( 0.117647, 0.0588235, 0.196078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -74,12 +74,12 @@ shader_param/mask = ExtResource( 4 )
 
 [node name="WeaponMenu" type="Control"]
 pause_mode = 2
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 340.194
-margin_top = 43.5179
-margin_right = -43.8057
-margin_bottom = -42.4821
+margin_left = -140.0
+margin_top = 43.0
+margin_right = -44.0
+margin_bottom = 227.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -115,6 +115,7 @@ __meta__ = {
 margin_right = 72.0
 margin_bottom = 144.0
 script = ExtResource( 6 )
+pages = [ NodePath("Page0"), NodePath("Page1") ]
 
 [node name="Page0" type="HBoxContainer" parent="MarginContainer/Pager"]
 margin_right = 88.0
@@ -267,22 +268,27 @@ margin_bottom = 24.0
 [node name="H" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_bottom = 40.0
+palette = 1
 
 [node name="A" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 48.0
 margin_bottom = 56.0
+palette = 2
 
 [node name="W" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_bottom = 72.0
+palette = 3
 
 [node name="B" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 80.0
 margin_bottom = 88.0
+palette = 4
 
 [node name="Q" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 96.0
 margin_bottom = 104.0
+palette = 5
 
 [node name="E" type="HBoxContainer" parent="MarginContainer/Pager/Page0/Info"]
 margin_top = 112.0
@@ -484,26 +490,32 @@ text = "next"
 [node name="F" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 16.0
 margin_bottom = 24.0
+palette = 6
 
 [node name="M" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_bottom = 40.0
+palette = 7
 
 [node name="C" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 48.0
 margin_bottom = 56.0
+palette = 8
 
 [node name="1" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_bottom = 72.0
+palette = 9
 
 [node name="2" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 80.0
 margin_bottom = 88.0
+palette = 9
 
 [node name="3" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 96.0
 margin_bottom = 104.0
+palette = 9
 
 [node name="1ups" type="Control" parent="MarginContainer/Pager/Page1/Info"]
 margin_top = 112.0

@@ -18,6 +18,10 @@ func set_active(value: bool) -> void:
 	active = value
 	visible = value
 	menu.set_active(value)
+	if value:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func toggle_active() -> void:
 	set_active(!active)
