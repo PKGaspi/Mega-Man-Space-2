@@ -11,7 +11,6 @@ export var hide_when_animating: NodePath
 export var background: NodePath = "Background"
 
 var active:= true
-var unlocked_entries: Dictionary
 var entries:= []
 var entry: Node
 var entry_index: int = 1

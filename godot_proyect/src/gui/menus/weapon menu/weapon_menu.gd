@@ -2,6 +2,8 @@ extends MenuPanel
 
 onready var pager = get_node("MarginContainer/Pager")
 
+var unlocked_entries: Dictionary
+
 func _ready() -> void:
 	global.connect("user_pause", self, "_on_global_user_pause")
 	opening_animation()
@@ -63,7 +65,7 @@ func update_entries() -> void:
 	
 	for entry in pager.current_page.get_node("Letters").get_children():
 		var key = Vector2(page, n_entries)
-		var node = get_node("MarginContainer/Pager/Page" + str(page) + "/Info/" + entry.name)
+		var node = pager.get_node("Page" + str(page) + "/Info/" + entry.name)
 		
 		if key == Vector2(0, 7):
 			# e-tank entry.
