@@ -65,6 +65,11 @@ as well as an original story by me, Tear.
 - Personal Twitter profile: (https://twitter.com/PK_Gaspi) (personal, not only gamedev there)
 
 ### FAQ
+Q: When will the game be released?  
+A: There isn't a specific release date. A release build will be published whenever
+I feel the game is ready. I estimate that will be this year. A demo with one level
+may be available soon.
+
 Q: Is that Mega Man shooting with his arms or is it a ship where Mega Man is in?  
 A: This was a very popular question for [Mega Man Space], when the Megaship design
 was very similar to Mega Man extending his arms from the top. I hope this is clear 
