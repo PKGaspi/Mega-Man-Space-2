@@ -17,6 +17,7 @@ invert_dir = true
 rotate_towards_destination = true
 _follow_megaship_at_ready = true
 follow_max_distance = 200.0
+drifting = 0.8
 damage = 8.0
 
 [node name="Sprite" type="Sprite" parent="." index="5"]

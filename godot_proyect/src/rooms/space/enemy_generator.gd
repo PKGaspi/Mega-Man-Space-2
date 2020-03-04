@@ -23,7 +23,7 @@ var width : float
 var height : float
 var center : Vector2
 
-var horde : bool = false
+var horde : bool = true
 var total_enemies : int = 10
 var n_enemies : int = 0
 var max_enemies : int = 4
@@ -56,7 +56,6 @@ func _process(delta):
 				y = random.randf_range(- height / 2, height / 2) + center.y
 			create_enemy(Vector2(x, y), random.randi_range(0, enemies_len - 1))
 		if total_enemies == 0:
-			horde = false
 			new_random_horde()
 
 func _on_enemy_death():
@@ -64,7 +63,6 @@ func _on_enemy_death():
 
 func new_horde(new_spawn, total_enemies, max_enemies):
 	# TODO: play new horde sound.
-	horde = true
 	if warning != null:
 		warning.queue_free()
 		visibility_notifier.queue_free()

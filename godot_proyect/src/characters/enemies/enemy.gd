@@ -10,6 +10,8 @@ export(bool) var rotate_towards_destination = false
 export(bool) var _follow_megaship_at_ready = false
 export(float) var follow_max_distance = -1
 export(bool) var dynamic_dir : bool = true
+export(float, .0, 1.0) var drifting: = .0 # How easily this enemi drifts.
+
 var to_follow = null
 var to_follow_on_range = false
 var dir : Vector2 = Vector2()
@@ -40,11 +42,18 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	destination = get_destination()
 	if dynamic_dir:
-		dir = global_position.direction_to(destination)
+		if dir == Vector2.ZERO:
+			dir = global_position.direction_to(destination)
+		else:
+			if invert_dir:
+				dir = - dir # Dir needs to be inverted if it was before.
+			var rot = dir.angle_to(global_position.direction_to(destination))
+			rot *= (1 - drifting) / 10
+			dir = dir.rotated(rot)
 	if to_follow != null:
 		to_follow_on_range = follow_max_distance < 0 or global_position.distance_to(destination) <= follow_max_distance
 		if !to_follow_on_range:
-			dir = Vector2()
+			dir = Vector2.ZERO
 	if invert_dir:
 		dir = - dir
 	if rotate_towards_destination and (to_follow_on_range or to_follow == null):
