@@ -84,6 +84,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+hide_when_animating = NodePath("MarginContainer")
 
 [node name="Background" type="NinePatchRect" parent="."]
 material = SubResource( 2 )
@@ -264,30 +265,37 @@ text = "next"
 [node name="P" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 16.0
 margin_bottom = 24.0
+max_value = 28.0
+palette = 0
 
 [node name="H" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_bottom = 40.0
+max_value = 28.0
 palette = 1
 
 [node name="A" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 48.0
 margin_bottom = 56.0
+max_value = 28.0
 palette = 2
 
 [node name="W" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_bottom = 72.0
+max_value = 28.0
 palette = 3
 
 [node name="B" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 80.0
 margin_bottom = 88.0
+max_value = 28.0
 palette = 4
 
 [node name="Q" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 96.0
 margin_bottom = 104.0
+max_value = 28.0
 palette = 5
 
 [node name="E" type="HBoxContainer" parent="MarginContainer/Pager/Page0/Info"]
@@ -490,31 +498,37 @@ text = "next"
 [node name="F" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 16.0
 margin_bottom = 24.0
+max_value = 28.0
 palette = 6
 
 [node name="M" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_bottom = 40.0
+max_value = 28.0
 palette = 7
 
 [node name="C" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 48.0
 margin_bottom = 56.0
+max_value = 28.0
 palette = 8
 
 [node name="1" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_bottom = 72.0
+max_value = 28.0
 palette = 9
 
 [node name="2" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 80.0
 margin_bottom = 88.0
+max_value = 28.0
 palette = 9
 
 [node name="3" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 96.0
 margin_bottom = 104.0
+max_value = 28.0
 palette = 9
 
 [node name="1ups" type="Control" parent="MarginContainer/Pager/Page1/Info"]
@@ -561,11 +575,5 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "CONFIG"
 
-[node name="FlickeringTimer" type="Timer" parent="."]
-wait_time = 0.133
-
 [node name="SndMenuSelect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-
-[node name="Tween" type="Tween" parent="."]
-[connection signal="timeout" from="FlickeringTimer" to="." method="_on_FlickeringTimer_timeout"]
