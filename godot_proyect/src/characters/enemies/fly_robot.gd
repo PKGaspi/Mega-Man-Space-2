@@ -1,4 +1,4 @@
-extends "res://src/characters/enemies/enemy.gd"
+extends Enemy
 
 const PROPELLER_SPEED = 10
 

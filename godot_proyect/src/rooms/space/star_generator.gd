@@ -32,8 +32,8 @@ export(int) var MAX_PLANETS_PER_SECTOR = 1
 
 const SECTOR_SIZE_MULTIPLIER = .35
 onready var sector_size = get_viewport().size * SECTOR_SIZE_MULTIPLIER # Sector size.
-onready var sector_rows = sector_size.x / 10 # Number of sectors loaded at the same time on a row.
-onready var sector_columns = sector_size.y / 10 # Number of sectors loaded at the same time on a column.
+onready var sector_rows = get_viewport().size.y / 27 # Number of sectors loaded at the same time on a row.
+onready var sector_columns = get_viewport().size.x / 48 # Number of sectors loaded at the same time on a column.
 onready var stars_per_sector = 5 # Number of stars to attempt to generate per sector.
 
 var random # Base randomizer.
@@ -75,6 +75,7 @@ func _ready():
 	
 	# Connect Viewport size_changes signal.
 	get_viewport().connect("size_changed", self, "_on_viewport_size_changed")
+	$BackgroundColor.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 
 func _process(delta):
 	if to_follow != null and get_node(to_follow) is Node2D:
@@ -98,7 +99,6 @@ func _on_to_follow_tree_exiting():
 func _on_viewport_size_changed():
 	$BackgroundColor.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 	sector_size = get_viewport().size * SECTOR_SIZE_MULTIPLIER
-	print(sector_size)
 
 #########################
 ## Auxiliar functions. ##

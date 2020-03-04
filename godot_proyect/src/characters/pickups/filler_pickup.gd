@@ -1,4 +1,5 @@
-extends "res://src/characters/pickups/pickup.gd"
+class_name FillerPickup
+extends Pickup
 
 var prefix : String = ""
 

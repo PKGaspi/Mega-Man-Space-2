@@ -2,17 +2,16 @@ extends Control
 
 const LVL_SCENE = preload("res://src/rooms/space/space.tscn")
 
-var WEAPONS = global.WEAPONS
 var COORDS_TO_WEAPONS = {
-	Vector2(-1, -1) : WEAPONS.BUBBLE,
-	Vector2(0, -1) : WEAPONS.AIR,
-	Vector2(1, -1) : WEAPONS.QUICK,
-	Vector2(-1, 0) : WEAPONS.HEAT,
-	Vector2(0, 0) : WEAPONS.MEGA,
-	Vector2(1, 0) : WEAPONS.WOOD,
-	Vector2(-1, 1) : WEAPONS.METAL,
-	Vector2(0, 1) : WEAPONS.FLASH,
-	Vector2(1, 1) : WEAPONS.CRASH,
+	Vector2(-1, -1) : Weapon.TYPES.BUBBLE,
+	Vector2(0, -1) : Weapon.TYPES.AIR,
+	Vector2(1, -1) : Weapon.TYPES.QUICK,
+	Vector2(-1, 0) : Weapon.TYPES.HEAT,
+	Vector2(0, 0) : Weapon.TYPES.MEGA,
+	Vector2(1, 0) : Weapon.TYPES.WOOD,
+	Vector2(-1, 1) : Weapon.TYPES.METAL,
+	Vector2(0, 1) : Weapon.TYPES.FLASH,
+	Vector2(1, 1) : Weapon.TYPES.CRASH,
 }
 
 func _on_entry_actioned(column, row) -> void:

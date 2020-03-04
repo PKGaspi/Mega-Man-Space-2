@@ -84,6 +84,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+hide_when_animating = NodePath("MarginContainer")
 
 [node name="Background" type="NinePatchRect" parent="."]
 material = SubResource( 2 )
@@ -561,11 +562,5 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "CONFIG"
 
-[node name="FlickeringTimer" type="Timer" parent="."]
-wait_time = 0.133
-
 [node name="SndMenuSelect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-
-[node name="Tween" type="Tween" parent="."]
-[connection signal="timeout" from="FlickeringTimer" to="." method="_on_FlickeringTimer_timeout"]
