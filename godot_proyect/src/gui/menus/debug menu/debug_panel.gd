@@ -17,7 +17,7 @@ func _input(event: InputEvent) -> void:
 func set_active(value: bool) -> void:
 	active = value
 	visible = value
-	menu.set_active(value)
+	menu.set_active(value and !global.is_paused)
 	if value:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:

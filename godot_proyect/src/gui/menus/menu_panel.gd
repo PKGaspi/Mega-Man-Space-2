@@ -147,7 +147,7 @@ func set_active(value: bool) -> void:
 		flickering_timer.start()
 	else:
 		flickering_timer.stop()
-		entry.modulate.a = 1
+		if entry != null: entry.modulate.a = 1
 
 func next_entry() -> void:
 	if n_entries != 0:
