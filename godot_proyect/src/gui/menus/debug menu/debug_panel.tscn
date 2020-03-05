@@ -65,6 +65,9 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+animate_opening = false
+animate_closing = false
+entries = [ NodePath("0"), NodePath("1") ]
 
 [node name="0" type="Label" parent="DebugContainer/MarginContainer/Entries/Options"]
 margin_right = 92.0

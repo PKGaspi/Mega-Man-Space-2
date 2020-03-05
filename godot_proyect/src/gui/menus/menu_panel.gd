@@ -8,6 +8,8 @@ var flickering_timer = Timer.new()
 export var _selected_flickering_interval: float = 8.0/60.0
 export var opening_time: = .3
 export var hide_when_animating: NodePath
+export var animate_opening: bool = true
+export var animate_closing: bool = true
 export var background: NodePath = "Background"
 export var palette: int = 0 setget set_palette
 
@@ -31,20 +33,14 @@ signal closed
 signal animation_ended
 
 func _ready() -> void:
-	# Setup tween.
-	add_child(tween)
-	# Setup flickering timer.
-	add_child(flickering_timer)
-	flickering_timer.wait_time = _selected_flickering_interval
-	flickering_timer.connect("timeout", self, "_on_FlickeringTimer_timeout")
-	flickering_timer.start()
+	_init_children()
 	
 	# Connect global pause.
 	global.connect("user_pause", self, "_on_global_user_pause")
 	
 	# Animate opening.
-	opening_animation()
-	
+	if animate_opening:
+		opening_animation()
 	# Update current entires.
 	call_deferred("update_entries")
 	
@@ -96,13 +92,22 @@ func _on_global_user_pause(value : bool) -> void:
 	if !value:
 		close_menu()
 
+func _init_children():
+	# Setup tween.
+	add_child(tween)
+	# Setup flickering timer.
+	add_child(flickering_timer)
+	flickering_timer.wait_time = _selected_flickering_interval
+	flickering_timer.connect("timeout", self, "_on_FlickeringTimer_timeout")
+	flickering_timer.start()
+
 func play_sound(snd: NodePath) -> void:
-	if snd != null:
+	if has_node(snd):
 		var node = get_node(snd)
 		if node != null and node.has_method("play"):
 			 get_node(snd).play()
 
-func growing_animation(start_size: Vector2, final_size: Vector2, time: float = opening_time, hide:= get_node(hide_when_animating)):
+func growing_animation(start_size: Vector2, final_size: Vector2, time: float = opening_time, hide:= get_node(hide_when_animating) if has_node(hide_when_animating) else null):
 	if hide != null: hide.visible = false
 	# Start opening animation.
 	tween.interpolate_property(self, "rect_size", start_size, final_size, time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -114,20 +119,25 @@ func growing_animation(start_size: Vector2, final_size: Vector2, time: float = o
 	emit_signal("animation_ended")
 
 func opening_animation(time = opening_time):
+	var previous_active = active
+	set_active(false)
 	play_sound(snd_open)
 	growing_animation(Vector2.ZERO, rect_size, time)
 	yield(self, "animation_ended")
 	emit_signal("opened")
+	set_active(previous_active)
 
 func closing_animation(time = opening_time):
+	set_active(false)
 	growing_animation(rect_size, Vector2.ZERO, time)
 	yield(self, "animation_ended")
 	emit_signal("closed")
 
 func close_menu():
 	play_sound(snd_close)
-	closing_animation()
-	yield(self, "closed")
+	if animate_closing:
+		closing_animation()
+		yield(self, "closed")
 	queue_free()
 
 func set_entry(value : int) -> bool:

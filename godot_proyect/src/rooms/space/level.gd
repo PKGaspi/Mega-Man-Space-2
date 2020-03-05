@@ -34,6 +34,7 @@ var music_loops = {
 func _ready() -> void:
 	get_tree().current_scene = self
 	global.connect("user_pause", self, "_on_global_user_pause")
+	$GameLayer/Megaship.connect("death", self, "_on_megaship_death")
 	
 	set_music(lvl_id)
 	start_ready_animation()

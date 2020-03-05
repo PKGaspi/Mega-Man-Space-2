@@ -118,10 +118,8 @@ func _ready():
 	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
 	
 	# Connect signals.
-	connect("death", $"/root/Space", "_on_megaship_death")
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
 	connect("palette_change", ammo_bar, "set_palette")
-	
 	global.connect("user_pause", self, "_on_global_user_pause")
 
 
@@ -338,7 +336,7 @@ func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 	if !unlocked_weapons.has(weapon_index):
 		weapon_index = Weapon.TYPES.MEGA
 	var unlocked = unlocked_weapons[weapon_index]
-	if unlocked:
+	if unlocked and weapon_index != active_weapon:
 		if play_sound:
 			$SndWeaponSwap.play()
 		# Set palette.
@@ -357,19 +355,17 @@ func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 
 func next_weapon():
 	# WARNING: This only works as expected if at least one weapon
-	# is unlocked. Mega is unlocked by default and at all time.
-	var weapon = max((active_weapon + 1) % Weapon.TYPES.SIZE, 0)
+	# is unlocked. Mega is unlocked by default and should be at all times.
+	var weapon = (active_weapon + 1) % Weapon.TYPES.SIZE
 	while !set_weapon(weapon):
-		pass
+		weapon = (weapon + 1) % Weapon.TYPES.SIZE
 
 func previous_weapon():
 	# WARNING: This only works as expected if at least one weapon
-	# is unlocked. Mega is unlocked by default and at all time.
-	var weapon = (active_weapon - 1) % Weapon.TYPES.SIZE
-	if weapon < 0: 
-		weapon = Weapon.TYPES.SIZE - 1
+	# is unlocked. Mega is unlocked by default and should be at all times.
+	var weapon = (active_weapon - 1) if active_weapon > 0 else Weapon.TYPES.SIZE - 1
 	while !set_weapon(weapon):
-		pass
+		weapon = weapon - 1 if weapon > 0 else Weapon.TYPES.SIZE - 1
 
 func die():
 	# Save the camera position.
