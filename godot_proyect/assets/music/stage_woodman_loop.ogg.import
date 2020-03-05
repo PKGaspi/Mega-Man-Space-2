@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/stage_woodman_loop.ogg-7ca8423b784acc10eba04fa25b999d60.oggstr"
+
+[deps]
+
+source_file="res://assets/music/stage_woodman_loop.ogg"
+dest_files=[ "res://.import/stage_woodman_loop.ogg-7ca8423b784acc10eba04fa25b999d60.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

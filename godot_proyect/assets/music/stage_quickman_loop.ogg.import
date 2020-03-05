@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/stage_quickman_loop.ogg-b0374e98a0f346516725e7e31431020d.oggstr"
+
+[deps]
+
+source_file="res://assets/music/stage_quickman_loop.ogg"
+dest_files=[ "res://.import/stage_quickman_loop.ogg-b0374e98a0f346516725e7e31431020d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

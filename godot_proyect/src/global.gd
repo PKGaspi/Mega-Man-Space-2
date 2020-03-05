@@ -1,5 +1,6 @@
 extends Node
 
+const DEBUG_BUS_LAYOUT = preload("res://resources/audio/debug_bus_layout.tres")
 const CURSOR = preload("res://assets/sprites/gui/cursor.png")
 const TOUCHSCREEN_LAYOUT = preload("res://src/gui/touchscreen_layout.tscn")
 
@@ -53,10 +54,15 @@ var prev_mouse_mode
 signal user_pause
 
 func _ready():
+	# Init global randomizer.
 	random = init_random()
-	pause_mode = Node.PAUSE_MODE_PROCESS
+	
+	# Set mouse mode.
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	
+	# Set bus layout.
+	if OS.is_debug_build():
+		AudioServer.set_bus_layout(DEBUG_BUS_LAYOUT)
 	
 
 func _input(event: InputEvent) -> void:

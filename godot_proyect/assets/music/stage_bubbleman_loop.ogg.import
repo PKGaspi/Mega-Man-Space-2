@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/stage_bubbleman_loop.ogg-1956b9c22c8a81378e7e9a183ccc630c.oggstr"
+
+[deps]
+
+source_file="res://assets/music/stage_bubbleman_loop.ogg"
+dest_files=[ "res://.import/stage_bubbleman_loop.ogg-1956b9c22c8a81378e7e9a183ccc630c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -4,11 +4,13 @@
 [ext_resource path="res://src/rooms/select stage/penta_blue_bar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/rooms/select stage/triple_white_bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/music/stage_select_intro.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/music/stage_select_loop.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/music/select_stage_intro.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/music/select_stage_loop.ogg" type="AudioStream" id=6]
 [ext_resource path="res://src/gui/menus/select stage menu/select_stage_menu.gd" type="Script" id=7]
 [ext_resource path="res://src/rooms/select stage/select_stage.gd" type="Script" id=8]
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=9]
+
+
 
 [node name="SelectStage" type="Control"]
 anchor_right = 1.0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/stage_crashman_loop.ogg-6fd03c98554a91ccdac56a67abf1af33.oggstr"
+
+[deps]
+
+source_file="res://assets/music/stage_crashman_loop.ogg"
+dest_files=[ "res://.import/stage_crashman_loop.ogg-6fd03c98554a91ccdac56a67abf1af33.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
