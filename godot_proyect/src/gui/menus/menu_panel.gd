@@ -9,11 +9,12 @@ export var _selected_flickering_interval: float = 8.0/60.0
 export var opening_time: = .3
 export var hide_when_animating: NodePath
 export var background: NodePath = "Background"
+export var palette: int = 0 setget set_palette
 
-var active:= true
-var entries:= []
+var active:= true setget set_active
+export(Array, NodePath) var entries
 var entry: Node
-var entry_index: int = 1
+export var entry_index: int = 0
 var n_entries: int = 0
 
 export var snd_selection_change: NodePath = "SndMenuSelect"
@@ -30,6 +31,15 @@ func _ready() -> void:
 	flickering_timer.wait_time = _selected_flickering_interval
 	flickering_timer.connect("timeout", self, "_on_FlickeringTimer_timeout")
 	flickering_timer.start()
+	
+	# Connect global pause.
+	global.connect("user_pause", self, "_on_global_user_pause")
+	
+	# Animate opening.
+	opening_animation()
+	
+	# Update current entires.
+	call_deferred("update_entries")
 	
 func _input(event: InputEvent) -> void:
 	if active:
@@ -59,13 +69,17 @@ func _on_action_pressed_ui_left():
 	pass
 
 func _on_action_pressed_ui_right():
-	_on_action_pressed_ui_accept()
+	pass
 	
 func _on_action_pressed_ui_accept():
 	pass
 
 func _on_FlickeringTimer_timeout() -> void:
 	entry.modulate.a = 0 if entry.modulate.a == 1 else 1
+
+func _on_global_user_pause(value : bool) -> void:
+	if !value:
+		close_menu()
 
 func growing_animation(start_size: Vector2, final_size: Vector2, time: float = opening_time, hide:= get_node(hide_when_animating)):
 	if hide != null: hide.visible = false
@@ -88,6 +102,11 @@ func closing_animation(time = opening_time):
 	yield(self, "animation_ended")
 	emit_signal("closed")
 
+func close_menu():
+	closing_animation()
+	yield(self, "closed")
+	queue_free()
+
 func set_entry(value : int, play_sound: bool = true) -> bool:
 # warning-ignore:narrowing_conversion
 	value = clamp(value, 0, n_entries)
@@ -96,9 +115,17 @@ func set_entry(value : int, play_sound: bool = true) -> bool:
 		if entry != null:
 			entry.modulate.a = 1
 		entry_index = value
-		entry = entries[entry_index]
+		entry = get_node(entries[entry_index]) if entries[entry_index] is NodePath else entries[entry_index]
 		return true
 	return false
+
+func set_active(value: bool) -> void:
+	active = value
+	if active:
+		flickering_timer.start()
+	else:
+		flickering_timer.stop()
+		entry.modulate.a = 1
 
 func next_entry() -> void:
 	if n_entries != 0:
@@ -115,8 +142,11 @@ func previous_entry() -> void:
 		set_entry(new_entry)
 
 func update_entries() -> void:
-	pass
+	n_entries = len(entries)
+	entry_index = clamp(entry_index, 0, n_entries - 1)
+	entry = get_node(entries[entry_index])
 
 func set_palette(value : int) -> void:
 	if value < PALETTES.get_frame_count("default"):
+		palette = value
 		get_node(background).material.set_shader_param("palette", PALETTES.get_frame("default", value))

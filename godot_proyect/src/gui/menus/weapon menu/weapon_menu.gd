@@ -1,23 +1,16 @@
 extends MenuPanel
 
+const PAUSE_MENU = preload("res://src/gui/menus/pause menu/pause_menu.tscn")
+
 onready var pager = get_node("MarginContainer/Pager")
 
 var unlocked_entries: Dictionary
-
-func _ready() -> void:
-	global.connect("user_pause", self, "_on_global_user_pause")
-	opening_animation()
-	
-	# Load menu entries.
-	update_entries()
-	flickering_timer.start()
 
 func _on_action_pressed_ui_left():
 	previous_page()
 
 func _on_action_pressed_ui_right():
 	next_page()
-	
 
 func _on_action_pressed_ui_accept():
 	match entry_index:
@@ -32,21 +25,16 @@ func _on_action_pressed_ui_accept():
 				global.set_user_pause(false)
 		8:
 			# TODO: Open settings menu.
+			var inst = PAUSE_MENU.instance()
+			inst.palette = palette
+			get_parent().add_child(inst)
+			set_active(false)
 			pass
 		_:
 			# Set weapon.
 			if global.MEGASHIP != null and global.MEGASHIP.has_method("set_weapon"):
 				global.MEGASHIP.set_weapon(pager.page_index * 6 + entry_index - 1, false)
 				global.set_user_pause(false)
-	
-func _on_global_user_pause(value : bool) -> void:
-	if !value:
-		closing_animation()
-		yield(self, "closed")
-		queue_free()
-
-func _on_FlickeringTimer_timeout() -> void:
-	entry.modulate.a = 0 if entry.modulate.a == 1 else 1
 
 func next_page() -> void:
 	entry.modulate.a = 1

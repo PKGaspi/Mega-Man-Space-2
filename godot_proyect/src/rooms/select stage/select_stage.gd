@@ -14,6 +14,9 @@ var COORDS_TO_WEAPONS = {
 	Vector2(1, 1) : Weapon.TYPES.CRASH,
 }
 
+func _ready() -> void:
+	get_tree().current_scene = self
+
 func _on_entry_actioned(column, row) -> void:
 	if column != 0 or row != 0:
 		var lvl = LVL_SCENE.instance()

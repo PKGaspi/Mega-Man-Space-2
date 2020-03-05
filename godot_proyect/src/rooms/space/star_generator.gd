@@ -31,9 +31,9 @@ export(float) var PLANET_FREQUENCY = .01
 export(int) var MAX_PLANETS_PER_SECTOR = 1
 
 const SECTOR_SIZE_MULTIPLIER = .35
-onready var sector_size = get_viewport().size * SECTOR_SIZE_MULTIPLIER # Sector size.
-onready var sector_rows = get_viewport().size.y / 27 # Number of sectors loaded at the same time on a row.
-onready var sector_columns = get_viewport().size.x / 48 # Number of sectors loaded at the same time on a column.
+onready var sector_size = get_viewport().get_size_override() * SECTOR_SIZE_MULTIPLIER # Sector size.
+onready var sector_rows = get_viewport().get_size_override().y / 27 # Number of sectors loaded at the same time on a row.
+onready var sector_columns = get_viewport().get_size_override().x / 48 # Number of sectors loaded at the same time on a column.
 onready var stars_per_sector = 5 # Number of stars to attempt to generate per sector.
 
 var random # Base randomizer.
@@ -98,7 +98,7 @@ func _on_to_follow_tree_exiting():
 
 func _on_viewport_size_changed():
 	$BackgroundColor.set_anchors_and_margins_preset(Control.PRESET_WIDE)
-	sector_size = get_viewport().size * SECTOR_SIZE_MULTIPLIER
+	sector_size = get_viewport().get_size_override() * SECTOR_SIZE_MULTIPLIER
 
 #########################
 ## Auxiliar functions. ##

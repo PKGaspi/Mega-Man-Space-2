@@ -85,11 +85,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 hide_when_animating = NodePath("MarginContainer")
+entry_index = 1
 
 [node name="Background" type="NinePatchRect" parent="."]
 material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource( 7 )
 patch_margin_left = 8
 patch_margin_top = 8
@@ -340,7 +343,7 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "CONFIG"
+text = "MENU"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -560,7 +563,7 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "CONFIG"
+text = "MENU"
 
 [node name="SndMenuSelect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

@@ -4,6 +4,7 @@ const SELECT_SCREEN = "res://src/rooms/select stage/select_stage.tscn"
 
 var to_move : Vector2 = Vector2(0, 100)
 func _ready() -> void:
+	get_tree().current_scene = self
 	randomize()
 	$Music.play()
 	animate_camera()
