@@ -7,12 +7,37 @@ const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
 var lvl_id = 0 # This is set when selecting the level.
 
+var music_intros = {
+	Weapon.TYPES.MEGA : preload("res://assets/music/stage_crashman_intro.wav"),
+	Weapon.TYPES.AIR : null,
+	Weapon.TYPES.BUBBLE : preload("res://assets/music/stage_bubbleman_intro.wav"),
+	Weapon.TYPES.CRASH : preload("res://assets/music/stage_crashman_intro.wav"),
+	Weapon.TYPES.FLASH : preload("res://assets/music/stage_flashman_intro.wav"),
+	Weapon.TYPES.HEAT : null,
+	Weapon.TYPES.METAL : null,
+	Weapon.TYPES.QUICK : null,
+	Weapon.TYPES.WOOD : preload("res://assets/music/stage_woodman_intro.wav"),
+}
+
+var music_loops = {
+	Weapon.TYPES.MEGA : preload("res://assets/music/stage_crashman_loop.ogg"),
+	Weapon.TYPES.AIR : preload("res://assets/music/stage_airman_loop.ogg"),
+	Weapon.TYPES.BUBBLE : preload("res://assets/music/stage_bubbleman_loop.ogg"),
+	Weapon.TYPES.CRASH : preload("res://assets/music/stage_crashman_loop.ogg"),
+	Weapon.TYPES.FLASH : preload("res://assets/music/stage_flashman_loop.ogg"),
+	Weapon.TYPES.HEAT : preload("res://assets/music/stage_heatman_loop.ogg"),
+	Weapon.TYPES.METAL : preload("res://assets/music/stage_metalman_loop.ogg"),
+	Weapon.TYPES.QUICK : preload("res://assets/music/stage_quickman_loop.ogg"),
+	Weapon.TYPES.WOOD : preload("res://assets/music/stage_woodman_loop.ogg"),
+}
+
 func _ready() -> void:
 	get_tree().current_scene = self
-	$Music.play()
 	global.connect("user_pause", self, "_on_global_user_pause")
-	$GUILayer/Container/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
-	global.pause()
+	
+	set_music(lvl_id)
+	start_ready_animation()
+
 
 func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("user_pause"):
@@ -58,6 +83,21 @@ func _on_global_user_pause(value) -> void:
 		$GameLayer.add_child(inst)
 	else: # Game is paused.
 		create_weapons_menu()
+	
+func set_music(music_index: int) -> void:
+	if music_intros.has(lvl_id) and music_loops.has(lvl_id):
+		var intro = music_intros[lvl_id]
+		var loop = music_loops[lvl_id]
+		$MusicIntro.stream = intro
+		$MusicLoop.stream = loop
+		if intro != null:
+			$MusicIntro.play()
+		elif loop != null:
+			$MusicLoop.play()
+
+func start_ready_animation():
+	$GUILayer/Container/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
+	global.pause()
 
 func create_weapons_menu() -> void:
 	var inst = WEAPONS_MENU.instance()
@@ -80,7 +120,7 @@ func create_weapons_menu() -> void:
 
 func death() -> void:
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("none")
-	$Music.stop()
+	$MusicLoop.stop()
 	$GameOverTimer.start(GAME_OVER_WAIT_TIME)
 	
 	# TODO: Start timer for game over screen or something like that.

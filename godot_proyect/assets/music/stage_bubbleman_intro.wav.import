@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/stage_bubbleman_intro.wav-bdb9118db502e1443b97a7b6d9ca8669.sample"
+
+[deps]
+
+source_file="res://assets/music/stage_bubbleman_intro.wav"
+dest_files=[ "res://.import/stage_bubbleman_intro.wav-bdb9118db502e1443b97a7b6d9ca8669.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

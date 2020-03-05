@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/stage_airman_loop.ogg-2e0959e624692ed09143be14fcf18608.oggstr"
+
+[deps]
+
+source_file="res://assets/music/stage_airman_loop.ogg"
+dest_files=[ "res://.import/stage_airman_loop.ogg-2e0959e624692ed09143be14fcf18608.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
