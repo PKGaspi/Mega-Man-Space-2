@@ -14,11 +14,6 @@ func _ready() -> void:
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
 	global.pause()
 
-func _input(event : InputEvent) -> void:
-	if event.is_action_pressed("user_pause"):
-		global.toggle_user_pause()
-
-
 func _on_animation_finished(animation):
 	if animation == "ready":
 		global.create_touchscreen_layout($GUILayer/Container)

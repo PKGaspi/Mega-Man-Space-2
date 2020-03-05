@@ -60,6 +60,8 @@ func _ready():
 	
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("user_pause"):
+		global.toggle_user_pause()
 	# Set current input method.
 	if input_type != INPUT_TYPES.KEY_MOUSE and (event is InputEventKey or event is InputEventMouseButton or event is InputEventMouseMotion):
 		input_type = INPUT_TYPES.KEY_MOUSE
@@ -82,7 +84,7 @@ func _input(event: InputEvent) -> void:
 	# Exit game function.
 	if event.is_action_pressed("exit_game"):
 		$GameExitTimer.start(EXITING_TIME)
-	if event.is_action_released("exit_game"):
+	elif event.is_action_released("exit_game"):
 		$GameExitTimer.stop()
 	
 func _on_megaship_tree_exiting():
@@ -173,6 +175,7 @@ func fix_mouse_mode():
 	var tmp = Input.get_mouse_mode()
 	Input.set_mouse_mode(0)
 	Input.set_mouse_mode(tmp)
+	# Input.call_deferred("set_mouse_mode", Input.get_mouse_mode())
 
 func obtain_1up():
 	lifes = min(lifes + 1, MAX_LIFES)
