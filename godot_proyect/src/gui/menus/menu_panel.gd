@@ -111,7 +111,7 @@ func set_entry(value : int, play_sound: bool = true) -> bool:
 # warning-ignore:narrowing_conversion
 	value = clamp(value, 0, n_entries)
 	if value < entries.size():
-		if play_sound and snd_selection_change != null: get_node(snd_selection_change).play()
+		if play_sound and get_node(snd_selection_change) != null: get_node(snd_selection_change).play()
 		if entry != null:
 			entry.modulate.a = 1
 		entry_index = value
@@ -125,7 +125,7 @@ func set_active(value: bool) -> void:
 		flickering_timer.start()
 	else:
 		flickering_timer.stop()
-		entry.modulate.a = 1
+		if entry != null: entry.modulate.a = 1
 
 func next_entry() -> void:
 	if n_entries != 0:
