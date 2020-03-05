@@ -84,6 +84,10 @@ config/name="Mega Man Space 2"
 run/main_scene="res://src/rooms/space/space.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout="res://resources/audio/default_bus_layout.tres"
+
 [autoload]
 
 global="*res://src/global.tscn"
