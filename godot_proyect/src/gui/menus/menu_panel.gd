@@ -17,7 +17,14 @@ var entry: Node
 export var entry_index: int = 0
 var n_entries: int = 0
 
-export var snd_selection_change: NodePath = "SndMenuSelect"
+export var snd_open: NodePath = "SndOpen"
+export var snd_close: NodePath = "SndClose"
+export var snd_ui_up: NodePath = "SndUIMove"
+export var snd_ui_down: NodePath = "SndUIMove"
+export var snd_ui_left: NodePath = "SndUIMove"
+export var snd_ui_right: NodePath = "SndUIMove"
+export var snd_ui_accept: NodePath = "SndUIAccept"
+export var snd_ui_cancel: NodePath = "SndUICancel"
 
 signal opened
 signal closed
@@ -58,11 +65,16 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_pressed("ui_accept"):
 			accept_event()
 			_on_action_pressed_ui_accept()
+		elif event.is_action_pressed("ui_cancel"):
+			accept_event()
+			_on_action_pressed_ui_accept()
 
 func _on_action_pressed_ui_down():
+	play_sound(snd_ui_down)
 	next_entry()
 	
 func _on_action_pressed_ui_up():
+	play_sound(snd_ui_up)
 	previous_entry()
 
 func _on_action_pressed_ui_left():
@@ -74,12 +86,21 @@ func _on_action_pressed_ui_right():
 func _on_action_pressed_ui_accept():
 	pass
 
+func _on_action_pressed_ui_cancel():
+	pass
+
 func _on_FlickeringTimer_timeout() -> void:
 	entry.modulate.a = 0 if entry.modulate.a == 1 else 1
 
 func _on_global_user_pause(value : bool) -> void:
 	if !value:
 		close_menu()
+
+func play_sound(snd: NodePath) -> void:
+	if snd != null:
+		var node = get_node(snd)
+		if node != null and node.has_method("play"):
+			 get_node(snd).play()
 
 func growing_animation(start_size: Vector2, final_size: Vector2, time: float = opening_time, hide:= get_node(hide_when_animating)):
 	if hide != null: hide.visible = false
@@ -93,6 +114,7 @@ func growing_animation(start_size: Vector2, final_size: Vector2, time: float = o
 	emit_signal("animation_ended")
 
 func opening_animation(time = opening_time):
+	play_sound(snd_open)
 	growing_animation(Vector2.ZERO, rect_size, time)
 	yield(self, "animation_ended")
 	emit_signal("opened")
@@ -103,15 +125,15 @@ func closing_animation(time = opening_time):
 	emit_signal("closed")
 
 func close_menu():
+	play_sound(snd_close)
 	closing_animation()
 	yield(self, "closed")
 	queue_free()
 
-func set_entry(value : int, play_sound: bool = true) -> bool:
+func set_entry(value : int) -> bool:
 # warning-ignore:narrowing_conversion
 	value = clamp(value, 0, n_entries)
 	if value < entries.size():
-		if play_sound and snd_selection_change != null: get_node(snd_selection_change).play()
 		if entry != null:
 			entry.modulate.a = 1
 		entry_index = value

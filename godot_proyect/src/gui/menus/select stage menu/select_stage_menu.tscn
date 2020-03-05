@@ -1,0 +1,164 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=1]
+[ext_resource path="res://src/gui/menus/select stage menu/select_stage_menu.gd" type="Script" id=2]
+[ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.gd" type="Script" id=3]
+[ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.tscn" type="PackedScene" id=4]
+
+[node name="SelectStageMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopLeftEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.33
+anchor_top = 0.2
+anchor_right = 0.33
+anchor_bottom = 0.2
+margin_left = -21.4
+margin_top = -21.0
+margin_right = 22.6
+margin_bottom = 39.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+column = -1
+row = -1
+
+[node name="TopCenterEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -22.0
+margin_top = -21.0
+margin_right = 22.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+row = -1
+
+[node name="TopRightEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.67
+anchor_top = 0.2
+anchor_right = 0.67
+anchor_bottom = 0.2
+margin_left = -21.4
+margin_top = -21.0
+margin_right = 22.6
+margin_bottom = 39.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+column = 1
+row = -1
+
+[node name="MiddleLeftEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.33
+anchor_top = 0.5
+anchor_right = 0.33
+anchor_bottom = 0.5
+margin_left = -22.4
+margin_top = -22.0
+margin_right = 21.6
+margin_bottom = 38.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+column = -1
+
+[node name="MiddleCenterEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.0
+margin_top = -22.0
+margin_right = 22.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiddleRightEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.67
+anchor_top = 0.5
+anchor_right = 0.67
+anchor_bottom = 0.5
+margin_left = -22.0
+margin_top = -22.0
+margin_right = 22.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+column = 1
+
+[node name="BottomLeftEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.33
+anchor_top = 0.8
+anchor_right = 0.33
+anchor_bottom = 0.8
+margin_left = -22.4
+margin_top = -22.0
+margin_right = 21.6
+margin_bottom = 38.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+column = -1
+row = 1
+
+[node name="BottomCenterEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+margin_left = -22.0
+margin_top = -22.0
+margin_right = 22.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+row = 1
+
+[node name="BottomRightEntry" type="Control" parent="." instance=ExtResource( 4 )]
+anchor_left = 0.67
+anchor_top = 0.8
+anchor_right = 0.67
+anchor_bottom = 0.8
+margin_left = -22.0
+margin_top = -22.0
+margin_right = 22.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 15, 29 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+column = 1
+row = 1
+
+[node name="SndSelectionChange" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )

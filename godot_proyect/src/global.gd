@@ -119,7 +119,6 @@ func set_user_pause(value : bool) -> void:
 		user_pause = value
 		emit_signal("user_pause", value)
 		if value:
-			$SndPauseMenu.play()
 			prev_mouse_mode = Input.get_mouse_mode() 
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:

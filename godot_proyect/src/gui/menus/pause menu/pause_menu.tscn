@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=2]
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=4]
 [ext_resource path="res://src/gui/menus/pause menu/pause_menu.gd" type="Script" id=5]
+[ext_resource path="res://assets/sfx/other/pause_menu.wav" type="AudioStream" id=6]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -152,5 +153,8 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "Exit to Desktop"
 
-[node name="SndMenuSelect" type="AudioStreamPlayer" parent="."]
+[node name="SndUIMove" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[node name="SndOpen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
