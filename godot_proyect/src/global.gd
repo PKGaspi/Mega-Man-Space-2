@@ -103,7 +103,7 @@ func unpause() -> void:
 	
 func set_pause(value : bool) -> void:
 	is_paused = value
-	get_tree().paused = value
+	self.get_tree().paused = value
 
 func set_user_pause(value : bool) -> void:
 	# The user can only pause the game if it is not paused

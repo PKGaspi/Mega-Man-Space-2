@@ -143,6 +143,7 @@ func previous_entry() -> void:
 
 func update_entries() -> void:
 	n_entries = len(entries)
+# warning-ignore:narrowing_conversion
 	entry_index = clamp(entry_index, 0, n_entries - 1)
 	entry = get_node(entries[entry_index])
 
