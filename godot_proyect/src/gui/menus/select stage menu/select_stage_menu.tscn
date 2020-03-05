@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/gui/menus/select stage menu/select_stage_menu.gd" type="Script" id=2]
 [ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.gd" type="Script" id=3]
-[ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://src/gui/menus/menu_entry_frame.tscn" type="PackedScene" id=5]
 
 [node name="SelectStageMenu" type="Control"]
 anchor_right = 1.0
@@ -13,7 +14,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopLeftEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="TopLeftEntry" type="Control" parent="."]
 anchor_left = 0.33
 anchor_top = 0.2
 anchor_right = 0.33
@@ -30,7 +31,49 @@ __meta__ = {
 column = -1
 row = -1
 
-[node name="TopCenterEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="FrameContainer" type="MarginContainer" parent="TopLeftEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="TopLeftEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="TopLeftEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_top = -16.0
+margin_right = 1.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Bubble"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="TopLeftEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopCenterEntry" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 0.2
 anchor_right = 0.5
@@ -46,7 +89,49 @@ __meta__ = {
 }
 row = -1
 
-[node name="TopRightEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="FrameContainer" type="MarginContainer" parent="TopCenterEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="TopCenterEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="TopCenterEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -16.0
+margin_right = 2.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Air"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="TopCenterEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRightEntry" type="Control" parent="."]
 anchor_left = 0.67
 anchor_top = 0.2
 anchor_right = 0.67
@@ -63,7 +148,48 @@ __meta__ = {
 column = 1
 row = -1
 
-[node name="MiddleLeftEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="FrameContainer" type="MarginContainer" parent="TopRightEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="TopRightEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="TopRightEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = 2.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Quick"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="TopRightEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiddleLeftEntry" type="Control" parent="."]
 anchor_left = 0.33
 anchor_top = 0.5
 anchor_right = 0.33
@@ -79,7 +205,49 @@ __meta__ = {
 }
 column = -1
 
-[node name="MiddleCenterEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="FrameContainer" type="MarginContainer" parent="MiddleLeftEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="MiddleLeftEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="MiddleLeftEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_top = -16.1424
+margin_right = 2.0
+margin_bottom = -8.1424
+custom_fonts/font = ExtResource( 4 )
+text = "Heat"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="MiddleLeftEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiddleCenterEntry" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -94,7 +262,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MiddleRightEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="FrameContainer" type="MarginContainer" parent="MiddleCenterEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="MiddleCenterEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="MiddleCenterEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -16.0
+margin_right = 2.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "D*"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="MiddleCenterEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Wily"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MiddleRightEntry" type="Control" parent="."]
 anchor_left = 0.67
 anchor_top = 0.5
 anchor_right = 0.67
@@ -110,7 +320,49 @@ __meta__ = {
 }
 column = 1
 
-[node name="BottomLeftEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="FrameContainer" type="MarginContainer" parent="MiddleRightEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="MiddleRightEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="MiddleRightEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_top = -16.0
+margin_right = 2.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Wood"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="MiddleRightEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLeftEntry" type="Control" parent="."]
 anchor_left = 0.33
 anchor_top = 0.8
 anchor_right = 0.33
@@ -127,7 +379,49 @@ __meta__ = {
 column = -1
 row = 1
 
-[node name="BottomCenterEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="FrameContainer" type="MarginContainer" parent="BottomLeftEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="BottomLeftEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="BottomLeftEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.0
+margin_top = -16.0
+margin_right = 2.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Metal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="BottomLeftEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomCenterEntry" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 0.8
 anchor_right = 0.5
@@ -143,7 +437,49 @@ __meta__ = {
 }
 row = 1
 
-[node name="BottomRightEntry" type="Control" parent="." instance=ExtResource( 4 )]
+[node name="FrameContainer" type="MarginContainer" parent="BottomCenterEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="BottomCenterEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="BottomCenterEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_top = -16.0
+margin_right = 2.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Flash"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="BottomCenterEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomRightEntry" type="Control" parent="."]
 anchor_left = 0.67
 anchor_top = 0.8
 anchor_right = 0.67
@@ -159,6 +495,48 @@ __meta__ = {
 }
 column = 1
 row = 1
+
+[node name="FrameContainer" type="MarginContainer" parent="BottomRightEntry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MenuEntryFrame" parent="BottomRightEntry/FrameContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 44.0
+margin_bottom = 44.0
+
+[node name="TopLabel" type="Label" parent="BottomRightEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_top = -16.0
+margin_right = 2.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "Crash"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomLabel" type="Label" parent="BottomRightEntry"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -8.0
+margin_right = 1.0
+custom_fonts/font = ExtResource( 4 )
+text = "Man"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SndSelectionChange" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
