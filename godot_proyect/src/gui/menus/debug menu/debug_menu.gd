@@ -16,3 +16,6 @@ func _on_action_pressed_ui_accept():
 				
 		_:
 			print_debug("Not implemented")
+
+func _on_global_user_pause(value: bool) -> void:
+	pass

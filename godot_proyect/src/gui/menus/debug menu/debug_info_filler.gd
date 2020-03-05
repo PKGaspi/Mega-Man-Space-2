@@ -17,7 +17,6 @@ func _process(delta: float) -> void:
 	
 	fps.text = str(Engine.get_frames_per_second())
 	
-	var root = get_tree().root
-	room.text = root.get_child(2).name if root.get_child_count() > 2 else NULL_VALUE
+	room.text = get_tree().current_scene.name
 	
 	build.text = NULL_VALUE
