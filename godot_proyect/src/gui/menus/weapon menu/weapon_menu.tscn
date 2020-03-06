@@ -85,8 +85,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-hide_when_animating = NodePath("MarginContainer")
-entry_index = 1
+hide_when_animating = NodePath("Contents")
 
 [node name="Background" type="NinePatchRect" parent="."]
 material = SubResource( 2 )
@@ -105,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Contents" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 12.0
@@ -116,24 +115,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Pager" type="Control" parent="MarginContainer"]
+[node name="Pager" type="Control" parent="Contents"]
 margin_right = 72.0
 margin_bottom = 144.0
 script = ExtResource( 6 )
 pages = [ NodePath("Page0"), NodePath("Page1") ]
 
-[node name="Page0" type="HBoxContainer" parent="MarginContainer/Pager"]
+[node name="Page0" type="HBoxContainer" parent="Contents/Pager"]
 margin_right = 88.0
 margin_bottom = 120.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Letters" type="VBoxContainer" parent="MarginContainer/Pager/Page0"]
+[node name="Letters" type="VBoxContainer" parent="Contents/Pager/Page0"]
 margin_right = 9.0
 margin_bottom = 144.0
 
-[node name=">" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name=">" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_right = 9.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
@@ -147,7 +146,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="P" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name="P" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_top = 16.0
 margin_right = 9.0
 margin_bottom = 24.0
@@ -159,7 +158,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "P"
 
-[node name="H" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name="H" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_top = 32.0
 margin_right = 9.0
 margin_bottom = 40.0
@@ -171,7 +170,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "H"
 
-[node name="A" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name="A" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_top = 48.0
 margin_right = 9.0
 margin_bottom = 56.0
@@ -183,7 +182,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "A"
 
-[node name="W" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name="W" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_top = 64.0
 margin_right = 9.0
 margin_bottom = 72.0
@@ -195,7 +194,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "W"
 
-[node name="B" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name="B" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_top = 80.0
 margin_right = 9.0
 margin_bottom = 88.0
@@ -207,7 +206,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "B"
 
-[node name="Q" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name="Q" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_top = 96.0
 margin_right = 9.0
 margin_bottom = 104.0
@@ -219,7 +218,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "Q"
 
-[node name="E" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name="E" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_top = 112.0
 margin_right = 9.0
 margin_bottom = 128.0
@@ -235,7 +234,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="X" type="Label" parent="MarginContainer/Pager/Page0/Letters"]
+[node name="X" type="Label" parent="Contents/Pager/Page0/Letters"]
 margin_top = 136.0
 margin_right = 9.0
 margin_bottom = 144.0
@@ -250,12 +249,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Info" type="VBoxContainer" parent="MarginContainer/Pager/Page0"]
+[node name="Info" type="VBoxContainer" parent="Contents/Pager/Page0"]
 margin_left = 17.0
 margin_right = 73.0
 margin_bottom = 144.0
 
-[node name=">" type="Label" parent="MarginContainer/Pager/Page0/Info"]
+[node name=">" type="Label" parent="Contents/Pager/Page0/Info"]
 margin_right = 56.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
@@ -266,43 +265,43 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "next"
 
-[node name="P" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
+[node name="P" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 16.0
 margin_bottom = 24.0
 max_value = 28.0
 palette = 0
 
-[node name="H" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
+[node name="H" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_bottom = 40.0
 max_value = 28.0
 palette = 1
 
-[node name="A" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
+[node name="A" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 48.0
 margin_bottom = 56.0
 max_value = 28.0
 palette = 2
 
-[node name="W" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
+[node name="W" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_bottom = 72.0
 max_value = 28.0
 palette = 3
 
-[node name="B" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
+[node name="B" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 80.0
 margin_bottom = 88.0
 max_value = 28.0
 palette = 4
 
-[node name="Q" parent="MarginContainer/Pager/Page0/Info" instance=ExtResource( 3 )]
+[node name="Q" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 96.0
 margin_bottom = 104.0
 max_value = 28.0
 palette = 5
 
-[node name="E" type="HBoxContainer" parent="MarginContainer/Pager/Page0/Info"]
+[node name="E" type="HBoxContainer" parent="Contents/Pager/Page0/Info"]
 margin_top = 112.0
 margin_right = 56.0
 margin_bottom = 128.0
@@ -310,14 +309,14 @@ grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 0, 16 )
 
-[node name="1" type="TextureRect" parent="MarginContainer/Pager/Page0/Info/E"]
+[node name="1" type="TextureRect" parent="Contents/Pager/Page0/Info/E"]
 margin_right = 8.0
 margin_bottom = 16.0
 size_flags_horizontal = 5
 texture = ExtResource( 11 )
 stretch_mode = 4
 
-[node name="2" type="TextureRect" parent="MarginContainer/Pager/Page0/Info/E"]
+[node name="2" type="TextureRect" parent="Contents/Pager/Page0/Info/E"]
 margin_left = 16.0
 margin_right = 24.0
 margin_bottom = 16.0
@@ -325,7 +324,7 @@ size_flags_horizontal = 5
 texture = ExtResource( 11 )
 stretch_mode = 4
 
-[node name="3" type="TextureRect" parent="MarginContainer/Pager/Page0/Info/E"]
+[node name="3" type="TextureRect" parent="Contents/Pager/Page0/Info/E"]
 margin_left = 32.0
 margin_right = 40.0
 margin_bottom = 16.0
@@ -333,7 +332,7 @@ size_flags_horizontal = 5
 texture = ExtResource( 11 )
 stretch_mode = 4
 
-[node name="4" type="TextureRect" parent="MarginContainer/Pager/Page0/Info/E"]
+[node name="4" type="TextureRect" parent="Contents/Pager/Page0/Info/E"]
 margin_left = 48.0
 margin_right = 56.0
 margin_bottom = 16.0
@@ -341,7 +340,7 @@ size_flags_horizontal = 5
 texture = ExtResource( 11 )
 stretch_mode = 4
 
-[node name="X" type="Label" parent="MarginContainer/Pager/Page0/Info"]
+[node name="X" type="Label" parent="Contents/Pager/Page0/Info"]
 margin_top = 136.0
 margin_right = 56.0
 margin_bottom = 144.0
@@ -356,7 +355,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Page1" type="HBoxContainer" parent="MarginContainer/Pager"]
+[node name="Page1" type="HBoxContainer" parent="Contents/Pager"]
 visible = false
 margin_right = 88.0
 margin_bottom = 120.0
@@ -364,11 +363,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Letters" type="VBoxContainer" parent="MarginContainer/Pager/Page1"]
+[node name="Letters" type="VBoxContainer" parent="Contents/Pager/Page1"]
 margin_right = 9.0
 margin_bottom = 144.0
 
-[node name=">" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name=">" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_right = 9.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
@@ -382,7 +381,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="F" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name="F" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_top = 16.0
 margin_right = 9.0
 margin_bottom = 24.0
@@ -394,7 +393,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "F"
 
-[node name="M" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name="M" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_top = 32.0
 margin_right = 9.0
 margin_bottom = 40.0
@@ -406,7 +405,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "M"
 
-[node name="C" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name="C" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_top = 48.0
 margin_right = 9.0
 margin_bottom = 56.0
@@ -418,7 +417,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "C"
 
-[node name="1" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name="1" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_top = 64.0
 margin_right = 9.0
 margin_bottom = 72.0
@@ -430,7 +429,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "1"
 
-[node name="2" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name="2" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_top = 80.0
 margin_right = 9.0
 margin_bottom = 88.0
@@ -442,7 +441,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "2"
 
-[node name="3" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name="3" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_top = 96.0
 margin_right = 9.0
 margin_bottom = 104.0
@@ -454,7 +453,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "3"
 
-[node name="1ups" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name="1ups" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_top = 112.0
 margin_right = 9.0
 margin_bottom = 128.0
@@ -468,7 +467,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="X" type="Label" parent="MarginContainer/Pager/Page1/Letters"]
+[node name="X" type="Label" parent="Contents/Pager/Page1/Letters"]
 margin_top = 136.0
 margin_right = 9.0
 margin_bottom = 144.0
@@ -483,12 +482,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Info" type="VBoxContainer" parent="MarginContainer/Pager/Page1"]
+[node name="Info" type="VBoxContainer" parent="Contents/Pager/Page1"]
 margin_left = 17.0
 margin_right = 73.0
 margin_bottom = 144.0
 
-[node name=">" type="Label" parent="MarginContainer/Pager/Page1/Info"]
+[node name=">" type="Label" parent="Contents/Pager/Page1/Info"]
 margin_right = 56.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
@@ -499,49 +498,49 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "next"
 
-[node name="F" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
+[node name="F" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 16.0
 margin_bottom = 24.0
 max_value = 28.0
 palette = 6
 
-[node name="M" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
+[node name="M" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_bottom = 40.0
 max_value = 28.0
 palette = 7
 
-[node name="C" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
+[node name="C" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 48.0
 margin_bottom = 56.0
 max_value = 28.0
 palette = 8
 
-[node name="1" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
+[node name="1" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_bottom = 72.0
 max_value = 28.0
 palette = 9
 
-[node name="2" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
+[node name="2" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 80.0
 margin_bottom = 88.0
 max_value = 28.0
 palette = 9
 
-[node name="3" parent="MarginContainer/Pager/Page1/Info" instance=ExtResource( 3 )]
+[node name="3" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 96.0
 margin_bottom = 104.0
 max_value = 28.0
 palette = 9
 
-[node name="1ups" type="Control" parent="MarginContainer/Pager/Page1/Info"]
+[node name="1ups" type="Control" parent="Contents/Pager/Page1/Info"]
 margin_top = 112.0
 margin_right = 56.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 0, 16 )
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Pager/Page1/Info/1ups"]
+[node name="Icon" type="TextureRect" parent="Contents/Pager/Page1/Info/1ups"]
 material = SubResource( 4 )
 margin_right = 16.0
 margin_bottom = 16.0
@@ -551,7 +550,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text" type="Label" parent="MarginContainer/Pager/Page1/Info/1ups"]
+[node name="Text" type="Label" parent="Contents/Pager/Page1/Info/1ups"]
 margin_left = 18.0
 margin_top = 4.0
 margin_right = 43.0
@@ -567,7 +566,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="X" type="Label" parent="MarginContainer/Pager/Page1/Info"]
+[node name="X" type="Label" parent="Contents/Pager/Page1/Info"]
 margin_top = 136.0
 margin_right = 56.0
 margin_bottom = 144.0
@@ -581,6 +580,8 @@ text = "MENU"
 
 [node name="SndUIMove" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+bus = "Sfx"
 
 [node name="SndOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
+bus = "Sfx"

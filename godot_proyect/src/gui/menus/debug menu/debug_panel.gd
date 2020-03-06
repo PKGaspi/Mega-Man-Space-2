@@ -1,7 +1,7 @@
 extends Control
 
 var active = false setget set_active
-onready var menu = get_node("MarginContainer/Entries/Options")
+onready var menu = get_node("Contents/Entries/Options")
 
 func _ready() -> void:
 	global.connect("user_pause", self, "_on_global_user_pause")

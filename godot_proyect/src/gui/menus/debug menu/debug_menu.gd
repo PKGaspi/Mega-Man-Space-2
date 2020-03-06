@@ -1,13 +1,15 @@
 extends MenuPanel
 
-onready var enemy_generator = get_node("/root/Space/GameLayer/EnemyGenerator")
-	
+onready var enemy_generator_path = "/root/Space/GameLayer/EnemyGenerator"
 
 func _on_action_pressed_ui_accept():
 	match entry_index:
 		0:
+			if !has_node(enemy_generator_path):
+				return
+			var enemy_generator = get_node(enemy_generator_path)
 			var ship = global.MEGASHIP
-			if global.MEGASHIP is Megaship and enemy_generator.get("center") != null:
+			if global.MEGASHIP is Megaship and enemy_generator != null and enemy_generator.get("center") != null:
 				ship.global_position = enemy_generator.center
 		1:
 			if global.MEGASHIP is Megaship:

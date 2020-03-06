@@ -47,8 +47,9 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-hide_when_animating = NodePath("MarginContainer")
-entries = [ NodePath("MarginContainer/Sections/Entries/Resume"), NodePath("MarginContainer/Sections/Entries/Settings"), NodePath("MarginContainer/Sections/Entries/Exit Stage"), NodePath("MarginContainer/Sections/Entries/Exit to Title Screen"), NodePath("MarginContainer/Sections/Entries/Exit to Desktop") ]
+hide_when_animating = NodePath("Contents")
+entries = [ NodePath("Contents/Sections/Entries/Resume"), NodePath("Contents/Sections/Entries/Settings"), NodePath("Contents/Sections/Entries/Exit Stage"), NodePath("Contents/Sections/Entries/Exit to Title Screen"), NodePath("Contents/Sections/Entries/Exit to Desktop") ]
+require_confirmation = [ false, false, true, true, true ]
 
 [node name="Background" type="NinePatchRect" parent="."]
 material = SubResource( 2 )
@@ -67,7 +68,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Contents" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 12.0
@@ -78,20 +79,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sections" type="HBoxContainer" parent="MarginContainer"]
+[node name="Sections" type="HBoxContainer" parent="Contents"]
 margin_right = 240.0
 margin_bottom = 144.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Entries" type="VBoxContainer" parent="MarginContainer/Sections"]
+[node name="Entries" type="VBoxContainer" parent="Contents/Sections"]
 margin_top = 36.0
 margin_right = 134.0
 margin_bottom = 108.0
 size_flags_vertical = 4
 
-[node name="Resume" type="Label" parent="MarginContainer/Sections/Entries"]
+[node name="Resume" type="Label" parent="Contents/Sections/Entries"]
 margin_right = 134.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
@@ -105,7 +106,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Settings" type="Label" parent="MarginContainer/Sections/Entries"]
+[node name="Settings" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 16.0
 margin_right = 134.0
 margin_bottom = 24.0
@@ -117,7 +118,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "Settings"
 
-[node name="Exit Stage" type="Label" parent="MarginContainer/Sections/Entries"]
+[node name="Exit Stage" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 32.0
 margin_right = 134.0
 margin_bottom = 40.0
@@ -129,7 +130,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "Exit Stage"
 
-[node name="Exit to Title Screen" type="Label" parent="MarginContainer/Sections/Entries"]
+[node name="Exit to Title Screen" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 48.0
 margin_right = 134.0
 margin_bottom = 56.0
@@ -141,7 +142,7 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 text = "Exit to Title Screen"
 
-[node name="Exit to Desktop" type="Label" parent="MarginContainer/Sections/Entries"]
+[node name="Exit to Desktop" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 64.0
 margin_right = 134.0
 margin_bottom = 72.0
@@ -155,6 +156,8 @@ text = "Exit to Desktop"
 
 [node name="SndUIMove" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "Sfx"
 
 [node name="SndOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "Sfx"

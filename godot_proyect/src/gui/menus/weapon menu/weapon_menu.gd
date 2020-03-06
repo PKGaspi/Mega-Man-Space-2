@@ -2,7 +2,7 @@ extends MenuPanel
 
 const PAUSE_MENU = preload("res://src/gui/menus/pause menu/pause_menu.tscn")
 
-onready var pager = get_node("MarginContainer/Pager")
+onready var pager = get_node("Contents/Pager")
 
 var unlocked_entries: Dictionary
 

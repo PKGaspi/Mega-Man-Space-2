@@ -15,6 +15,7 @@ export var palette: int = 0 setget set_palette
 
 var active:= true setget set_active
 export(Array, NodePath) var entries
+export(Array, bool) var require_confirmation
 var entry: Node
 export var entry_index: int = 0
 var n_entries: int = 0
@@ -86,7 +87,7 @@ func _on_action_pressed_ui_cancel():
 	pass
 
 func _on_FlickeringTimer_timeout() -> void:
-	entry.modulate.a = 0 if entry.modulate.a == 1 else 1
+	if entry != null: entry.modulate.a = 0 if entry.modulate.a == 1 else 1
 
 func _on_global_user_pause(value : bool) -> void:
 	if !value:
@@ -106,6 +107,7 @@ func play_sound(snd: NodePath) -> void:
 		var node = get_node(snd)
 		if node != null and node.has_method("play"):
 			 get_node(snd).play()
+
 
 func growing_animation(start_size: Vector2, final_size: Vector2, time: float = opening_time, hide:= get_node(hide_when_animating) if has_node(hide_when_animating) else null):
 	if hide != null: hide.visible = false
