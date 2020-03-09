@@ -13,9 +13,8 @@ export var animate_closing: bool = true
 export var background: NodePath = "Background"
 export var palette: int = 0 setget set_palette
 
-var active:= true setget set_active
+export var active:= true setget set_active
 export(Array, NodePath) var entries
-export(Array, bool) var require_confirmation
 var entry: Node
 export var entry_index: int = 0
 var n_entries: int = 0
@@ -154,6 +153,8 @@ func set_entry(value : int) -> bool:
 	return false
 
 func set_active(value: bool) -> void:
+	if value == active:
+		return
 	active = value
 	if active:
 		flickering_timer.start()
@@ -179,7 +180,8 @@ func update_entries() -> void:
 	n_entries = len(entries)
 # warning-ignore:narrowing_conversion
 	entry_index = clamp(entry_index, 0, n_entries - 1)
-	entry = get_node(entries[entry_index])
+	if entry_index >= 0:
+		entry = get_node(entries[entry_index])
 
 func set_palette(value : int) -> void:
 	if value < PALETTES.get_frame_count("default"):

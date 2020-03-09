@@ -7,6 +7,7 @@ const YESNO_MENU = preload("res://src/gui/menus/yesno menu/yesno_menu.tscn")
 const SELECT_SCREEN = "res://src/rooms/select stage/select_stage.tscn"
 const TITLE_SCREEN = "res://src/rooms/title screen/title_screen.tscn"
 
+export(Array, bool) var require_confirmation
 var confirmation_status: bool = false
 
 func _on_action_pressed_ui_accept():

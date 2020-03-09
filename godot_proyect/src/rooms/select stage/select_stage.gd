@@ -17,7 +17,7 @@ var COORDS_TO_WEAPONS = {
 func _ready() -> void:
 	get_tree().current_scene = self
 
-func _on_entry_actioned(column, row) -> void:
+func _on_entry_actioned(column: int, row: int) -> void:
 	if column != 0 or row != 0:
 		var lvl = LVL_SCENE.instance()
 		lvl.lvl_id = COORDS_TO_WEAPONS[Vector2(column, row)]
