@@ -6,7 +6,7 @@ const TOUCHSCREEN_LAYOUT = preload("res://src/gui/touchscreen_layout.tscn")
 
 const SCREEN_SIZE = Vector2(480, 270)
 
-const EXITING_TIME = .3 # In seconds.
+const EXITING_TIME = .8 # In seconds.
 var exiting_timer = 0 # Time that the exit key has been pressed.
 
 var is_paused : bool = false
