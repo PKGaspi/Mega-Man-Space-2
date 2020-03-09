@@ -10,4 +10,4 @@ bus = "Music"
 
 [node name="MusicLoop" type="AudioStreamPlayer" parent="."]
 bus = "Music"
-[connection signal="finished" from="MusicLoop" to="." method="_on_MusicLoop_finished"]
+[connection signal="finished" from="MusicIntro" to="." method="_on_MusicIntro_finished"]

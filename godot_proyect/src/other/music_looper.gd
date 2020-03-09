@@ -9,16 +9,16 @@ export var autoplay:= false
 onready var intro_node:= get_node("MusicIntro")
 onready var loop_node:= get_node("MusicLoop")
 
-signal loop_finished
+signal intro_finished
 
 func _ready() -> void:
 	set_intro(intro)
 	set_loop(loop)
 	if autoplay:
-		play()
+		call_deferred("play")
 
-func _on_MusicLoop_finished() -> void:
-	emit_signal("loop_finished")
+func _on_MusicIntro_finished() -> void:
+	emit_signal("intro_finished")
 	play_loop()
 
 func set_playing(value: bool):
@@ -41,13 +41,13 @@ func stop():
 	loop_node.stop()
 
 func set_intro(value: AudioStream) -> void:
+	intro = value
 	if is_inside_tree():
-		intro = value
 		intro_node.stream = value
 
 func set_loop(value: AudioStream) -> void:
+	loop = value
 	if is_inside_tree():
-		loop = value
 		loop_node.stream = value
 
 
