@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	elif animation == "teleport_falling":
 		global_position = destination
 		play("teleport_landing")
-		$"../SndTeleport".play()
+		global.MEGASHIP.get_node("SndTeleport").play()
 		
 func _process(delta: float) -> void:
 	material.set_shader_param("mask", masks.get_frame(animation, frame))

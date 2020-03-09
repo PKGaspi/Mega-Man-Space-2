@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/rooms/space/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://src/gui/aimer.gd" type="Script" id=5]
 [ext_resource path="res://src/characters/megaship/megaship_teleport.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/sfx/megaship/teleport.wav" type="AudioStream" id=8]
 [ext_resource path="res://src/rooms/space/enemy_generator.gd" type="Script" id=9]
 [ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/characters/enemies/telly.tscn" type="PackedScene" id=11]
@@ -82,10 +81,6 @@ position = Vector2( 240, 135 )
 DAMAGE_MULTIPLIERS = {
 
 }
-
-[node name="SndTeleport" type="AudioStreamPlayer" parent="GameLayer"]
-stream = ExtResource( 8 )
-bus = "Sfx"
 
 [node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
 script = ExtResource( 9 )
