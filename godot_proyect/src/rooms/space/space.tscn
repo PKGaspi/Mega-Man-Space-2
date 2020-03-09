@@ -16,7 +16,7 @@
 [ext_resource path="res://resources/gui/warning_masks.tres" type="SpriteFrames" id=14]
 [ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://src/rooms/space/space_background.tscn" type="PackedScene" id=16]
-[ext_resource path="res://assets/music/stage_heatman_loop.ogg" type="AudioStream" id=39]
+[ext_resource path="res://src/other/music_looper.tscn" type="PackedScene" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -101,14 +101,8 @@ current = true
 [node name="SpaceBackground" parent="." instance=ExtResource( 16 )]
 to_follow = NodePath("../GameLayer/Megaship")
 
-[node name="MusicLoop" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 39 )
-bus = "Music"
-
-[node name="MusicIntro" type="AudioStreamPlayer" parent="."]
-bus = "Music"
+[node name="MusicLooper" parent="." instance=ExtResource( 17 )]
 
 [node name="GameOverTimer" type="Timer" parent="."]
 [connection signal="tree_exiting" from="GameLayer/TeleportAnimation" to="." method="_on_teleport_animation_tree_exiting"]
-[connection signal="finished" from="MusicIntro" to="MusicLoop" method="play" flags=6]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]

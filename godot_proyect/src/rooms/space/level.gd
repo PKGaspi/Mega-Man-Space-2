@@ -5,6 +5,8 @@ const GAME_OVER_WAIT_TIME = 5 # In seconds.
 const MEGASHIP_TELEPORT = preload("res://src/characters/megaship/megaship_teleport.tscn")
 const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
+onready var music_looper = get_node("MusicLooper")
+
 var lvl_id = 0 # This is set when selecting the level.
 
 var music_intros = {
@@ -84,12 +86,9 @@ func set_music(music_index: int) -> void:
 	if music_intros.has(lvl_id) and music_loops.has(lvl_id):
 		var intro = music_intros[lvl_id]
 		var loop = music_loops[lvl_id]
-		$MusicIntro.stream = intro
-		$MusicLoop.stream = loop
-		if intro != null:
-			$MusicIntro.play()
-		elif loop != null:
-			$MusicLoop.play()
+		music_looper.intro = intro
+		music_looper.loop = loop
+		music_looper.play()
 
 func start_ready_animation():
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/other/music_looper.gd" type="Script" id=1]
+
+[node name="MusicLooper" type="Node"]
+script = ExtResource( 1 )
+
+[node name="MusicIntro" type="AudioStreamPlayer" parent="."]
+bus = "Music"
+
+[node name="MusicLoop" type="AudioStreamPlayer" parent="."]
+bus = "Music"
+[connection signal="finished" from="MusicLoop" to="." method="_on_MusicLoop_finished"]
