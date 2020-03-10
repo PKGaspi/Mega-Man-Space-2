@@ -54,6 +54,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/pickups/pickup.gd"
 }, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://src/other/state.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://src/other/state_machine.gd"
+}, {
 "base": "Pickup",
 "class": "Upgrade",
 "language": "GDScript",
@@ -74,6 +84,8 @@ _global_script_class_icons={
 "Megaship": "",
 "MenuPanel": "",
 "Pickup": "",
+"State": "",
+"StateMachine": "",
 "Upgrade": "",
 "Weapon": ""
 }
