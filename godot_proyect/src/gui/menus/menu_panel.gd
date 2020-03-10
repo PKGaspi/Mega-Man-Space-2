@@ -7,7 +7,7 @@ var tween = Tween.new()
 var flickering_timer = Timer.new()
 export var _selected_flickering_interval: float = 8.0/60.0
 export var opening_time: = .3
-export var hide_when_animating: NodePath
+export var hide_when_animating: NodePath = "Contents"
 export var animate_opening: bool = true
 export var animate_closing: bool = true
 export var background: NodePath = "Background"
@@ -119,6 +119,7 @@ func growing_animation(start_size: Vector2, final_size: Vector2, time: float = o
 	if hide != null: hide.visible = true
 	emit_signal("animation_ended")
 
+
 func opening_animation(time = opening_time):
 	var previous_active = active
 	set_active(false)
@@ -128,11 +129,13 @@ func opening_animation(time = opening_time):
 	emit_signal("opened")
 	set_active(previous_active)
 
+
 func closing_animation(time = opening_time):
 	set_active(false)
 	growing_animation(rect_size, Vector2.ZERO, time)
 	yield(self, "animation_ended")
 	emit_signal("closed")
+
 
 func close_menu():
 	play_sound(snd_close)
@@ -140,6 +143,7 @@ func close_menu():
 		closing_animation()
 		yield(self, "closed")
 	queue_free()
+
 
 func set_entry(value : int) -> bool:
 # warning-ignore:narrowing_conversion
@@ -152,6 +156,7 @@ func set_entry(value : int) -> bool:
 		return true
 	return false
 
+
 func set_active(value: bool) -> void:
 	if value == active:
 		return
@@ -162,13 +167,15 @@ func set_active(value: bool) -> void:
 		flickering_timer.stop()
 		if entry != null: entry.modulate.a = 1
 
+
 func next_entry() -> void:
 	if n_entries != 0:
 		var new_entry = (entry_index + 1) % n_entries
 		while entries[new_entry] == null:
 			new_entry = (new_entry + 1) % n_entries
 		set_entry(new_entry)
-	
+
+
 func previous_entry() -> void:
 	if n_entries != 0:
 		var new_entry = (entry_index - 1) % n_entries if entry_index > 0 else n_entries - 1
@@ -176,12 +183,14 @@ func previous_entry() -> void:
 			new_entry = (new_entry - 1) % n_entries if new_entry > 0 else n_entries - 1
 		set_entry(new_entry)
 
+
 func update_entries() -> void:
 	n_entries = len(entries)
 # warning-ignore:narrowing_conversion
 	entry_index = clamp(entry_index, 0, n_entries - 1)
 	if entry_index >= 0:
 		entry = get_node(entries[entry_index])
+
 
 func set_palette(value : int) -> void:
 	if value < PALETTES.get_frame_count("default"):
