@@ -6,7 +6,7 @@ onready var _state_machine: = _get_state_machine()
 
 # Using the same class, i.e. State, as a type hint causes a memory leak in Godot
 # 3.2.
-var _parent_state: State = null # Null if the parent is the state machine.
+var _parent_state = null # Null if the parent is the state machine.
 
 
 func _ready() -> void:

@@ -47,39 +47,39 @@ shader_param/palette_size = 8.0
 [sub_resource type="SpriteFrames" id=4]
 resource_local_to_scene = true
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "body_iddle",
-"speed": 5.0
+"name": "body_charging",
+"speed": 8.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "propeller",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "body_charging",
-"speed": 8.0
+"name": "body_iddle",
+"speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=5]
 resource_local_to_scene = true
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "body_iddle",
-"speed": 5.0
+"name": "body_charging",
+"speed": 8.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "propeller",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "body_charging",
-"speed": 8.0
+"name": "body_iddle",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
@@ -87,8 +87,8 @@ extents = Vector2( 10.5, 18 )
 
 [node name="FlyRobot" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-_hp_bar_position = Vector2( 16, -11 )
 hp_max = 14.0
+_hp_bar_position = Vector2( 16, -11 )
 masks = ExtResource( 3 )
 move_speed = 200.0
 rotate_towards_destination = true

@@ -101,5 +101,3 @@ to_follow = NodePath("../GameLayer/Megaship")
 [node name="GameOverTimer" type="Timer" parent="."]
 [connection signal="tree_exiting" from="GameLayer/TeleportAnimation" to="." method="_on_teleport_animation_tree_exiting"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
-
-[editable path="MusicLooper"]

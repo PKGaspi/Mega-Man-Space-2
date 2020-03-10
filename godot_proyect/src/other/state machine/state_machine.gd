@@ -2,7 +2,6 @@ class_name StateMachine
 extends Node
 
 export var initial_state:= NodePath()
-
 onready var state: State = get_node(initial_state) setget set_state
 
 signal transitioned(state_path)
