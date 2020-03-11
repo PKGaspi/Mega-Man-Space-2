@@ -12,7 +12,7 @@ var _parent_state = null # Null if the parent is the state machine.
 func _ready() -> void:
 	yield(owner, "ready")
 	var parent = get_parent()
-	if parent is State:
+	if not parent.is_in_group("state_machine"):
 		_parent_state = parent
 
 

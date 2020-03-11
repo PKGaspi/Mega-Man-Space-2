@@ -5,8 +5,6 @@ extends Character
 ## Resources. ##
 ################
 
-const CHARACTER = preload("res://src/characters/character.gd")
-
 const LEMON = preload("res://src/bullets/megaship/lemon.tscn")
 export(SpriteFrames) var masks = null
 export(SpriteFrames) var palettes = null
@@ -19,9 +17,6 @@ const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
 const MOVE_SPEED_DEACCEL = 20 # In pixels/second^2.
 const MOVE_SPEED_MAX = 260 # In pixels/second.
 
-# Auto fire cooldown. Maybe do this a variable so
-# you can get upgrades to improve it.
-const AUTO_FIRE_INTERVAL = .05 # In seconds/bullet.
 
 const JOYSTICK_DEADZONE = .3
 const JOYSTICK_LEFT = JOY_AXIS_0
@@ -96,7 +91,6 @@ var weapons_ammo = { # Current ammo for each weapon.
 ########################
 # Mechanics variables. #
 ########################
-var auto_fire = 0 # Seconds since last fire.
 var speed = 0 # Speed at this frame.
 var motion = Vector2() # Ammount to move.
 var motion_dir = Vector2() # Direction of the last movement.
@@ -123,37 +117,6 @@ func _ready():
 	global.connect("user_pause", self, "_on_global_user_pause")
 
 
-func _physics_process(delta):
-	# Movement.
-	input_dir = get_directional_input()
-	motion = get_motion(input_dir)
-	move_and_slide(motion)
-	# Check for collision.
-	for i in range(get_slide_count()):
-		var collider = get_slide_collision(i).collider
-		if collider is CHARACTER:
-			collider.collide(self)
-			break
-	
-
-func _process(delta):
-	# Calculate rotation and sprite.
-	rotation = get_rotation()
-	
-	# Check if we are firing.
-	auto_fire += delta
-	if Input.is_action_pressed("shoot") and auto_fire >= AUTO_FIRE_INTERVAL:
-		fire(n_cannons, ammo_per_shot[active_weapon])
-		auto_fire = 0
-	
-	# Emit propulsion particles.
-	propulsion_particles(speed)
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("weapon_prev"):
-		previous_weapon()
-	elif event.is_action_pressed("weapon_next"):
-		next_weapon()
 
 func _on_global_user_pause(value):
 	if !value:
@@ -273,7 +236,7 @@ func get_motion(dir):
 	var motion = min(1, motion_dir.length()) * motion_dir.normalized() * speed * speed_multiplier
 	return motion
 
-func propulsion_particles(speed):
+func emit_propulsion_particles(speed):
 	var propulsion_dir = - motion_dir
 	
 	$PropulsionParticles1.emitting = speed != 0
