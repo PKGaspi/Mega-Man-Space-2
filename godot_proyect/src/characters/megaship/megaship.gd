@@ -236,6 +236,10 @@ func get_motion(dir):
 	var motion = min(1, motion_dir.length()) * motion_dir.normalized() * speed * speed_multiplier
 	return motion
 
+func fire(n_cannons : int = self.n_cannons, used_ammo : float = ammo_per_shot[active_weapon]) -> bool:
+	# Declared here to change default arguments.
+	return .fire(n_cannons, used_ammo)
+
 func emit_propulsion_particles(speed):
 	var propulsion_dir = - motion_dir
 	

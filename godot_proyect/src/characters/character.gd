@@ -231,12 +231,14 @@ func disappear():
 
 
 func fire(n_cannons : int = self.n_cannons, used_ammo : float = -.2) -> bool:
-	# Called when there is an attempt to shoot.
-	var shooted = ammo > 0 and shooting_remaining_cd == 0 # Check if there is enough ammo and the cd is 0.
-	if shooted:
+	# Called when there is an attempt to shoot. This method checks that a
+	# shoot is viable and if so creates the projectiles via shoot_projectile().
+	var shooted = false
+	var able_to_shoot = ammo > 0 and shooting_remaining_cd == 0 # Check if there is enough ammo and the cd is 0.
+	if able_to_shoot:
 		var cannons = cannon_pos[n_cannons - 1]
 		for cannon in cannons:
-			shooted = shooted && shoot_projectile(cannon) # ????? Why the and tho
+			shooted = shoot_projectile(cannon) or shooted # If any cannon shooted, return true and act as so.
 		if shooted:
 			shooting_remaining_cd = shooting_cd # Put shooting on cd.
 			set_ammo_relative(used_ammo) # Consume ammo.

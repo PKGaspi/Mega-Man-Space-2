@@ -113,6 +113,7 @@ death_instance = ExtResource( 3 )
 invencibility_time = 1.2
 bullet = ExtResource( 4 )
 cannon_pos = [ [ Vector2( 15, -0.5 ) ], [ Vector2( 7, 4 ), Vector2( 7, -5 ) ], [ Vector2( 15, -0.5 ), Vector2( 7, 4 ), Vector2( 7, -5 ) ] ]
+n_cannons = 2
 masks = ExtResource( 5 )
 palettes = ExtResource( 6 )
 
