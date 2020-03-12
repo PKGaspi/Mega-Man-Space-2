@@ -144,32 +144,6 @@ func take_damage(damage):
 	$HitParticles.emitting = true
 	$HitParticles.restart()
 
-func get_directional_input():
-	var input : Vector2 = Vector2.ZERO
-	
-	match global.input_type:
-		global.INPUT_TYPES.GAMEPAD:
-			# Gamepad input.
-			# Joystick input.
-			input = get_joystick_axis(0, JOYSTICK_LEFT)
-			continue
-		global.INPUT_TYPES.KEY_MOUSE, global.INPUT_TYPES.GAMEPAD:
-			# Keyboard input.
-			if Input.is_action_pressed("move_up"):
-				input += Vector2.UP
-			if Input.is_action_pressed("move_down"):
-				input += Vector2.DOWN
-			if Input.is_action_pressed("move_left"):
-				input += Vector2.LEFT
-			if Input.is_action_pressed("move_right"):
-				input += Vector2.RIGHT
-				
-		global.INPUT_TYPES.TOUCHSCREEN:
-			# Touchscreen input.
-			input = get_mobile_joystick_axis(JOYSTICK_LEFT)
-		
-	return input
-
 func get_rotation():
 	var rot : float = rotation
 	var input : Vector2
@@ -225,22 +199,12 @@ func get_mobile_joystick_axis(joystick):
 	elif joystick == JOYSTICK_RIGHT:
 		return global.current_touchscreen_layout.get_node("RightJoystick").output
 
-func get_motion(dir):
-	if dir != Vector2():
-		# Accelerate.
-		speed = clamp(speed + MOVE_SPEED_ACCEL, 0, MOVE_SPEED_MAX)
-		motion_dir = dir
-	else:
-		# Deaccelerate.
-		speed = clamp(speed - MOVE_SPEED_DEACCEL, 0, MOVE_SPEED_MAX)
-	var motion = min(1, motion_dir.length()) * motion_dir.normalized() * speed * speed_multiplier
-	return motion
 
 func fire(n_cannons : int = self.n_cannons, used_ammo : float = ammo_per_shot[active_weapon]) -> bool:
 	# Declared here to change default arguments.
 	return .fire(n_cannons, used_ammo)
 
-func emit_propulsion_particles(speed):
+func emit_propulsion_particles(speed: float) -> void:
 	var propulsion_dir = - motion_dir
 	
 	$PropulsionParticles1.emitting = speed != 0
