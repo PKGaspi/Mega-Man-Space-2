@@ -29,7 +29,7 @@ func physics_process(delta):
 	character.emit_propulsion_particles(input_dir.normalized() * acceleration)
 
 
-func unhandled_input(event: InputEvent) -> void:
+func input(event: InputEvent) -> void:
 	if event.is_action_pressed("weapon_prev"):
 		character.previous_weapon()
 	elif event.is_action_pressed("weapon_next"):

@@ -218,10 +218,8 @@ func emit_propulsion_particles(velocity: Vector2) -> void:
 
 func fill(type, ammount):
 	if type == "1up":
-		$Snd1Up.play()
 		global.obtain_1up()
 	elif type == "e-tank":
-		$Snd1Up.play()
 		global.obtain_etank()
 	elif type == "heal":
 		set_hp_relative(ammount, true)

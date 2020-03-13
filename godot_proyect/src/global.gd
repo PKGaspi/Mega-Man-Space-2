@@ -183,10 +183,14 @@ func fix_mouse_mode():
 	# Input.call_deferred("set_mouse_mode", Input.get_mouse_mode())
 
 func obtain_1up():
-	lifes = min(lifes + 1, MAX_LIFES)
+	if lifes < MAX_LIFES:
+		$SndCollect.play()
+		lifes = lifes + 1
 	
 func obtain_etank():
-	etanks = min(etanks + 1, MAX_ETANKS)
+	if etanks < MAX_ETANKS:
+		$SndCollect.play()
+		etanks = etanks + 1
 
 func play_audio_random_pitch(snd, interval):
 	if snd != null and snd.has_method("play"):
