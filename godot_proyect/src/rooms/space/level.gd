@@ -115,7 +115,7 @@ func create_weapons_menu() -> void:
 
 func death() -> void:
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("none")
-	$MusicLoop.stop()
+	music_looper.stop()
 	$GameOverTimer.start(GAME_OVER_WAIT_TIME)
 	
 	# TODO: Start timer for game over screen or something like that.
