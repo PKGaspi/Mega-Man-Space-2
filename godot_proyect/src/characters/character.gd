@@ -64,7 +64,6 @@ export(Dictionary) var DAMAGE_MULTIPLIERS = {
 
 # Motion.
 var acceleration : float = 1
-var momentum : Vector2 = Vector2.ZERO
 var friction : float = .2
 
 # Signals.
@@ -90,10 +89,6 @@ func _physics_process(delta: float) -> void:
 	
 	# Reduce shooting cd.
 	shooting_remaining_cd = max(0, shooting_remaining_cd - delta)
-	
-	# Apply and update momentum.
-	move_and_slide(momentum)
-	momentum *= friction
 
 
 func _on_flickering_timer_timeout():
@@ -181,10 +176,6 @@ func flicker(interval = flickering_interval):
 	$FlickeringTimer.start(interval)
 	flickering = true
 	toggle_visibility()
-
-
-func push(motion):
-	momentum += motion
 
 
 func hit(damage, weapon = Weapon.TYPES.MEGA):

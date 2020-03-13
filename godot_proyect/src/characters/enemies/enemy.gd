@@ -103,5 +103,4 @@ func die():
 
 func collide(collider):
 	# Default action on collide.
-	collider.push(motion)
 	collider.hit(damage)

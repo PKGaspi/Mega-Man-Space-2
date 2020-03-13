@@ -1,8 +1,8 @@
 extends CharacterState
 
 export var max_speed:= 260.0
-export var acceleration:= 120.0
-export var deacceleration:= 60.0
+export var acceleration:= 300.0
+export var deacceleration:= 220.0
 var current_velocity:= Vector2.ZERO
 
 
@@ -26,7 +26,7 @@ func physics_process(delta):
 		character.fire()
 	
 	# Emit propulsion particles.
-	character.emit_propulsion_particles(velocity.length())
+	character.emit_propulsion_particles(input_dir.normalized() * acceleration)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -62,8 +62,14 @@ func calculate_velocity(
 	delta: float
 ) -> Vector2:
 	
-	var new_velocity: Vector2 = move_direction * acceleration * delta + current_velocity
-
+	var new_velocity: Vector2 
+	if move_direction != Vector2.ZERO:
+		# Accelerate.
+		new_velocity = move_direction * acceleration * delta + current_velocity
+	else:
+		# Deaccelerate.
+		new_velocity = current_velocity - current_velocity.normalized() * deacceleration * delta
+	
 	if new_velocity.length() > max_speed:
 		new_velocity = new_velocity.normalized() * max_speed
 	# TODO: Implement deacceleration.

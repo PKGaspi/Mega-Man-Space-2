@@ -204,8 +204,9 @@ func fire(n_cannons : int = self.n_cannons, used_ammo : float = ammo_per_shot[ac
 	# Declared here to change default arguments.
 	return .fire(n_cannons, used_ammo)
 
-func emit_propulsion_particles(speed: float) -> void:
-	var propulsion_dir = - motion_dir
+func emit_propulsion_particles(velocity: Vector2) -> void:
+	var propulsion_dir = -velocity
+	var speed = velocity.length()
 	
 	$PropulsionParticles1.emitting = speed != 0
 	$PropulsionParticles1.global_rotation = propulsion_dir.angle()
@@ -242,10 +243,9 @@ func upgrade(type : String, ammount : float) -> void:
 		if type == "hp_max":
 			# Do extra stuff in this case.
 			ammo_max = clamp(value + ammount, value_min, value_max)
-			set_hp_relative(0)
-			set_ammo_relative(0)
-			hp_bar.value = hp
-			ammo_bar.value = get_ammo()
+			hp_bar.max_value = hp_max
+			ammo_bar.max_value = ammo_max
+			
 			
 func set_palette(palette_index : int) -> void:
 	# Set color palette.
