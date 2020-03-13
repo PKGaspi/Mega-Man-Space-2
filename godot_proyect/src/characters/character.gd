@@ -159,6 +159,11 @@ func set_hp_relative(relative_value, pause = false):
 	set_hp(hp + relative_value, pause)
 
 
+func set_hp_max(value):
+	hp_max = value
+	hp_bar.max_value = value
+
+
 func get_ammo():
 	return ammo
 
@@ -170,6 +175,11 @@ func set_ammo(value, pause = false):
 
 func set_ammo_relative(relative_value, pause = false):
 	set_ammo(ammo + relative_value, pause)
+
+
+func set_ammo_max(value):
+	ammo_max = value
+	ammo_bar.max_value = value
 
 
 func flicker(interval = flickering_interval):

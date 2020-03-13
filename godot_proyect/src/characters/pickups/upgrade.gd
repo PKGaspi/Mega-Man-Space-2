@@ -8,36 +8,35 @@ const MOVE_SPEED_NEG = 40
 
 var bad : bool = ammount < 0 # Whether the pickpup is bad or good.
 
-enum {
+enum TYPES {
 	HP,
 	SPEED,
 	N_SHOOTS,
 	BULLET_MAX,
-	UPGRADES_LENGTH,
+	LENGTH,
 }
 
 var UPGRADE_TYPES = {
-	HP: "hp_max",
-	SPEED: "speed_multiplier",
-	N_SHOOTS: "n_cannons",
-	BULLET_MAX: "bullet_max",
+	TYPES.HP: "hp_max",
+	TYPES.SPEED: "speed",
+	TYPES.N_SHOOTS: "n_cannons",
+	TYPES.BULLET_MAX: "bullet_max",
 }
 
 var UPGRADE_AMMOUNTS = {
-	HP: 2.0,
-	SPEED: .2,
-	N_SHOOTS: 1.0,
-	BULLET_MAX: 1.0,
+	TYPES.HP: 2.0,
+	TYPES.SPEED: 30,
+	TYPES.N_SHOOTS: 1.0,
+	TYPES.BULLET_MAX: 1.0,
 }
 
 const SPRITES = preload("res://resources/characters/pickups/upgrades_sprites.tres")
 
-var index = -1
+export(TYPES) var index = -1
 
 func _ready():
 	
-	if index < 0:
-		set_random_upgrade()
+	set_type(index)
 	
 	# Maybe this upgrade is negative.
 	if random.randf() <= NEGATIVE_FREQUENCY:
@@ -64,10 +63,13 @@ func _on_shine_timer_timeout() -> void:
 #########################
 
 func set_random_upgrade() -> void:
-	set_type(random.randi_range(0, UPGRADES_LENGTH - 1))
+	set_type(random.randi_range(0, TYPES.LENGTH - 1))
 
 func set_type(new_index) -> void:
-	self.index = new_index
+	if new_index < 0 or new_index >= TYPES.LENGTH:
+		set_random_upgrade()
+		return
+	index = new_index
 	type = UPGRADE_TYPES[index]
 	ammount = get_default_ammount()
 	bad = ammount <= 0

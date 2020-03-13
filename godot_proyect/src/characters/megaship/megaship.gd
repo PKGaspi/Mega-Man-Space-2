@@ -228,21 +228,29 @@ func fill(type, ammount):
 			set_ammo_relative(ammount, true)
 	
 func upgrade(type : String, ammount : float) -> void:
-	var value = get(type)
+	var old_value = get(type)
 	var value_max = get(type.to_upper() + "_MAX")
 	var value_min = get(type.to_upper() + "_MIN")
-	if value == value_max:
+	var new_value
+	if old_value and value_max and value_min:
+		new_value = clamp(old_value + ammount, value_min, value_max)
+	else:
+		new_value = 0
+	
+	if old_value == value_max:
 		# TODO: Add some points or something. Play points sound.
 		pass
 	else:
 		if ammount > 0:
 			$SndUpgrade.play()
-		set(type, clamp(value + ammount, value_min, value_max))
-		if type == "hp_max":
-			# Do extra stuff in this case.
-			ammo_max = clamp(value + ammount, value_min, value_max)
-			hp_bar.max_value = hp_max
-			ammo_bar.max_value = ammo_max
+		match type:
+			"hp_max":
+				set_hp_max(new_value)
+				set_ammo_max(new_value)
+			"speed":
+				$StateMachine/Move.max_speed += ammount
+			_:
+				set(type, new_value)
 			
 			
 func set_palette(palette_index : int) -> void:

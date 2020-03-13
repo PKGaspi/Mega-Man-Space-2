@@ -1,8 +1,9 @@
 extends CharacterState
 
-export var max_speed:= 260.0
-export var acceleration:= 300.0
-export var deacceleration:= 220.0
+const MIN_MAX_SPEED:= 200.0
+export var max_speed:= 260.0 setget set_max_speed
+const MAX_MAX_SPEED:= 400.0
+export var acceleration_ratio:= 7/4
 var current_velocity:= Vector2.ZERO
 
 
@@ -10,7 +11,8 @@ var current_velocity:= Vector2.ZERO
 func physics_process(delta):
 	# Movement.
 	var input_dir = get_input_direction()
-	var velocity = calculate_velocity(input_dir, delta)
+	var acceleration = acceleration_ratio * max_speed
+	var velocity = calculate_velocity(input_dir, acceleration, delta)
 	character.move_and_slide(velocity)
 	# Check for collision.
 	for i in range(character.get_slide_count()):
@@ -40,6 +42,13 @@ func input(event: InputEvent) -> void:
 # get_rotation -> calculate_rotation
 # 
 
+## Setters and getters. ##
+
+func set_max_speed(value: float) -> void:
+	max_speed = clamp(value, MIN_MAX_SPEED, MAX_MAX_SPEED)
+	print(max_speed)
+
+## Auxiliar functions. ##
 
 func get_input_direction(normalized:= false) -> Vector2:
 	# TODO: Implement touchscreen controls.
@@ -59,6 +68,7 @@ func get_input_direction(normalized:= false) -> Vector2:
 
 func calculate_velocity(
 	move_direction: Vector2,
+	acceleration: float,
 	delta: float
 ) -> Vector2:
 	
@@ -68,7 +78,7 @@ func calculate_velocity(
 		new_velocity = move_direction * acceleration * delta + current_velocity
 	else:
 		# Deaccelerate.
-		new_velocity = current_velocity - current_velocity.normalized() * deacceleration * delta
+		new_velocity = current_velocity - current_velocity.normalized() * (acceleration * 4 / 5) * delta
 	
 	if new_velocity.length() > max_speed:
 		new_velocity = new_velocity.normalized() * max_speed
