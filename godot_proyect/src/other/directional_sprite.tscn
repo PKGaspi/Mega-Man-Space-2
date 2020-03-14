@@ -4,3 +4,4 @@
 
 [node name="DirectionalSprite" type="AnimatedSprite"]
 script = ExtResource( 1 )
+[connection signal="frame_changed" from="." to="." method="_on_frame_changed"]

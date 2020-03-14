@@ -107,14 +107,14 @@ func _enter_tree() -> void:
 func _ready():
 	
 	# Init material.
-	#$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
-#	$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
-#	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
+	connect("palette_change", get_node("SprShip"), "set_palette")
 	
 	# Connect signals.
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
 	connect("palette_change", ammo_bar, "set_palette")
 	global.connect("user_pause", self, "_on_global_user_pause")
+	
+	set_palette(active_weapon)
 
 
 
@@ -213,7 +213,6 @@ func upgrade(type : String, ammount : float) -> void:
 func set_palette(palette_index : int) -> void:
 	# Set color palette.
 	var new_palette = palettes.get_frame("default", palette_index)
-	$SprShip.material.set_shader_param("palette", new_palette)
 	# Set propulsion particles new color.
 	var image = new_palette.get_data()
 	image.lock()

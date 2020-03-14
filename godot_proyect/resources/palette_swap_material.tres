@@ -19,6 +19,9 @@ void fragment() {
 		//If an inconsistency appears between Intel and Amd/Nvidia, feel free to fix it and commit, but take this as a warning for production use
 		output = texture(palette,vec2((color_r*255.0+0.5)/255.0,0.0));
 	}
+	else{
+		output.a = 0.0; // White turns into transparent.
+	}
 	COLOR.rgba = output;
 }
 "

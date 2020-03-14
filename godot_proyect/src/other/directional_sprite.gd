@@ -1,8 +1,8 @@
 extends AnimatedSprite
 
+export(SpriteFrames) var palettes
 var direction: Vector2
 
-signal animation_changed(animation)
 
 func set_direction(value: Vector2, rotation: float) -> void:
 	var old_animation = animation
@@ -24,11 +24,25 @@ func set_direction(value: Vector2, rotation: float) -> void:
 		propulsion_angle %= 360
 		# Set the corresponding mask
 		set_animation(str(propulsion_angle))
-	print(animation)
-	if animation != old_animation:
-		play()
+	
+	play()
+
 
 func set_animation(value: String) -> void:
 	if frames.has_animation(value):
 		.set_animation(value)
-		emit_signal("animation_changed", value)
+		set_mask(animation)
+
+
+func set_palette(value: int) -> void:
+	if material != null:
+		print("wtf")
+		material.set_shader_param("palette", palettes.get_frame("default", frame))
+		
+
+func set_mask(value: String) -> void:
+	if material != null:
+		material.set_shader_param("mask", frames.get_frame(animation, frame))
+
+func _on_frame_changed() -> void:
+	set_mask(animation)
