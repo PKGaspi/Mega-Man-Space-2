@@ -107,9 +107,9 @@ func _enter_tree() -> void:
 func _ready():
 	
 	# Init material.
-	$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
-	$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
-	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
+	#$SprShip.texture = global.create_empty_image(masks.get_frame("iddle", 0).get_size())
+#	$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
+#	$SprShip.material.set_shader_param("palette", palettes.get_frame("default", 0))
 	
 	# Connect signals.
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
@@ -130,79 +130,34 @@ func set_ammo(value, pause = false, weapon = active_weapon):
 	.set_ammo(value, pause)
 	weapons_ammo[weapon] = ammo
 
+
 func get_ammo(weapon = active_weapon) -> float:
 	return weapons_ammo[clamp(weapon, 1, Weapon.TYPES.SIZE)]
 
+
 func set_visibility(value):
 	$SprShip.visible = value
-	
+
+
 func get_visibility():
 	return $SprShip.visible
+
 
 func take_damage(damage):
 	.take_damage(damage)
 	$HitParticles.emitting = true
 	$HitParticles.restart()
 
-func get_rotation():
-	var rot : float = rotation
-	var input : Vector2
-	
-	match global.input_type:
-		
-		global.INPUT_TYPES.KEY_MOUSE:
-			# Keyboard input.
-			var mouse_pos = get_global_mouse_position()
-			if position.distance_to(mouse_pos) > 3:
-				input = global_position.direction_to(mouse_pos)
-				
-		global.INPUT_TYPES.GAMEPAD:
-			# Gamepad input.
-			input = get_joystick_axis(0, JOYSTICK_RIGHT)
-				
-		global.INPUT_TYPES.TOUCHSCREEN:
-			# Touchscreen input.
-			input = get_mobile_joystick_axis(JOYSTICK_RIGHT)
-		
-	if input != Vector2.ZERO:
-		rot = input.angle()
-	
-	# Set rotation sprite.
-	if input_dir == Vector2():
-		$SprShip.material.set_shader_param("mask", masks.get_frame("iddle", 0))
-	else:
-		var sprite_angle = int(round(rad2deg(input_dir.angle() - rot)))
-		# Work only with positive angles.
-		if sprite_angle < 0:
-			sprite_angle += 360
-		# Make the angle change in an interval of 45 / 2 degs.
-		if sprite_angle % 45 >= 45 / 2:
-			sprite_angle += 45 - sprite_angle % 45
-		else:
-			sprite_angle -= sprite_angle % 45
-		sprite_angle %= 360
-		# Set the corresponding mask
-		$SprShip.material.set_shader_param("mask", masks.get_frame(str(sprite_angle), 0))
-		
-	
-	return rot
-
-func get_joystick_axis(device, joystick):
-	var input = Vector2(Input.get_joy_axis(device, joystick), Input.get_joy_axis(device, joystick + 1))
-	if input.length() < JOYSTICK_DEADZONE:
-		input = Vector2()
-	return input
-
-func get_mobile_joystick_axis(joystick):
-	if joystick == JOYSTICK_LEFT:
-		return global.current_touchscreen_layout.get_node("LeftJoystick").output
-	elif joystick == JOYSTICK_RIGHT:
-		return global.current_touchscreen_layout.get_node("RightJoystick").output
-
 
 func fire(n_cannons : int = self.n_cannons, used_ammo : float = ammo_per_shot[active_weapon]) -> bool:
 	# Declared here to change default arguments.
 	return .fire(n_cannons, used_ammo)
+
+
+func apply_propulsion_effects(propulsion: Vector2) -> void:
+	$SprShip.set_direction(propulsion, rotation)
+	emit_propulsion_particles(propulsion)
+
 
 func emit_propulsion_particles(velocity: Vector2) -> void:
 	var propulsion_dir = -velocity
@@ -216,6 +171,7 @@ func emit_propulsion_particles(velocity: Vector2) -> void:
 	$PropulsionParticles2.global_rotation = propulsion_dir.angle()
 	$PropulsionParticles2.process_material.initial_velocity = speed / 4
 
+
 func fill(type, ammount):
 	if type == "1up":
 		global.obtain_1up()
@@ -226,7 +182,8 @@ func fill(type, ammount):
 	elif type == "ammo":
 		if active_weapon != Weapon.TYPES.MEGA:
 			set_ammo_relative(ammount, true)
-	
+
+
 func upgrade(type : String, ammount : float) -> void:
 	var old_value = get(type)
 	var value_max = get(type.to_upper() + "_MAX")
@@ -251,8 +208,8 @@ func upgrade(type : String, ammount : float) -> void:
 				$StateMachine/Move.max_speed += ammount
 			_:
 				set(type, new_value)
-			
-			
+
+
 func set_palette(palette_index : int) -> void:
 	# Set color palette.
 	var new_palette = palettes.get_frame("default", palette_index)
@@ -268,6 +225,7 @@ func set_palette(palette_index : int) -> void:
 	
 	# Emit palette change signal.
 	emit_signal("palette_change", palette_index)
+
 
 func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 	if !unlocked_weapons.has(weapon_index):
@@ -288,7 +246,7 @@ func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 		active_weapon = weapon_index
 		set_ammo(get_ammo())
 	return unlocked
-		
+
 
 func next_weapon():
 	# WARNING: This only works as expected if at least one weapon
@@ -297,6 +255,7 @@ func next_weapon():
 	while !set_weapon(weapon):
 		weapon = (weapon + 1) % Weapon.TYPES.SIZE
 
+
 func previous_weapon():
 	# WARNING: This only works as expected if at least one weapon
 	# is unlocked. Mega is unlocked by default and should be at all times.
@@ -304,10 +263,10 @@ func previous_weapon():
 	while !set_weapon(weapon):
 		weapon = weapon - 1 if weapon > 0 else Weapon.TYPES.SIZE - 1
 
+
 func die():
 	# Save the camera position.
 	$Camera2D.current = false
-	
 	
 	# Generate death scene.
 	var inst = death_instance.instance()

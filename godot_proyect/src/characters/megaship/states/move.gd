@@ -1,5 +1,9 @@
 extends CharacterState
 
+const MIN_DISTANCE_TO_CURSOR = 5
+
+# Speed and acceleration.
+
 const MIN_MAX_SPEED:= 200.0
 export var max_speed:= 260.0 setget set_max_speed
 const MAX_MAX_SPEED:= 400.0
@@ -21,14 +25,15 @@ func physics_process(delta):
 			collider.collide(character)
 			break
 	# Calculate rotation and sprite.
-	character.rotation = character.get_rotation()
+	character.rotation = calculate_rotation()
 	
 	# Check if we are firing.
 	if Input.is_action_pressed("shoot"):
 		character.fire()
 	
 	# Emit propulsion particles.
-	character.emit_propulsion_particles(input_dir.normalized() * acceleration)
+	var propulsion = input_dir.normalized() * acceleration
+	character.apply_propulsion_effects(propulsion)
 
 
 func input(event: InputEvent) -> void:
@@ -82,6 +87,20 @@ func calculate_velocity(
 	
 	if new_velocity.length() > max_speed:
 		new_velocity = new_velocity.normalized() * max_speed
-	# TODO: Implement deacceleration.
 	current_velocity = new_velocity
 	return new_velocity
+
+
+func calculate_rotation() -> float:
+	var rotation:= character.rotation
+	
+	match global.input_type:
+		global.INPUT_TYPES.KEY_MOUSE: # Keyboard and mouse input.
+			var mouse_pos = character.get_global_mouse_position()
+			var global_position = character.global_position
+			if global_position.distance_to(mouse_pos) > MIN_DISTANCE_TO_CURSOR:
+				rotation = global_position.direction_to(mouse_pos).angle()
+		_:
+			pass #rotation = 
+	return rotation
+
