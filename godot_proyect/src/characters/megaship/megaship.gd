@@ -117,7 +117,6 @@ func _ready():
 	set_palette(active_weapon)
 
 
-
 func _on_global_user_pause(value):
 	if !value:
 		speed = 0
@@ -202,11 +201,19 @@ func upgrade(type : String, ammount : float) -> void:
 			$SndUpgrade.play()
 		match type:
 			"hp_max":
+				# Also change max ammo.
 				set_hp_max(new_value)
 				set_ammo_max(new_value)
 			"speed":
+				# Changes in the state machine.
 				$StateMachine/Move.max_speed += ammount
+			"bullet_max":
+				# Change bullet max number and shooting cd.
+				if bullet_max != new_value:
+					bullet_max = new_value
+					shooting_cd = shooting_cd - sign(ammount) * .02
 			_:
+				# Only change the intended value.
 				set(type, new_value)
 
 

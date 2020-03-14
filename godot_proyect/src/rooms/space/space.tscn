@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/rooms/space/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/gui/aimer.gd" type="Script" id=5]
 [ext_resource path="res://src/characters/megaship/megaship_teleport.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/characters/pickups/upgrade.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/rooms/space/enemy_generator.gd" type="Script" id=9]
 [ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/characters/enemies/telly.tscn" type="PackedScene" id=11]
@@ -92,6 +93,55 @@ warning_palettes = ExtResource( 15 )
 pause_mode = 2
 position = Vector2( 240, 135 )
 current = true
+
+[node name="Upgrade" parent="GameLayer" instance=ExtResource( 8 )]
+position = Vector2( 76.605, 133.091 )
+index = 3
+
+[node name="Upgrade2" parent="GameLayer" instance=ExtResource( 8 )]
+position = Vector2( 76.605, 133.091 )
+DAMAGE_MULTIPLIERS = {
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1,
+5: 1,
+6: 1,
+7: 1,
+8: 1
+}
+index = 3
+
+[node name="Upgrade3" parent="GameLayer" instance=ExtResource( 8 )]
+position = Vector2( 76.605, 133.091 )
+DAMAGE_MULTIPLIERS = {
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1,
+5: 1,
+6: 1,
+7: 1,
+8: 1
+}
+index = 3
+
+[node name="Upgrade4" parent="GameLayer" instance=ExtResource( 8 )]
+position = Vector2( 76.605, 133.091 )
+DAMAGE_MULTIPLIERS = {
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1,
+5: 1,
+6: 1,
+7: 1,
+8: 1
+}
+index = 3
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 16 )]
 to_follow = NodePath("../GameLayer/Megaship")

@@ -36,7 +36,6 @@ func set_animation(value: String) -> void:
 
 func set_palette(value: int) -> void:
 	if material != null:
-		print("wtf")
 		material.set_shader_param("palette", palettes.get_frame("default", frame))
 		
 
