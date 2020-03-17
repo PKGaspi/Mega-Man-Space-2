@@ -1,18 +1,18 @@
+
 extends AnimatedSprite
 
 export(SpriteFrames) var palettes
 var direction: Vector2
 
 
-func set_direction(value: Vector2, rotation: float) -> void:
-	var old_animation = animation
+func set_direction(value: Vector2) -> void:
 	direction = value
 	# Set rotation sprite.
 	if direction == Vector2.ZERO: # Iddle.
 		set_animation("iddle")
 	else:
 		var degrees_per_direction = 360 / 8
-		var propulsion_angle = int(round(rad2deg(direction.angle() - rotation)))
+		var propulsion_angle = int(round(rad2deg(direction.angle() - global_rotation)))
 		# Work only with positive angles.
 		if propulsion_angle < 0:
 			propulsion_angle += 360

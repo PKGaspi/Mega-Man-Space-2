@@ -154,11 +154,8 @@ func fire(n_cannons : int = self.n_cannons, used_ammo : float = ammo_per_shot[ac
 
 
 func apply_propulsion_effects(propulsion: Vector2) -> void:
-	$SprShip.set_direction(propulsion, rotation)
+	$SprShip.set_direction(propulsion)
 	$PropulsionParticles.emit(propulsion)
-
-
-
 
 
 func fill(type, ammount):
