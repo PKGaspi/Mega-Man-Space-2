@@ -150,7 +150,8 @@ func take_damage(damage):
 
 func fire(n_cannons : int = self.n_cannons, used_ammo : float = ammo_per_shot[active_weapon]) -> bool:
 	# Declared here to change default arguments.
-	return .fire(n_cannons, used_ammo)
+	#return .fire(n_cannons, used_ammo)
+	return $Cannons/Cannon.shoot()
 
 
 func apply_propulsion_effects(propulsion: Vector2) -> void:

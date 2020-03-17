@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
@@ -19,11 +19,12 @@
 [ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=19]
+[ext_resource path="res://src/characters/cannon.tscn" type="PackedScene" id=20]
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -6.5, -6, 13, 0, -6.5, 6 )
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
 //The palette used
@@ -49,9 +50,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 2 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 19 )
 shader_param/mask = ExtResource( 18 )
@@ -126,16 +127,21 @@ palettes = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 scale = Vector2( 1.3, 1.76 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="SprShip" parent="." index="1" instance=ExtResource( 14 )]
-material = SubResource( 2 )
+material = SubResource( 3 )
 position = Vector2( -0.5, 0.5 )
 frames = ExtResource( 5 )
 animation = "iddle"
 palettes = ExtResource( 6 )
 
-[node name="HitParticles" type="Particles2D" parent="." index="2"]
+[node name="Cannons" type="Node2D" parent="." index="2"]
+
+[node name="Cannon" parent="Cannons" index="0" instance=ExtResource( 20 )]
+projectile = ExtResource( 4 )
+
+[node name="HitParticles" type="Particles2D" parent="." index="3"]
 z_index = 1
 emitting = false
 amount = 3
@@ -146,7 +152,7 @@ local_coords = false
 process_material = SubResource( 4 )
 texture = SubResource( 5 )
 
-[node name="PropulsionParticles" type="Node2D" parent="." index="3"]
+[node name="PropulsionParticles" type="Node2D" parent="." index="4"]
 script = ExtResource( 17 )
 
 [node name="PropulsionParticles1" type="Particles2D" parent="PropulsionParticles" index="0"]
@@ -167,19 +173,19 @@ randomness = 0.3
 local_coords = false
 process_material = SubResource( 7 )
 
-[node name="SndShoot" type="AudioStreamPlayer2D" parent="." index="4"]
+[node name="SndShoot" type="AudioStreamPlayer2D" parent="." index="5"]
 stream = ExtResource( 10 )
 
-[node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="5"]
+[node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="6"]
 stream = SubResource( 8 )
 
-[node name="SndHit" type="AudioStreamPlayer2D" parent="." index="6"]
+[node name="SndHit" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource( 11 )
 
-[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="7"]
+[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 13 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="12"]
+[node name="Camera2D" type="Camera2D" parent="." index="13"]
 process_mode = 0
 smoothing_enabled = true
 smoothing_speed = 8.0
@@ -190,10 +196,10 @@ drag_margin_bottom = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="13"]
+[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="14"]
 stream = ExtResource( 12 )
 
-[node name="StateMachine" type="Node" parent="." index="14"]
+[node name="StateMachine" type="Node" parent="." index="15"]
 script = ExtResource( 15 )
 initial_state = NodePath("Move")
 

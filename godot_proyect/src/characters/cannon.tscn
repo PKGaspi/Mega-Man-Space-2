@@ -8,5 +8,6 @@ __meta__ = {
 "_gizmo_extents_": 1.0
 }
 
-[node name="ShootingCDTimer" type="Timer" parent="."]
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
