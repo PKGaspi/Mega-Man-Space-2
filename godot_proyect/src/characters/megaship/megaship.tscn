@@ -137,40 +137,40 @@ frames = ExtResource( 5 )
 animation = "iddle"
 palettes = ExtResource( 6 )
 
-[node name="CannonSetups" type="Node2D" parent="." index="2"]
+[node name="CannonUpgrader" type="Node2D" parent="." index="2"]
 script = ExtResource( 22 )
 n_cannons = 2
 
-[node name="1" parent="CannonSetups" index="0" instance=ExtResource( 21 )]
+[node name="1" parent="CannonUpgrader" index="0" instance=ExtResource( 21 )]
 
-[node name="CenterCannon" parent="CannonSetups/1" index="2" instance=ExtResource( 20 )]
+[node name="CenterCannon" parent="CannonUpgrader/1" index="2" instance=ExtResource( 20 )]
 position = Vector2( 16, 0 )
 projectile = ExtResource( 4 )
 
-[node name="2" parent="CannonSetups" index="1" instance=ExtResource( 21 )]
+[node name="2" parent="CannonUpgrader" index="1" instance=ExtResource( 21 )]
 
-[node name="LeftCannon" parent="CannonSetups/2" index="2" instance=ExtResource( 20 )]
+[node name="LeftCannon" parent="CannonUpgrader/2" index="2" instance=ExtResource( 20 )]
 position = Vector2( 7, -4.5 )
 rotation = -0.0349066
 projectile = ExtResource( 4 )
 
-[node name="RightCannon" parent="CannonSetups/2" index="3" instance=ExtResource( 20 )]
+[node name="RightCannon" parent="CannonUpgrader/2" index="3" instance=ExtResource( 20 )]
 position = Vector2( 7, 4.5 )
 rotation = 0.0349066
 projectile = ExtResource( 4 )
 
-[node name="3" parent="CannonSetups" index="2" instance=ExtResource( 21 )]
+[node name="3" parent="CannonUpgrader" index="2" instance=ExtResource( 21 )]
 
-[node name="CenterCannon" parent="CannonSetups/3" index="2" instance=ExtResource( 20 )]
+[node name="CenterCannon" parent="CannonUpgrader/3" index="2" instance=ExtResource( 20 )]
 position = Vector2( 16, 0 )
 projectile = ExtResource( 4 )
 
-[node name="LeftCannon" parent="CannonSetups/3" index="3" instance=ExtResource( 20 )]
+[node name="LeftCannon" parent="CannonUpgrader/3" index="3" instance=ExtResource( 20 )]
 position = Vector2( 7, -4.5 )
 rotation = -0.174533
 projectile = ExtResource( 4 )
 
-[node name="RightCannon" parent="CannonSetups/3" index="4" instance=ExtResource( 20 )]
+[node name="RightCannon" parent="CannonUpgrader/3" index="4" instance=ExtResource( 20 )]
 position = Vector2( 7, 4.5 )
 rotation = 0.174533
 projectile = ExtResource( 4 )

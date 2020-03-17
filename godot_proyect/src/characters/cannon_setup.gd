@@ -1,3 +1,4 @@
+class_name CannonSetup
 extends Node2D
 
 onready var snd_shoot = $SndShoot
@@ -16,3 +17,13 @@ func fire() -> bool:
 		# TODO: Consume ammo
 		global.play_audio_random_pitch(snd_shoot, Vector2(.98, 1.02)) # Play sound.
 	return shooted
+
+func set_cooldown(value: float) -> void:
+	for child in get_children():
+		if child is Cannon:
+			child.set_cooldown(value)
+
+func set_projectile(value: PackedScene) -> void:
+	for child in get_children():
+		if child is Cannon:
+			child.set_projectile(value)

@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/cannon.gd"
 }, {
+"base": "Node2D",
+"class": "CannonSetup",
+"language": "GDScript",
+"path": "res://src/characters/cannon_setup.gd"
+}, {
+"base": "Node2D",
+"class": "CannonUpgrader",
+"language": "GDScript",
+"path": "res://src/characters/cannon_upgrader.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -87,6 +97,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Bullet": "",
 "Cannon": "",
+"CannonSetup": "",
+"CannonUpgrader": "",
 "Character": "",
 "CharacterState": "",
 "Enemy": "",

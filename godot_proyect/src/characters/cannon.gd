@@ -1,8 +1,9 @@
 class_name Cannon
 extends Position2D
 
-export var projectile: PackedScene # What to shoot.
+export var projectile: PackedScene setget set_projectile# What to shoot.
 export var max_projectiles: int = 3 # Max number of projectiles at once on the screen.
+export var cooldown: float = .1 setget set_cooldown# Time between shoots.
 
 onready var _cooldown_timer := $Cooldown
 var n_projectiles: int = 0 # Current number of projectiles on screen.
@@ -28,3 +29,9 @@ func shoot() -> bool:
 	
 	return true
 
+func set_cooldown(value: float) -> void:
+	cooldown = value
+	_cooldown_timer.wait_time = value
+
+func set_projectile(value: PackedScene) -> void:
+	projectile = value
