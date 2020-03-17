@@ -71,13 +71,11 @@ __meta__ = {
 pause_mode = 1
 
 [node name="TeleportAnimation" parent="GameLayer" instance=ExtResource( 6 )]
-position = Vector2( 240, -100 )
+position = Vector2( 0, -200 )
 animation = "teleport_falling"
 playing = true
-destination = Vector2( 240, 135 )
 
 [node name="Megaship" parent="GameLayer" instance=ExtResource( 7 )]
-position = Vector2( 240, 135 )
 DAMAGE_MULTIPLIERS = {
 
 }
@@ -90,7 +88,6 @@ warning_palettes = ExtResource( 15 )
 
 [node name="StaticCamera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2
-position = Vector2( 240, 135 )
 current = true
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 16 )]
