@@ -108,8 +108,9 @@ default_bus_layout="res://resources/audio/default_bus_layout.tres"
 
 [autoload]
 
-global="*res://src/global.tscn"
+global="*res://src/autoload/global.tscn"
 debug_menu="*res://src/gui/menus/debug menu/debug_panel.tscn"
+ObjectRegistry="*res://src/autoload/object_registry.tscn"
 
 [debug]
 
