@@ -31,17 +31,17 @@ func set_direction(value: Vector2, rotation: float) -> void:
 func set_animation(value: String) -> void:
 	if frames.has_animation(value):
 		.set_animation(value)
-		set_mask(animation)
+		set_mask(frame)
 
 
 func set_palette(value: int) -> void:
 	if material != null:
-		material.set_shader_param("palette", palettes.get_frame("default", frame))
+		material.set_shader_param("palette", palettes.get_frame("default", value))
 		
 
-func set_mask(value: String) -> void:
+func set_mask(value: int) -> void:
 	if material != null:
-		material.set_shader_param("mask", frames.get_frame(animation, frame))
+		material.set_shader_param("mask", frames.get_frame(animation, value))
 
 func _on_frame_changed() -> void:
-	set_mask(animation)
+	set_mask(frame)

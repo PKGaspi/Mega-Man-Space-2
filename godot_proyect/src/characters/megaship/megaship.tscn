@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/other/directional_sprite.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/other/state machine/state_machine.gd" type="Script" id=15]
 [ext_resource path="res://src/characters/megaship/states/move.gd" type="Script" id=16]
+[ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -141,7 +142,10 @@ local_coords = false
 process_material = SubResource( 4 )
 texture = SubResource( 5 )
 
-[node name="PropulsionParticles1" type="Particles2D" parent="." index="3"]
+[node name="PropulsionParticles" type="Node2D" parent="." index="3"]
+script = ExtResource( 17 )
+
+[node name="PropulsionParticles1" type="Particles2D" parent="PropulsionParticles" index="0"]
 z_index = -3
 emitting = false
 amount = 75
@@ -150,7 +154,7 @@ randomness = 0.3
 local_coords = false
 process_material = SubResource( 6 )
 
-[node name="PropulsionParticles2" type="Particles2D" parent="." index="4"]
+[node name="PropulsionParticles2" type="Particles2D" parent="PropulsionParticles" index="1"]
 z_index = -3
 emitting = false
 amount = 25
@@ -159,19 +163,19 @@ randomness = 0.3
 local_coords = false
 process_material = SubResource( 7 )
 
-[node name="SndShoot" type="AudioStreamPlayer2D" parent="." index="5"]
+[node name="SndShoot" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource( 10 )
 
-[node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="6"]
+[node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="5"]
 stream = SubResource( 8 )
 
-[node name="SndHit" type="AudioStreamPlayer2D" parent="." index="7"]
+[node name="SndHit" type="AudioStreamPlayer2D" parent="." index="6"]
 stream = ExtResource( 11 )
 
-[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="8"]
+[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource( 13 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="13"]
+[node name="Camera2D" type="Camera2D" parent="." index="12"]
 process_mode = 0
 smoothing_enabled = true
 smoothing_speed = 8.0
@@ -182,12 +186,13 @@ drag_margin_bottom = 0.1
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="14"]
+[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="13"]
 stream = ExtResource( 12 )
 
-[node name="StateMachine" type="Node" parent="." index="15"]
+[node name="StateMachine" type="Node" parent="." index="14"]
 script = ExtResource( 15 )
 initial_state = NodePath("Move")
 
 [node name="Move" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 16 )
+[connection signal="palette_change" from="." to="SprShip" method="set_palette"]

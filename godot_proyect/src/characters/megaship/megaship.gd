@@ -99,7 +99,7 @@ var input_dir = Vector2() # Direction that the user inputs.
 ##############
 ## Singals. ##
 ##############
-signal palette_change
+signal palette_change(new_palette_index)
 
 func _enter_tree() -> void:
 	global.MEGASHIP = self # Set global reference.
@@ -155,20 +155,10 @@ func fire(n_cannons : int = self.n_cannons, used_ammo : float = ammo_per_shot[ac
 
 func apply_propulsion_effects(propulsion: Vector2) -> void:
 	$SprShip.set_direction(propulsion, rotation)
-	emit_propulsion_particles(propulsion)
+	$PropulsionParticles.emit(propulsion)
 
 
-func emit_propulsion_particles(velocity: Vector2) -> void:
-	var propulsion_dir = -velocity
-	var speed = velocity.length()
-	
-	$PropulsionParticles1.emitting = speed != 0
-	$PropulsionParticles1.global_rotation = propulsion_dir.angle()
-	$PropulsionParticles1.process_material.initial_velocity = speed / 4
-	
-	$PropulsionParticles2.emitting = speed != 0
-	$PropulsionParticles2.global_rotation = propulsion_dir.angle()
-	$PropulsionParticles2.process_material.initial_velocity = speed / 4
+
 
 
 func fill(type, ammount):
@@ -223,10 +213,10 @@ func set_palette(palette_index : int) -> void:
 	# Set propulsion particles new color.
 	var image = new_palette.get_data()
 	image.lock()
-	var new_color_1 = image.get_pixel(2, 0)
-	var new_color_2 = image.get_pixel(3, 0)
-	$PropulsionParticles1.process_material.color = new_color_1
-	$PropulsionParticles2.process_material.color = new_color_2
+	var new_color_0 = image.get_pixel(2, 0)
+	var new_color_1 = image.get_pixel(3, 0)
+	$PropulsionParticles.set_color(0, new_color_0)
+	$PropulsionParticles.set_color(1, new_color_1)
 	image.unlock()
 	
 	# Emit palette change signal.
