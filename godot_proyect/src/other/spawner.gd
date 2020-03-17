@@ -1,4 +1,4 @@
-extends Node2D
+extends Position2D
 
 export(PackedScene) var to_spawn # What to spawn.
 export(int) var max_spawns # Max spawned objects at the same time in the scene. Cero or Negative means there ins no maximum.
