@@ -7,7 +7,6 @@
 radius = 8.44082
 
 [node name="Asteroid" instance=ExtResource( 1 )]
-hp_max = 5.0
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="4"]
 position = Vector2( -0.376133, 0.268669 )

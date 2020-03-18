@@ -11,7 +11,7 @@ var _stat_caps := {}
 signal stat_changed(stat_name, new_value)
 
 
-func _init() -> void:
+func initialize() -> void:
 	_init_lists()
 
 
@@ -47,8 +47,9 @@ func _init_lists() -> void:
 		"resource_path",
 		"script",
 		"_stats",
-		"_modifiers",
-		"_cache"
+		"_stat_initial",
+		"_stat_current",
+		"_stat_caps",
 	] # Values to ignore.
 	_stats = []
 	_stat_initial = {}

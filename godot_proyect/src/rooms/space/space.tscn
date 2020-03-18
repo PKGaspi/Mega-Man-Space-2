@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/rooms/space/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://src/rooms/space/space_background.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=17]
+[ext_resource path="res://resources/palette_swap_material.tres" type="Material" id=18]
+[ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -36,9 +38,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BarContainer" type="Control" parent="GUILayer/Container"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MegashipHPBar" parent="GUILayer/Container/BarContainer" instance=ExtResource( 19 )]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 23.0
+margin_bottom = 80.0
+
+[node name="MegashipAmmoBar" parent="GUILayer/Container/BarContainer" instance=ExtResource( 19 )]
+margin_left = 23.0
+margin_top = 24.0
+margin_right = 30.0
+margin_bottom = 80.0
+
 [node name="CenterContainer" type="CenterContainer" parent="GUILayer/Container"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CenterText" type="Label" parent="GUILayer/Container/CenterContainer"]
 margin_left = 240.0
@@ -60,23 +85,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BarContainer" type="Control" parent="GUILayer/Container"]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="GameLayer" type="Node2D" parent="."]
 pause_mode = 1
 
 [node name="TeleportAnimation" parent="GameLayer" instance=ExtResource( 6 )]
+material = ExtResource( 18 )
 position = Vector2( 0, -200 )
 animation = "teleport_falling"
 playing = true
 
 [node name="Megaship" parent="GameLayer" instance=ExtResource( 7 )]
+_hp_bar_path = NodePath("../../GUILayer/Container/BarContainer/MegashipHPBar")
 DAMAGE_MULTIPLIERS = {
 
 }

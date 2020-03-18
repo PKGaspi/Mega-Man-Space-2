@@ -46,9 +46,6 @@ func _on_animation_finished(animation):
 	if animation == "ready":
 		global.create_touchscreen_layout($GUILayer/Container)
 		$GameLayer/TeleportAnimation.pause_mode = PAUSE_MODE_PROCESS
-		# Disable static camera.
-		#$GameLayer/StaticCamera.queue_free()
-		#$GameLayer/Megaship/Camera2D.current = true
 
 func _on_teleport_animation_tree_exiting() -> void:
 	global.unpause()

@@ -72,21 +72,7 @@ var unlocked_weapons = global.unlocked_weapons
 ##############
 # HP & ammo. #
 ##############
-# var hp = hp_max # Current HP. This is in character.gd.
-var weapons_ammo = { # Current ammo for each weapon.
-	Weapon.TYPES.MEGA : ammo_max,
-	Weapon.TYPES.BUBBLE : ammo_max,
-	Weapon.TYPES.AIR : ammo_max,
-	Weapon.TYPES.QUICK : ammo_max,
-	Weapon.TYPES.HEAT : ammo_max,
-	Weapon.TYPES.WOOD : ammo_max,
-	Weapon.TYPES.METAL : ammo_max,
-	Weapon.TYPES.FLASH : ammo_max,
-	Weapon.TYPES.CRASH : ammo_max,
-	Weapon.TYPES.ONE : ammo_max,
-	Weapon.TYPES.TWO : ammo_max,
-	Weapon.TYPES.THREE : ammo_max,
-}
+
 
 ########################
 # Mechanics variables. #
@@ -111,7 +97,6 @@ func _ready():
 	
 	# Connect signals.
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
-	connect("palette_change", ammo_bar, "set_palette")
 	global.connect("user_pause", self, "_on_global_user_pause")
 	
 	set_palette(active_weapon)
@@ -124,15 +109,6 @@ func _on_global_user_pause(value):
 #########################
 ## Auxiliar functions. ##
 #########################
-
-func set_ammo(value, pause = false, weapon = active_weapon):
-	.set_ammo(value, pause)
-	weapons_ammo[weapon] = ammo
-
-
-func get_ammo(weapon = active_weapon) -> float:
-	return weapons_ammo[clamp(weapon, 1, Weapon.TYPES.SIZE)]
-
 
 func set_visibility(value):
 	$SprShip.visible = value
@@ -168,7 +144,7 @@ func fill(type, ammount):
 		set_hp_relative(ammount, true)
 	elif type == "ammo":
 		if active_weapon != Weapon.TYPES.MEGA:
-			set_ammo_relative(ammount, true)
+			pass # TODO: set_ammo_relative(ammount, true)
 
 
 func upgrade(type : String, ammount : float) -> void:
@@ -190,8 +166,8 @@ func upgrade(type : String, ammount : float) -> void:
 		match type:
 			"hp_max":
 				# Also change max ammo.
-				set_hp_max(new_value)
-				set_ammo_max(new_value)
+				set_max_hp(new_value)
+				# TODO: set_ammo_max(new_value)
 			"speed":
 				# Changes in the state machine.
 				$StateMachine/Move.max_speed += ammount
@@ -222,6 +198,7 @@ func set_palette(palette_index : int) -> void:
 
 
 func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
+	# TODO: MOVE THIS TO THE CANNON STATE MACHINE
 	if !unlocked_weapons.has(weapon_index):
 		weapon_index = Weapon.TYPES.MEGA
 	var unlocked = unlocked_weapons[weapon_index]
@@ -232,13 +209,13 @@ func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
 # warning-ignore:narrowing_conversion
 		set_palette(clamp(weapon_index, 0, Weapon.TYPES.ONE))
 		# Set ammo_bar visibility.
-		ammo_bar.visible = weapon_index != 0
+		#ammo_bar.visible = weapon_index != 0
 		# Save ammo value.
-		weapons_ammo[active_weapon] = ammo
+		#weapons_ammo[active_weapon] = ammo
 		# TODO: Change bullets.
 		
 		active_weapon = weapon_index
-		set_ammo(get_ammo())
+		#set_ammo(get_ammo())
 	return unlocked
 
 

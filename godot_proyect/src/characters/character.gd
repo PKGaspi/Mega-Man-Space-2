@@ -1,28 +1,13 @@
 class_name Character
 extends KinematicBody2D
 
-
+# Stats.
+export var stats: Resource
 # Bars.
-const TILED_PROGRESS = preload("res://src/gui/tiled_progress.tscn")
-onready var BAR_CONTAINER = $"/root/Space/GUILayer/Container/BarContainer"
-# HP.
-export(float, 0, 100, 1) var hp_max = 10 # Max hp.
-export(bool) var _hp_bar_show = true
-export(bool) var _hp_bar_on_gui = false
-export(int) var _hp_bar_palette = 0
-export(Vector2) var _hp_bar_cell_size = Vector2(4, 2)
-export(Vector2) var _hp_bar_position = Vector2(10, -8)
-var hp_bar
-var hp : float # Hp.
-# Ammo.
-export(float, 0, 100, 1) var ammo_max = 28 # Max ammo.
-export(bool) var _ammo_bar_show : bool = false
-export(bool) var _ammo_bar_on_gui : bool = false
-export(int) var _ammo_bar_palette : int = 0
-export(Vector2) var _ammo_bar_cell_size : Vector2 = Vector2(4, 2)
-export(Vector2) var _ammo_bar_position : Vector2 = Vector2(15, -8)
-var ammo_bar
-var ammo : float # Ammo.
+export var _hp_bar_path: NodePath
+onready var hp_bar: TiledProgress = get_node(_hp_bar_path)
+var hp
+var max_hp
 
 export(NodePath) var snd_hit = "SndHit"
 export(NodePath) var snd_shoot = "SndShoot"
@@ -72,12 +57,10 @@ signal death
 
 
 func _ready() -> void:
-	hp = hp_max
-	ammo = ammo_max
-	# Init bars.
-	hp_bar = create_progress_bar(_hp_bar_cell_size, _hp_bar_position, hp_max, _hp_bar_show, _hp_bar_on_gui, _hp_bar_palette, "HpBar")
-	ammo_bar = create_progress_bar(_ammo_bar_cell_size, _ammo_bar_position, ammo_max, _ammo_bar_show, _ammo_bar_on_gui, _ammo_bar_palette, "AmmoBar")
-	
+	assert(stats != null)
+	stats.initialize()
+	max_hp = stats.get_stat("max_hp")
+	hp = max_hp
 	# Init timers.
 	if flicker_before_timeout:
 		$LifeFlickeringTimer.start(life_flicker_time)
@@ -118,26 +101,6 @@ func _on_life_flickering_timer_timeout():
 #########################
 
 
-func create_progress_bar(cell_size : Vector2, pos : Vector2, max_value : float, show : bool = true, on_gui : bool = false, palette : int = 0, name : String = ""):
-	var bar = TILED_PROGRESS.instance()
-	bar.cell_size = cell_size
-	bar.rect_position = pos
-	bar.max_value = max_value
-	bar.visible = show
-	bar.palette = palette
-	
-	if on_gui:
-		if name != "":
-			bar.name = self.name + name
-		BAR_CONTAINER.add_child(bar)
-	else:
-		if name != "":
-			bar.name = name
-		add_child(bar)
-	
-	return bar
-
-
 func set_visibility(value):
 	visible = value
 
@@ -151,35 +114,19 @@ func toggle_visibility():
 
 
 func set_hp(value, pause = false):
-	hp = clamp(value, 0, hp_max)
-	hp_bar.set_value(hp, pause)
+	hp = clamp(value, 0, max_hp)
+	if hp_bar != null:
+		hp_bar.set_value(hp, pause)
 
 
 func set_hp_relative(relative_value, pause = false):
 	set_hp(hp + relative_value, pause)
 
 
-func set_hp_max(value):
-	hp_max = value
-	hp_bar.max_value = value
-
-
-func get_ammo():
-	return ammo
-
-
-func set_ammo(value, pause = false):
-	ammo = clamp(value, 0, ammo_max)
-	ammo_bar.set_value(value, pause)
-
-
-func set_ammo_relative(relative_value, pause = false):
-	set_ammo(ammo + relative_value, pause)
-
-
-func set_ammo_max(value):
-	ammo_max = value
-	ammo_bar.max_value = value
+func set_max_hp(value):
+	max_hp = value
+	if hp_bar != null:
+		hp_bar.max_value = value
 
 
 func flicker(interval = flickering_interval):
@@ -229,34 +176,6 @@ func die():
 func disappear():
 	# Destroy myself by default.
 	queue_free()
-
-
-func fire(n_cannons : int = self.n_cannons, used_ammo : float = -.2) -> bool:
-	# Called when there is an attempt to shoot. This method checks that a
-	# shoot is viable and if so creates the projectiles via shoot_projectile().
-	var shooted = false
-	var able_to_shoot = ammo > 0 and shooting_remaining_cd == 0 # Check if there is enough ammo and the cd is 0.
-	if able_to_shoot:
-		var cannons = cannon_pos[n_cannons - 1]
-		for cannon in cannons:
-			shooted = shoot_projectile(cannon) or shooted # If any cannon shooted, return true and act as so.
-		if shooted:
-			shooting_remaining_cd = shooting_cd # Put shooting on cd.
-			set_ammo_relative(used_ammo) # Consume ammo.
-			global.play_audio_random_pitch(get_node(snd_shoot), Vector2(.98, 1.02)) # Play sound.
-	return shooted
-
-
-func shoot_projectile(pos: Vector2, projectile: Bullet = bullet) -> bool:
-	var group = str(pos) + str(self)
-	var shooted = get_tree().get_nodes_in_group(group).size() < bullet_max
-	# Check if there are too many projectiles.
-	if shooted:
-		# Fire projectile.
-		var inst = projectile.instance()
-		inst.init(global_position + pos.rotated(rotation), rotation, group)
-		get_parent().add_child(inst)
-	return shooted
 
 
 func is_in_range(object : Node2D, radious):

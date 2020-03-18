@@ -111,7 +111,7 @@ func toggle_upgrade():
 		move_speed = MOVE_SPEED_POS
 
 func die():
-	hp = hp_max
+	hp = max_hp
 	toggle_upgrade()
 	
 

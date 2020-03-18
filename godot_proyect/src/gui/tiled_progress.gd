@@ -1,4 +1,5 @@
 tool
+class_name TiledProgress
 extends Control
 
 export var max_value: float = 28 setget set_max_value
