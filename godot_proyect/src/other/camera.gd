@@ -15,6 +15,7 @@ func set_to_follow(value: NodePath) -> void:
 		_node_to_follow = node 
 		if _current_transform != null:
 			_current_transform.queue_free()
+		# Create a remote transform on the new to_follow node.
 		_current_transform = RemoteTransform2D.new()
 		_current_transform.name = "CameraTransform"
 		_current_transform.remote_path = get_path()
