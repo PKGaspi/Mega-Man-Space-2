@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/character.gd"
 }, {
-"base": "State",
+"base": "Reference",
 "class": "CharacterState",
 "language": "GDScript",
 "path": "res://src/library/state machine/character_state.gd"
@@ -74,12 +74,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/pickups/pickup.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "State",
 "language": "GDScript",
 "path": "res://src/library/state machine/state.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://src/library/state machine/state_machine.gd"

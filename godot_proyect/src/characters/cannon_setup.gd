@@ -18,12 +18,21 @@ func fire() -> bool:
 		global.play_audio_random_pitch(snd_shoot, Vector2(.98, 1.02)) # Play sound.
 	return shooted
 
+
+# Setters act on all childs.
 func set_cooldown(value: float) -> void:
 	for child in get_children():
 		if child is Cannon:
 			child.set_cooldown(value)
 
+
 func set_projectile(value: PackedScene) -> void:
 	for child in get_children():
 		if child is Cannon:
 			child.set_projectile(value)
+
+
+func set_max_projectiles(value: int) -> void:
+	for child in get_children():
+		if child is Cannon:
+			child.set_max_projectiles(value)

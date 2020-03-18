@@ -29,9 +29,15 @@ func shoot() -> bool:
 	
 	return true
 
+
 func set_cooldown(value: float) -> void:
 	cooldown = value
 	_cooldown_timer.wait_time = value
 
+
 func set_projectile(value: PackedScene) -> void:
 	projectile = value
+
+
+func set_max_projectiles(value: int) -> void:
+	max_projectiles = value
