@@ -1,4 +1,5 @@
 class_name Weapon
+extends Resource
 
 # Weapons.
 enum TYPES {
@@ -17,3 +18,4 @@ enum TYPES {
 	SIZE,
 }
 
+export(TYPES) var type := TYPES.MEGA

@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "State",
 "class": "CharacterState",
 "language": "GDScript",
-"path": "res://src/other/state machine/character_state.gd"
+"path": "res://src/library/state machine/character_state.gd"
 }, {
 "base": "Character",
 "class": "Enemy",
@@ -77,22 +77,27 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://src/other/state machine/state.gd"
+"path": "res://src/library/state machine/state.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://src/other/state machine/state_machine.gd"
+"path": "res://src/library/state machine/state_machine.gd"
+}, {
+"base": "Resource",
+"class": "Stats",
+"language": "GDScript",
+"path": "res://src/characters/stats.gd"
 }, {
 "base": "Pickup",
 "class": "Upgrade",
 "language": "GDScript",
 "path": "res://src/characters/pickups/upgrade.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://src/weapons.gd"
+"path": "res://src/characters/weapons.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -110,6 +115,7 @@ _global_script_class_icons={
 "Pickup": "",
 "State": "",
 "StateMachine": "",
+"Stats": "",
 "Upgrade": "",
 "Weapon": ""
 }

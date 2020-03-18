@@ -2,8 +2,9 @@
 
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_spawner.png" type="Texture" id=2]
-[ext_resource path="res://src/other/spawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/library/spawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/characters/enemies/telly.tscn" type="PackedScene" id=4]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 15 )
