@@ -222,18 +222,7 @@ stream = ExtResource( 13 )
 [node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 12 )
 
-[node name="Camera2D" type="Camera2D" parent="." index="14"]
-process_mode = 0
-smoothing_enabled = true
-smoothing_speed = 8.0
-drag_margin_left = 0.1
-drag_margin_top = 0.1
-drag_margin_right = 0.1
-drag_margin_bottom = 0.1
-editor_draw_limits = true
-editor_draw_drag_margin = true
-
-[node name="StateMachine" type="Node" parent="." index="15"]
+[node name="StateMachine" type="Node" parent="." index="14"]
 script = ExtResource( 15 )
 initial_state = NodePath("Move")
 

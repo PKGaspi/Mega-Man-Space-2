@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/rooms/space/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/gui/aimer.gd" type="Script" id=5]
 [ext_resource path="res://src/characters/megaship/megaship_teleport.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/other/camera.gd" type="Script" id=8]
 [ext_resource path="res://src/rooms/space/enemy_generator.gd" type="Script" id=9]
 [ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/characters/enemies/telly.tscn" type="PackedScene" id=11]
@@ -86,9 +87,11 @@ enemies = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource
 warning_masks = ExtResource( 14 )
 warning_palettes = ExtResource( 15 )
 
-[node name="StaticCamera" type="Camera2D" parent="GameLayer"]
+[node name="Camera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2
 current = true
+script = ExtResource( 8 )
+_path_to_follow = NodePath("../Megaship")
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 16 )]
 to_follow = NodePath("../GameLayer/Megaship")
