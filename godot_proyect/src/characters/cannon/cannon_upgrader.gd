@@ -5,10 +5,13 @@ export var stats: Resource
 export var _ammo_bar_path: NodePath
 onready var ammo_bar = get_node(_ammo_bar_path)
 
+var weapon: int = Weapon.TYPES.MEGA
 var n_cannons: int = 1
-var ammo
-var max_ammo
-var ammo_per_shot
+var ammo: float
+var max_ammo: float
+var ammo_per_shot: float
+
+signal weapon_changed(new_weapon)
 
 func _ready() -> void:
 	assert(stats != null and stats is CannonStats)
@@ -52,5 +55,22 @@ func set_ammo(value: float, pause: bool = false) -> void:
 	if ammo_bar != null:
 		ammo_bar.set_value(ammo, pause)
 
+
 func set_relative_ammo(relative_value: float, pause: bool = false) -> void:
 	set_ammo(ammo + relative_value, pause)
+
+
+func set_weapon(value: int) -> void:
+	weapon = value
+	if ammo_bar != null:
+		ammo_bar.palette = weapon
+		ammo_bar.visible = weapon != Weapon.TYPES.MEGA
+	emit_signal("weapon_changed", weapon)
+
+
+func next_weapon() -> void:
+	set_weapon((weapon + 1) % Weapon.TYPES.size())
+	
+	
+func previous_weapon() -> void:
+	set_weapon((weapon - 1) if weapon > 0 else Weapon.TYPES.size() - 1)

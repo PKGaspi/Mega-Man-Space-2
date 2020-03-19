@@ -114,7 +114,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/weapons.gd"
 }, {
-"base": "State",
+"base": "CharacterState",
 "class": "WeaponState",
 "language": "GDScript",
 "path": "res://src/library/state machine/weapon_state.gd"

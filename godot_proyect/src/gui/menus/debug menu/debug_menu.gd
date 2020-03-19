@@ -13,8 +13,8 @@ func _on_action_pressed_ui_accept():
 				ship.global_position = enemy_generator.center
 		1:
 			if global.MEGASHIP is Megaship:
-				for weapon in global.MEGASHIP.unlocked_weapons:
-					global.MEGASHIP.unlocked_weapons[weapon] = true
+				for weapon in global.unlocked_weapons:
+					global.unlocked_weapons[weapon] = true
 				
 		_:
 			print_debug("Not implemented")

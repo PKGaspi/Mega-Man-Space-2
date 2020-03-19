@@ -94,8 +94,8 @@ func start_ready_animation():
 func create_weapons_menu() -> void:
 	var inst = WEAPONS_MENU.instance()
 	inst.set_palette(lvl_id)
-	var weapon_index = global.MEGASHIP.active_weapon
-	var unlocked_weapons = global.MEGASHIP.unlocked_weapons
+	var weapon_index = global.MEGASHIP.get_weapon()
+	var unlocked_weapons = global.unlocked_weapons
 	var unlocked_entries = {}
 	for i in range(12):
 		# Create dictionary with the unlocked entries. Key is a vector2 with

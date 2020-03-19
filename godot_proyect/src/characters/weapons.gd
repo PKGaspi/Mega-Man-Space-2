@@ -15,7 +15,6 @@ enum TYPES {
 	ONE,
 	TWO,
 	THREE,
-	SIZE,
 }
 
 export(TYPES) var type := TYPES.MEGA

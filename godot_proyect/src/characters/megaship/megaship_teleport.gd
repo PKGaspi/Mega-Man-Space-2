@@ -13,7 +13,7 @@ func _ready() -> void:
 	global.MEGASHIP.visible = false
 	play("teleport_falling")
 	material.set_shader_param("mask", masks.get_frame(animation, frame))
-	material.set_shader_param("palette", palettes.get_frame("default", clamp(global.MEGASHIP.active_weapon, 0, Weapon.TYPES.ONE)))
+	material.set_shader_param("palette", palettes.get_frame("default", clamp(0, 0, Weapon.TYPES.ONE)))
 	dir = global_position.direction_to(destination)
 	pass
 

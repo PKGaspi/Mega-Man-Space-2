@@ -1,5 +1,5 @@
 class_name WeaponState
-extends State
+extends CharacterState
 
 export(Weapon.TYPES) var weapon
 export var projectile: PackedScene
@@ -18,7 +18,7 @@ func physics_process(delta: float) -> void:
 		cannons.fire()
 
 func enter(msg := {}) -> void:
+	character.set_palette(weapon)
 	cannons.set_projectile(projectile)
 	cannons.set_ammo(ammo)
-	cannons.ammo_bar.palette = weapon
-	cannons.ammo_bar.visible = weapon != Weapon.TYPES.MEGA
+	cannons.set_weapon(weapon)

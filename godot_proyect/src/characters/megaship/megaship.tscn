@@ -238,3 +238,4 @@ initial_state = NodePath("Move")
 [node name="Move" type="Node" parent="StateMachine" index="0"]
 script = ExtResource( 16 )
 [connection signal="palette_change" from="." to="SprShip" method="set_palette"]
+[connection signal="weapon_changed" from="Cannons" to="." method="set_palette"]
