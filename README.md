@@ -83,7 +83,8 @@ A: Yes.
 Main designer, developer, artist and tester: I.  
 Ideas and feedback: friends and family.  
 Color palette swap shader for [Godot]: https://github.com/HeartoLazor/godot_palette_swap.  
-Virtual Joystick for [Godot]: https://github.com/MarcoFazioRandom/Virtual-Joystick-Godot
+Virtual Joystick for [Godot]: https://github.com/MarcoFazioRandom/Virtual-Joystick-Godot  
+[Godot] 2D Space Game (for learning porposes): https://github.com/GDQuest/godot-2d-space-game  
 
 
 [Mega Man Space]: https://gaspi.itch.io/mega-man-space
