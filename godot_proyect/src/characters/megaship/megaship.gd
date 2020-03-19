@@ -21,13 +21,8 @@ func _enter_tree() -> void:
 	global.MEGASHIP = self # Set global reference.
 
 func _ready():
-	
-	# Init material.
-	connect("palette_change", get_node("SprShip"), "set_palette")
-	
 	# Connect signals.
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
-	global.connect("user_pause", self, "_on_global_user_pause")
 	
 
 

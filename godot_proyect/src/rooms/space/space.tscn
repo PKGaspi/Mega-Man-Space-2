@@ -138,7 +138,10 @@ DAMAGE_MULTIPLIERS = {
 [node name="SprShip" parent="GameLayer/Megaship" index="1"]
 material = SubResource( 3 )
 
-[node name="Cannons" parent="GameLayer/Megaship" index="2"]
+[node name="Knockback" parent="GameLayer/Megaship/StateMachine/Move" index="1"]
+knockback_speed = 80.0
+
+[node name="Cannons" parent="GameLayer/Megaship" index="3"]
 _ammo_bar_path = NodePath("../../../GUILayer/Container/BarContainer/MegashipAmmoBar")
 
 [node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
