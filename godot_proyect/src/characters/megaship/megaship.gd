@@ -17,18 +17,25 @@ onready var spr_ship := $SprShip
 ##############
 signal palette_change(new_palette_index)
 
+
+##################
+### Functions. ###
+##################
+
+
 func _enter_tree() -> void:
 	global.MEGASHIP = self # Set global reference.
+
 
 func _ready():
 	# Connect signals.
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
-	
 
 
 ##################
 ## MEGASHIP API ##
 ##################
+
 
 func set_visibility(value):
 	spr_ship.visible = value

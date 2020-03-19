@@ -1,6 +1,8 @@
 class_name MegashipCannons
 extends Node2D
 
+onready var snd_weapon_change = $SndWeaponSwap
+
 export var stats: Resource
 export var _ammo_bar_path: NodePath
 onready var ammo_bar = get_node(_ammo_bar_path)
@@ -61,6 +63,8 @@ func set_relative_ammo(relative_value: float, pause: bool = false) -> void:
 
 
 func set_weapon(value: int) -> void:
+	if snd_weapon_change != null:
+		snd_weapon_change.play()
 	weapon = value
 	if ammo_bar != null:
 		ammo_bar.palette = weapon

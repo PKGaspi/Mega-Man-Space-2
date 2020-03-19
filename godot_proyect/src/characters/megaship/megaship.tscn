@@ -202,6 +202,9 @@ script = ExtResource( 23 )
 projectile = ExtResource( 4 )
 _cannons_path = NodePath("../..")
 
+[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="Cannons" index="4"]
+stream = ExtResource( 12 )
+
 [node name="HitParticles" type="Particles2D" parent="." index="4"]
 z_index = 1
 emitting = false
@@ -244,8 +247,5 @@ stream = ExtResource( 11 )
 
 [node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 13 )
-
-[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="." index="10"]
-stream = ExtResource( 12 )
 [connection signal="palette_change" from="." to="SprShip" method="set_palette"]
 [connection signal="weapon_changed" from="Cannons" to="." method="set_palette"]
