@@ -26,14 +26,6 @@ var invencible : bool = false
 var flickering : bool = false
 var disappearing : bool = false
 
-# Bullets.
-# Auto fire cooldown.
-export var shooting_cd: float = .05 # Min seconds between shootings.
-var shooting_remaining_cd: float = 0 # Seconds to wait until next shooting is posible.
-export(PackedScene) var bullet = null
-export(Array, Array, Vector2) var cannon_pos = [[Vector2()]]
-export(int) var bullet_max : int = 3
-export(int) var n_cannons : int = 1
 
 export(Dictionary) var DAMAGE_MULTIPLIERS = { 
 	Weapon.TYPES.MEGA : 1,
@@ -66,12 +58,6 @@ func _ready() -> void:
 		$LifeFlickeringTimer.start(life_flicker_time)
 	if dissapear_on_timeout:
 		$LifeTimer.start(life_time)
-
-
-func _physics_process(delta: float) -> void:
-	
-	# Reduce shooting cd.
-	shooting_remaining_cd = max(0, shooting_remaining_cd - delta)
 
 
 func _on_flickering_timer_timeout():

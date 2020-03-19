@@ -24,10 +24,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/cannon/cannon_setup.gd"
 }, {
-"base": "Node2D",
-"class": "CannonUpgrader",
+"base": "Stats",
+"class": "CannonStats",
 "language": "GDScript",
-"path": "res://src/characters/cannon/cannon_upgrader.gd"
+"path": "res://src/characters/cannon/cannon_stats.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Character",
@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/megaship/megaship.gd"
 }, {
+"base": "Node2D",
+"class": "MegashipCannons",
+"language": "GDScript",
+"path": "res://src/characters/cannon/cannon_upgrader.gd"
+}, {
 "base": "Control",
 "class": "MenuPanel",
 "language": "GDScript",
@@ -79,7 +84,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/ship_stats.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://src/library/state machine/state.gd"
@@ -108,12 +113,17 @@ _global_script_classes=[ {
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://src/characters/weapons.gd"
+}, {
+"base": "State",
+"class": "WeaponState",
+"language": "GDScript",
+"path": "res://src/library/state machine/weapon_state.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "Cannon": "",
 "CannonSetup": "",
-"CannonUpgrader": "",
+"CannonStats": "",
 "Character": "",
 "CharacterState": "",
 "Enemy": "",
@@ -121,6 +131,7 @@ _global_script_class_icons={
 "FillerPickup": "",
 "Joystick": "",
 "Megaship": "",
+"MegashipCannons": "",
 "MenuPanel": "",
 "Pickup": "",
 "ShipStats": "",
@@ -129,7 +140,8 @@ _global_script_class_icons={
 "Stats": "",
 "TiledProgress": "",
 "Upgrade": "",
-"Weapon": ""
+"Weapon": "",
+"WeaponState": ""
 }
 
 [application]

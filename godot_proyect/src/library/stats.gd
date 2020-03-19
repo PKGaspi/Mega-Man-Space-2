@@ -60,8 +60,8 @@ func _init_lists() -> void:
 			continue # Ignore.
 		if property.name in ignore:
 			continue # Ignore.
-		if property.name.substr(0, 4) == "_cap":
-			_stat_caps[property.name] = get(property.name)
+		if property.name.substr(0, 5) == "_cap_":
+			_stat_caps[property.name.substr(5)] = get(property.name)
 			continue # Ignore. 
 		_stats.append(property.name)
 		_stat_initial[property.name] = get(property.name)

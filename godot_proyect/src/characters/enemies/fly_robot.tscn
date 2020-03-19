@@ -87,14 +87,42 @@ extents = Vector2( 10.5, 18 )
 
 [node name="FlyRobot" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-hp_max = 14.0
-_hp_bar_position = Vector2( 16, -11 )
+snd_hit = NodePath("SndHit")
+snd_shoot = NodePath("SndShoot")
+invencibility_time = 0.5
+life_time = 10.0
+life_flicker_time = 8.0
+flicker_on_hit = true
+flicker_before_timeout = false
+dissapear_on_timeout = false
+DAMAGE_MULTIPLIERS = {
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1,
+5: 1,
+6: 1,
+7: 1,
+8: 1
+}
 masks = ExtResource( 3 )
 move_speed = 200.0
+invert_dir = false
 rotate_towards_destination = true
 _follow_megaship_at_ready = true
 follow_max_distance = 500.0
+dynamic_dir = true
+drifting = 0.0
+drop_chance = 0.5
 damage = 6.0
+shooting_cd = 0.05
+bullet = null
+cannon_pos = [ [ Vector2( 0, 0 ) ] ]
+bullet_max = 3
+n_cannons = 1
+hp_max = 14.0
+_hp_bar_position = Vector2( 16, -11 )
 
 [node name="SprBody" type="Sprite" parent="." index="5"]
 material = SubResource( 2 )
@@ -114,7 +142,7 @@ playing = true
 visible = false
 frames = SubResource( 5 )
 animation = "propeller"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="9"]

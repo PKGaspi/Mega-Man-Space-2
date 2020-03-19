@@ -27,10 +27,6 @@ func physics_process(delta):
 	# Calculate rotation and sprite.
 	character.rotation = calculate_rotation()
 	
-	# Check if we are firing.
-	if Input.is_action_pressed("shoot"):
-		character.fire()
-	
 	# Emit propulsion particles.
 	var propulsion = input_dir.normalized() * acceleration
 	character.apply_propulsion_effects(propulsion)

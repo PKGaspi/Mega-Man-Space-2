@@ -16,6 +16,11 @@ func _ready() -> void:
 		_parent_state = parent
 
 
+func input(event: InputEvent) -> void:
+	if _parent_state != null:
+		_parent_state.input(event)
+
+
 func unhandled_input(event: InputEvent) -> void:
 	if _parent_state != null:
 		_parent_state.unhandled_input(event)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/rooms/space/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=2]
@@ -19,10 +19,45 @@
 [ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=17]
 [ext_resource path="res://resources/palette_swap_material.tres" type="Material" id=18]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
 font_data = ExtResource( 2 )
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+//The palette used
+uniform sampler2D palette;
+//how many horizontal pixels has the palette
+uniform float palette_size;
+//Mask for wich color use from palette
+uniform sampler2D mask;
+
+void fragment() {
+	vec4 mask_color = texture(mask,UV);
+	vec4 output = texture(TEXTURE,UV);
+	if(mask_color.r != 1.0)
+	{
+		highp float color_r = mask_color.r;
+		//If an inconsistency appears between Intel and Amd/Nvidia, feel free to fix it and commit, but take this as a warning for production use
+		output = texture(palette,vec2((color_r*255.0+0.5)/255.0,0.0));
+	}
+	else{
+		output.a = 0.0; // White turns into transparent.
+	}
+	COLOR.rgba = output;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = SubResource( 2 )
+shader_param/palette_size = 8.0
+shader_param/palette = ExtResource( 20 )
+shader_param/mask = ExtResource( 21 )
 
 [node name="Space" type="Node"]
 pause_mode = 2
@@ -100,6 +135,12 @@ DAMAGE_MULTIPLIERS = {
 
 }
 
+[node name="SprShip" parent="GameLayer/Megaship" index="1"]
+material = SubResource( 3 )
+
+[node name="Cannons" parent="GameLayer/Megaship" index="2"]
+_ammo_bar_path = NodePath("../../../GUILayer/Container/BarContainer/MegashipAmmoBar")
+
 [node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
 script = ExtResource( 9 )
 enemies = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ]
@@ -129,3 +170,5 @@ to_follow = NodePath("../GameLayer/Camera")
 [node name="GameOverTimer" type="Timer" parent="."]
 [connection signal="tree_exiting" from="GameLayer/TeleportAnimation" to="." method="_on_teleport_animation_tree_exiting"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
+
+[editable path="GameLayer/Megaship"]

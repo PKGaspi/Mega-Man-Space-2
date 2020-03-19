@@ -124,12 +124,6 @@ func take_damage(damage):
 	$HitParticles.restart()
 
 
-func fire(n_cannons : int = self.n_cannons, used_ammo : float = ammo_per_shot[active_weapon]) -> bool:
-	# Declared here to change default arguments.
-	#return .fire(n_cannons, used_ammo)
-	return $CannonUpgrader.fire()
-
-
 func apply_propulsion_effects(propulsion: Vector2) -> void:
 	$SprShip.set_direction(propulsion)
 	$PropulsionParticles.emit(propulsion)
@@ -173,9 +167,10 @@ func upgrade(type : String, ammount : float) -> void:
 				$StateMachine/Move.max_speed += ammount
 			"bullet_max":
 				# Change bullet max number and shooting cd.
-				if bullet_max != new_value:
-					bullet_max = new_value
-					shooting_cd = shooting_cd - sign(ammount) * .02
+#				if bullet_max != new_value:
+#					bullet_max = new_value
+#					shooting_cd = shooting_cd - sign(ammount) * .02
+				pass
 			_:
 				# Only change the intended value.
 				set(type, new_value)
