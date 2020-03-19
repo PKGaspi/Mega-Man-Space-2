@@ -62,7 +62,7 @@ func fill(type, ammount):
 	elif type == "heal":
 		set_hp_relative(ammount, true)
 	elif type == "ammo":
-		cannons.set_ammo_relative(ammount, true)
+		cannons.set_relative_ammo(ammount, true)
 
 
 func upgrade(type : String, ammount : float) -> void:

@@ -36,7 +36,7 @@ func _ready() -> void:
 	if global.MEGASHIP != null:
 		# Conect palette change signal.
 		global.MEGASHIP.connect("palette_change", self, "_on_megaship_palette_change")
-		set_palette(global.MEGASHIP.active_weapon)
+		set_palette(global.MEGASHIP.get_weapon())
 	
 func init(pos : Vector2, type : String = "", ammount : float = 0, small : bool = false) -> void:
 	self.global_position = pos

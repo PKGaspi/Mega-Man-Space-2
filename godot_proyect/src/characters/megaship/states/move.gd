@@ -74,10 +74,16 @@ func calculate_velocity(
 	var new_velocity: Vector2 
 	if move_direction != Vector2.ZERO:
 		# Accelerate.
-		new_velocity = move_direction * acceleration * delta + current_velocity
+		new_velocity = current_velocity + move_direction * acceleration * delta
 	else:
 		# Deaccelerate.
-		new_velocity = current_velocity - current_velocity.normalized() * (acceleration * 4 / 5) * delta
+		var to_substract = current_velocity.normalized() * (acceleration * 4 / 5) * delta
+		if current_velocity.length() < to_substract.length():
+			# Stay in place if we are going the other way.
+			new_velocity = Vector2.ZERO
+		else:
+			# Reduce velocity.
+			new_velocity = current_velocity - to_substract
 	
 	if new_velocity.length() > max_speed:
 		new_velocity = new_velocity.normalized() * max_speed
