@@ -40,8 +40,6 @@ func input(event: InputEvent) -> void:
 
 # Methods to move to here:
 # new: get_character_collision.
-# get_rotation -> calculate_rotation
-# 
 
 ## Setters and getters. ##
 

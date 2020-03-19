@@ -5,45 +5,7 @@ extends Character
 ## Resources. ##
 ################
 
-const LEMON = preload("res://src/bullets/megaship/lemon.tscn")
-export(SpriteFrames) var masks = null
-export(SpriteFrames) var palettes = null
-
-######################
-## Gameplay values. ##
-######################
-# Moving speed.
-const MOVE_SPEED_ACCEL = 30 # In pixels/second^2.
-const MOVE_SPEED_DEACCEL = 20 # In pixels/second^2.
-const MOVE_SPEED_MAX = 260 # In pixels/second.
-
-
-const JOYSTICK_DEADZONE = .3
-const JOYSTICK_LEFT = JOY_AXIS_0
-const JOYSTICK_RIGHT = JOY_AXIS_2
-
-###########################
-# Upgrades and atributes. #
-###########################
-# Speed.
-const SPEED_MULTIPLIER_MAX = 1.8 # Max speed multiplier.
-var speed_multiplier = 1 # This applies to max speed and accelerations.
-const SPEED_MULTIPLIER_MIN = .6 # Min speed multiplier.
-# HP.
-const HP_MAX_MAX = 38 # Max max HP.
-# var hp_max = 28 # Max HP. This is in character.gd.
-const HP_MAX_MIN = 18 # Min max HP.
-# Ammo.
-const AMMO_MAX_MAX = 38 # Max max ammo.
-const AMMO_MAX_MIN = 18 # Min max ammo.
-# Cannons.
-const N_CANNONS_MAX = 3 # Max number of active cannons.
-# var n_cannons = 1 is in the super class.
-const N_CANNONS_MIN = 1 # Min number of active cannons.
-# Bullets.
-const BULLET_MAX_MAX = 10 # Max max bullets per cannon on screen.
-# var bullets_max = 1 is in the super class.
-const BULLET_MAX_MIN = 1 # Min max bullets per cannon on screen.
+var palettes = preload("res://resources/characters/megaship/megaship_palettes.tres")
 
 ############
 # WEAPONS. #

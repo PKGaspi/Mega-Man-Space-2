@@ -10,7 +10,6 @@ var hp
 var max_hp
 
 export(NodePath) var snd_hit = "SndHit"
-export(NodePath) var snd_shoot = "SndShoot"
 export(PackedScene) var death_instance = null
 
 # Flickering and invencibility.

@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/sprites/characters/megaship/teleport/megaship_teleport_mask_0.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=2]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 //The palette used
@@ -31,7 +31,7 @@ void fragment() {
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 2 )
 shader_param/mask = ExtResource( 1 )
