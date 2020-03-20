@@ -15,8 +15,8 @@ onready var spr_ship := $SprShip
 ##############
 ## Singals. ##
 ##############
-signal palette_change(new_palette_index)
 
+signal palette_change(new_palette_index)
 
 ##################
 ### Functions. ###

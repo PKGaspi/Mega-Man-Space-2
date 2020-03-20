@@ -1,9 +1,9 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
 [ext_resource path="res://src/characters/megaship/megaship_death.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/bullets/megaship/lemon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/characters/megaship/megaship_cannon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/characters/megaship/megaship_masks.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_0.png" type="Texture" id=7]
@@ -11,7 +11,6 @@
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_2.png" type="Texture" id=9]
 [ext_resource path="res://assets/sfx/megaship/shoot.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=11]
-[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=12]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
 [ext_resource path="res://src/library/directional_sprite.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=15]
@@ -19,16 +18,11 @@
 [ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=19]
-[ext_resource path="res://src/characters/cannon/cannon.tscn" type="PackedScene" id=20]
-[ext_resource path="res://src/characters/cannon/cannon_setup.tscn" type="PackedScene" id=21]
-[ext_resource path="res://src/characters/cannon/cannon_upgrader.gd" type="Script" id=22]
-[ext_resource path="res://src/library/state machine/weapon_state.gd" type="Script" id=23]
-[ext_resource path="res://src/characters/cannon/cannon_stats.gd" type="Script" id=24]
 [ext_resource path="res://src/characters/megaship/states/travel.gd" type="Script" id=25]
 [ext_resource path="res://src/characters/megaship/states/knockback.gd" type="Script" id=26]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( -6.5, -6, 13, 0, -6.5, 6 )
+points = PoolVector2Array( -7.5, -9, 16, 0, -7.5, 9 )
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -62,16 +56,6 @@ shader = SubResource( 2 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 19 )
 shader_param/mask = ExtResource( 18 )
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 24 )
-max_ammo = 28.0
-ammo_per_shot = 0.0
-cooldown = 0.1
-n_cannons = 1
-_cap_max_ammo = Vector2( 20, 36 )
-_cap_cooldown = Vector2( 0.4, 0.16 )
-_cap_n_cannons = Vector2( 1, 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 flag_disable_z = true
@@ -129,7 +113,6 @@ death_instance = ExtResource( 3 )
 invencibility_time = 1.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-scale = Vector2( 1.3, 1.76 )
 shape = SubResource( 1 )
 
 [node name="SprShip" parent="." index="1" instance=ExtResource( 14 )]
@@ -155,55 +138,7 @@ script = ExtResource( 26 )
 knockback_time = 1.0
 knockback_speed = 70.0
 
-[node name="Cannons" type="Node2D" parent="." index="3"]
-script = ExtResource( 22 )
-stats = SubResource( 4 )
-
-[node name="1" parent="Cannons" index="0" instance=ExtResource( 21 )]
-
-[node name="CenterCannon" parent="Cannons/1" index="2" instance=ExtResource( 20 )]
-position = Vector2( 16, 0 )
-projectile = ExtResource( 4 )
-
-[node name="2" parent="Cannons" index="1" instance=ExtResource( 21 )]
-
-[node name="LeftCannon" parent="Cannons/2" index="2" instance=ExtResource( 20 )]
-position = Vector2( 7, -4.5 )
-rotation = -0.0349066
-projectile = ExtResource( 4 )
-
-[node name="RightCannon" parent="Cannons/2" index="3" instance=ExtResource( 20 )]
-position = Vector2( 7, 4.5 )
-rotation = 0.0349066
-projectile = ExtResource( 4 )
-
-[node name="3" parent="Cannons" index="2" instance=ExtResource( 21 )]
-
-[node name="CenterCannon" parent="Cannons/3" index="2" instance=ExtResource( 20 )]
-position = Vector2( 16, 0 )
-projectile = ExtResource( 4 )
-
-[node name="LeftCannon" parent="Cannons/3" index="3" instance=ExtResource( 20 )]
-position = Vector2( 7, -4.5 )
-rotation = -0.174533
-projectile = ExtResource( 4 )
-
-[node name="RightCannon" parent="Cannons/3" index="4" instance=ExtResource( 20 )]
-position = Vector2( 7, 4.5 )
-rotation = 0.174533
-projectile = ExtResource( 4 )
-
-[node name="StateMachine" type="Node" parent="Cannons" index="3"]
-script = ExtResource( 15 )
-initial_state = NodePath("Mega")
-
-[node name="Mega" type="Node" parent="Cannons/StateMachine" index="0"]
-script = ExtResource( 23 )
-projectile = ExtResource( 4 )
-_cannons_path = NodePath("../..")
-
-[node name="SndWeaponSwap" type="AudioStreamPlayer" parent="Cannons" index="4"]
-stream = ExtResource( 12 )
+[node name="Cannons" parent="." index="3" instance=ExtResource( 4 )]
 
 [node name="HitParticles" type="Particles2D" parent="." index="4"]
 z_index = 1

@@ -15,8 +15,9 @@ var ammo_per_shot: float
 
 signal weapon_changed(new_weapon)
 
+
 func _ready() -> void:
-	assert(stats != null and stats is CannonStats)
+	assert(stats != null and stats is StatsCannon)
 	stats.initialize()
 	n_cannons = stats.get_stat("n_cannons")
 	max_ammo = stats.get_stat("max_ammo")
@@ -33,7 +34,8 @@ func fire() -> bool:
 			set_relative_ammo(-ammo_per_shot)
 	return shooted
 
-# Setters act on all childs.
+
+# Some setters act on all childs.
 func set_cooldown(value: float) -> void:
 	for child in get_children():
 		if child is CannonSetup:
@@ -62,19 +64,35 @@ func set_relative_ammo(relative_value: float, pause: bool = false) -> void:
 	set_ammo(ammo + relative_value, pause)
 
 
-func set_weapon(value: int) -> void:
-	if snd_weapon_change != null:
-		snd_weapon_change.play()
-	weapon = value
-	if ammo_bar != null:
-		ammo_bar.palette = weapon
-		ammo_bar.visible = weapon != Weapon.TYPES.MEGA
-	emit_signal("weapon_changed", weapon)
+func set_weapon(value: int) -> bool:
+	# Clamp value.
+	value = fposmod(value, Weapon.TYPES.size())
+	if weapon == value:
+		# Weapon did not change cause this is the current weapon.
+		return true 
+	
+	var unlocked = global.unlocked_weapons[value]
+	
+	if unlocked:
+		# TODO: check if the weapon is unlocked.
+		if snd_weapon_change != null:
+			snd_weapon_change.play()
+		weapon = value
+		if ammo_bar != null:
+			ammo_bar.palette = weapon
+			ammo_bar.visible = weapon != Weapon.TYPES.MEGA
+		emit_signal("weapon_changed", weapon)
+	
+	return unlocked
 
 
 func next_weapon() -> void:
-	set_weapon((weapon + 1) % Weapon.TYPES.size())
-	
-	
+	var new_weapon = weapon + 1
+	while !set_weapon(new_weapon):
+		new_weapon = new_weapon + 1
+
+
 func previous_weapon() -> void:
-	set_weapon((weapon - 1) if weapon > 0 else Weapon.TYPES.size() - 1)
+	var new_weapon = weapon - 1
+	while !set_weapon(new_weapon):
+		new_weapon = new_weapon - 1

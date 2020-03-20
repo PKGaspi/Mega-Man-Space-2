@@ -2,10 +2,18 @@ extends CharacterState
 
 const MIN_DISTANCE_TO_CURSOR = 5 # In pixels.
 
+var cannons
+
 func _ready() -> void:
+	yield(owner, "ready")
+	cannons = character.cannons
 	pass
 
 func physics_process(delta: float) -> void:
+	# Check if we are shooting.
+	if Input.is_action_pressed("shoot"):
+		cannons.fire()
+	
 	# Calculate movement.
 	var input_dir = get_input_direction()
 	var acceleration = _parent.acceleration_ratio * _parent.max_speed
@@ -31,6 +39,14 @@ func physics_process(delta: float) -> void:
 			# Get knockbacked./
 			var dir = collider.global_position.direction_to(character.global_position)
 			_state_machine.transition_to("Move/Knockback", {"knockback_dir": dir})
+
+
+func input(event: InputEvent) -> void:
+	# Change weapon.
+	if event.is_action_pressed("weapon_prev"):
+		character.previous_weapon()
+	elif event.is_action_pressed("weapon_next"):
+		character.next_weapon()
 
 
 ## Auxiliar functions. ##

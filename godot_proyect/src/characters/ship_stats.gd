@@ -1,4 +1,4 @@
-class_name ShipStats
+class_name StatsShip
 extends Stats
 
 

@@ -1,4 +1,4 @@
-class_name CannonStats
+class_name StatsCannon
 extends Stats
 
 export var max_ammo := 28.0

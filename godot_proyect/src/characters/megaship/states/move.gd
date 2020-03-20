@@ -19,13 +19,6 @@ func physics_process(delta):
 	
 
 
-func input(event: InputEvent) -> void:
-	if event.is_action_pressed("weapon_prev"):
-		character.previous_weapon()
-	elif event.is_action_pressed("weapon_next"):
-		character.next_weapon()
-
-
 ## Setters and getters. ##
 
 func set_max_speed(value: float) -> void:
