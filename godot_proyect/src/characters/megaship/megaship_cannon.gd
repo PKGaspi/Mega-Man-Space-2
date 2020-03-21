@@ -23,6 +23,7 @@ func _ready() -> void:
 	max_ammo = stats.get_stat("max_ammo")
 	ammo = max_ammo
 	ammo_per_shot = stats.get_stat("ammo_per_shot")
+	set_weapon(weapon, false)
 
 
 func fire() -> bool:
@@ -64,7 +65,7 @@ func set_relative_ammo(relative_value: float, pause: bool = false) -> void:
 	set_ammo(ammo + relative_value, pause)
 
 
-func set_weapon(value: int) -> bool:
+func set_weapon(value: int, play_sound := true) -> bool:
 	# Clamp value.
 	value = int(fposmod(value, Weapon.TYPES.size()))
 	if weapon == value:
@@ -75,7 +76,7 @@ func set_weapon(value: int) -> bool:
 	
 	if unlocked:
 		# TODO: check if the weapon is unlocked.
-		if snd_weapon_change != null:
+		if play_sound and snd_weapon_change != null:
 			snd_weapon_change.play()
 		weapon = value
 		if ammo_bar != null:

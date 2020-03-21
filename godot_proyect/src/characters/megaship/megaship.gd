@@ -10,7 +10,10 @@ var palettes = preload("res://resources/characters/megaship/megaship_palettes.tr
 onready var cannons := $Cannons
 onready var hit_particles := $HitParticles
 onready var propulsion_particles := $PropulsionParticles
+onready var state_machine := $StateMachine
+
 onready var spr_ship := $SprShip
+onready var snd_teleport := $SndTeleport
 
 ##############
 ## Singals. ##
@@ -30,7 +33,12 @@ func _enter_tree() -> void:
 func _ready():
 	# Connect signals.
 	connect("tree_exiting", global, "_on_megaship_tree_exiting")
+	global.connect("user_pause", self, "_on_user_pause")
 
+
+func _on_user_pause(value):
+	if value:
+		state_machine.transition_to("TeleportEnd")
 
 ##################
 ## MEGASHIP API ##
@@ -157,7 +165,7 @@ func get_weapon() -> int:
 
 
 func set_weapon(weapon_index : int, play_sound : bool = true) -> bool:
-	return cannons.set_weapon(weapon_index)
+	return cannons.set_weapon(weapon_index, play_sound)
 
 
 func next_weapon():

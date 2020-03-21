@@ -9,6 +9,12 @@ func _ready() -> void:
 	cannons = character.cannons
 	pass
 
+
+func enter(msg: Dictionary = {}) -> void:
+	if msg.has("velocity"):
+		_parent.velocity = msg["velocity"]
+
+
 func physics_process(delta: float) -> void:
 	# Check if we are shooting.
 	if Input.is_action_pressed("shoot"):

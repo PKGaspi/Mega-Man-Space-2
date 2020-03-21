@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/megaship_teleport_2.png-938c76e28adc118c6580734fdb22e90c.stex"
+path="res://.import/megaship_teleport_mask_1.png-0cede3d15d700710994232498e7e9692.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/megaship/teleport/megaship_teleport_2.png"
-dest_files=[ "res://.import/megaship_teleport_2.png-938c76e28adc118c6580734fdb22e90c.stex" ]
+source_file="res://assets/sprites/characters/megaship/teleport/megaship_teleport_mask_1.png"
+dest_files=[ "res://.import/megaship_teleport_mask_1.png-0cede3d15d700710994232498e7e9692.stex" ]
 
 [params]
 

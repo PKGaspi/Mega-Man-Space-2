@@ -9,15 +9,9 @@
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_5.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_4.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_8.png" type="Texture" id=9]
-
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/megaship_teleport_mask_0.png-9b5d8cd88abdf67d4537aa8d788d5b78.stex"
-
-[sub_resource type="StreamTexture" id=2]
-load_path = "res://.import/megaship_teleport_mask_1.png-0cede3d15d700710994232498e7e9692.stex"
-
-[sub_resource type="StreamTexture" id=3]
-load_path = "res://.import/megaship_teleport_mask_2.png-da5ea9f0adf9cf904794bfefb2774c6c.stex"
+[ext_resource path="res://assets/sprites/characters/megaship/teleport/megaship_teleport_mask_0.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/characters/megaship/teleport/megaship_teleport_mask_2.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/characters/megaship/teleport/megaship_teleport_mask_1.png" type="Texture" id=12]
 
 [resource]
 animations = [ {
@@ -26,15 +20,15 @@ animations = [ {
 "name": "0",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
-"loop": false,
-"name": "teleport_landing",
-"speed": 20.0
-}, {
-"frames": [ SubResource( 1 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "teleport_falling",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 12 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "teleport_landing",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,

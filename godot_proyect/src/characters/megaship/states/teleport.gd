@@ -32,7 +32,7 @@ func enter(msg: Dictionary = {}) -> void:
 	
 	var dir = init_position.direction_to(final_position)
 	velocity = dir * teleport_speed
-	character.global_rotation = dir.angle() - PI / 2
+	character.global_rotation = dir.angle()
 
 
 func physics_process(delta: float) -> void:
@@ -51,4 +51,3 @@ func physics_process(delta: float) -> void:
 
 func exit() -> void:
 	character.global_position = final_position
-	_parent.velocity = Vector2.ZERO # Do not get propulsed at the end.

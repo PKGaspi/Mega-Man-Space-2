@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_0.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_1.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_2.png" type="Texture" id=9]
-[ext_resource path="res://assets/sfx/megaship/shoot.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=11]
 [ext_resource path="res://src/characters/megaship/states/teleport.gd" type="Script" id=12]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
@@ -177,15 +176,13 @@ randomness = 0.3
 local_coords = false
 process_material = SubResource( 7 )
 
-[node name="SndShoot" type="AudioStreamPlayer2D" parent="." index="6"]
-stream = ExtResource( 10 )
-
-[node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="7"]
+[node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="6"]
 stream = SubResource( 8 )
 
-[node name="SndHit" type="AudioStreamPlayer2D" parent="." index="8"]
+[node name="SndHit" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource( 11 )
 
-[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="9"]
+[node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 13 )
+[connection signal="palette_change" from="." to="SprShip" method="set_palette"]
 [connection signal="weapon_changed" from="Cannons" to="." method="set_palette"]
