@@ -2,7 +2,6 @@ extends Node
 
 const GAME_OVER_WAIT_TIME = 5 # In seconds.
 
-const MEGASHIP_TELEPORT = preload("res://src/characters/megaship/megaship_teleport.tscn")
 const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
 onready var music_looper = get_node("MusicLooper")
@@ -44,12 +43,11 @@ func _ready() -> void:
 
 func _on_animation_finished(animation):
 	if animation == "ready":
+		global.unpause()
+		$GameLayer/Megaship.visible = true
+		$GameLayer/EnemyGenerator.new_random_horde()
 		global.create_touchscreen_layout($GUILayer/Container)
-		$GameLayer/TeleportAnimation.pause_mode = PAUSE_MODE_PROCESS
 
-func _on_teleport_animation_tree_exiting() -> void:
-	global.unpause()
-	$GameLayer/EnemyGenerator.new_random_horde()
 
 func _on_megaship_death() -> void:
 	death()
@@ -69,14 +67,7 @@ func _on_game_over_timer_timeout() -> void:
 func _on_global_user_pause(value) -> void:
 	$GUILayer/Container.visible = !value
 	$GameLayer.visible = !value
-	if !value: # Game is unpaused.
-		global.MEGASHIP.visible = false
-		var inst = MEGASHIP_TELEPORT.instance()
-		var ship_pos = global.MEGASHIP.global_position
-		inst.global_position = ship_pos
-		inst.destination = ship_pos
-		$GameLayer.add_child(inst)
-	else: # Game is paused.
+	if value:# Game is paused.
 		create_weapons_menu()
 	
 func set_music(music_index: int) -> void:
@@ -88,6 +79,7 @@ func set_music(music_index: int) -> void:
 		music_looper.play()
 
 func start_ready_animation():
+	$GameLayer/Megaship.visible = false
 	$GUILayer/Container/CenterContainer/CenterText.set_animation("ready", 3, self, "_on_animation_finished")
 	global.pause()
 

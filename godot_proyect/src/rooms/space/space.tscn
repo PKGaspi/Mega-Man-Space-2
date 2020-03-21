@@ -1,11 +1,10 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/rooms/space/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=4]
 [ext_resource path="res://src/gui/aimer.gd" type="Script" id=5]
-[ext_resource path="res://src/characters/megaship/megaship_teleport.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/library/camera.gd" type="Script" id=8]
 [ext_resource path="res://src/rooms/space/enemy_generator.gd" type="Script" id=9]
@@ -17,7 +16,6 @@
 [ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=15]
 [ext_resource path="res://src/rooms/space/space_background.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=17]
-[ext_resource path="res://resources/palette_swap_material.tres" type="Material" id=18]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=20]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=21]
@@ -131,12 +129,6 @@ __meta__ = {
 [node name="GameLayer" type="Node2D" parent="."]
 pause_mode = 1
 
-[node name="TeleportAnimation" parent="GameLayer" instance=ExtResource( 6 )]
-material = ExtResource( 18 )
-position = Vector2( 0, -200 )
-animation = "teleport_falling"
-playing = true
-
 [node name="Megaship" parent="GameLayer" instance=ExtResource( 7 )]
 _hp_bar_path = NodePath("../../GUILayer/Container/BarContainer/MegashipHPBar")
 DAMAGE_MULTIPLIERS = {
@@ -145,6 +137,13 @@ DAMAGE_MULTIPLIERS = {
 
 [node name="SprShip" parent="GameLayer/Megaship" index="1"]
 material = SubResource( 3 )
+
+[node name="StateMachine" parent="GameLayer/Megaship" index="2"]
+initial_state = NodePath("Move/Teleport")
+initial_msg = {
+"final_position": Vector2( 0, 0 ),
+"init_position": Vector2( 0, -300 )
+}
 
 [node name="Knockback" parent="GameLayer/Megaship/StateMachine/Move" index="1"]
 knockback_speed = 80.0
@@ -179,7 +178,6 @@ to_follow = NodePath("../GameLayer/Camera")
 [node name="MusicLooper" parent="." instance=ExtResource( 17 )]
 
 [node name="GameOverTimer" type="Timer" parent="."]
-[connection signal="tree_exiting" from="GameLayer/TeleportAnimation" to="." method="_on_teleport_animation_tree_exiting"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
 
 [editable path="GameLayer/Megaship"]

@@ -7,9 +7,18 @@ var final_position: Vector2
 
 var velocity: Vector2
 
+var spr_ship
+
+func _ready() -> void:
+	yield(owner, "ready")
+	spr_ship = character.spr_ship
 
 func enter(msg: Dictionary = {}) -> void:
-	# TODO: set tp sprite.
+	# Set animation.
+	spr_ship.set_animation("teleport_falling")
+	spr_ship.play()
+	
+	# Setup values.
 	var current_position = character.global_position
 	if msg.has("init_position"):
 		init_position = msg["init_position"]
@@ -23,7 +32,7 @@ func enter(msg: Dictionary = {}) -> void:
 	
 	var dir = init_position.direction_to(final_position)
 	velocity = dir * teleport_speed
-	character.global_rotation = dir.angle()
+	character.global_rotation = dir.angle() - PI / 2
 
 
 func physics_process(delta: float) -> void:
@@ -31,11 +40,10 @@ func physics_process(delta: float) -> void:
 	# Check how far we are to final_position.
 	var current_position = character.global_position
 	var distance = current_position.distance_to(final_position)
-	print(distance)
 	if distance < velocity.length() * delta:
 		# This is the last movement.
 		# TODO: play teleport end animation.
-		_state_machine.transition_to("Move/Travel")
+		_state_machine.transition_to("TeleportEnd")
 	else:
 		# Move towards the final_position.
 		_parent.velocity = velocity

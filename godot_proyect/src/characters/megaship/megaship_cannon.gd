@@ -66,7 +66,7 @@ func set_relative_ammo(relative_value: float, pause: bool = false) -> void:
 
 func set_weapon(value: int) -> bool:
 	# Clamp value.
-	value = fposmod(value, Weapon.TYPES.size())
+	value = int(fposmod(value, Weapon.TYPES.size()))
 	if weapon == value:
 		# Weapon did not change cause this is the current weapon.
 		return true 

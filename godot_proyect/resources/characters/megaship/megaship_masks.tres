@@ -21,10 +21,15 @@ load_path = "res://.import/megaship_teleport_mask_2.png-da5ea9f0adf9cf904794bfef
 
 [resource]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "teleport_landing",
+"name": "0",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": false,
+"name": "teleport_landing",
+"speed": 20.0
 }, {
 "frames": [ SubResource( 1 ) ],
 "loop": true,
@@ -44,11 +49,6 @@ animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "270",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "0",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],

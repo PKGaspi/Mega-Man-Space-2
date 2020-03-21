@@ -15,9 +15,9 @@ func _ready() -> void:
 
 func spawn() -> void:
 	var inst = to_spawn.instance()
-	get_parent().get_parent().add_child(inst)
 	inst.global_position = global_position
 	inst.connect("tree_exited", self, "_on_spawn_tree_exited")
+	get_parent().get_parent().add_child(inst)
 	n_spawns += 1
 	total_spawns -= 1
 	if total_spawns == 0:

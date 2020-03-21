@@ -10,6 +10,8 @@ func _ready() -> void:
 
 func set_to_follow(value: NodePath) -> void:
 	_path_to_follow = value
+	if !has_node(_path_to_follow):
+		return
 	var node = get_node(_path_to_follow)
 	if node is Node2D:
 		_node_to_follow = node 
