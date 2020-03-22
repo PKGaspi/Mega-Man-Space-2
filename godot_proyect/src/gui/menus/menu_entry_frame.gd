@@ -1,23 +1,28 @@
 extends Control
 
+
+onready var corners := $Corners
+onready var flickering_timer := $FlickeringTimer
+onready var image := $ImageContainer/TextureRect
+
 var selected : bool = false
 
 func _ready() -> void:
-	$Corners.visible = selected
+	corners.visible = selected
 
 func _on_FlickeringTimer_timeout() -> void:
-	$Corners.visible = !$Corners.visible
+	corners.visible = !corners.visible
 
 func set_texture(value : Texture) -> void:
-	$ImageContainer/TextureRect.texture = value
+	image.texture = value
 
 func set_selected(value : bool) -> void:
 	selected = value
-	$Corners.visible = value
+	corners.visible = value
 	if selected:
-		$FlickeringTimer.start()
+		flickering_timer.start()
 	else:
-		$FlickeringTimer.stop()
+		flickering_timer.stop()
 
 func toggle_selected() -> void:
 	set_selected(!selected)

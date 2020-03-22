@@ -19,4 +19,4 @@ func set_color(child_index, value) -> void:
 	if child_index < get_child_count():
 		var child = get_child(child_index)
 		if child is Particles2D and child.process_material != null:
-			get_child(child_index).process_material.color = value
+			child.process_material.color = value

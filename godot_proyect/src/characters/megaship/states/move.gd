@@ -9,6 +9,7 @@ export var acceleration_ratio:= 7/4
 
 var velocity:= Vector2.ZERO
 
+# TODO: Add support for stats.
 
 
 func physics_process(delta):
