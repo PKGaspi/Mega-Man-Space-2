@@ -1,28 +1,28 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://src/rooms/space/level.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://src/gui/centre_text.gd" type="Script" id=3]
-[ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=4]
-[ext_resource path="res://src/gui/aimer.gd" type="Script" id=5]
-[ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/library/camera.gd" type="Script" id=8]
-[ext_resource path="res://src/rooms/space/enemy_generator.gd" type="Script" id=9]
-[ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
+[ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://resources/gui/warning_masks.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://src/gui/centre_text.gd" type="Script" id=7]
+[ext_resource path="res://src/gui/aimer.gd" type="Script" id=8]
+[ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/library/camera.gd" type="Script" id=10]
 [ext_resource path="res://src/characters/enemies/telly.tscn" type="PackedScene" id=11]
-[ext_resource path="res://src/characters/enemies/fly_robot.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/characters/enemies/telly_spawner.tscn" type="PackedScene" id=13]
-[ext_resource path="res://resources/gui/warning_masks.tres" type="SpriteFrames" id=14]
-[ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=15]
-[ext_resource path="res://src/rooms/space/space_background.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=17]
-[ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=20]
-[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
+[ext_resource path="res://src/characters/enemies/fly_robot.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/characters/enemies/telly_spawner.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
+[ext_resource path="res://src/rooms/level/enemy_generator.gd" type="Script" id=16]
+[ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
-font_data = ExtResource( 2 )
+font_data = ExtResource( 6 )
 
 [sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
@@ -54,24 +54,24 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource( 2 )
 shader_param/palette_size = 8.0
-shader_param/palette = ExtResource( 20 )
-shader_param/mask = ExtResource( 21 )
+shader_param/palette = ExtResource( 3 )
+shader_param/mask = ExtResource( 12 )
 
 [node name="Space" type="Node"]
 pause_mode = 2
-script = ExtResource( 1 )
+script = ExtResource( 15 )
 
-[node name="GUILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="."]
 pause_mode = 2
 
-[node name="Container" type="Control" parent="GUILayer"]
+[node name="HUD" type="Control" parent="UILayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BarContainer" type="Control" parent="GUILayer/Container"]
+[node name="BarContainer" type="Control" parent="UILayer/HUD"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -79,7 +79,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MegashipHPBar" parent="GUILayer/Container/BarContainer" instance=ExtResource( 19 )]
+[node name="MegashipHPBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
 margin_left = 16.0
 margin_top = 24.0
 margin_right = 23.0
@@ -89,7 +89,8 @@ cell_size = Vector2( 7, 2 )
 horizontal = false
 palette = 0
 
-[node name="MegashipAmmoBar" parent="GUILayer/Container/BarContainer" instance=ExtResource( 19 )]
+[node name="MegashipAmmoBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
+visible = false
 margin_left = 23.0
 margin_top = 24.0
 margin_right = 30.0
@@ -99,14 +100,14 @@ cell_size = Vector2( 7, 2 )
 horizontal = false
 palette = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="GUILayer/Container"]
+[node name="CenterContainer" type="CenterContainer" parent="UILayer/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterText" type="Label" parent="GUILayer/Container/CenterContainer"]
+[node name="CenterText" type="Label" parent="UILayer/HUD/CenterContainer"]
 margin_left = 240.0
 margin_top = 131.0
 margin_right = 240.0
@@ -114,14 +115,14 @@ margin_bottom = 139.0
 custom_fonts/font = SubResource( 1 )
 align = 1
 valign = 1
-script = ExtResource( 3 )
+script = ExtResource( 7 )
 
-[node name="Aimer" type="TextureRect" parent="GUILayer/Container"]
+[node name="Aimer" type="TextureRect" parent="UILayer/HUD"]
 margin_right = 5.0
 margin_bottom = 5.0
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 expand = true
-script = ExtResource( 5 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -129,8 +130,8 @@ __meta__ = {
 [node name="GameLayer" type="Node2D" parent="."]
 pause_mode = 1
 
-[node name="Megaship" parent="GameLayer" instance=ExtResource( 7 )]
-_hp_bar_path = NodePath("../../GUILayer/Container/BarContainer/MegashipHPBar")
+[node name="Megaship" parent="GameLayer" instance=ExtResource( 19 )]
+_hp_bar_path = NodePath("../../UILayer/HUD/BarContainer/MegashipHPBar")
 DAMAGE_MULTIPLIERS = {
 
 }
@@ -149,13 +150,13 @@ initial_msg = {
 knockback_speed = 80.0
 
 [node name="Cannons" parent="GameLayer/Megaship" index="3"]
-_ammo_bar_path = NodePath("../../../GUILayer/Container/BarContainer/MegashipAmmoBar")
+_ammo_bar_path = NodePath("../../../UILayer/HUD/BarContainer/MegashipAmmoBar")
 
 [node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
-script = ExtResource( 9 )
-enemies = [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ]
-warning_masks = ExtResource( 14 )
-warning_palettes = ExtResource( 15 )
+script = ExtResource( 16 )
+enemies = [ ExtResource( 1 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ) ]
+warning_masks = ExtResource( 5 )
+warning_palettes = ExtResource( 4 )
 
 [node name="Camera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2
@@ -169,15 +170,16 @@ drag_margin_top = 0.1
 drag_margin_right = 0.1
 drag_margin_bottom = 0.1
 editor_draw_drag_margin = true
-script = ExtResource( 8 )
+script = ExtResource( 10 )
 _path_to_follow = NodePath("../Megaship")
 
-[node name="SpaceBackground" parent="." instance=ExtResource( 16 )]
+[node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 to_follow = NodePath("../GameLayer/Camera")
 
-[node name="MusicLooper" parent="." instance=ExtResource( 17 )]
+[node name="MusicLooper" parent="." instance=ExtResource( 18 )]
 
 [node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 5.0
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
 
 [editable path="GameLayer/Megaship"]

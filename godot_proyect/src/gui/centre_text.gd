@@ -74,21 +74,22 @@ func add_and_check_animation_time(delta : float) -> bool:
 		set_label_visibility(false)
 	return reached_time
 
-func set_animation(animation : String, duration : float = 3.0, listener : Object = null, listener_method : String = "") -> void:
+
+func set_animation(animation : String, duration : float = 3.0) -> void:
 	self.animation = animation
 	self.animation_time = duration
 	self.animation_timer = 0
 	call(animation + "_init")
-	
-	if listener != null and listener.has_method(listener_method):
-		connect("animation_finished", listener, listener_method)
+
 
 func toggle_label_visibility() -> void:
 	set_label_visibility(!visible)
 
+
 func set_label_visibility(value : bool) -> void:
 	visible = value
-	
+
+
 func set_label(text : String, color : Color, size : float) -> void:
 	self.text = text
 	self.modulate = color

@@ -1,17 +1,17 @@
 extends Node
 
-const DEBUG_BUS_LAYOUT = preload("res://resources/audio/debug_bus_layout.tres")
-const CURSOR = preload("res://assets/sprites/gui/cursor.png")
-const TOUCHSCREEN_LAYOUT = preload("res://src/gui/touchscreen_layout.tscn")
+const DEBUG_BUS_LAYOUT := preload("res://resources/audio/debug_bus_layout.tres")
+const CURSOR := preload("res://assets/sprites/gui/cursor.png")
+const TOUCHSCREEN_LAYOUT := preload("res://src/gui/touchscreen_layout.tscn")
 
-const SCREEN_SIZE = Vector2(480, 270)
+const SCREEN_SIZE := Vector2(480, 270)
 
-const EXITING_TIME = .8 # In seconds.
-var exiting_timer = 0 # Time that the exit key has been pressed.
+onready var snd_collect := $SndCollect
+onready var game_exit_timer := $GameExitTimer
 
-var is_paused : bool = false
-var user_pause : bool = false
-var os : String = OS.get_name()
+var is_paused := false
+var user_pause := false
+var os := OS.get_name()
 
 var current_touchscreen_layout = null
 
@@ -53,6 +53,8 @@ var prev_mouse_mode
 
 signal user_pause
 
+
+
 func _ready():
 	# Init global randomizer.
 	random = init_random()
@@ -63,7 +65,7 @@ func _ready():
 	# Set bus layout.
 	if OS.is_debug_build():
 		AudioServer.set_bus_layout(DEBUG_BUS_LAYOUT)
-	
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("user_pause"):
@@ -89,29 +91,37 @@ func _input(event: InputEvent) -> void:
 	
 	# Exit game function.
 	if event.is_action_pressed("exit_game"):
-		$GameExitTimer.start(EXITING_TIME)
+		game_exit_timer.start()
 	elif event.is_action_released("exit_game"):
-		$GameExitTimer.stop()
-	
+		game_exit_timer.stop()
+
+
+
 func _on_megaship_tree_exiting():
 	MEGASHIP = null
+
 
 func _on_game_exit_timer_timeout() -> void:
 	exit_game()
 
-##########################
-### Library functions. ###
-##########################
+
+###################
+### Global API. ###
+###################
+
 
 func pause() -> void:
 	set_pause(true)
 
+
 func unpause() -> void:
 	set_pause(false)
-	
+
+
 func set_pause(value : bool) -> void:
 	is_paused = value
 	get_tree().paused = value
+
 
 func set_user_pause(value : bool) -> void:
 	# The user can only pause the game if it is not paused
@@ -126,31 +136,57 @@ func set_user_pause(value : bool) -> void:
 		else:
 			Input.set_mouse_mode(prev_mouse_mode)
 
+
 func toggle_pause() -> void:
 	set_pause(!is_paused)
+
 
 func toggle_user_pause() -> void:
 	set_user_pause(!is_paused)
 
+
 func is_mobile_os(os = self.os):
 	return os == "Android" or os == "iOS"
+
 
 func create_touchscreen_layout(parent : Node = get_parent()):
 	current_touchscreen_layout = TOUCHSCREEN_LAYOUT.instance()
 	parent.call_deferred("add_child", current_touchscreen_layout)
 	set_touchscreen_layout_visibility(input_type == INPUT_TYPES.TOUCHSCREEN)
 
+
 func set_touchscreen_layout_visibility(value : bool):
 	if current_touchscreen_layout != null:
 		current_touchscreen_layout.visible = value
 
+
 func game_over() -> void:
+	# Placeholder for game_over scenario.
+	# TODO: Reset points.
 	lifes = LIFES_DEFAULT
 	etanks = ETANKS_DEFAULT
-	# TODO: Load game over scene.
+
+
+func obtain_1up():
+	if lifes < MAX_LIFES:
+		snd_collect.play()
+		lifes = lifes + 1
+
+
+func obtain_etank():
+	if etanks < MAX_ETANKS:
+		snd_collect.play()
+		etanks = etanks + 1
+
 
 func exit_game() -> void:
 	get_tree().quit()
+
+
+##########################
+### Library functions. ###
+##########################
+
 
 func create_empty_image(size : Vector2) -> ImageTexture:
 	var empty_image = Image.new()
@@ -159,20 +195,18 @@ func create_empty_image(size : Vector2) -> ImageTexture:
 	empty_image.decompress()
 	empty_texture.create_from_image(empty_image)
 	return empty_texture
-	
-func create_timer(name : String) -> Timer:
-	var timer = Timer.new()
-	timer.name = name
-	return timer
-	
+
+
 func init_random():
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	return random
-	
+
+
 func toggle_fullscreen():
 	OS.window_fullscreen = !OS.window_fullscreen
 	fix_mouse_mode()
+
 
 func fix_mouse_mode():
 	# This shit is a workaround for the mouse not being able to
@@ -182,15 +216,6 @@ func fix_mouse_mode():
 	Input.set_mouse_mode(tmp)
 	# Input.call_deferred("set_mouse_mode", Input.get_mouse_mode())
 
-func obtain_1up():
-	if lifes < MAX_LIFES:
-		$SndCollect.play()
-		lifes = lifes + 1
-	
-func obtain_etank():
-	if etanks < MAX_ETANKS:
-		$SndCollect.play()
-		etanks = etanks + 1
 
 func play_audio_random_pitch(snd, interval):
 	if snd != null and snd.has_method("play"):

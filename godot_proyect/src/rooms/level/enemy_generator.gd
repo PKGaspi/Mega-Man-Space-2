@@ -11,7 +11,7 @@ export(SpriteFrames) var warning_palettes
 var warning_material = preload("res://resources/palette_swap_material.tres").duplicate()
 var warning_texture
 
-onready var CENTER_TEXT = $"/root/Space/GUILayer/Container/CenterContainer/CenterText"
+onready var CENTER_TEXT = $"/root/Space/UILayer/HUD/CenterContainer/CenterText"
 
 # Zone where enemies spawn.
 const AREA_SIZE = Vector2(640, 360)

@@ -41,7 +41,9 @@ func _ready() -> void:
 	max_ammo = stats.get_stat("max_ammo")
 	ammo = max_ammo
 	ammo_per_shot = stats.get_stat("ammo_per_shot")
-	#set_weapon(weapon, false)
+	
+	if ammo_bar != null:
+		ammo_bar.visible = weapon != Weapon.TYPES.MEGA
 
 
 func fire(power: int = 0) -> bool:

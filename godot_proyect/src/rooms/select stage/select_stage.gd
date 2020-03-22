@@ -1,6 +1,6 @@
 extends Control
 
-const LVL_SCENE = preload("res://src/rooms/space/space.tscn")
+const LVL_SCENE = preload("res://src/rooms/level/level.tscn")
 
 var COORDS_TO_WEAPONS = {
 	Vector2(-1, -1) : Weapon.TYPES.BUBBLE,

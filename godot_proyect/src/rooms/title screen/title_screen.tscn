@@ -4,7 +4,8 @@
 [ext_resource path="res://assets/music/title.ogg" type="AudioStream" id=2]
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/gui/title_logo.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/rooms/space/space_background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=5]
+
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
