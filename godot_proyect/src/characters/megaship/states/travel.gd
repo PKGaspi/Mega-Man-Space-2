@@ -11,14 +11,19 @@ func _ready() -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	# Allow cannon shooting.
+	cannons.state_machine.transition_to(cannons.weapon_to_state(cannons.weapon))
 	if msg.has("velocity"):
 		_parent.velocity = msg["velocity"]
 
 
+func exit() -> void:
+	# Disable cannon shooting.
+	cannons.state_machine.transition_to("Disabled")
+
+
 func physics_process(delta: float) -> void:
 	# Check if we are shooting.
-	if Input.is_action_pressed("shoot"):
-		cannons.fire()
 	
 	# Calculate movement.
 	var input_dir = get_input_direction()

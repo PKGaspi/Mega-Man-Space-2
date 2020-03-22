@@ -3,7 +3,7 @@
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
 [ext_resource path="res://src/characters/megaship/megaship_death.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/characters/megaship/megaship_cannon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/characters/megaship/cannon/megaship_cannon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/characters/megaship/megaship_masks.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_0.png" type="Texture" id=7]
@@ -185,4 +185,4 @@ stream = ExtResource( 11 )
 [node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 13 )
 [connection signal="palette_change" from="." to="SprShip" method="set_palette"]
-[connection signal="weapon_changed" from="Cannons" to="." method="set_palette"]
+[connection signal="weapon_changed" from="Cannons" to="SprShip" method="set_palette"]

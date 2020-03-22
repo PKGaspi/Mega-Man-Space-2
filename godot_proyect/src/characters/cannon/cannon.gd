@@ -13,11 +13,12 @@ func _on_projectile_tree_exiting() -> void:
 	n_projectiles -= 1
 
 
-func shoot() -> bool:
+func fire(power: int = 0) -> bool:
 	if n_projectiles >= max_projectiles or not _cooldown_timer.is_stopped():
 		return false
 		
 	var inst = projectile.instance()
+	inst.power = power
 	inst.global_position = global_position
 	inst.global_rotation = global_rotation
 	inst.connect("tree_exited", self, "_on_projectile_tree_exiting")

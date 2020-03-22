@@ -2,6 +2,7 @@ class_name MegashipCannons
 extends Node2D
 
 onready var snd_weapon_change = $SndWeaponSwap
+onready var state_machine = $StateMachine
 
 export var stats: Resource
 export var _ammo_bar_path: NodePath
@@ -13,6 +14,13 @@ var ammo: float
 var max_ammo: float
 var ammo_per_shot: float
 
+
+var weapon_states := {
+	Weapon.TYPES.MEGA: "RapidFire/Mega",
+	Weapon.TYPES.HEAT: "ChargedFire/Heat",
+}
+
+
 signal weapon_changed(new_weapon)
 
 
@@ -23,17 +31,22 @@ func _ready() -> void:
 	max_ammo = stats.get_stat("max_ammo")
 	ammo = max_ammo
 	ammo_per_shot = stats.get_stat("ammo_per_shot")
-	set_weapon(weapon, false)
+	#set_weapon(weapon, false)
 
 
-func fire() -> bool:
+func fire(power: int = 0) -> bool:
 	assert(n_cannons > 0 and n_cannons <= get_child_count())
 	var shooted := false
 	if ammo > 0:
-		shooted = get_child(n_cannons - 1).fire()
+		shooted = get_child(n_cannons - 1).fire(power)
 		if shooted:
 			set_relative_ammo(-ammo_per_shot)
 	return shooted
+
+
+func weapon_to_state(weapon_index: int = weapon) -> String:
+	assert(weapon_states.has(weapon))
+	return weapon_states[weapon_index] if weapon_states.has(weapon_index) else "Disabled"
 
 
 # Some setters act on all childs.
@@ -76,9 +89,10 @@ func set_weapon(value: int, play_sound := true) -> bool:
 	
 	if unlocked:
 		# TODO: check if the weapon is unlocked.
+		weapon = value
+		state_machine.transition_to(weapon_to_state(weapon))
 		if play_sound and snd_weapon_change != null:
 			snd_weapon_change.play()
-		weapon = value
 		if ammo_bar != null:
 			ammo_bar.palette = weapon
 			ammo_bar.visible = weapon != Weapon.TYPES.MEGA

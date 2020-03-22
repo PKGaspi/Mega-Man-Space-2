@@ -6,6 +6,7 @@ export(float, 0, 30, .1) var damage : float = 2
 export(Weapon.TYPES) var weapon = Weapon.TYPES.MEGA
 export(int) var n_collisions = 1 # Number of collisions before the bullet dissapears. Cero or negative for no max.
 
+var power
 var dir
 
 func _ready():

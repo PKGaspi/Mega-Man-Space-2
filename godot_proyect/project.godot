@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/state machine/character_state.gd"
 }, {
+"base": "WeaponState",
+"class": "ChargedWeaponState",
+"language": "GDScript",
+"path": "res://src/library/state machine/charged_weapon_state.gd"
+}, {
 "base": "Character",
 "class": "Enemy",
 "language": "GDScript",
@@ -62,7 +67,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "MegashipCannons",
 "language": "GDScript",
-"path": "res://src/characters/megaship/megaship_cannon.gd"
+"path": "res://src/characters/megaship/cannon/megaship_cannon.gd"
 }, {
 "base": "Control",
 "class": "MenuPanel",
@@ -99,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/ship_stats.gd"
 }, {
+"base": "Stats",
+"class": "StatsWeapon",
+"language": "GDScript",
+"path": "res://src/characters/cannon/weapon_stats.gd"
+}, {
 "base": "Control",
 "class": "TiledProgress",
 "language": "GDScript",
@@ -125,6 +135,7 @@ _global_script_class_icons={
 "CannonSetup": "",
 "Character": "",
 "CharacterState": "",
+"ChargedWeaponState": "",
 "Enemy": "",
 "EnemyGenerator": "",
 "FillerPickup": "",
@@ -138,6 +149,7 @@ _global_script_class_icons={
 "Stats": "",
 "StatsCannon": "",
 "StatsShip": "",
+"StatsWeapon": "",
 "TiledProgress": "",
 "Upgrade": "",
 "Weapon": "",
