@@ -17,7 +17,17 @@ var ammo_per_shot: float
 
 var weapon_states := {
 	Weapon.TYPES.MEGA: "RapidFire/Mega",
+	Weapon.TYPES.AIR: "RapidFire/Air",
+	Weapon.TYPES.BUBBLE: "RapidFire/Bubble",
+	Weapon.TYPES.QUICK: "RapidFire/Quick",
+	Weapon.TYPES.METAL: "RapidFire/Metal",
+	Weapon.TYPES.CRASH: "RapidFire/Crash",
 	Weapon.TYPES.HEAT: "ChargedFire/Heat",
+	Weapon.TYPES.WOOD: "ChargedFire/Wood",
+	Weapon.TYPES.FLASH: "Flash",
+	Weapon.TYPES.ONE: "One",
+	Weapon.TYPES.TWO: "Two",
+	Weapon.TYPES.THREE: "Three",
 }
 
 

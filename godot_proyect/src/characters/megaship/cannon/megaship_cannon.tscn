@@ -73,6 +73,21 @@ script = ExtResource( 11 )
 script = ExtResource( 8 )
 projectile = ExtResource( 4 )
 
+[node name="Air" type="Node" parent="StateMachine/RapidFire"]
+script = ExtResource( 8 )
+
+[node name="Bubble" type="Node" parent="StateMachine/RapidFire"]
+script = ExtResource( 8 )
+
+[node name="Quick" type="Node" parent="StateMachine/RapidFire"]
+script = ExtResource( 8 )
+
+[node name="Metal" type="Node" parent="StateMachine/RapidFire"]
+script = ExtResource( 8 )
+
+[node name="Crash" type="Node" parent="StateMachine/RapidFire"]
+script = ExtResource( 8 )
+
 [node name="ChargedFire" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
 
@@ -81,6 +96,27 @@ script = ExtResource( 12 )
 weapon = 1
 projectile = ExtResource( 4 )
 stats = ExtResource( 14 )
+
+[node name="Wood" type="Node" parent="StateMachine/ChargedFire"]
+script = ExtResource( 12 )
+weapon = 1
+projectile = ExtResource( 4 )
+stats = ExtResource( 14 )
+
+[node name="Flash" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
+weapon = 1
+projectile = ExtResource( 4 )
+stats = ExtResource( 14 )
+
+[node name="One" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+
+[node name="Two" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+
+[node name="Three" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
 
 [node name="Disabled" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
