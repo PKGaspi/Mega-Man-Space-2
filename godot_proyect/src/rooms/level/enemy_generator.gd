@@ -107,7 +107,7 @@ func create_warning(center : Vector2) -> void:
 func create_enemy(pos, enemy_index):
 	n_enemies += 1
 	var inst = enemies[enemy_index].instance()
-	inst.init(pos)
+	inst.global_position = pos
 	inst.connect("death", self, "_on_enemy_death")
 	add_child(inst)
 

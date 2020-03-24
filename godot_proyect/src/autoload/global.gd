@@ -197,18 +197,18 @@ func create_empty_image(size : Vector2) -> ImageTexture:
 	return empty_texture
 
 
-func init_random():
+func init_random() -> RandomNumberGenerator:
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	return random
 
 
-func toggle_fullscreen():
+func toggle_fullscreen() -> void:
 	OS.window_fullscreen = !OS.window_fullscreen
 	fix_mouse_mode()
 
 
-func fix_mouse_mode():
+func fix_mouse_mode() -> void:
 	# This shit is a workaround for the mouse not being able to
 	# leave a section of the screen when toggling fullscreen.
 	var tmp = Input.get_mouse_mode()
@@ -217,7 +217,7 @@ func fix_mouse_mode():
 	# Input.call_deferred("set_mouse_mode", Input.get_mouse_mode())
 
 
-func play_audio_random_pitch(snd, interval):
+func play_audio_random_pitch(snd, interval) -> void:
 	if snd != null and snd.has_method("play"):
 		snd.play(0)
 		snd.pitch_scale = random.randf_range(interval.x, interval.y)

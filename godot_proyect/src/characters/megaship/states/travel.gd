@@ -43,12 +43,12 @@ func physics_process(delta: float) -> void:
 	# Get collisions.
 	var collider = _parent.get_collided_character()
 	if collider != null:
-		collider.collide(character)
 		if collider is Pickup:
-			pass # Do nothing.
-		elif collider is Enemy and character.invencible:
-			# Get knockbacked.
-			print(collider)
+			# TODO: Apply the pickup effect.
+			pass 
+		elif collider is Enemy and not character.invencible:
+			# Get hit and knockbacked.
+			character.hit(collider.collision_damage)
 			var dir = collider.global_position.direction_to(character.global_position)
 			_state_machine.transition_to("Move/Knockback", {"knockback_dir": dir})
 

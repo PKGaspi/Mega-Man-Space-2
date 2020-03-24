@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://src/characters/megaship/states/teleport.gd" type="Script" id=12]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
 [ext_resource path="res://src/library/directional_sprite.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=15]
 [ext_resource path="res://src/characters/megaship/states/move.gd" type="Script" id=16]
 [ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
@@ -111,7 +110,6 @@ collision_layer = 1
 collision_mask = 12
 script = ExtResource( 2 )
 death_instance = ExtResource( 3 )
-invencibility_time = 1.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -122,8 +120,7 @@ frames = ExtResource( 5 )
 animation = "iddle"
 palettes = ExtResource( 6 )
 
-[node name="StateMachine" type="Node" parent="." index="2"]
-script = ExtResource( 15 )
+[node name="StateMachine" parent="." index="2"]
 initial_state = NodePath("Move/Travel")
 
 [node name="Move" type="Node" parent="StateMachine" index="0"]
@@ -179,8 +176,9 @@ process_material = SubResource( 7 )
 [node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="6"]
 stream = SubResource( 8 )
 
-[node name="SndHit" type="AudioStreamPlayer2D" parent="." index="7"]
+[node name="SndHit" parent="." index="7"]
 stream = ExtResource( 11 )
+script = null
 
 [node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 13 )

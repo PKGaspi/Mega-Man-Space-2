@@ -132,9 +132,6 @@ pause_mode = 1
 
 [node name="Megaship" parent="GameLayer" instance=ExtResource( 19 )]
 _hp_bar_path = NodePath("../../UILayer/HUD/BarContainer/MegashipHPBar")
-DAMAGE_MULTIPLIERS = {
-
-}
 
 [node name="SprShip" parent="GameLayer/Megaship" index="1"]
 material = SubResource( 3 )
@@ -180,6 +177,9 @@ to_follow = NodePath("../GameLayer/Camera")
 
 [node name="GameOverTimer" type="Timer" parent="."]
 wait_time = 5.0
+[connection signal="timeout" from="GameLayer/Megaship/InvencibilityTimer" to="GameLayer/Megaship" method="_on_invencibility_timer_timeout"]
+[connection signal="timeout" from="GameLayer/Megaship/LifeTimer" to="GameLayer/Megaship" method="_on_life_timer_timeout"]
+[connection signal="timeout" from="GameLayer/Megaship/LifeFlickeringTimer" to="GameLayer/Megaship" method="_on_life_flickering_timer_timeout"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
 
 [editable path="GameLayer/Megaship"]

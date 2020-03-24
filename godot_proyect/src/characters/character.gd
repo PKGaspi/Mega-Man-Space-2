@@ -1,46 +1,31 @@
 class_name Character
 extends KinematicBody2D
 
+const FLICKER_INTERVAL = 4.0 / 60.0
+
 # Stats.
 export var stats: Resource
-# Bars.
+var hp: float setget set_hp
+var max_hp: float setget set_max_hp
+# Seconds the character is invencible after getting hit.
+var invencibility_time: float setget set_invencibility_time 
+# A dictionary with multipliers of what makes more damage or less to this character.
+var weaknesses: Dictionary
+
+# HP bar.
 export var _hp_bar_path: NodePath
 onready var hp_bar: TiledProgress = get_node(_hp_bar_path)
-var hp
-var max_hp
 
-export(NodePath) var snd_hit = "SndHit"
+# Death
 export(PackedScene) var death_instance = null
 
-# Flickering and invencibility.
-export(float) var invencibility_time : float = .5 # Seconds the character is invencible after hit.
-export(float) var life_time : float = 10 # Seconds until the character disapears.
-export(float) var life_flicker_time : float = 8 # Start flickering when the character has this many seconds of life.
-export(bool) var flicker_on_hit : bool = true
-export(bool) var flicker_before_timeout : bool = false
-export(bool) var dissapear_on_timeout : bool = false
-var flickering_interval : float = .05 # Seconds between each visibility toggle when flickering.
-var flickering_timer : float = 0 # Seconds until a toggle on visibility is made.
-var invencible : bool = false
-var flickering : bool = false
-var disappearing : bool = false
+# State variables.
+var invencible: bool = false setget set_invencible
 
-
-export(Dictionary) var DAMAGE_MULTIPLIERS = { 
-	Weapon.TYPES.MEGA : 1,
-	Weapon.TYPES.BUBBLE : 1,
-	Weapon.TYPES.AIR : 1,
-	Weapon.TYPES.QUICK : 1,
-	Weapon.TYPES.HEAT : 1,
-	Weapon.TYPES.WOOD : 1,
-	Weapon.TYPES.METAL : 1,
-	Weapon.TYPES.FLASH : 1,
-	Weapon.TYPES.CRASH : 1,
-}
-
-# Motion.
-var acceleration : float = 1
-var friction : float = .2
+# Nodes.
+var flickering_timer := Timer.new()
+var invencibility_timer := Timer.new()
+onready var snd_hit := $SndHit
 
 # Signals.
 signal death
@@ -48,42 +33,41 @@ signal death
 
 
 func _ready() -> void:
+	# Set timers.
+	flickering_timer.name = "FlickeringTimer"
+	invencibility_timer.name = "InvencibilityTimer"
+	
+	flickering_timer.connect("timeout", self, "_on_flickering_timer_timeout")
+	invencibility_timer.connect("timeout", self, "_on_invencibility_timer_timeout")
+	
+	flickering_timer.wait_time = FLICKER_INTERVAL
+	invencibility_timer.one_shot = true
+	
+	add_child(flickering_timer)
+	add_child(invencibility_timer)
+	
+	# Set initial stats.
 	assert(stats != null)
 	stats.initialize()
-	max_hp = stats.get_stat("max_hp")
-	hp = max_hp
-	# Init timers.
-	if flicker_before_timeout:
-		$LifeFlickeringTimer.start(life_flicker_time)
-	if dissapear_on_timeout:
-		$LifeTimer.start(life_time)
+	set_max_hp(stats.get_stat("max_hp"))
+	set_hp(max_hp)
+	set_invencibility_time(stats.get_stat("invencibility_time"))
+	weaknesses = stats.get_stat("weaknesses")
+	
 
 
 func _on_flickering_timer_timeout():
-	if flickering:
-		flicker()
-	else:
-		$FlickeringTimer.stop()
-		set_visibility(true)
+	toggle_visibility()
 
 
 func _on_invencibility_timer_timeout():
-	flickering = disappearing
 	set_invencible(false)
 
 
-func _on_life_timer_timeout():
-	disappear()
 
-
-func _on_life_flickering_timer_timeout():
-	disappearing = true
-	flicker()
-
-
-#########################
-## Auxiliar functions. ##
-#########################
+##########################
+## Setters and getters. ##
+##########################
 
 
 func set_visibility(value):
@@ -102,6 +86,7 @@ func set_hp(value, pause = false):
 	hp = clamp(value, 0, max_hp)
 	if hp_bar != null:
 		hp_bar.set_value(hp, pause)
+	check_death()
 
 
 func set_hp_relative(relative_value, pause = false):
@@ -114,54 +99,63 @@ func set_max_hp(value):
 		hp_bar.max_value = value
 
 
-func flicker(interval = flickering_interval):
-	$FlickeringTimer.start(interval)
-	flickering = true
-	toggle_visibility()
+func set_invencibility_time(value: float) -> void:
+	invencibility_time = value
+	invencibility_timer.wait_time = invencibility_time
 
 
-func hit(damage, weapon = Weapon.TYPES.MEGA):
-	if !invencible:
+func set_invencible(value: bool) -> void:
+	invencible = value
+	if invencible:
+		toggle_visibility()
+		invencibility_timer.start()
+		flickering_timer.start()
+	else:
+		set_visibility(true)
+		invencibility_timer.stop()
+		flickering_timer.stop()
+
+
+#########################
+## Auxiliar functions. ##
+#########################
+
+
+func hit(damage: float, weapon: int = Weapon.TYPES.MEGA) -> void:
+	# var weapon = bullet.weapon
+	if not invencible:
+		snd_hit.play()
+		set_invencible(true)
 		# TODO: Calculate damage with enemy weakness and type.
 		take_damage(damage)
 
 
-func take_damage(damage):
-	# Play hit sound.
-	global.play_audio_random_pitch(get_node(snd_hit), Vector2(.90, 1.10))
+func take_damage(damage) -> void:
 	set_hp_relative(-damage)
-	set_invencible(true)
-	check_death()
 
 
-func set_invencible(value : bool) -> void:
-	invencible = value
-	if value:
-		$InvencibilityTimer.start(invencibility_time)
-		flicker()
-
-
-func check_death():
+func check_death() -> void:
+	# Overwrite to add more death conditions.
 	if hp <= 0:
 		# Oh wow I'm dead.
 		die()
 
 
-func die():
-	# Destroy myself by default.
+func die() -> void:
 	emit_signal("death")
 	if death_instance != null:
-		# Creat death scene.
+		# Create death scene.
 		var inst = death_instance.instance()
 		inst.global_position = global_position
 		get_parent().add_child(inst)
+	# Destroy myself.
 	queue_free()
 
 
-func disappear():
-	# Destroy myself by default.
+func disappear() -> void:
+	# Just destroy myself by default.
 	queue_free()
 
 
-func is_in_range(object : Node2D, radious):
+func is_in_range(object: Node2D, radious) -> bool:
 	return object != null and (global_position.distance_to(object.global_position) <= radious or radious < 0)

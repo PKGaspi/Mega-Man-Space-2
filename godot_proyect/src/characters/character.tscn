@@ -1,13 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://src/library/stats/ship_stats.gd" type="Script" id=2]
-
+[ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=3]
+[ext_resource path="res://src/library/random_pitch_audio_stream_player_2D.gd" type="Script" id=4]
+[ext_resource path="res://src/library/state machine/state.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 max_speed = 260.0
 max_hp = 28.0
+invencibility_time = 0.8
+weaknesses = {
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1,
+5: 1,
+6: 1,
+7: 1,
+8: 1
+}
 _cap_max_speed = Vector2( 200, 380 )
 _cap_max_hp = Vector2( 20, 36 )
 
@@ -17,17 +31,13 @@ collision_mask = 5
 script = ExtResource( 1 )
 stats = SubResource( 1 )
 
-[node name="FlickeringTimer" type="Timer" parent="."]
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+initial_state = NodePath("Iddle")
 
-[node name="InvencibilityTimer" type="Timer" parent="."]
-one_shot = true
+[node name="Iddle" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
 
-[node name="LifeTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="LifeFlickeringTimer" type="Timer" parent="."]
-one_shot = true
-[connection signal="timeout" from="FlickeringTimer" to="." method="_on_flickering_timer_timeout"]
-[connection signal="timeout" from="InvencibilityTimer" to="." method="_on_invencibility_timer_timeout"]
-[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
-[connection signal="timeout" from="LifeFlickeringTimer" to="." method="_on_life_flickering_timer_timeout"]
+[node name="SndHit" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource( 4 )
+randomness_interval = Vector2( 0.9, 1.1 )
