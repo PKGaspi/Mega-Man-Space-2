@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/character.gd"
 }, {
-"base": "Reference",
+"base": "State",
 "class": "CharacterState",
 "language": "GDScript",
 "path": "res://src/library/state machine/character_state.gd"
@@ -48,11 +48,6 @@ _global_script_classes=[ {
 "class": "EnemyGenerator",
 "language": "GDScript",
 "path": "res://src/rooms/level/enemy_generator.gd"
-}, {
-"base": "Pickup",
-"class": "FillerPickup",
-"language": "GDScript",
-"path": "res://src/characters/pickups/filler_pickup.gd"
 }, {
 "base": "Control",
 "class": "Joystick",
@@ -74,10 +69,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/gui/menus/menu_panel.gd"
 }, {
-"base": "Enemy",
+"base": "Area2D",
 "class": "Pickup",
 "language": "GDScript",
-"path": "res://src/characters/pickups/pickup.gd"
+"path": "res://src/pickups/pickup.gd"
 }, {
 "base": "AudioStreamPlayer2D",
 "class": "RandomPitchAudioStreamPlayer2D",
@@ -119,11 +114,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/gui/tiled_progress.gd"
 }, {
-"base": "Pickup",
-"class": "Upgrade",
-"language": "GDScript",
-"path": "res://src/characters/pickups/upgrade.gd"
-}, {
 "base": "Resource",
 "class": "Weapon",
 "language": "GDScript",
@@ -143,7 +133,6 @@ _global_script_class_icons={
 "ChargedWeaponState": "",
 "Enemy": "",
 "EnemyGenerator": "",
-"FillerPickup": "",
 "Joystick": "",
 "Megaship": "",
 "MegashipCannons": "",
@@ -157,7 +146,6 @@ _global_script_class_icons={
 "StatsShip": "",
 "StatsWeapon": "",
 "TiledProgress": "",
-"Upgrade": "",
 "Weapon": "",
 "WeaponState": ""
 }

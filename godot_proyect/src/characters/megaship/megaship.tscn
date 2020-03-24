@@ -14,13 +14,14 @@
 [ext_resource path="res://src/characters/megaship/states/teleport.gd" type="Script" id=12]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
 [ext_resource path="res://src/library/directional_sprite.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/characters/megaship/states/move.gd" type="Script" id=16]
+[ext_resource path="res://src/characters/states/move.gd" type="Script" id=16]
 [ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=19]
 [ext_resource path="res://src/characters/megaship/states/teleport_end.gd" type="Script" id=20]
 [ext_resource path="res://src/characters/megaship/states/travel.gd" type="Script" id=25]
 [ext_resource path="res://src/characters/megaship/states/knockback.gd" type="Script" id=26]
+
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -7.5, -9, 16, 0, -7.5, 9 )

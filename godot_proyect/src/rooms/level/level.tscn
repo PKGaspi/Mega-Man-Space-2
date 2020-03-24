@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/library/state machine/state.gd" type="Script" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -145,6 +146,9 @@ initial_msg = {
 
 [node name="Knockback" parent="GameLayer/Megaship/StateMachine/Move" index="1"]
 knockback_speed = 80.0
+
+[node name="Iddle" parent="GameLayer/Megaship/StateMachine" index="2"]
+script = ExtResource( 20 )
 
 [node name="Cannons" parent="GameLayer/Megaship" index="3"]
 _ammo_bar_path = NodePath("../../../UILayer/HUD/BarContainer/MegashipAmmoBar")

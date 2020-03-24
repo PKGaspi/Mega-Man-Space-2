@@ -1,16 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/characters/character.gd" type="Script" id=1]
 [ext_resource path="res://src/stats/ship_stats.gd" type="Script" id=2]
 [ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=3]
 [ext_resource path="res://src/library/random_pitch_audio_stream_player_2D.gd" type="Script" id=4]
 [ext_resource path="res://src/library/state machine/state.gd" type="Script" id=5]
-
+[ext_resource path="res://src/characters/states/move.gd" type="Script" id=6]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-max_speed = 260.0
 max_hp = 28.0
+max_speed = 260.0
+acceleration_ratio = 1.75
+collision_damage = 4.0
 invencibility_time = 0.8
 weaknesses = {
 0: 1,
@@ -35,6 +37,9 @@ stats = SubResource( 1 )
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 initial_state = NodePath("Iddle")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
 
 [node name="Iddle" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
