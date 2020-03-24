@@ -56,11 +56,11 @@ func _ready() -> void:
 	
 
 
-func _on_flickering_timer_timeout():
+func _on_flickering_timer_timeout() -> void:
 	toggle_visibility()
 
 
-func _on_invencibility_timer_timeout():
+func _on_invencibility_timer_timeout() -> void:
 	set_invencible(false)
 
 
@@ -70,30 +70,30 @@ func _on_invencibility_timer_timeout():
 ##########################
 
 
-func set_visibility(value):
+func set_visibility(value) -> void:
 	visible = value
 
 
-func get_visibility():
+func get_visibility() -> bool:
 	return visible
 
 
-func toggle_visibility():
+func toggle_visibility() -> void:
 	set_visibility(!get_visibility())
 
 
-func set_hp(value, pause = false):
+func set_hp(value: float, pause := false) -> void:
 	hp = clamp(value, 0, max_hp)
 	if hp_bar != null:
 		hp_bar.set_value(hp, pause)
 	check_death()
 
 
-func set_hp_relative(relative_value, pause = false):
+func set_hp_relative(relative_value: float, pause := false) -> void:
 	set_hp(hp + relative_value, pause)
 
 
-func set_max_hp(value):
+func set_max_hp(value: float) -> void:
 	max_hp = value
 	if hp_bar != null:
 		hp_bar.max_value = value
@@ -127,11 +127,7 @@ func hit(damage: float, weapon: int = Weapon.TYPES.MEGA) -> void:
 		snd_hit.play()
 		set_invencible(true)
 		# TODO: Calculate damage with enemy weakness and type.
-		take_damage(damage)
-
-
-func take_damage(damage) -> void:
-	set_hp_relative(-damage)
+		set_hp_relative(-damage)
 
 
 func check_death() -> void:
@@ -157,5 +153,5 @@ func disappear() -> void:
 	queue_free()
 
 
-func is_in_range(object: Node2D, radious) -> bool:
+func is_in_range(object: Node2D, radious: float) -> bool:
 	return object != null and (global_position.distance_to(object.global_position) <= radious or radious < 0)

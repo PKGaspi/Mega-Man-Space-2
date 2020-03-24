@@ -38,3 +38,29 @@ func get_collided_character() -> Character:
 		if collider is Character:
 			return collider
 	return null
+
+
+
+func calculate_velocity(
+	move_direction: Vector2,
+	acceleration: float,
+	current_velocity: Vector2,
+	delta: float
+) -> Vector2:
+	
+	var new_velocity: Vector2 
+	if move_direction != Vector2.ZERO:
+		# Accelerate.
+		new_velocity = current_velocity + move_direction * acceleration * delta
+	else:
+		# Deaccelerate.
+		var to_substract = current_velocity.normalized() * (acceleration * 4 / 5) * delta
+		if current_velocity.length() < to_substract.length():
+			# Stay in place if we are going the other way.
+			new_velocity = Vector2.ZERO
+		else:
+			# Reduce velocity.
+			new_velocity = current_velocity - to_substract
+	
+	current_velocity = new_velocity
+	return new_velocity

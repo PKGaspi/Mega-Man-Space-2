@@ -7,7 +7,6 @@ var cannons
 func _ready() -> void:
 	yield(owner, "ready")
 	cannons = character.cannons
-	pass
 
 
 func enter(msg: Dictionary = {}) -> void:
@@ -23,12 +22,10 @@ func exit() -> void:
 
 
 func physics_process(delta: float) -> void:
-	# Check if we are shooting.
-	
 	# Calculate movement.
 	var input_dir = get_input_direction()
 	var acceleration = _parent.acceleration_ratio * _parent.max_speed
-	_parent.velocity = calculate_velocity(input_dir, acceleration, _parent.velocity, delta)
+	_parent.velocity = _parent.calculate_velocity(input_dir, acceleration, _parent.velocity, delta)
 
 	# Calculate rotation.
 	character.rotation = calculate_rotation()
@@ -77,31 +74,6 @@ func get_input_direction(normalized:= false) -> Vector2:
 		input_dir = input_dir.normalized()
 	
 	return input_dir
-
-
-func calculate_velocity(
-	move_direction: Vector2,
-	acceleration: float,
-	current_velocity: Vector2,
-	delta: float
-) -> Vector2:
-	
-	var new_velocity: Vector2 
-	if move_direction != Vector2.ZERO:
-		# Accelerate.
-		new_velocity = current_velocity + move_direction * acceleration * delta
-	else:
-		# Deaccelerate.
-		var to_substract = current_velocity.normalized() * (acceleration * 4 / 5) * delta
-		if current_velocity.length() < to_substract.length():
-			# Stay in place if we are going the other way.
-			new_velocity = Vector2.ZERO
-		else:
-			# Reduce velocity.
-			new_velocity = current_velocity - to_substract
-	
-	current_velocity = new_velocity
-	return new_velocity
 
 
 func calculate_rotation() -> float:
