@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_0.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_1.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/characters/megaship/particles/megaship_hit_particle_2.png" type="Texture" id=9]
+[ext_resource path="res://src/characters/megaship/megaship_stats.tres" type="Resource" id=10]
 [ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=11]
 [ext_resource path="res://src/characters/megaship/states/teleport.gd" type="Script" id=12]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
@@ -109,6 +110,7 @@ stereo = true
 collision_layer = 1
 collision_mask = 12
 script = ExtResource( 2 )
+stats = ExtResource( 10 )
 death_instance = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
@@ -141,6 +143,7 @@ script = ExtResource( 12 )
 script = ExtResource( 20 )
 
 [node name="Cannons" parent="." index="3" instance=ExtResource( 4 )]
+position = Vector2( 0.5, -0.5 )
 
 [node name="HitParticles" type="Particles2D" parent="." index="4"]
 z_index = 1

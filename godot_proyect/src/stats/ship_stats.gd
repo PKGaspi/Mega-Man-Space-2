@@ -4,6 +4,9 @@ extends Stats
 
 export var max_speed: float = 260
 export var max_hp: float = 28.0
+# Damage dealt when colliding with another Ship.
+export var collision_damage: float = 4.0
+# Time until the ship can take damage again.
 export var invencibility_time: float = .8
 
 # Value to multiply damage by. Higher is weaker.
