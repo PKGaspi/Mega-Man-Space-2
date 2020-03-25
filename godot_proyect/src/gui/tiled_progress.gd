@@ -8,6 +8,9 @@ export var cell_size: Vector2 = Vector2(7, 2)
 export var horizontal: bool = false
 export(Weapon.TYPES) var palette: int = 0 setget set_palette # Current palette index.
 
+onready var snd_fill := $SndFill
+onready var fill_timer := $FillTimer
+
 const PALETTES = preload("res://resources/gui/progress_bar_palettes.tres")
 
 func _ready() -> void:
@@ -39,8 +42,8 @@ func set_value(new_value: float, pause: bool = false) -> void:
 		while value < max_value and i < int_part:
 			set_value(value + sign(diff))
 			# Play sound and wait until it finishes.
-			$SndFill.play()
-			$FillTimer.start()
+			snd_fill.play()
+			fill_timer.start()
 			yield(get_node("FillTimer"), "timeout")
 			i += 1
 		global.unpause()
