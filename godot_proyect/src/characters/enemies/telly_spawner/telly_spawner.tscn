@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/characters/enemies/telly/telly_spawner.png" type="Texture" id=3]
+[ext_resource path="res://src/library/spawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_stats.tres" type="Resource" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.5, 15 )
+
+[node name="TellySpawner" instance=ExtResource( 1 )]
+stats = ExtResource( 5 )
+
+[node name="HPBar" parent="hud" index="0"]
+margin_left = 17.0
+margin_top = -16.0
+margin_right = 22.0
+margin_bottom = -6.0
+
+[node name="Sprite" type="Sprite" parent="." index="3"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
+position = Vector2( -0.5, -1 )
+shape = SubResource( 1 )
+
+[node name="LeftSpawner" parent="." index="5" instance=ExtResource( 4 )]
+position = Vector2( -7.5, 14 )
+to_spawn = ExtResource( 2 )
+max_spawns = 3
+time_between_spawns = 5.0
+
+[node name="RightSpawner" parent="." index="6" instance=ExtResource( 4 )]
+position = Vector2( 6.5, 14 )
+to_spawn = ExtResource( 2 )
+max_spawns = 3
+time_between_spawns = 5.0
