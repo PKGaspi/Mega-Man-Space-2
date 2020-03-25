@@ -6,6 +6,8 @@ var stats
 var max_speed: float
 var acceleration_ratio: float
 
+export var invert_movement := false
+export var rotate_forwards := false
 var velocity:= Vector2.ZERO
 
 func _ready() -> void:
@@ -28,7 +30,13 @@ func physics_process(delta):
 	# Move.
 	if velocity.length() > max_speed:
 		velocity = velocity.normalized() * max_speed
+	
 	character.move_and_slide(velocity)
+	
+	# Apply rotation.
+	if rotate_forwards:
+		character.global_rotation = velocity.rotated(PI/2).angle()
+
 
 
 func get_collided_character() -> Character:
@@ -48,6 +56,10 @@ func calculate_velocity(
 	delta: float
 ) -> Vector2:
 	
+	if invert_movement:
+		move_direction = -move_direction
+	
+		
 	var new_velocity: Vector2 
 	if move_direction != Vector2.ZERO:
 		# Accelerate.
@@ -61,6 +73,7 @@ func calculate_velocity(
 		else:
 			# Reduce velocity.
 			new_velocity = current_velocity - to_substract
+	
 	
 	current_velocity = new_velocity
 	return new_velocity

@@ -163,8 +163,7 @@ script = ExtResource( 10 )
 _path_to_follow = NodePath("../Megaship")
 
 [node name="TellySpawner" parent="GameLayer" instance=ExtResource( 14 )]
-position = Vector2( 168.934, 80.7699 )
-collision_mask = 5
+position = Vector2( 174.715, 67.5466 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 to_follow = NodePath("../GameLayer/Camera")

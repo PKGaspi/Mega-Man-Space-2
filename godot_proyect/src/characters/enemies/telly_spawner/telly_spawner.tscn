@@ -12,11 +12,18 @@ extents = Vector2( 14.5, 15 )
 [node name="TellySpawner" instance=ExtResource( 1 )]
 stats = ExtResource( 5 )
 
+[node name="StateMachine" parent="." index="0"]
+initial_state = NodePath("Move/Follow/FollowMegaship")
+
+[node name="Move" parent="StateMachine" index="0"]
+invert_movement = true
+rotate_forwards = true
+
 [node name="HPBar" parent="hud" index="0"]
 margin_left = 17.0
 margin_top = -16.0
 margin_right = 22.0
-margin_bottom = -6.0
+margin_bottom = 14.0
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
 texture = ExtResource( 3 )
@@ -26,13 +33,13 @@ position = Vector2( -0.5, -1 )
 shape = SubResource( 1 )
 
 [node name="LeftSpawner" parent="." index="5" instance=ExtResource( 4 )]
-position = Vector2( -7.5, 14 )
+position = Vector2( -11, 24 )
 to_spawn = ExtResource( 2 )
 max_spawns = 3
 time_between_spawns = 5.0
 
 [node name="RightSpawner" parent="." index="6" instance=ExtResource( 4 )]
-position = Vector2( 6.5, 14 )
+position = Vector2( 10, 24 )
 to_spawn = ExtResource( 2 )
 max_spawns = 3
 time_between_spawns = 5.0
