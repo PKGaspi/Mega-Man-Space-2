@@ -13,10 +13,10 @@ func register_node(node: Node) -> void:
 		register_pickup(node)
 
 func register_projectile(projectile: Node) -> void:
-	_projectiles.add_child(projectile)
+	_projectiles.call_deferred("add_child", projectile)
 
 func register_enemy(enemy: Node) -> void:
-	_enemies.add_child(enemy)
+	_enemies.call_deferred("add_child", enemy)
 
 func register_pickup(pickup: Node) -> void:
-	_pickups.add_child(pickup)
+	_pickups.call_deferred("add_child", pickup)
