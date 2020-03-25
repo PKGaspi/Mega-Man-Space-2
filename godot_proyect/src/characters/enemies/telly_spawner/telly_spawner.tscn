@@ -1,16 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_spawner.png" type="Texture" id=3]
 [ext_resource path="res://src/library/spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_stats.tres" type="Resource" id=5]
+[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_drops.tres" type="Resource" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.5, 15 )
 
 [node name="TellySpawner" instance=ExtResource( 1 )]
 stats = ExtResource( 5 )
+drops = ExtResource( 6 )
 
 [node name="StateMachine" parent="." index="0"]
 initial_state = NodePath("Move/Follow/FollowMegaship")
@@ -21,9 +23,11 @@ rotate_forwards = true
 
 [node name="HPBar" parent="hud" index="0"]
 margin_left = 17.0
-margin_top = -16.0
+margin_top = -21.0
 margin_right = 22.0
-margin_bottom = 14.0
+margin_bottom = 19.0
+max_value = 20.0
+value = 20.0
 
 [node name="Sprite" type="Sprite" parent="." index="3"]
 texture = ExtResource( 3 )

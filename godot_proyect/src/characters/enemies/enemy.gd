@@ -20,8 +20,9 @@ func die() -> void:
 func drop() -> void:
 	# Drop something.
 	var to_drop = drops.get_random_item()
+	print(to_drop)
 	if to_drop != null and to_drop is PackedScene:
 		var inst = to_drop.instance()
 		if inst is Node2D:
 			inst.global_position = global_position
-		add_child(inst)
+		ObjectRegistry.register_node(inst)
