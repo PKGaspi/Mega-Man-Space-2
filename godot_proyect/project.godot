@@ -123,6 +123,11 @@ _global_script_classes=[ {
 "class": "WeaponState",
 "language": "GDScript",
 "path": "res://src/library/state machine/weapon_state.gd"
+}, {
+"base": "Resource",
+"class": "WeightRandomizer",
+"language": "GDScript",
+"path": "res://src/library/weight_randomizer.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -147,7 +152,8 @@ _global_script_class_icons={
 "StatsWeapon": "",
 "TiledProgress": "",
 "Weapon": "",
-"WeaponState": ""
+"WeaponState": "",
+"WeightRandomizer": ""
 }
 
 [application]

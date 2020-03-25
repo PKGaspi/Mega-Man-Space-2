@@ -42,7 +42,7 @@ margin_bottom = 56.0
 rect_min_size = Vector2( 3, 2 )
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 value = 28.0
 

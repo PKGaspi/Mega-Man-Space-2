@@ -1,6 +1,6 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://src/characters/enemies/asteroid.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/characters/enemies/asteroid/asteroid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
 [ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=4]
@@ -10,16 +10,15 @@
 [ext_resource path="res://src/gui/aimer.gd" type="Script" id=8]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
-[ext_resource path="res://src/characters/enemies/telly.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
-[ext_resource path="res://src/characters/enemies/fly_robot.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/characters/enemies/telly_spawner.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/characters/enemies/fly_robot/fly_robot.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
 [ext_resource path="res://src/rooms/level/enemy_generator.gd" type="Script" id=16]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/library/state machine/state.gd" type="Script" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -85,10 +84,6 @@ margin_left = 16.0
 margin_top = 24.0
 margin_right = 23.0
 margin_bottom = 80.0
-max_value = 28.0
-cell_size = Vector2( 7, 2 )
-horizontal = false
-palette = 0
 
 [node name="MegashipAmmoBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
 visible = false
@@ -96,10 +91,6 @@ margin_left = 23.0
 margin_top = 24.0
 margin_right = 30.0
 margin_bottom = 80.0
-max_value = 28.0
-cell_size = Vector2( 7, 2 )
-horizontal = false
-palette = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="UILayer/HUD"]
 anchor_right = 1.0
@@ -147,9 +138,6 @@ initial_msg = {
 [node name="Knockback" parent="GameLayer/Megaship/StateMachine/Move" index="1"]
 knockback_speed = 80.0
 
-[node name="Iddle" parent="GameLayer/Megaship/StateMachine" index="2"]
-script = ExtResource( 20 )
-
 [node name="Cannons" parent="GameLayer/Megaship" index="3"]
 _ammo_bar_path = NodePath("../../../UILayer/HUD/BarContainer/MegashipAmmoBar")
 
@@ -173,6 +161,9 @@ drag_margin_bottom = 0.1
 editor_draw_drag_margin = true
 script = ExtResource( 10 )
 _path_to_follow = NodePath("../Megaship")
+
+[node name="TellySpawner" parent="GameLayer" instance=ExtResource( 14 )]
+position = Vector2( 168.934, 80.7699 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 to_follow = NodePath("../GameLayer/Camera")
