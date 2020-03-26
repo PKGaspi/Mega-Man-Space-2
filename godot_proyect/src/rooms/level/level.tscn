@@ -84,6 +84,10 @@ margin_left = 16.0
 margin_top = 24.0
 margin_right = 23.0
 margin_bottom = 80.0
+max_value = 28.0
+cell_size = Vector2( 7, 2 )
+horizontal = false
+palette = 0
 
 [node name="MegashipAmmoBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
 visible = false
@@ -91,6 +95,10 @@ margin_left = 23.0
 margin_top = 24.0
 margin_right = 30.0
 margin_bottom = 80.0
+max_value = 28.0
+cell_size = Vector2( 7, 2 )
+horizontal = false
+palette = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="UILayer/HUD"]
 anchor_right = 1.0

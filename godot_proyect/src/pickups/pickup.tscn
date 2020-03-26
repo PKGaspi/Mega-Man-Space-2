@@ -1,8 +1,81 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/pickups/pickup.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=2]
+[ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=4]
+[ext_resource path="res://src/library/animated_palette_sprite.gd" type="Script" id=5]
+[ext_resource path="res://resources/characters/pickups/filler_pickups_masks.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://src/library/state machine/state.gd" type="Script" id=7]
+[ext_resource path="res://src/pickups/states/move.gd" type="Script" id=8]
+[ext_resource path="res://src/pickups/states/random_direction.gd" type="Script" id=9]
+[ext_resource path="res://src/stats/pickup_stats.gd" type="Script" id=10]
+[ext_resource path="res://assets/sprites/characters/pickups/ammo/ammo_mask_0.png" type="Texture" id=11]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 10 )
+affected_stat = 0
+ammount = 0.0
+flickering_time = 0.0
+life_time = 0.0
+max_speed = 0.0
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+//The palette used
+uniform sampler2D palette;
+//how many horizontal pixels has the palette
+uniform float palette_size;
+//Mask for wich color use from palette
+uniform sampler2D mask;
+
+void fragment() {
+	vec4 mask_color = texture(mask,UV);
+	vec4 output = texture(TEXTURE,UV);
+	if(mask_color.r != 1.0)
+	{
+		highp float color_r = mask_color.r;
+		//If an inconsistency appears between Intel and Amd/Nvidia, feel free to fix it and commit, but take this as a warning for production use
+		output = texture(palette,vec2((color_r*255.0+0.5)/255.0,0.0));
+	}
+	else{
+		output.a = 0.0; // White turns into transparent.
+	}
+	COLOR.rgba = output;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = SubResource( 2 )
+shader_param/palette_size = 8.0
+shader_param/palette = ExtResource( 2 )
+shader_param/mask = ExtResource( 11 )
 
 [node name="Pickup" type="Area2D"]
+input_pickable = false
+collision_layer = 16
 script = ExtResource( 1 )
+stats = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="SprIcon" type="AnimatedSprite" parent="."]
+material = SubResource( 3 )
+frames = ExtResource( 6 )
+animation = "ammo"
+playing = true
+script = ExtResource( 5 )
+palettes = ExtResource( 3 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+initial_state = NodePath("Move/RandomDirection")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+
+[node name="RandomDirection" type="Node" parent="StateMachine/Move"]
+script = ExtResource( 9 )
+
+[node name="Iddle" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )

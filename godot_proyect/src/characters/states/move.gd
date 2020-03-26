@@ -13,17 +13,16 @@ var velocity:= Vector2.ZERO
 func _ready() -> void:
 	yield(owner, "ready")
 	stats = character.stats
-	stats.connect("stat_changed", self, "_on_stats_stat_changed")
+	stats.connect("stat_changed", self, "_on_stat_changed")
 	
 	max_speed = stats.get_stat("max_speed")
 	acceleration_ratio = stats.get_stat("acceleration_ratio")
 
 
-func _on_stats_stat_changed(stat_name: String, new_value: float) -> void:
+func _on_stat_changed(stat_name: String, new_value: float) -> void:
 	match stat_name:
 		"max_speed": max_speed = stats.get_stat(stat_name)
 		"acceleration_ratio": acceleration_ratio = stats.get_stat(stat_name)
-		
 
 
 func physics_process(delta):
@@ -46,7 +45,6 @@ func get_collided_character() -> Character:
 		if collider is Character:
 			return collider
 	return null
-
 
 
 func calculate_velocity(

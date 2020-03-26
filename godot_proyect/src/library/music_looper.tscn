@@ -2,7 +2,6 @@
 
 [ext_resource path="res://src/library/music_looper.gd" type="Script" id=1]
 
-
 [node name="MusicLooper" type="Node"]
 script = ExtResource( 1 )
 

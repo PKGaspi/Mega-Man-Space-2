@@ -1,9 +1,10 @@
+tool
 class_name AnimatedPaletteSprite
 extends AnimatedSprite
 
 export(SpriteFrames) var palettes
 
-func _ready() -> void:
+func _init() -> void:
 	connect("frame_changed", self, "_on_frame_changed")
 
 

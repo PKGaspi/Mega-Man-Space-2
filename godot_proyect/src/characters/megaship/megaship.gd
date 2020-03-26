@@ -7,7 +7,6 @@ extends Character
 
 var palettes = preload("res://resources/characters/megaship/megaship_palettes.tres")
 
-onready var cannons := $Cannons
 onready var hit_particles := $HitParticles
 onready var propulsion_particles := $PropulsionParticles
 onready var state_machine := $StateMachine
@@ -21,6 +20,7 @@ onready var snd_teleport := $SndTeleport
 
 signal palette_change(new_palette_index)
 
+
 ##################
 ### Functions. ###
 ##################
@@ -32,13 +32,14 @@ func _enter_tree() -> void:
 
 func _ready():
 	# Connect signals.
-	connect("tree_exiting", global, "_on_megaship_tree_exiting")
+	#connect("tree_exiting", global, "_on_megaship_tree_exiting")
 	global.connect("user_pause", self, "_on_user_pause")
 
 
 func _on_user_pause(value):
 	if value:
 		state_machine.transition_to("TeleportEnd")
+
 
 ##################
 ## MEGASHIP API ##
@@ -53,8 +54,8 @@ func get_visibility():
 	return spr_ship.visible
 
 
-func take_damage(damage):
-	.take_damage(damage)
+func hit(damage: float, weapon := Weapon.TYPES.MEGA) -> void:
+	.hit(damage, weapon)
 	hit_particles.emitting = true
 	hit_particles.restart()
 
@@ -73,41 +74,6 @@ func fill(type, ammount):
 		set_hp_relative(ammount, true)
 	elif type == "ammo":
 		cannons.set_relative_ammo(ammount, true)
-
-
-func upgrade(type : String, ammount : float) -> void:
-	var old_value = get(type)
-	var value_max = get(type.to_upper() + "_MAX")
-	var value_min = get(type.to_upper() + "_MIN")
-	var new_value
-	if old_value and value_max and value_min:
-		new_value = clamp(old_value + ammount, value_min, value_max)
-	else:
-		new_value = 0
-	
-	if old_value == value_max:
-		# TODO: Add some points or something. Play points sound.
-		pass
-	else:
-		if ammount > 0:
-			$SndUpgrade.play()
-		match type:
-			"hp_max":
-				# Also change max ammo.
-				set_max_hp(new_value)
-				# TODO: set_ammo_max(new_value)
-			"speed":
-				# Changes in the state machine.
-				$StateMachine/Move.max_speed += ammount
-			"bullet_max":
-				# Change bullet max number and shooting cd.
-#				if bullet_max != new_value:
-#					bullet_max = new_value
-#					shooting_cd = shooting_cd - sign(ammount) * .02
-				pass
-			_:
-				# Only change the intended value.
-				set(type, new_value)
 
 
 func set_palette(palette_index : int) -> void:

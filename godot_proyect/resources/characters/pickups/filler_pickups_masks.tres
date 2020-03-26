@@ -16,12 +16,22 @@
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
 "loop": true,
-"name": "small_heal",
+"name": "small_hp",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "1up",
+"name": "e_tank",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "hp",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "ammo",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
@@ -29,18 +39,8 @@ animations = [ {
 "name": "small_ammo",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "heal",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "e-tank",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "ammo",
+"name": "one_up",
 "speed": 10.0
 } ]

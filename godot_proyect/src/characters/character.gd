@@ -14,7 +14,11 @@ var weaknesses: Dictionary
 
 # HP bar.
 export var _hp_bar_path: NodePath
-onready var hp_bar: TiledProgress = get_node(_hp_bar_path)
+onready var hp_bar: TiledProgress
+
+# Cannons.
+export var _cannons_path: NodePath
+var cannons
 
 # Death
 export(PackedScene) var death_instance = null
@@ -33,6 +37,12 @@ signal death
 
 
 func _ready() -> void:
+	# Set nodes.
+	if has_node(_cannons_path):
+		cannons = get_node(_cannons_path)
+	if has_node(_hp_bar_path):
+		hp_bar = get_node(_hp_bar_path)
+	
 	# Set timers.
 	flickering_timer.name = "FlickeringTimer"
 	invencibility_timer.name = "InvencibilityTimer"
@@ -54,6 +64,9 @@ func _ready() -> void:
 	set_invencibility_time(stats.get_stat("invencibility_time"))
 	weaknesses = stats.get_stat("weaknesses")
 	
+	# Signals.
+	stats.connect("stat_changed", self, "_on_stat_changed")
+	
 
 
 func _on_flickering_timer_timeout() -> void:
@@ -63,6 +76,12 @@ func _on_flickering_timer_timeout() -> void:
 func _on_invencibility_timer_timeout() -> void:
 	set_invencible(false)
 
+
+func _on_stat_changed(stat_name: String, new_value: float) -> void:
+	match stat_name:
+		"hp": set_hp(new_value, true)
+		"max_hp": set_max_hp(new_value)
+		"invencibility_time": set_invencibility_time(new_value)
 
 
 ##########################
@@ -116,9 +135,9 @@ func set_invencible(value: bool) -> void:
 		flickering_timer.stop()
 
 
-#########################
-## Auxiliar functions. ##
-#########################
+####################
+## API functions. ##
+####################
 
 
 func hit(damage: float, weapon: int = Weapon.TYPES.MEGA) -> void:
@@ -151,6 +170,23 @@ func die() -> void:
 func disappear() -> void:
 	# Just destroy myself by default.
 	queue_free()
+
+
+func modify_stat(stat_name: String, stat_owner: int, ammount: float) -> void:
+	match stat_owner:
+		StatsPickup.OWNERS.GLOBAL:
+			global.stat.set_stat(stat_name, ammount)
+		StatsPickup.OWNERS.CANNON:
+			if cannons != null:
+				cannons.stat.set_stat(stat_name, ammount)
+		StatsPickup.OWNERS.CHARACTER:
+			stats.set_stat(stat_name, ammount)
+	stats.modify_stat(stat_name, ammount)
+
+
+#########################
+## Auxiliar functions. ##
+#########################
 
 
 func is_in_range(object: Node2D, radious: float) -> bool:

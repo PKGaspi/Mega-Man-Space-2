@@ -21,7 +21,7 @@
 [ext_resource path="res://src/characters/megaship/states/travel.gd" type="Script" id=25]
 [ext_resource path="res://src/characters/megaship/states/knockback.gd" type="Script" id=26]
 
-[sub_resource type="Shader" id=9]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 //The palette used
@@ -47,9 +47,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 9 )
+shader = SubResource( 1 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 19 )
 shader_param/mask = ExtResource( 18 )
@@ -110,10 +110,11 @@ collision_layer = 1
 collision_mask = 12
 script = ExtResource( 2 )
 stats = ExtResource( 10 )
+_cannons_path = NodePath("Cannons")
 death_instance = ExtResource( 3 )
 
 [node name="SprShip" type="AnimatedSprite" parent="." index="0"]
-material = SubResource( 10 )
+material = SubResource( 2 )
 frames = ExtResource( 5 )
 animation = "iddle"
 script = ExtResource( 16 )
