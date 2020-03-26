@@ -52,7 +52,7 @@ func fire(power: int = 0) -> bool:
 	if ammo > 0:
 		shooted = get_child(n_cannons - 1).fire(power)
 		if shooted:
-			set_relative_ammo(-ammo_per_shot)
+			set_ammo_relative(-ammo_per_shot)
 	return shooted
 
 
@@ -86,7 +86,7 @@ func set_ammo(value: float, pause: bool = false) -> void:
 		ammo_bar.set_value(ammo, pause)
 
 
-func set_relative_ammo(relative_value: float, pause: bool = false) -> void:
+func set_ammo_relative(relative_value: float, pause: bool = false) -> void:
 	set_ammo(ammo + relative_value, pause)
 
 
@@ -105,11 +105,12 @@ func set_weapon(value: int, play_sound := true) -> bool:
 		state_machine.transition_to(weapon_to_state(weapon))
 		if play_sound and snd_weapon_change != null:
 			snd_weapon_change.play()
+		
 		if ammo_bar != null:
-			ammo_bar.palette = weapon
 			ammo_bar.visible = weapon != Weapon.TYPES.MEGA
+			ammo_bar.palette = weapon
 		emit_signal("weapon_changed", weapon)
-	
+		
 	return unlocked
 
 

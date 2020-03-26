@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=1]
 [ext_resource path="res://src/pickups/ammo/small/small_ammo_pickup_collision_shape.tres" type="Shape2D" id=2]
 [ext_resource path="res://src/pickups/pickup.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprites/characters/pickups/ammo/ammo_small_mask_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/characters/pickups/ammo/ammo_small_mask_0.png" type="Texture" id=4]
 [ext_resource path="res://src/pickups/ammo/small/small_ammo_pickup_stats.tres" type="Resource" id=5]
 
 [sub_resource type="Shader" id=1]
@@ -45,10 +45,6 @@ stats = ExtResource( 5 )
 [node name="SprIcon" parent="." index="0"]
 material = SubResource( 2 )
 animation = "small_ammo"
-frame = 1
 
 [node name="CollisionBox" parent="." index="1"]
 shape = ExtResource( 2 )
-
-[node name="StateMachine" parent="." index="2"]
-initial_state = NodePath("../../AmmoPikcup/StateMachine/Move/RandomDirection")

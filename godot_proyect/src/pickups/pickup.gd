@@ -29,6 +29,11 @@ func _ready() -> void:
 	ammount = stats.get_stat("ammount")
 	flickering_time = stats.get_stat("flickering_time")
 	life_time = stats.get_stat("life_time")
+	
+	# Signals.
+	global.MEGASHIP.connect("palette_changed", self, "_on_megaship_palette_change")
+	
+	spr_icon.set_palette(global.MEGASHIP.get_weapon())
 
 
 func _on_body_entered(body: PhysicsBody2D) -> void:
@@ -38,3 +43,7 @@ func _on_body_entered(body: PhysicsBody2D) -> void:
 func collide(character: Character) -> void:
 	character.modify_stat(affected_stat, stat_owner, ammount)
 	queue_free()
+
+
+func _on_megaship_palette_change(palette_index) -> void:
+	spr_icon.set_palette(palette_index)

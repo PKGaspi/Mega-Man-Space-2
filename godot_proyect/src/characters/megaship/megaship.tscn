@@ -184,3 +184,5 @@ script = null
 
 [node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 13 )
+[connection signal="palette_changed" from="." to="SprShip" method="set_palette"]
+[connection signal="weapon_changed" from="Cannons" to="." method="set_palette"]

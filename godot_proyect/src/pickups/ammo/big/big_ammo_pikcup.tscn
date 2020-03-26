@@ -48,6 +48,3 @@ frame = 1
 
 [node name="CollisionBox" parent="." index="1"]
 shape = ExtResource( 5 )
-
-[node name="StateMachine" parent="." index="2"]
-initial_state = NodePath("../../AmmoPikcup/StateMachine/Move/RandomDirection")

@@ -18,7 +18,7 @@ onready var snd_teleport := $SndTeleport
 ## Singals. ##
 ##############
 
-signal palette_change(new_palette_index)
+signal palette_changed(new_palette_index)
 
 
 ##################
@@ -89,7 +89,7 @@ func set_palette(palette_index : int) -> void:
 	image.unlock()
 	
 	# Emit palette change signal.
-	emit_signal("palette_change", palette_index)
+	emit_signal("palette_changed", palette_index)
 
 
 func die():

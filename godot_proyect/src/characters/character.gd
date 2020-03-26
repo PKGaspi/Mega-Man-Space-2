@@ -178,7 +178,8 @@ func modify_stat(stat_name: String, stat_owner: int, ammount: float) -> void:
 			global.stat.modify_stat(stat_name, ammount)
 		StatsPickup.OWNERS.CANNON:
 			if cannons != null:
-				cannons.stat.modify_stat(stat_name, ammount)
+				if stat_name == "ammo": cannons.set_ammo_relative(ammount, true)
+				else: cannons.stats.modify_stat(stat_name, ammount)
 		StatsPickup.OWNERS.CHARACTER:
 			if stat_name == "hp": set_hp_relative(ammount, true)
 			else: stats.modify_stat(stat_name, ammount)

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=1]
-[ext_resource path="res://src/pickups/hp/big/big_hp_pikcup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/pickups/hp/small/small_hp_pikcup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/pickups/ammo/small/small_ammo_pikcup.tscn" type="PackedScene" id=3]
 
 [resource]
 script = ExtResource( 1 )
-items = [ ExtResource( 2 ) ]
-weights = [ 1 ]
+items = [ ExtResource( 2 ), ExtResource( 3 ), null ]
+weights = [ 1, 1, 3 ]
