@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_0.png" type="Texture" id=2]
@@ -10,23 +10,12 @@
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_7.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_6.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_2.png" type="Texture" id=10]
-[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=11]
+[ext_resource path="res://src/characters/enemies/telly/telly_drops.tres" type="Resource" id=11]
 
-[sub_resource type="Resource" id=1]
-script = ExtResource( 11 )
-items = {
-0: 0,
-1: 1,
-2: 2,
-3: 3,
-4: 4,
-5: 5
-}
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 7.5, 8 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 8 ) ],
 "loop": true,
@@ -36,19 +25,22 @@ animations = [ {
 
 [node name="Telly" instance=ExtResource( 1 )]
 stats = ExtResource( 4 )
-drops = SubResource( 1 )
+drops = ExtResource( 11 )
 
 [node name="StateMachine" parent="." index="0"]
 initial_state = NodePath("Move/Follow/FollowMegaship")
 
+[node name="HPBar" parent="hud" index="0"]
+horizontal = false
+
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="3"]
 position = Vector2( 0.5, 0 )
 z_index = -1
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="4"]
 z_index = -1
-frames = SubResource( 3 )
+frames = SubResource( 2 )
 animation = "rotating"
-frame = 5
+frame = 1
 playing = true

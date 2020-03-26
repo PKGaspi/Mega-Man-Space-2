@@ -175,13 +175,13 @@ func disappear() -> void:
 func modify_stat(stat_name: String, stat_owner: int, ammount: float) -> void:
 	match stat_owner:
 		StatsPickup.OWNERS.GLOBAL:
-			global.stat.set_stat(stat_name, ammount)
+			global.stat.modify_stat(stat_name, ammount)
 		StatsPickup.OWNERS.CANNON:
 			if cannons != null:
-				cannons.stat.set_stat(stat_name, ammount)
+				cannons.stat.modify_stat(stat_name, ammount)
 		StatsPickup.OWNERS.CHARACTER:
-			stats.set_stat(stat_name, ammount)
-	stats.modify_stat(stat_name, ammount)
+			if stat_name == "hp": set_hp_relative(ammount, true)
+			else: stats.modify_stat(stat_name, ammount)
 
 
 #########################

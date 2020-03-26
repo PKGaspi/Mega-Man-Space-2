@@ -10,7 +10,7 @@ func _ready() -> void:
 	yield(owner, "ready")
 	stats = moveable.stats
 	
-	max_speed = stats.get_stats("max_speed")
+	max_speed = stats.get_stat("max_speed")
 
 
 func physics_process(delta: float) -> void:

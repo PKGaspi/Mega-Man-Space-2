@@ -20,4 +20,4 @@ func physics_process(delta: float) -> void:
 
 
 func random_dir() -> Vector2:
-	return Vector2(rng.randi(), rng.randi()).normalized()
+	return Vector2(rng.randi_range(-1, 1), rng.randi_range(-1, 1)).normalized()

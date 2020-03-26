@@ -23,8 +23,10 @@ func get_stat(stat_name: String) -> float:
 func modify_stat(stat_name: String, ammount: float) -> void:
 	assert(stat_name in _stats)
 	var old_value = get_stat(stat_name)
-	var cap = _stat_caps[stat_name]
-	var new_value = clamp(old_value + ammount, cap.x, cap.y)
+	var new_value = old_value + ammount
+	if _stat_caps.has(stat_name):
+		var cap = _stat_caps[stat_name]
+		new_value = clamp(new_value, cap.x, cap.y)
 	if old_value != new_value:
 		_stat_current[stat_name] = new_value
 		emit_signal("stat_changed", stat_name, new_value)

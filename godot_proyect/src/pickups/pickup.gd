@@ -25,7 +25,7 @@ func _ready() -> void:
 	stats.initialize()
 	
 	affected_stat = stats.get_stat_name()
-	stat_owner = stats.get_stat_owner(affected_stat)
+	stat_owner = stats.get_stat_owner()
 	ammount = stats.get_stat("ammount")
 	flickering_time = stats.get_stat("flickering_time")
 	life_time = stats.get_stat("life_time")
