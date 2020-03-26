@@ -19,9 +19,9 @@ func _on_action_pressed_ui_accept():
 			next_page()
 		7:
 			# Use an e-tank.
-			if global.MEGASHIP != null and global.etanks > 0:
-				global.etanks -= 1
-				global.MEGASHIP.call_deferred("set_hp", global.MEGASHIP.hp_max, true)
+			if global.MEGASHIP != null and global.e_tanks > 0:
+				global.modify_stat("e_tanks", -1)
+				global.MEGASHIP.call_deferred("set_hp", global.MEGASHIP.max_hp, true)
 				global.set_user_pause(false)
 		8:
 			# TODO: Open settings menu.

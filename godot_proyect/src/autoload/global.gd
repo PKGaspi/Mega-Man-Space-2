@@ -109,8 +109,14 @@ func _on_game_exit_timer_timeout() -> void:
 
 func _on_stat_changed(stat_name: String, new_value: float) -> void:
 	match stat_name:
-		"one_ups": one_ups = int(new_value)
-		"e_tanks": e_tanks = int(new_value)
+		"one_ups": 
+			if new_value > one_ups:
+				snd_collect.play()
+			one_ups = int(new_value)
+		"e_tanks": 
+			if new_value > e_tanks:
+				snd_collect.play()
+			e_tanks = int(new_value)
 
 
 ###################
