@@ -6,20 +6,38 @@
 [ext_resource path="res://src/library/spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_stats.tres" type="Resource" id=5]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_drops.tres" type="Resource" id=6]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.5, 15 )
+[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_collision_shape.tres" type="Shape2D" id=7]
 
 [node name="TellySpawner" instance=ExtResource( 1 )]
 stats = ExtResource( 5 )
 drops = ExtResource( 6 )
 
-[node name="StateMachine" parent="." index="0"]
+[node name="CollisionBox" parent="." index="0"]
+position = Vector2( -0.5, -1 )
+shape = ExtResource( 7 )
+one_way_collision_margin = 0.0
+
+[node name="StateMachine" parent="." index="1"]
 initial_state = NodePath("Move/Follow/FollowMegaship")
 
 [node name="Move" parent="StateMachine" index="0"]
 invert_movement = true
 rotate_forwards = true
+
+[node name="Sprite" type="Sprite" parent="." index="3"]
+texture = ExtResource( 3 )
+
+[node name="LeftSpawner" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( -11, 24 )
+to_spawn = ExtResource( 2 )
+max_spawns = 3
+time_between_spawns = 5.0
+
+[node name="RightSpawner" parent="." index="5" instance=ExtResource( 4 )]
+position = Vector2( 10, 24 )
+to_spawn = ExtResource( 2 )
+max_spawns = 3
+time_between_spawns = 5.0
 
 [node name="HPBar" parent="hud" index="0"]
 margin_left = 17.0
@@ -28,22 +46,3 @@ margin_right = 22.0
 margin_bottom = 19.0
 max_value = 20.0
 value = 20.0
-
-[node name="Sprite" type="Sprite" parent="." index="3"]
-texture = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="4"]
-position = Vector2( -0.5, -1 )
-shape = SubResource( 1 )
-
-[node name="LeftSpawner" parent="." index="5" instance=ExtResource( 4 )]
-position = Vector2( -11, 24 )
-to_spawn = ExtResource( 2 )
-max_spawns = 3
-time_between_spawns = 5.0
-
-[node name="RightSpawner" parent="." index="6" instance=ExtResource( 4 )]
-position = Vector2( 10, 24 )
-to_spawn = ExtResource( 2 )
-max_spawns = 3
-time_between_spawns = 5.0

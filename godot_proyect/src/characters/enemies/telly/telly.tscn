@@ -11,9 +11,7 @@
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_6.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_2.png" type="Texture" id=10]
 [ext_resource path="res://src/characters/enemies/telly/telly_drops.tres" type="Resource" id=11]
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 7.5, 8 )
+[ext_resource path="res://src/characters/enemies/telly/telly_collision_shape.tres" type="Shape2D" id=12]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -30,17 +28,14 @@ drops = ExtResource( 11 )
 [node name="StateMachine" parent="." index="0"]
 initial_state = NodePath("Move/Follow/FollowMegaship")
 
-[node name="HPBar" parent="hud" index="0"]
-horizontal = false
-
-[node name="CollisionBox" type="CollisionShape2D" parent="." index="3"]
+[node name="CollisionBox" parent="." index="2"]
 position = Vector2( 0.5, 0 )
 z_index = -1
-shape = SubResource( 3 )
+shape = ExtResource( 12 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="4"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="3"]
 z_index = -1
 frames = SubResource( 2 )
 animation = "rotating"
-frame = 1
+frame = 6
 playing = true

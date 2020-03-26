@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=1]
-[ext_resource path="res://src/pickups/hp/hp_pikcup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/pickups/hp/big/big_hp_pikcup.tscn" type="PackedScene" id=2]
 
 [resource]
 script = ExtResource( 1 )
