@@ -125,7 +125,7 @@ pause_mode = 1
 [node name="Megaship" parent="GameLayer" instance=ExtResource( 19 )]
 _hp_bar_path = NodePath("../../UILayer/HUD/BarContainer/MegashipHPBar")
 
-[node name="SprShip" parent="GameLayer/Megaship" index="1"]
+[node name="SprShip" parent="GameLayer/Megaship" index="0"]
 material = SubResource( 3 )
 
 [node name="StateMachine" parent="GameLayer/Megaship" index="2"]

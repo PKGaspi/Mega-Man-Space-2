@@ -1,7 +1,7 @@
+tool
+class_name DirectionalSprite
+extends AnimatedPaletteSprite
 
-extends AnimatedSprite
-
-export(SpriteFrames) var palettes
 var direction: Vector2
 
 
@@ -27,21 +27,3 @@ func set_direction(value: Vector2) -> void:
 	
 	play()
 
-
-func set_animation(value: String) -> void:
-	if frames.has_animation(value):
-		.set_animation(value)
-		set_mask(frame)
-
-
-func set_palette(value: int) -> void:
-	if material != null:
-		material.set_shader_param("palette", palettes.get_frame("default", value))
-		
-
-func set_mask(value: int) -> void:
-	if material != null:
-		material.set_shader_param("mask", frames.get_frame(animation, value))
-
-func _on_frame_changed() -> void:
-	set_mask(frame)

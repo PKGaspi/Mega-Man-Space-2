@@ -13,7 +13,7 @@
 [ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=11]
 [ext_resource path="res://src/characters/megaship/states/teleport.gd" type="Script" id=12]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
-[ext_resource path="res://src/library/directional_sprite.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/library/directional_sprite.gd" type="Script" id=16]
 [ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=19]
@@ -21,7 +21,7 @@
 [ext_resource path="res://src/characters/megaship/states/travel.gd" type="Script" id=25]
 [ext_resource path="res://src/characters/megaship/states/knockback.gd" type="Script" id=26]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
 //The palette used
@@ -47,9 +47,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=10]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 9 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 19 )
 shader_param/mask = ExtResource( 18 )
@@ -112,10 +112,11 @@ script = ExtResource( 2 )
 stats = ExtResource( 10 )
 death_instance = ExtResource( 3 )
 
-[node name="SprShip" parent="." index="0" instance=ExtResource( 14 )]
-material = SubResource( 2 )
+[node name="SprShip" type="AnimatedSprite" parent="." index="0"]
+material = SubResource( 10 )
 frames = ExtResource( 5 )
 animation = "iddle"
+script = ExtResource( 16 )
 palettes = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
@@ -182,5 +183,3 @@ script = null
 
 [node name="SndUpgrade" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 13 )
-[connection signal="palette_change" from="." to="SprShip" method="set_palette"]
-[connection signal="weapon_changed" from="Cannons" to="SprShip" method="set_palette"]
