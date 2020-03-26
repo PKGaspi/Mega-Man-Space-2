@@ -5,7 +5,7 @@
 [ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=4]
 [ext_resource path="res://src/library/animated_palette_sprite.gd" type="Script" id=5]
-[ext_resource path="res://resources/characters/pickups/filler_pickups_masks.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://resources/pickups/pickup_icons.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://src/library/state machine/state.gd" type="Script" id=7]
 [ext_resource path="res://src/pickups/states/move.gd" type="Script" id=8]
 [ext_resource path="res://src/pickups/states/random_direction.gd" type="Script" id=9]

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-one_ups = 8
-e_tanks = 3
+one_ups = 2
+e_tanks = 0
 _cap_one_ups = Vector2( 0, 9 )
 _cap_e_tanks = Vector2( 0, 4 )

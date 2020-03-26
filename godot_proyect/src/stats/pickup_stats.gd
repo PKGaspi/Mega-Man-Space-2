@@ -23,10 +23,10 @@ enum TYPES {
 var type_owners = {
 	TYPES.HP: OWNERS.CHARACTER,
 	TYPES.MAX_HP: OWNERS.CHARACTER,
+	TYPES.MAX_SPEED: OWNERS.CHARACTER,
 	
 	TYPES.AMMO: OWNERS.CANNON,
 	TYPES.MAX_AMMO: OWNERS.CANNON,
-	TYPES.MAX_SPEED: OWNERS.CANNON,
 	TYPES.BULLETS: OWNERS.CANNON,
 	TYPES.CANNONS: OWNERS.CANNON,
 	
@@ -37,10 +37,10 @@ var type_owners = {
 var type_names = {
 	TYPES.HP: "hp",
 	TYPES.MAX_HP: "max_hp",
+	TYPES.MAX_SPEED: "max_speed",
 	
 	TYPES.AMMO: "ammo",
 	TYPES.MAX_AMMO: "max_ammo",
-	TYPES.MAX_SPEED: "max_speed",
 	TYPES.BULLETS: "max_bullets",
 	TYPES.CANNONS: "n_cannons",
 	

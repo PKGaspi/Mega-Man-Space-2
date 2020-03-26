@@ -37,13 +37,22 @@ signal weapon_changed(new_weapon)
 func _ready() -> void:
 	assert(stats != null and stats is StatsCannon)
 	stats.initialize()
+	
 	n_cannons = stats.get_stat("n_cannons")
 	max_ammo = stats.get_stat("max_ammo")
 	ammo = max_ammo
 	ammo_per_shot = stats.get_stat("ammo_per_shot")
 	
+	stats.connect("stat_changed", self, "_on_stat_changed")
+	
 	if ammo_bar != null:
 		ammo_bar.visible = weapon != Weapon.TYPES.MEGA
+
+
+func _on_stat_changed(stat_name: String, new_value: float) -> void:
+	match stat_name:
+		"n_cannons": n_cannons = new_value
+		"max_bullets": set_max_projectiles(new_value)
 
 
 func fire(power: int = 0) -> bool:
@@ -76,7 +85,7 @@ func set_projectile(value: PackedScene) -> void:
 
 func set_max_projectiles(value: int) -> void:
 	for child in get_children():
-		if child is Cannon:
+		if child is CannonSetup:
 			child.set_max_projectiles(value)
 
 

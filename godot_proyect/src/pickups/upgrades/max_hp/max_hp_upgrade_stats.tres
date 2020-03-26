@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/stats/pickup_stats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+affected_stat = 1
+ammount = 3.0
+flickering_time = 4.0
+life_time = 14.0
+max_speed = 10.0

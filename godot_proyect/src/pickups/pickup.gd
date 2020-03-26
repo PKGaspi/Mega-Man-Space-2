@@ -31,9 +31,10 @@ func _ready() -> void:
 	life_time = stats.get_stat("life_time")
 	
 	# Signals.
-	global.MEGASHIP.connect("palette_changed", self, "_on_megaship_palette_change")
 	
-	spr_icon.set_palette(global.MEGASHIP.get_weapon())
+	if spr_icon is AnimatedPaletteSprite:
+		global.MEGASHIP.connect("palette_changed", self, "_on_megaship_palette_change")
+		spr_icon.set_palette(global.MEGASHIP.get_weapon())
 
 
 func _on_body_entered(body: PhysicsBody2D) -> void:

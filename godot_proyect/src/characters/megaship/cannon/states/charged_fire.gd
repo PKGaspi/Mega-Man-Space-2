@@ -14,7 +14,6 @@ func input(event: InputEvent) -> void:
 	# This doesn't take cd into account. It assumes that cannons does for now.
 	if event.is_action_pressed("shoot"):
 		charging_timer.start()
-		print("charging")
 	if event.is_action_released("shoot"):
 		var time_left = charging_timer.time_left
 		charging_timer.stop()

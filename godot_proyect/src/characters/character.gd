@@ -30,6 +30,7 @@ var invencible: bool = false setget set_invencible
 var flickering_timer := Timer.new()
 var invencibility_timer := Timer.new()
 onready var snd_hit := $SndHit
+onready var snd_upgrade := $SndUpgrade
 
 # Signals.
 signal death
@@ -79,7 +80,6 @@ func _on_invencibility_timer_timeout() -> void:
 
 func _on_stat_changed(stat_name: String, new_value: float) -> void:
 	match stat_name:
-		"hp": set_hp(new_value, true)
 		"max_hp": set_max_hp(new_value)
 		"invencibility_time": set_invencibility_time(new_value)
 
@@ -179,10 +179,16 @@ func modify_stat(stat_name: String, stat_owner: int, ammount: float) -> void:
 		StatsPickup.OWNERS.CANNON:
 			if cannons != null:
 				if stat_name == "ammo": cannons.set_ammo_relative(ammount, true)
-				else: cannons.stats.modify_stat(stat_name, ammount)
+				else: 
+					if ammount > 0:
+						snd_upgrade.play()
+					cannons.stats.modify_stat(stat_name, ammount)
 		StatsPickup.OWNERS.CHARACTER:
 			if stat_name == "hp": set_hp_relative(ammount, true)
-			else: stats.modify_stat(stat_name, ammount)
+			else: 
+				if ammount > 0:
+					snd_upgrade.play()
+				stats.modify_stat(stat_name, ammount)
 
 
 #########################
