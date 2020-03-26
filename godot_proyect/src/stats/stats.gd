@@ -15,6 +15,11 @@ func initialize() -> void:
 	_init_lists()
 
 
+func get_stat_initial_value(stat_name: String) -> float:
+	assert(stat_name in _stat_initial)
+	return _stat_initial[stat_name]
+
+
 func get_stat(stat_name: String) -> float:
 	assert(stat_name in _stats)
 	return _stat_current[stat_name]

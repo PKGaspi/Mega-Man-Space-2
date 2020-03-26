@@ -58,13 +58,13 @@ func update_entries() -> void:
 		if key == Vector2(0, 7):
 			# e-tank entry.
 			entries.append(entry)
-			for i in range(global.etanks, 4):
+			for i in range(global.e_tanks, 4):
 				node.get_node(str(i + 1)).visible = false
 				
 		elif key == Vector2(1, 7):
 			# 1up entry.
 			entries.append(null) # Make this entry non selectable.
-			node.get_node("Text").text = ":  %02d" % global.lifes
+			node.get_node("Text").text = ":  %02d" % global.one_ups
 			
 		elif !unlocked_entries.has(Vector2(key)) or unlocked_entries[key]:
 			# No info about current entry or entry is unlocked.

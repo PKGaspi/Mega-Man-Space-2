@@ -20,4 +20,4 @@ func physics_process(delta: float) -> void:
 
 
 func random_dir() -> Vector2:
-	return Vector2(rng.randi_range(-1, 1), rng.randi_range(-1, 1)).normalized()
+	return Vector2.RIGHT.rotated(rng.randf_range(0, 2*PI))

@@ -27,6 +27,7 @@ func physics_process(delta: float) -> void:
 	var acceleration = _parent.acceleration_ratio * _parent.max_speed
 	_parent.velocity = _parent.calculate_velocity(input_dir, acceleration, _parent.velocity, delta)
 
+	print(_parent.velocity)
 	# Calculate rotation.
 	character.rotation = calculate_rotation()
 	

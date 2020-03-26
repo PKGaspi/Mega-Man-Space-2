@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource( 1 )
-affected_stat = 2
-ammount = 10.0
+affected_stat = 7
+ammount = 1.0
 flickering_time = 3.0
 life_time = 12.0
-max_speed = 15.0
+max_speed = 10.0

@@ -8,4 +8,4 @@ affected_stat = 0
 ammount = 10.0
 flickering_time = 3.0
 life_time = 12.0
-max_speed = 20.0
+max_speed = 15.0

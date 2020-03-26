@@ -175,7 +175,7 @@ func disappear() -> void:
 func modify_stat(stat_name: String, stat_owner: int, ammount: float) -> void:
 	match stat_owner:
 		StatsPickup.OWNERS.GLOBAL:
-			global.stat.modify_stat(stat_name, ammount)
+			global.stats.modify_stat(stat_name, ammount)
 		StatsPickup.OWNERS.CANNON:
 			if cannons != null:
 				if stat_name == "ammo": cannons.set_ammo_relative(ammount, true)

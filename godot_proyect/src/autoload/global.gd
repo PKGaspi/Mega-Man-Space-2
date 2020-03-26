@@ -9,6 +9,8 @@ const SCREEN_SIZE := Vector2(480, 270)
 onready var snd_collect := $SndCollect
 onready var game_exit_timer := $GameExitTimer
 
+export var stats: Resource
+
 var is_paused := false
 var user_pause := false
 var os := OS.get_name()
@@ -39,12 +41,8 @@ var unlocked_weapons = {
 	Weapon.TYPES.THREE : false,
 }
 
-const LIFES_DEFAULT = 2
-var lifes = LIFES_DEFAULT # The number of extra lifes.
-const MAX_LIFES = 9
-const ETANKS_DEFAULT = 3
-var etanks = ETANKS_DEFAULT # The number of etanks.
-const MAX_ETANKS = 4
+var one_ups: int
+var e_tanks: int
 
 var MEGASHIP # The megaship instance for easy global access.
 var random : RandomNumberGenerator # Used for general randomness.
@@ -56,6 +54,10 @@ signal user_pause
 
 
 func _ready():
+	# Setup stats.
+	init_stats()
+	stats.connect("stat_changed", self, "_on_stat_changed")
+	
 	# Init global randomizer.
 	random = init_random()
 	
@@ -103,6 +105,12 @@ func _on_megaship_tree_exiting():
 
 func _on_game_exit_timer_timeout() -> void:
 	exit_game()
+
+
+func _on_stat_changed(stat_name: String, new_value: float) -> void:
+	match stat_name:
+		"one_ups": one_ups = int(new_value)
+		"e_tanks": e_tanks = int(new_value)
 
 
 ###################
@@ -163,20 +171,17 @@ func set_touchscreen_layout_visibility(value : bool):
 func game_over() -> void:
 	# Placeholder for game_over scenario.
 	# TODO: Reset points.
-	lifes = LIFES_DEFAULT
-	etanks = ETANKS_DEFAULT
+	init_stats()
 
 
-func obtain_1up():
-	if lifes < MAX_LIFES:
-		snd_collect.play()
-		lifes = lifes + 1
+func init_stats() -> void:
+	stats.initialize()
+	one_ups = stats.get_stat_initial_value("one_ups")
+	e_tanks = stats.get_stat_initial_value("e_tanks")
 
 
-func obtain_etank():
-	if etanks < MAX_ETANKS:
-		snd_collect.play()
-		etanks = etanks + 1
+func modify_stat(stat_name: String, ammount: float) -> void:
+	stats.modify_stat(stat_name, ammount)
 
 
 func exit_game() -> void:

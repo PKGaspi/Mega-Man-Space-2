@@ -44,8 +44,8 @@ var type_names = {
 	TYPES.BULLETS: "max_bullets",
 	TYPES.CANNONS: "n_cannons",
 	
-	TYPES.ONE_UP: "one_up",
-	TYPES.E_TANK: "e_tank",
+	TYPES.ONE_UP: "one_ups",
+	TYPES.E_TANK: "e_tanks",
 }
 
 
