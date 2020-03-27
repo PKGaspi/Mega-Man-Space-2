@@ -60,7 +60,7 @@ func _ready() -> void:
 	get_tree().current_scene = self
 	
 	# Setup signals.
-	global.connect("user_pause", self, "_on_global_user_pause")
+	global.connect("user_paused", self, "_on_global_user_pause")
 	megaship.connect("death", self, "_on_megaship_death")
 	center_text.connect("animation_finished", self, "_on_animation_finished")
 	

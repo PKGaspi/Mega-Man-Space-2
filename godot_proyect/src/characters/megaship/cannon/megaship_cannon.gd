@@ -65,7 +65,6 @@ func fire(power: int = 0) -> bool:
 		if shooted:
 			set_ammo_relative(-ammo_per_shot)
 	
-	print(shooted)
 	return shooted
 
 

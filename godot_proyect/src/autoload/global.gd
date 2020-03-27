@@ -49,7 +49,7 @@ var random : RandomNumberGenerator # Used for general randomness.
 
 var prev_mouse_mode
 
-signal user_pause
+signal user_paused(is_paused)
 
 
 
@@ -143,7 +143,7 @@ func set_user_pause(value : bool) -> void:
 	if (user_pause or !is_paused) and MEGASHIP is Megaship:
 		set_pause(value)
 		user_pause = value
-		emit_signal("user_pause", value)
+		emit_signal("user_paused", value)
 		if value:
 			prev_mouse_mode = Input.get_mouse_mode() 
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

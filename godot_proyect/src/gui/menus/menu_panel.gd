@@ -36,7 +36,7 @@ func _ready() -> void:
 	_init_children()
 	
 	# Connect global pause.
-	global.connect("user_pause", self, "_on_global_user_pause")
+	global.connect("user_paused", self, "_on_global_user_pause")
 	
 	# Animate opening.
 	if animate_opening:

@@ -4,7 +4,7 @@ var active = false setget set_active
 onready var menu = get_node("Contents/Entries/Options")
 
 func _ready() -> void:
-	global.connect("user_pause", self, "_on_global_user_pause")
+	global.connect("user_paused", self, "_on_global_user_pause")
 	set_active(active)
 	if !OS.is_debug_build():
 		queue_free()

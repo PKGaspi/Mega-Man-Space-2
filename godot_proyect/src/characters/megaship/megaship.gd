@@ -32,8 +32,8 @@ func _enter_tree() -> void:
 
 func _ready():
 	# Connect signals.
-	#connect("tree_exiting", global, "_on_megaship_tree_exiting")
-	global.connect("user_pause", self, "_on_user_pause")
+	connect("tree_exiting", global, "_on_megaship_tree_exiting")
+	global.connect("user_paused", self, "_on_user_pause")
 
 
 func _on_user_pause(value):
