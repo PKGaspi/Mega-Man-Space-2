@@ -51,8 +51,10 @@ func _ready() -> void:
 
 func _on_stat_changed(stat_name: String, new_value: float) -> void:
 	match stat_name:
-		"n_cannons": n_cannons = new_value
-		"max_bullets": set_max_projectiles(new_value)
+		"ammo": set_ammo(new_value, true)
+		"max_ammo": set_max_ammo(new_value)
+		"n_cannons": n_cannons = int(new_value)
+		"max_bullets": set_max_projectiles(int(new_value))
 
 
 func fire(power: int = 0) -> bool:
@@ -62,6 +64,8 @@ func fire(power: int = 0) -> bool:
 		shooted = get_child(n_cannons - 1).fire(power)
 		if shooted:
 			set_ammo_relative(-ammo_per_shot)
+	
+	print(shooted)
 	return shooted
 
 
@@ -99,6 +103,12 @@ func set_ammo_relative(relative_value: float, pause: bool = false) -> void:
 	set_ammo(ammo + relative_value, pause)
 
 
+func set_max_ammo(value: float) -> void:
+	max_ammo = value
+	if ammo_bar != null:
+		ammo_bar.set_max_value(value)
+
+
 func set_weapon(value: int, play_sound := true) -> bool:
 	# Clamp value.
 	value = int(fposmod(value, Weapon.TYPES.size()))
@@ -107,10 +117,9 @@ func set_weapon(value: int, play_sound := true) -> bool:
 		return true 
 	
 	var unlocked = global.unlocked_weapons[value]
-	
 	if unlocked:
-		# TODO: check if the weapon is unlocked.
 		weapon = value
+		state_machine.state.ammo = ammo # Save current ammo.
 		state_machine.transition_to(weapon_to_state(weapon))
 		if play_sound and snd_weapon_change != null:
 			snd_weapon_change.play()

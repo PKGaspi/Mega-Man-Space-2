@@ -17,14 +17,13 @@ texture = ExtResource( 1 )
 material = null
 animation = "max_hp"
 playing = false
-centered = false
 palettes = null
 
 [node name="SprShine" type="AnimatedSprite" parent="." index="2"]
 modulate = Color( 1, 1, 1, 0.705882 )
 frames = ExtResource( 3 )
 animation = "shine"
-frame = 4
+frame = 2
 playing = true
 
 [node name="CollisionBox" parent="." index="3"]

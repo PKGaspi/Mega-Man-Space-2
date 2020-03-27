@@ -2,5 +2,6 @@ class_name StatsWeapon
 extends Stats
 
 
-export var charging_time: float
-export var charging_fases: int = 1
+export(Weapon.TYPES) var weapon := Weapon.TYPES.MEGA
+export var ammo: float = 28
+export var ammo_per_shot: float = .2

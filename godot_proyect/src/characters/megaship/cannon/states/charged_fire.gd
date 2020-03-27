@@ -1,4 +1,4 @@
-extends WeaponState
+extends CannonState
 
 var charging_fases: int
 var charging_time: float

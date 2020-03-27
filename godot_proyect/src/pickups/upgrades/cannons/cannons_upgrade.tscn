@@ -22,7 +22,7 @@ palettes = null
 modulate = Color( 1, 1, 1, 0.705882 )
 frames = ExtResource( 3 )
 animation = "shine"
-frame = 6
+frame = 12
 playing = true
 
 [node name="CollisionBox" parent="." index="3"]

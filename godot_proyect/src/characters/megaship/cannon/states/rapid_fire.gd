@@ -1,4 +1,4 @@
-extends WeaponState
+extends CannonState
 
 
 func physics_process(delta: float) -> void:

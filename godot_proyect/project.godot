@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/cannon/cannon_setup.gd"
 }, {
+"base": "State",
+"class": "CannonState",
+"language": "GDScript",
+"path": "res://src/library/state machine/cannon_state.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -119,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/stats/cannon_stats.gd"
 }, {
+"base": "StatsWeapon",
+"class": "StatsChargedWeapon",
+"language": "GDScript",
+"path": "res://src/stats/charged_weapon_stats.gd"
+}, {
 "base": "Stats",
 "class": "StatsGlobal",
 "language": "GDScript",
@@ -128,6 +138,11 @@ _global_script_classes=[ {
 "class": "StatsPickup",
 "language": "GDScript",
 "path": "res://src/stats/pickup_stats.gd"
+}, {
+"base": "StatsWeapon",
+"class": "StatsRapidWeapon",
+"language": "GDScript",
+"path": "res://src/stats/rapid_weapon_stats.gd"
 }, {
 "base": "Stats",
 "class": "StatsShip",
@@ -149,7 +164,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/weapons.gd"
 }, {
-"base": "State",
+"base": "CannonState",
 "class": "WeaponState",
 "language": "GDScript",
 "path": "res://src/library/state machine/weapon_state.gd"
@@ -164,6 +179,7 @@ _global_script_class_icons={
 "Bullet": "",
 "Cannon": "",
 "CannonSetup": "",
+"CannonState": "",
 "Character": "",
 "CharacterState": "",
 "ChargedWeaponState": "",
@@ -182,8 +198,10 @@ _global_script_class_icons={
 "StateMachine": "",
 "Stats": "",
 "StatsCannon": "",
+"StatsChargedWeapon": "",
 "StatsGlobal": "",
 "StatsPickup": "",
+"StatsRapidWeapon": "",
 "StatsShip": "",
 "StatsWeapon": "",
 "TiledProgress": "",

@@ -19,22 +19,22 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if state != null:
+	if is_instance_valid(state):
 		state.input(event)
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if state != null:
+	if is_instance_valid(state):
 		state.unhandled_input(event)
 
 
 func _process(delta: float) -> void:
-	if state != null:
+	if is_instance_valid(state):
 		state.process(delta)
 
 
 func _physics_process(delta: float) -> void:
-	if state != null:
+	if is_instance_valid(state):
 		state.physics_process(delta)
 
 

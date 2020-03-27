@@ -1,8 +1,6 @@
 class_name ChargedWeaponState
 extends WeaponState
 
-export var stats: Resource
-
 
 var charging_fases: int
 var charging_time: float
