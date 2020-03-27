@@ -18,7 +18,7 @@ shape = ExtResource( 7 )
 one_way_collision_margin = 0.0
 
 [node name="StateMachine" parent="." index="1"]
-initial_state = NodePath("Move/Follow/FollowMegaship")
+initial_state = NodePath("Move/Follow/Megaship")
 
 [node name="Move" parent="StateMachine" index="0"]
 invert_movement = true

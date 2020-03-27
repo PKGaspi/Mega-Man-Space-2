@@ -13,7 +13,7 @@
 [ext_resource path="res://src/characters/enemies/telly/telly_drops.tres" type="Resource" id=11]
 [ext_resource path="res://src/characters/enemies/telly/telly_collision_shape.tres" type="Shape2D" id=12]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 8 ) ],
 "loop": true,
@@ -25,17 +25,17 @@ animations = [ {
 stats = ExtResource( 4 )
 drops = ExtResource( 11 )
 
-[node name="StateMachine" parent="." index="0"]
-initial_state = NodePath("Move/Follow/FollowMegaship")
-
-[node name="CollisionBox" parent="." index="2"]
+[node name="CollisionBox" parent="." index="0"]
 position = Vector2( 0.5, 0 )
 z_index = -1
 shape = ExtResource( 12 )
 
+[node name="StateMachine" parent="." index="1"]
+initial_state = NodePath("Move/Follow/Megaship")
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="3"]
 z_index = -1
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "rotating"
-frame = 6
+frame = 5
 playing = true

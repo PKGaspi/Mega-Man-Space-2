@@ -11,6 +11,8 @@ var dir
 
 func _ready():
 	dir = Vector2(cos(rotation), sin(rotation))
+	if get_collision_layer_bit(1):
+		add_to_group("player_bullets")
 
 
 func _physics_process(delta):

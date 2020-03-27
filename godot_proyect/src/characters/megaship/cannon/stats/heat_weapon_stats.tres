@@ -6,6 +6,6 @@
 script = ExtResource( 1 )
 weapon = 1
 ammo = 28.0
-ammo_per_shot = 0.2
+ammo_per_shot = 1.0
 charging_time = 2.0
 charging_fases = 3

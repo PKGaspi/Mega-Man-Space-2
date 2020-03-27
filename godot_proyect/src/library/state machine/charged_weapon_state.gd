@@ -1,7 +1,7 @@
 class_name ChargedWeaponState
 extends WeaponState
 
-
+# Stats.
 var charging_fases: int
 var charging_time: float
 
@@ -12,6 +12,7 @@ func _ready() -> void:
 	stats.initialize()
 	charging_fases = stats.get_stat("charging_fases")
 	charging_time = stats.get_stat("charging_time")
+
 
 func enter(msg: Dictionary = {}) -> void:
 	.enter(msg)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/stats/rapid_weapon_stats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+weapon = 5
+ammo = 28.0
+ammo_per_shot = 0.1
+cooldown = 0.05
+max_bullets = 5

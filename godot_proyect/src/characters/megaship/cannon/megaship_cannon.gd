@@ -24,7 +24,7 @@ var weapon_states := {
 	Weapon.TYPES.CRASH: "RapidFire/Crash",
 	Weapon.TYPES.HEAT: "ChargedFire/Heat",
 	Weapon.TYPES.WOOD: "ChargedFire/Wood",
-	Weapon.TYPES.FLASH: "Flash",
+	Weapon.TYPES.FLASH: "ChargedFire/Flash",
 	Weapon.TYPES.ONE: "One",
 	Weapon.TYPES.TWO: "Two",
 	Weapon.TYPES.THREE: "Three",
@@ -75,9 +75,7 @@ func weapon_to_state(weapon_index: int = weapon) -> String:
 
 # Some setters act on all childs.
 func set_cooldown(value: float) -> void:
-	for child in get_children():
-		if child is CannonSetup:
-			child.set_cooldown(value)
+	pass
 
 
 func set_projectile(value: PackedScene) -> void:
@@ -87,9 +85,7 @@ func set_projectile(value: PackedScene) -> void:
 
 
 func set_max_projectiles(value: int) -> void:
-	for child in get_children():
-		if child is CannonSetup:
-			child.set_max_projectiles(value)
+	pass
 
 
 func set_ammo(value: float, pause: bool = false) -> void:
@@ -118,7 +114,9 @@ func set_weapon(value: int, play_sound := true) -> bool:
 	var unlocked = global.unlocked_weapons[value]
 	if unlocked:
 		weapon = value
-		state_machine.state.ammo = ammo # Save current ammo.
+		var state = state_machine.state
+		if state is WeaponState:
+			state_machine.state.ammo = ammo # Save current ammo.
 		state_machine.transition_to(weapon_to_state(weapon))
 		if play_sound and snd_weapon_change != null:
 			snd_weapon_change.play()

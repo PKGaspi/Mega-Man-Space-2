@@ -1,4 +1,4 @@
-extends CharacterState
+extends State
 
 var megaship: Megaship
 

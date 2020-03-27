@@ -4,6 +4,7 @@ var charging_fases: int
 var charging_time: float
 var charging_timer: Timer
 
+
 func _ready() -> void:
 	charging_timer = Timer.new()
 	charging_timer.one_shot = true
