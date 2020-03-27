@@ -81,4 +81,15 @@ script = ExtResource( 9 )
 
 [node name="Iddle" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )
+
+[node name="FlickeringTimer" type="Timer" parent="."]
+wait_time = 0.067
+
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StartFlickeringTimer" type="Timer" parent="."]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="FlickeringTimer" to="." method="_on_FlickeringTimer_timeout"]
+[connection signal="timeout" from="LifeTimer" to="." method="queue_free"]
+[connection signal="timeout" from="StartFlickeringTimer" to="FlickeringTimer" method="start"]

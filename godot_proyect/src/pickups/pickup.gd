@@ -16,7 +16,10 @@ var flickering_time: float
 var life_time: float
 
 
-onready var spr_icon = $SprIcon
+# Nodes.
+onready var life_timer := $LifeTimer
+onready var start_flickering_timer := $StartFlickeringTimer
+onready var spr_icon := $SprIcon
 
 
 func _ready() -> void:
@@ -29,6 +32,11 @@ func _ready() -> void:
 	ammount = stats.get_stat("ammount")
 	flickering_time = stats.get_stat("flickering_time")
 	life_time = stats.get_stat("life_time")
+	
+	life_timer.wait_time = life_time
+	life_timer.start()
+	start_flickering_timer.wait_time = life_time - flickering_time
+	start_flickering_timer.start()
 	
 	# Signals.
 	
@@ -48,3 +56,7 @@ func collide(character: Character) -> void:
 
 func _on_megaship_palette_change(palette_index) -> void:
 	spr_icon.set_palette(palette_index)
+
+
+func _on_FlickeringTimer_timeout() -> void:
+	visible = !visible
