@@ -25,3 +25,7 @@ func enter(msg := {}) -> void:
 	cannons.set_projectile(projectile)
 	cannons.set_ammo(ammo)
 	cannons.ammo_per_shot = ammo_per_shot
+
+
+func exit() -> void:
+	ammo = cannons.ammo

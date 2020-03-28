@@ -41,7 +41,7 @@ var type_names = {
 	
 	TYPES.AMMO: "ammo",
 	TYPES.MAX_AMMO: "max_ammo",
-	TYPES.BULLETS: "max_bullets",
+	TYPES.BULLETS: "max_bullets_extra",
 	TYPES.CANNONS: "n_cannons",
 	
 	TYPES.ONE_UP: "one_ups",

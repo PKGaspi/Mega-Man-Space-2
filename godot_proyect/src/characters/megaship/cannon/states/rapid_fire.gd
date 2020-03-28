@@ -1,8 +1,8 @@
 extends CannonState
 
 
-var max_bullets: int
-var cooldown: float
+var max_bullets_base: int
+var cooldown_base: float
 var cooldown_timer: Timer
 
 
@@ -13,12 +13,14 @@ func _ready() -> void:
 
 
 func physics_process(delta: float) -> void:
-	# This doesn't take cd into account. It assumes that cannons does for now.
 	if Input.is_action_pressed("shoot"):
 		
-		# TODO: add max_projecitles limitation.
-		if (cooldown_timer.is_stopped() and 
-			max_bullets > len(get_tree().get_nodes_in_group("player_bullets"))
-		):
-			cooldown_timer.start()
-			cannons.fire()
+		# Check cooldown.
+		if cooldown_timer.is_stopped():
+			# Check max_bullets.
+			var max_bullets = max_bullets_base + cannons.max_bullets_extra
+			if max_bullets > len(get_tree().get_nodes_in_group("player_bullets")):
+				# Fire, everything is correct.
+				var cooldown = cooldown_base - cannons.max_bullets_extra * .2
+				cooldown_timer.start(cooldown)
+				cannons.fire()

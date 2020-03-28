@@ -19,6 +19,6 @@ func enter(msg: Dictionary = {}) -> void:
 	.enter(msg)
 	
 	# Set parent parameters.
-	_parent.max_bullets = max_bullets
-	_parent.cooldown = cooldown
+	_parent.max_bullets_base = max_bullets
+	_parent.cooldown_base = cooldown
 	_parent.cooldown_timer.wait_time = cooldown

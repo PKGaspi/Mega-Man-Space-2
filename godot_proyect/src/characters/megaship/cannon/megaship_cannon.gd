@@ -10,8 +10,9 @@ onready var ammo_bar = get_node(_ammo_bar_path)
 
 var weapon: int = Weapon.TYPES.MEGA
 var n_cannons: int = 1
-var ammo: float
+var max_bullets_extra: int = 0
 var max_ammo: float
+var ammo: float
 var ammo_per_shot: float
 
 
@@ -39,6 +40,7 @@ func _ready() -> void:
 	stats.initialize()
 	
 	n_cannons = stats.get_stat("n_cannons")
+	max_bullets_extra = stats.get_stat("max_bullets_extra")
 	max_ammo = stats.get_stat("max_ammo")
 	ammo = max_ammo
 	ammo_per_shot = stats.get_stat("ammo_per_shot")
@@ -54,7 +56,7 @@ func _on_stat_changed(stat_name: String, new_value: float) -> void:
 		"ammo": set_ammo(new_value, true)
 		"max_ammo": set_max_ammo(new_value)
 		"n_cannons": n_cannons = int(new_value)
-		"max_bullets": set_max_projectiles(int(new_value))
+		"max_bullets_extra": max_bullets_extra = int(new_value)
 
 
 func fire(power: int = 0) -> bool:
@@ -114,9 +116,6 @@ func set_weapon(value: int, play_sound := true) -> bool:
 	var unlocked = global.unlocked_weapons[value]
 	if unlocked:
 		weapon = value
-		var state = state_machine.state
-		if state is WeaponState:
-			state_machine.state.ammo = ammo # Save current ammo.
 		state_machine.transition_to(weapon_to_state(weapon))
 		if play_sound and snd_weapon_change != null:
 			snd_weapon_change.play()
