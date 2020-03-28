@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/characters/enemies/asteroid/asteroid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/pickups/upgrades/bullets/bullets_upgrade.tscn" type="PackedScene" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -173,24 +172,6 @@ _path_to_follow = NodePath("../Megaship")
 
 [node name="TellySpawner" parent="GameLayer" instance=ExtResource( 14 )]
 position = Vector2( 174.715, 67.5466 )
-
-[node name="BulletsUpgrade" parent="GameLayer" instance=ExtResource( 20 )]
-position = Vector2( -121.468, 126.386 )
-
-[node name="BulletsUpgrade2" parent="GameLayer" instance=ExtResource( 20 )]
-position = Vector2( -47.0555, 92.7382 )
-
-[node name="BulletsUpgrade3" parent="GameLayer" instance=ExtResource( 20 )]
-position = Vector2( -118.233, 61.0319 )
-
-[node name="BulletsUpgrade4" parent="GameLayer" instance=ExtResource( 20 )]
-position = Vector2( -73.2617, 26.4137 )
-
-[node name="BulletsUpgrade5" parent="GameLayer" instance=ExtResource( 20 )]
-position = Vector2( -70.997, 62.0024 )
-
-[node name="BulletsUpgrade6" parent="GameLayer" instance=ExtResource( 20 )]
-position = Vector2( -113.056, 30.2961 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 to_follow = NodePath("../GameLayer/Camera")

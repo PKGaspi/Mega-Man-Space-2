@@ -28,7 +28,7 @@ func physics_process(delta: float) -> void:
 	_parent.velocity = _parent.calculate_velocity(input_dir, acceleration, _parent.velocity, delta)
 
 	# Calculate rotation.
-	character.rotation = calculate_rotation()
+	character.global_rotation = calculate_rotation()
 	
 	# Emit propulsion particles and calculate inclination sprite.
 	var propulsion = input_dir.normalized() * acceleration
@@ -77,7 +77,7 @@ func get_input_direction(normalized:= false) -> Vector2:
 
 
 func calculate_rotation() -> float:
-	var rotation:= character.rotation
+	var rotation:= character.global_rotation
 	
 	match global.input_type:
 		global.INPUT_TYPES.KEY_MOUSE: # Keyboard and mouse input.
@@ -85,6 +85,13 @@ func calculate_rotation() -> float:
 			var global_position = character.global_position
 			if global_position.distance_to(mouse_pos) > MIN_DISTANCE_TO_CURSOR:
 				rotation = global_position.direction_to(mouse_pos).angle()
+		global.INPUT_TYPES.GAMEPAD: # Gamepad input.
+			var aim_vector := Vector2(
+				Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"),
+				Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
+			)
+			if aim_vector.length() > .3:
+				rotation = aim_vector.angle()
 		_:
 			pass #rotation = 
 	return rotation
