@@ -31,7 +31,11 @@ func physics_process(delta: float) -> void:
 	character.global_rotation = calculate_rotation()
 	
 	# Emit propulsion particles and calculate inclination sprite.
-	var propulsion = input_dir.normalized() * acceleration
+	var propulsion
+	if input_dir.length() > 1:
+		propulsion = input_dir.normalized() * acceleration
+	else:
+		propulsion = input_dir * acceleration
 	character.apply_propulsion_effects(propulsion)
 	
 	# Call the parent state's method to apply movement.
