@@ -5,7 +5,8 @@ var megaship: Megaship
 
 func _ready() -> void:
 	megaship = global.MEGASHIP
-	megaship.connect("tree_exited", self, "_on_megaship_tree_exited")
+	if megaship is Megaship:
+		megaship.connect("tree_exited", self, "_on_megaship_tree_exited")
 
 
 func physics_process(delta: float) -> void:

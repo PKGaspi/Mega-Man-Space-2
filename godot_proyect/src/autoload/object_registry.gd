@@ -4,15 +4,29 @@ onready var _projectiles:= $Projectiles
 onready var _enemies:= $Enemies
 onready var _pickups:= $Pickups
 
+var current_scene: Node
 
 func _ready() -> void:
+	current_scene = get_tree().current_scene
 	global.connect("user_paused", self, "_on_user_paused")
+
+
+func _process(delta: float) -> void:
+	if current_scene != get_tree().current_scene:
+		current_scene = get_tree().current_scene
+		reset()
 
 
 func _on_user_paused(value: bool) -> void:
 	for child in get_children():
 		if child is CanvasItem:
 			child.visible = !value
+
+
+func reset() -> void:
+	for layer in get_children():
+		for child in layer.get_children():
+			child.queue_free()
 
 
 func register_node(node: Node) -> void:

@@ -15,6 +15,10 @@ func _on_action_pressed_ui_accept():
 			if global.MEGASHIP is Megaship:
 				for weapon in global.unlocked_weapons:
 					global.unlocked_weapons[weapon] = true
+		
+		2:
+			if global.MEGASHIP is Megaship:
+				global.MEGASHIP.die()
 				
 		_:
 			print_debug("Not implemented")

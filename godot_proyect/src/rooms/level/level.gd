@@ -84,13 +84,18 @@ func _on_megaship_death() -> void:
 
 
 func _on_game_over_timer_timeout() -> void:
-	global.lifes -= 1
-	if global.lifes < 0:
+	global.modify_stat("one_ups", -1)
+	if global.one_ups < 0:
 		print(":(")
 		global.game_over() # Resets lifes, e-tanks and points.
 		# TODO: Go to game over screen.
-	get_tree().reload_current_scene()
-	# TODO: Fix lvl_id resetting to 0.
+	
+	# Reset level.
+	var inst = load(filename).instance()
+	inst.lvl_id = lvl_id
+	get_tree().current_scene = inst
+	get_tree().root.add_child(inst)
+	queue_free()
 
 
 func _on_global_user_pause(value) -> void:

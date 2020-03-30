@@ -60,13 +60,14 @@ margin_bottom = 246.0
 
 [node name="Options" type="VBoxContainer" parent="DebugContainer/Contents/Entries"]
 margin_right = 92.0
-margin_bottom = 32.0
+margin_bottom = 52.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-active = false
-entries = [ NodePath("0"), NodePath("1") ]
+animate_opening = false
+animate_closing = false
+entries = [ NodePath("0"), NodePath("1"), NodePath("2") ]
 
 [node name="0" type="Label" parent="DebugContainer/Contents/Entries/Options"]
 margin_right = 92.0
@@ -82,12 +83,11 @@ custom_fonts/font = ExtResource( 1 )
 text = "Unlock weapons"
 
 [node name="2" type="Label" parent="DebugContainer/Contents/Entries/Options"]
-visible = false
 margin_top = 40.0
 margin_right = 92.0
 margin_bottom = 52.0
 custom_fonts/font = ExtResource( 1 )
-text = "Remove object"
+text = "Kill Megaship"
 
 [node name="3" type="Label" parent="DebugContainer/Contents/Entries/Options"]
 visible = false
@@ -99,7 +99,7 @@ text = "Set variables"
 
 [node name="HSeparator" type="HSeparator" parent="DebugContainer/Contents/Entries"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 40.0
+margin_top = 60.0
 margin_right = 92.0
 margin_bottom = 166.0
 size_flags_vertical = 3

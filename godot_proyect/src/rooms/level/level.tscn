@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/characters/enemies/asteroid/asteroid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
@@ -19,8 +19,6 @@
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/music_looper.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/pickups/upgrades/max_ammo/max_ammo_upgrade.tscn" type="PackedScene" id=20]
-[ext_resource path="res://src/pickups/upgrades/max_hp/max_hp_upgrade.tscn" type="PackedScene" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -174,18 +172,6 @@ _path_to_follow = NodePath("../Megaship")
 
 [node name="TellySpawner" parent="GameLayer" instance=ExtResource( 14 )]
 position = Vector2( 174.715, 67.5466 )
-
-[node name="MaxAmmoUpgrade" parent="GameLayer" instance=ExtResource( 20 )]
-position = Vector2( -63.2322, 33.2079 )
-
-[node name="MaxAmmoUpgrade2" parent="GameLayer" instance=ExtResource( 20 )]
-position = Vector2( -29.9081, 71.7085 )
-
-[node name="MaxHpUpgrade" parent="GameLayer" instance=ExtResource( 21 )]
-position = Vector2( -49.9673, -16.94 )
-
-[node name="MaxHpUpgrade2" parent="GameLayer" instance=ExtResource( 21 )]
-position = Vector2( -7.2607, -48.3228 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 to_follow = NodePath("../GameLayer/Camera")

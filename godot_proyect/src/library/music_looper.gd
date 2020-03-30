@@ -18,8 +18,10 @@ func _ready() -> void:
 		call_deferred("play")
 
 func _on_MusicIntro_finished() -> void:
-	emit_signal("intro_finished")
-	play_loop()
+	# Only play loop if the intro has finished.
+	if intro_node.get_playback_position() >= intro_node.stream.get_length():
+		emit_signal("intro_finished")
+		play_loop()
 
 func set_playing(value: bool):
 	if value:

@@ -11,7 +11,7 @@ export(SpriteFrames) var warning_palettes
 var warning_material = preload("res://resources/palette_swap_material.tres").duplicate()
 var warning_texture
 
-onready var CENTER_TEXT = $"/root/Space/UILayer/HUD/CenterContainer/CenterText"
+#onready var CENTER_TEXT = $"/root/Space/UILayer/HUD/CenterContainer/CenterText"
 
 # Zone where enemies spawn.
 const AREA_SIZE = Vector2(640, 360)
@@ -92,7 +92,7 @@ func new_random_horde(area_limits = AREA_LIMITS, total_enemies_range = TOTAL_ENE
 #########################
 
 func create_warning(center : Vector2) -> void:
-	CENTER_TEXT.set_animation("warning", 3)
+	#CENTER_TEXT.set_animation("warning", 3)
 	warning = WARNING.new()
 	warning.init(warning_texture, center, null, Vector2(), global.MEGASHIP)
 	warning.material = warning_material
