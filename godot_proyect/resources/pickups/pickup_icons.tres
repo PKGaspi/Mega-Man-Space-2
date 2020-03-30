@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=16 format=2]
+[gd_resource type="SpriteFrames" load_steps=17 format=2]
 
 [ext_resource path="res://assets/sprites/characters/pickups/heal/heal_small_mask_0.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/characters/pickups/heal/heal_small_mask_1.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/sprites/characters/pickups/upgrades/icons/upgrade_icon_speed.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/characters/pickups/upgrades/icons/upgrade_icon_cannons.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/characters/pickups/upgrades/icons/upgrade_icon_bullets.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/characters/pickups/upgrades/icons/upgrade_icons_masks_3.png" type="Texture" id=16]
 
 [resource]
 animations = [ {
@@ -41,6 +42,11 @@ animations = [ {
 "frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "max_speed",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "max_ammo",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
