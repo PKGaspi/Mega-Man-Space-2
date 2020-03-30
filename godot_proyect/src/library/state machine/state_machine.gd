@@ -18,6 +18,10 @@ func _ready() -> void:
 	state.enter(initial_msg)
 
 
+func restart() -> void:
+	transition_to(initial_state, initial_msg)
+
+
 func _input(event: InputEvent) -> void:
 	if is_instance_valid(state):
 		state.input(event)

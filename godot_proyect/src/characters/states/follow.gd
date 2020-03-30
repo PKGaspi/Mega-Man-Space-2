@@ -1,7 +1,6 @@
 extends MoveableState
 
 var to_follow: Vector2
-var distance: float
 
 
 func enter(msg: Dictionary = {}) -> void:

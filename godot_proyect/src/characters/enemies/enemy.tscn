@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/enemies/enemy.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/characters/states/follow_megaship.gd" type="Script" id=8]
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=9]
 [ext_resource path="res://src/characters/states/roam.gd" type="Script" id=10]
+[ext_resource path="res://src/characters/enemies/telly_spawner/iddle.gd" type="Script" id=11]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 6 )
@@ -48,6 +49,9 @@ drops = SubResource( 2 )
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="0"]
 
+[node name="StateMachine" parent="." index="1"]
+initial_state = NodePath("Move/Follow/Megaship")
+
 [node name="Follow" type="Node" parent="StateMachine/Move" index="0"]
 script = ExtResource( 4 )
 
@@ -56,6 +60,9 @@ script = ExtResource( 8 )
 
 [node name="Roam" type="Node" parent="StateMachine/Move/Follow" index="1"]
 script = ExtResource( 10 )
+
+[node name="Iddle" parent="StateMachine" index="1"]
+script = ExtResource( 11 )
 
 [node name="SndHit" parent="." index="2"]
 stream = ExtResource( 5 )

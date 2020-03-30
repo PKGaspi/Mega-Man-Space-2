@@ -35,7 +35,7 @@ func roam() -> void:
 				"center": character.global_position,
 				"radious": 100,
 			}
-			_state_machine.transition_to("Move/Follow/Roam", msg)
+			_state_machine.transition_to("Iddle", msg)
 
 
 func _on_megaship_tree_exited() -> void:

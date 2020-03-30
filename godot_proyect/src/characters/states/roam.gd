@@ -5,7 +5,7 @@ var center: Vector2
 var radious: float
 
 var distance: float
-var time_to_change := 1
+var time_to_change := 10
 var timer_to_change: Timer
 
 var view_distance: float
@@ -22,10 +22,11 @@ func _ready() -> void:
 	
 	# Timer to change roaming point every few seconds.
 	timer_to_change = Timer.new()
-	add_child(timer_to_change)
+	timer_to_change.name = "TimetToChange"
 	timer_to_change.wait_time = time_to_change
 	timer_to_change.start()
 	timer_to_change.connect("timeout", self, "roam_random_point")
+	add_child(timer_to_change)
 	
 	megaship = global.MEGASHIP
 

@@ -30,16 +30,9 @@ position = Vector2( 0.5, 0 )
 z_index = -1
 shape = ExtResource( 12 )
 
-[node name="StateMachine" parent="." index="1"]
-initial_state = NodePath("Move/Follow/Roam")
-initial_msg = {
-"center": Vector2( 10, 10 ),
-"radious": 200.0
-}
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="3"]
 z_index = -1
 frames = SubResource( 1 )
 animation = "rotating"
-frame = 5
+frame = 1
 playing = true
