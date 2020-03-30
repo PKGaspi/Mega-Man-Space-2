@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/pickups/pickup.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=2]
@@ -10,9 +10,8 @@
 [ext_resource path="res://src/pickups/states/move.gd" type="Script" id=8]
 [ext_resource path="res://src/pickups/states/random_direction.gd" type="Script" id=9]
 [ext_resource path="res://src/stats/pickup_stats.gd" type="Script" id=10]
-[ext_resource path="res://assets/sprites/characters/pickups/ammo/ammo_mask_0.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/characters/pickups/ammo/ammo_mask_1.png" type="Texture" id=11]
 [ext_resource path="res://src/characters/states/follow.gd" type="Script" id=12]
-[ext_resource path="res://src/characters/states/follow_megaship.gd" type="Script" id=13]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 10 )
@@ -65,6 +64,7 @@ stats = SubResource( 1 )
 material = SubResource( 3 )
 frames = ExtResource( 6 )
 animation = "ammo"
+frame = 1
 playing = true
 script = ExtResource( 5 )
 palettes = ExtResource( 3 )
@@ -83,9 +83,6 @@ script = ExtResource( 9 )
 
 [node name="Follow" type="Node" parent="StateMachine/Move"]
 script = ExtResource( 12 )
-
-[node name="Megaship" type="Node" parent="StateMachine/Move/Follow"]
-script = ExtResource( 13 )
 
 [node name="Iddle" type="Node" parent="StateMachine"]
 script = ExtResource( 7 )

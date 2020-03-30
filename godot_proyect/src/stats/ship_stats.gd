@@ -10,6 +10,8 @@ export var acceleration_ratio: float = 7.0/4.0
 export var collision_damage: float = 4.0
 # Time until the ship can take damage again.
 export var invencibility_time: float = .5
+# Distance at which this ships sees other ships.
+export var view_distance: float = 300.0
 
 # Value to multiply damage by. Higher is weaker.
 export(Dictionary) var weaknesses = { 

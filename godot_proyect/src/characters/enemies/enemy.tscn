@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/enemies/enemy.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/characters/states/follow_megaship.gd" type="Script" id=8]
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=9]
+[ext_resource path="res://src/characters/states/roam.gd" type="Script" id=10]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 6 )
@@ -17,6 +18,7 @@ max_speed = 260.0
 acceleration_ratio = 1.75
 collision_damage = 4.0
 invencibility_time = 0.5
+view_distance = 300.0
 weaknesses = {
 0: 1,
 1: 1,
@@ -51,6 +53,9 @@ script = ExtResource( 4 )
 
 [node name="Megaship" type="Node" parent="StateMachine/Move/Follow" index="0"]
 script = ExtResource( 8 )
+
+[node name="Roam" type="Node" parent="StateMachine/Move/Follow" index="1"]
+script = ExtResource( 10 )
 
 [node name="SndHit" parent="." index="2"]
 stream = ExtResource( 5 )

@@ -1,7 +1,7 @@
 extends MoveableState
 
 var to_follow: Vector2
-
+var distance: float
 
 
 func enter(msg: Dictionary = {}) -> void:
@@ -17,4 +17,4 @@ func physics_process(delta: float) -> void:
 	
 	# Call the parent state's method to apply movement.
 	_parent.physics_process(delta)
-
+	
