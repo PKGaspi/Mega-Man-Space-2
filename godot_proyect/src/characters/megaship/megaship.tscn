@@ -115,6 +115,7 @@ death_instance = ExtResource( 3 )
 
 [node name="SprShip" type="AnimatedSprite" parent="." index="0"]
 material = SubResource( 2 )
+z_index = -1
 frames = ExtResource( 5 )
 animation = "iddle"
 script = ExtResource( 16 )

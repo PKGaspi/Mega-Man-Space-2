@@ -1,3 +1,4 @@
+class_name CharacterMoveState
 extends CharacterState
 
 # Stats.
@@ -33,7 +34,7 @@ func physics_process(delta):
 	character.move_and_slide(velocity)
 	
 	# Apply rotation.
-	if rotate_forwards:
+	if rotate_forwards and velocity.length() > 0:
 		character.global_rotation = velocity.rotated(PI/2).angle()
 
 
@@ -48,20 +49,21 @@ func get_collided_character() -> Character:
 
 
 func calculate_velocity(
-	move_direction: Vector2,
-	acceleration: float,
-	current_velocity: Vector2,
+	propulsion: Vector2,
 	delta: float
 ) -> Vector2:
 	
+	var current_velocity = velocity
+	var acceleration = acceleration_ratio * max_speed
+	
 	if invert_movement:
-		move_direction = -move_direction
+		propulsion = -propulsion
 	
 		
 	var new_velocity: Vector2 
-	if move_direction != Vector2.ZERO:
+	if propulsion != Vector2.ZERO:
 		# Accelerate.
-		new_velocity = current_velocity + move_direction * acceleration * delta
+		new_velocity = current_velocity + propulsion * acceleration * delta
 	else:
 		# Deaccelerate.
 		var to_substract = current_velocity.normalized() * (acceleration * 4 / 5) * delta
@@ -73,5 +75,4 @@ func calculate_velocity(
 			new_velocity = current_velocity - to_substract
 	
 	
-	current_velocity = new_velocity
 	return new_velocity

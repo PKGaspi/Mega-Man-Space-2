@@ -11,8 +11,7 @@ func enter(msg: Dictionary = {}) -> void:
 func physics_process(delta: float) -> void:
 	# Calculate movement.
 	var dir = moveable.global_position.direction_to(to_follow)
-	var acceleration = _parent.acceleration_ratio * _parent.max_speed
-	_parent.velocity = _parent.calculate_velocity(dir, acceleration, _parent.velocity, delta)
+	_parent.velocity = _parent.calculate_velocity(dir, delta)
 	
 	# Call the parent state's method to apply movement.
 	_parent.physics_process(delta)

@@ -1,7 +1,9 @@
 extends Node
 
 
+const SELECT_STAGE = "res://src/rooms/select stage/select_stage.tscn"
 const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
+
 
 
 ############
@@ -51,7 +53,6 @@ var music_loops = {
 }
 
 
-
 var lvl_id = 0 # This is set when selecting the level.
 
 
@@ -84,18 +85,21 @@ func _on_megaship_death() -> void:
 
 
 func _on_game_over_timer_timeout() -> void:
-	global.modify_stat("one_ups", -1)
-	if global.one_ups < 0:
+	if global.one_ups == 0:
 		print(":(")
 		global.game_over() # Resets lifes, e-tanks and points.
 		# TODO: Go to game over screen.
-	
-	# Reset level.
-	var inst = load(filename).instance()
-	inst.lvl_id = lvl_id
-	get_tree().current_scene = inst
-	get_tree().root.add_child(inst)
-	queue_free()
+		get_tree().change_scene(SELECT_STAGE)
+		
+	else:
+		
+		global.modify_stat("one_ups", -1)
+		# Reset level.
+		var inst = load(filename).instance()
+		inst.lvl_id = lvl_id
+		get_tree().current_scene = inst
+		get_tree().root.add_child(inst)
+		queue_free()
 
 
 func _on_global_user_pause(value) -> void:

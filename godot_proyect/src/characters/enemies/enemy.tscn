@@ -9,7 +9,7 @@
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/characters/states/follow_megaship.gd" type="Script" id=8]
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=9]
-[ext_resource path="res://src/characters/states/roam.gd" type="Script" id=10]
+[ext_resource path="res://src/characters/states/deaccelerate.gd" type="Script" id=10]
 [ext_resource path="res://src/characters/enemies/telly_spawner/iddle.gd" type="Script" id=11]
 
 [sub_resource type="Resource" id=1]
@@ -58,7 +58,7 @@ script = ExtResource( 4 )
 [node name="Megaship" type="Node" parent="StateMachine/Move/Follow" index="0"]
 script = ExtResource( 8 )
 
-[node name="Roam" type="Node" parent="StateMachine/Move/Follow" index="1"]
+[node name="Deaccelerate" type="Node" parent="StateMachine/Move" index="1"]
 script = ExtResource( 10 )
 
 [node name="Iddle" parent="StateMachine" index="1"]

@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/character.gd"
 }, {
+"base": "CharacterState",
+"class": "CharacterMoveState",
+"language": "GDScript",
+"path": "res://src/characters/states/move.gd"
+}, {
 "base": "State",
 "class": "CharacterState",
 "language": "GDScript",
@@ -63,6 +68,11 @@ _global_script_classes=[ {
 "class": "EnemyGenerator",
 "language": "GDScript",
 "path": "res://src/rooms/level/enemy_generator.gd"
+}, {
+"base": "CharacterState",
+"class": "EnemyState",
+"language": "GDScript",
+"path": "res://src/library/state machine/enemy_state.gd"
 }, {
 "base": "Control",
 "class": "Joystick",
@@ -186,11 +196,13 @@ _global_script_class_icons={
 "CannonSetup": "",
 "CannonState": "",
 "Character": "",
+"CharacterMoveState": "",
 "CharacterState": "",
 "ChargedWeaponState": "",
 "DirectionalSprite": "",
 "Enemy": "",
 "EnemyGenerator": "",
+"EnemyState": "",
 "Joystick": "",
 "Megaship": "",
 "MegashipCannons": "",

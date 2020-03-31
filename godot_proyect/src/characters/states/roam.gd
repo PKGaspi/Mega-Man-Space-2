@@ -24,7 +24,7 @@ func _ready() -> void:
 	timer_to_change = Timer.new()
 	timer_to_change.name = "TimetToChange"
 	timer_to_change.wait_time = time_to_change
-	timer_to_change.start()
+	timer_to_change.autostart = true
 	timer_to_change.connect("timeout", self, "roam_random_point")
 	add_child(timer_to_change)
 	

@@ -3,10 +3,11 @@ extends Character
 
 export var drops: Resource
 
-var collision_damage = 4
+var collision_damage
 
 
 func _ready() -> void:
+	collision_damage = stats.get_stat("collision_damage")
 	drops.initialize()
 
 

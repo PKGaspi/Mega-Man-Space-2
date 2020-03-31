@@ -9,7 +9,7 @@ max_speed = 50.0
 acceleration_ratio = 3.0
 collision_damage = 4.0
 invencibility_time = 0.4
-view_distance = 400.0
+view_distance = 9.22337e+18
 weaknesses = {
 0: 1,
 1: 1,

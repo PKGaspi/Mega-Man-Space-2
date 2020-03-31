@@ -34,5 +34,5 @@ shape = ExtResource( 12 )
 z_index = -1
 frames = SubResource( 1 )
 animation = "rotating"
-frame = 1
+frame = 6
 playing = true

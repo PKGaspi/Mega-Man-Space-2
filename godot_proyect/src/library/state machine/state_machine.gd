@@ -16,6 +16,7 @@ func _ready() -> void:
 	yield(owner, "ready")
 	assert(state != null)
 	state.enter(initial_msg)
+	
 
 
 func restart() -> void:
