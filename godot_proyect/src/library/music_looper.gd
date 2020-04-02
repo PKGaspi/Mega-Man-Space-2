@@ -17,6 +17,8 @@ func _ready() -> void:
 	# Setup nodes.
 	intro_node = AudioStreamPlayer.new()
 	loop_node = AudioStreamPlayer.new()
+	intro_node.name = "MscIntro"
+	loop_node.name = "MscLoop"
 	add_child(intro_node)
 	add_child(loop_node)
 	

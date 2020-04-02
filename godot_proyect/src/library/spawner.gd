@@ -15,12 +15,13 @@ var spawn_when_free : bool = false # If true, the spawner will spawn as soon as 
 
 
 func _ready() -> void:
+	# Setup timer.
 	_spawn_timer = Timer.new()
 	_spawn_timer.wait_time = time_between_spawns
+	_spawn_timer.name = "SpawnTimer"
 	add_child(_spawn_timer)
 	_spawn_timer.connect("timeout", self, "_on_spawn_timer_timeout")
 	_spawn_timer.start()
-	pass
 
 
 func spawn() -> void:
