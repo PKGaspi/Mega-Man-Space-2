@@ -13,5 +13,4 @@ func _process(delta: float) -> void:
 			rect_position = get_viewport().get_mouse_position() - size / 2
 		_:
 			visible = false
-		# TODO: Set position around the MEGASHIP. Maybe a pointing sprite like warnings?
-	pass
+			# TODO: Set position around the MEGASHIP. Maybe a pointing sprite like warnings?

@@ -1,65 +1,57 @@
+class_name PointingSprite
 extends Sprite
 
-var max_opacity = .9
-var min_opacity = .2
 
-var pointing_to : Vector2
-var to_owner : Node2D
-var pointing_from : Vector2
-var from_owner : Node2D
 
-var initial_distance
+export var _to_owner_path: NodePath
+onready var to_owner: CanvasItem = get_node(_from_owner_path)
+var pointing_to: Vector2
+export var _from_owner_path: NodePath
+onready var from_owner: CanvasItem = get_node(_from_owner_path)
+var pointing_from: Vector2
 
-var opacity_on_distance : bool = true
+export var radious : float = 70
 
-var radius : float = 70
+export(float, 0.0, 1.0, .05) var max_opacity := .9
+export(float, 0.0, 1.0, .05) var min_opacity := .2
+
+var initial_distance := 1.0
+
 
 func _ready() -> void:
-	pointing_from = start_position()
-	pointing_to = end_position()
-		
-	global_position = pointing_from + pointing_from.direction_to(pointing_to) * radius
-	
-	if to_owner != null:
-		to_owner.connect("tree_exiting", self, "_on_to_owner_tree_exiting")
-	if from_owner != null:
-		from_owner.connect("tree_exiting", self, "_on_from_owner_tree_exiting")
+	global_position = calculate_position()
 
-func _process(delta: float) -> void:
-	pointing_from = start_position()
-	pointing_to = end_position()
-		
-	global_position = pointing_from + pointing_from.direction_to(pointing_to) * radius
+
+
+func _physics_process(delta: float) -> void:
+	global_position = calculate_position()
 	var distance = pointing_from.distance_to(pointing_to)
 	initial_distance = max(initial_distance, distance)
 	modulate.a = clamp(distance / initial_distance, min_opacity, max_opacity)
 
-func init(texture, pointing_to, to_owner = null, pointing_from = Vector2(), from_owner = null):
-	self.texture = texture
-	self.pointing_to = pointing_to
-	self.to_owner = to_owner
-	self.pointing_from = pointing_from
-	self.from_owner = from_owner
-	initial_distance = start_position().distance_to(end_position())
 
-func _on_to_owner_tree_exiting():
-	to_owner = null
+func calculate_position() -> Vector2:
+	pointing_from = start_position()
+	pointing_to = end_position()
+		
+	return pointing_from + pointing_from.direction_to(pointing_to) * radious
 
-func _on_from_owner_tree_exiting():
-	from_owner = null
 
 func start_position() -> Vector2:
-	if from_owner != null:
+	if is_instance_valid(from_owner):
 		pointing_from =  from_owner.global_position
 	return pointing_from
-		
+
+
 func end_position() -> Vector2:
-	if to_owner != null:
+	if is_instance_valid(to_owner):
 		pointing_to = to_owner.global_position
 	return pointing_to
 
+
 func _on_pointing_to_enters_screen() -> void:
 	visible = false
-	
+
+
 func _on_pointing_to_exits_screen() -> void:
 	visible = true

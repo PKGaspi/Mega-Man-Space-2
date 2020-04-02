@@ -5,7 +5,7 @@ extends Node2D
 export(Array, PackedScene) var enemies = null
 onready var enemies_len = len(enemies)
 
-const WARNING = preload("res://src/library/pointing_sprite.gd")
+
 export(SpriteFrames) var warning_masks
 export(SpriteFrames) var warning_palettes
 var warning_material = preload("res://resources/palette_swap_material.tres").duplicate()
@@ -93,14 +93,17 @@ func new_random_horde(area_limits = AREA_LIMITS, total_enemies_range = TOTAL_ENE
 
 func create_warning(center : Vector2) -> void:
 	#CENTER_TEXT.set_animation("warning", 3)
-	warning = WARNING.new()
-	warning.init(warning_texture, center, null, Vector2(), global.MEGASHIP)
+	warning = PointingSprite.new()
+	#warning.init(warning_texture, center, null, Vector2(), global.MEGASHIP)
+	warning.texture = warning_texture
+	warning.pointing_to = center
 	warning.material = warning_material
 	visibility_notifier = VisibilityNotifier2D.new()
 	visibility_notifier. global_position = center
 	visibility_notifier.connect("screen_entered", warning, "_on_pointing_to_enters_screen")
 	visibility_notifier.connect("screen_exited", warning, "_on_pointing_to_exits_screen")
 	add_child(warning)
+	warning.from_owner = global.MEGASHIP
 	add_child(visibility_notifier)
 
 

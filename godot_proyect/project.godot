@@ -114,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/pickups/pickup.gd"
 }, {
+"base": "Sprite",
+"class": "PointingSprite",
+"language": "GDScript",
+"path": "res://src/library/pointing_sprite.gd"
+}, {
 "base": "AudioStreamPlayer2D",
 "class": "RandomPitchAudioStreamPlayer2D",
 "language": "GDScript",
@@ -221,6 +226,7 @@ _global_script_class_icons={
 "MoveableState": "",
 "MusicLooper": "",
 "Pickup": "",
+"PointingSprite": "",
 "RandomPitchAudioStreamPlayer2D": "",
 "RapidWeaponState": "",
 "Spawner": "",

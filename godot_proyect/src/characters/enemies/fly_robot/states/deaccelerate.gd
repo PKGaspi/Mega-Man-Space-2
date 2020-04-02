@@ -30,8 +30,6 @@ func physics_process(delta: float) -> void:
 	_parent.velocity = _parent.calculate_velocity(Vector2.ZERO, delta)
 	_parent.physics_process(delta)
 	
-	print(_move_node.velocity)
-	
 	spr_propeller.speed_scale = _move_node.velocity.length() / max_speed
 	
 	if _parent.velocity.length() == 0:
