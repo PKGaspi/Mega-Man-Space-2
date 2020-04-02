@@ -6,6 +6,7 @@ var stats
 
 var max_speed: float
 var acceleration_ratio: float
+var deacceleration_ratio: float
 
 export var invert_movement := false
 export var rotate_forwards := false
@@ -18,6 +19,7 @@ func _ready() -> void:
 	
 	max_speed = stats.get_stat("max_speed")
 	acceleration_ratio = stats.get_stat("acceleration_ratio")
+	deacceleration_ratio = stats.get_stat("deacceleration_ratio")
 
 
 func _on_stat_changed(stat_name: String, new_value: float) -> void:
@@ -55,6 +57,7 @@ func calculate_velocity(
 	
 	var current_velocity = velocity
 	var acceleration = acceleration_ratio * max_speed
+	var deacceleration = deacceleration_ratio * max_speed
 	
 	if invert_movement:
 		propulsion = -propulsion
@@ -66,7 +69,7 @@ func calculate_velocity(
 		new_velocity = current_velocity + propulsion * acceleration * delta
 	else:
 		# Deaccelerate.
-		var to_substract = current_velocity.normalized() * (acceleration * 4 / 5) * delta
+		var to_substract = current_velocity.normalized() * deacceleration * delta
 		if current_velocity.length() < to_substract.length():
 			# Stay in place if we are going the other way.
 			new_velocity = Vector2.ZERO

@@ -4,13 +4,13 @@
 
 [resource]
 script = ExtResource( 1 )
-max_hp = 5.0
-max_speed = 50.0
-acceleration_ratio = 3.0
-deacceleration_ratio = 0.8
-collision_damage = 4.0
-invencibility_time = 0.4
-view_distance = 9.22337e+18
+max_hp = 10.0
+max_speed = 400.0
+acceleration_ratio = 2.3
+deacceleration_ratio = 0.7
+collision_damage = 5.0
+invencibility_time = 0.65
+view_distance = 500.0
 weaknesses = {
 0: 1,
 1: 1,
@@ -22,5 +22,5 @@ weaknesses = {
 7: 1,
 8: 1
 }
-_cap_max_speed = Vector2( 0, 380 )
-_cap_max_hp = Vector2( 20, 36 )
+_cap_max_speed = Vector2( 200, 500 )
+_cap_max_hp = Vector2( 0, 36 )

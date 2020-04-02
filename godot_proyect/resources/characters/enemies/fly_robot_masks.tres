@@ -19,7 +19,7 @@ animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "propeller",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,

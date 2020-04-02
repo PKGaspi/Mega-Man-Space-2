@@ -6,6 +6,7 @@ export var max_hp: float = 28.0
 export var max_speed: float = 260
 # Multiplier to calculate acceleration from speed.
 export var acceleration_ratio: float = 7.0/4.0
+export var deacceleration_ratio: float = 4.0/5.0
 # Damage dealt when colliding with another Ship.
 export var collision_damage: float = 4.0
 # Time until the ship can take damage again.

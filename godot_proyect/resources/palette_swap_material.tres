@@ -1,6 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[sub_resource type="Shader" id=1]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_0.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
 //The palette used
@@ -28,5 +30,7 @@ void fragment() {
 
 [resource]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+resource_name = "PaletteMaterial"
+shader = SubResource( 4 )
 shader_param/palette_size = 8.0
+shader_param/mask = ExtResource( 1 )
