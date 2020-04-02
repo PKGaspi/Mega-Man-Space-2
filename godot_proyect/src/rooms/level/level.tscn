@@ -173,6 +173,9 @@ _path_to_follow = NodePath("../Megaship")
 [node name="FlyRobot" parent="GameLayer" instance=ExtResource( 13 )]
 position = Vector2( -122.965, 43.0766 )
 
+[node name="TellySpawner" parent="GameLayer" instance=ExtResource( 14 )]
+position = Vector2( 161.162, 142.455 )
+
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 to_follow = NodePath("../GameLayer/Camera")
 

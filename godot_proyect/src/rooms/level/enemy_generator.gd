@@ -5,7 +5,7 @@ extends Node2D
 export(Array, PackedScene) var enemies = null
 onready var enemies_len = len(enemies)
 
-const WARNING = preload("res://src/gui/pointing_sprite.gd")
+const WARNING = preload("res://src/library/pointing_sprite.gd")
 export(SpriteFrames) var warning_masks
 export(SpriteFrames) var warning_palettes
 var warning_material = preload("res://resources/palette_swap_material.tres").duplicate()

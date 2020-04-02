@@ -3,10 +3,10 @@
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/characters/enemies/telly/telly_spawner.png" type="Texture" id=3]
-[ext_resource path="res://src/library/spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_stats.tres" type="Resource" id=5]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_drops.tres" type="Resource" id=6]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_collision_shape.tres" type="Shape2D" id=7]
+[ext_resource path="res://src/library/spawner.gd" type="Script" id=8]
 
 [node name="TellySpawner" instance=ExtResource( 1 )]
 stats = ExtResource( 5 )
@@ -17,23 +17,27 @@ position = Vector2( -0.5, -1 )
 shape = ExtResource( 7 )
 one_way_collision_margin = 0.0
 
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
 [node name="Move" parent="StateMachine" index="0"]
 invert_movement = true
 rotate_forwards = true
 
-[node name="Sprite" type="Sprite" parent="." index="3"]
-texture = ExtResource( 3 )
-
-[node name="LeftSpawner" parent="." index="4" instance=ExtResource( 4 )]
+[node name="LeftSpawner" type="Position2D" parent="." index="4"]
 position = Vector2( -11, 24 )
+script = ExtResource( 8 )
 to_spawn = ExtResource( 2 )
-max_spawns = 3
+max_spawns = 2
+total_spawns = 5
 time_between_spawns = 5.0
 
-[node name="RightSpawner" parent="." index="5" instance=ExtResource( 4 )]
+[node name="RightSpawner" type="Position2D" parent="." index="5"]
 position = Vector2( 10, 24 )
+script = ExtResource( 8 )
 to_spawn = ExtResource( 2 )
-max_spawns = 3
+max_spawns = 2
+total_spawns = 5
 time_between_spawns = 5.0
 
 [node name="HPBar" parent="hud" index="0"]
