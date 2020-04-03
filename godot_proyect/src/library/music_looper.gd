@@ -19,6 +19,7 @@ func _ready() -> void:
 	loop_node = AudioStreamPlayer.new()
 	intro_node.name = "MscIntro"
 	loop_node.name = "MscLoop"
+	intro_node.connect("finished", self, "_on_intro_finished")
 	add_child(intro_node)
 	add_child(loop_node)
 	
@@ -29,7 +30,7 @@ func _ready() -> void:
 		call_deferred("play")
 
 
-func _on_MusicIntro_finished() -> void:
+func _on_intro_finished() -> void:
 	# Only play loop if the intro has finished.
 	if intro_node.get_playback_position() >= intro_node.stream.get_length():
 		emit_signal("intro_finished")
