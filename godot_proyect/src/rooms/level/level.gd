@@ -16,7 +16,6 @@ onready var game_over_timer = $GameOverTimer
 
 onready var game_layer = $GameLayer
 onready var megaship = game_layer.get_node("Megaship")
-onready var enemy_generator = game_layer.get_node("EnemyGenerator")
 
 onready var ui = $UILayer
 onready var hud = ui.get_node("HUD")
@@ -77,7 +76,7 @@ func _on_animation_finished(animation):
 	if animation == "ready":
 		global.unpause()
 		megaship.visible = true
-		enemy_generator.new_random_horde()
+		# TODO: Start enemy generation
 
 
 func _on_megaship_death() -> void:

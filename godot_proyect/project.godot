@@ -64,11 +64,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/characters/enemies/enemy.gd"
 }, {
-"base": "Node2D",
-"class": "EnemyGenerator",
-"language": "GDScript",
-"path": "res://src/rooms/level/enemy_generator.gd"
-}, {
 "base": "CharacterState",
 "class": "EnemyState",
 "language": "GDScript",
@@ -221,7 +216,6 @@ _global_script_class_icons={
 "ChargedWeaponState": "",
 "DirectionalSprite": "",
 "Enemy": "",
-"EnemyGenerator": "",
 "EnemyState": "",
 "EnemyWave": "",
 "Joystick": "",

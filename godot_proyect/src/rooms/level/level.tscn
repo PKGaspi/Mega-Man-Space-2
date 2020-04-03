@@ -1,10 +1,7 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://src/characters/enemies/asteroid/asteroid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
-[ext_resource path="res://resources/gui/warning_palettes.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://resources/gui/warning_masks.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=7]
 [ext_resource path="res://src/gui/aimer.gd" type="Script" id=8]
@@ -12,10 +9,7 @@
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
 [ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
-[ext_resource path="res://src/characters/enemies/fly_robot/fly_robot.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
-[ext_resource path="res://src/rooms/level/enemy_generator.gd" type="Script" id=16]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/music_looper.gd" type="Script" id=18]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
@@ -155,12 +149,6 @@ knockback_speed = 80.0
 
 [node name="Cannons" parent="GameLayer/Megaship" index="3"]
 _ammo_bar_path = NodePath("../../../UILayer/HUD/BarContainer/MegashipAmmoBar")
-
-[node name="EnemyGenerator" type="Node2D" parent="GameLayer"]
-script = ExtResource( 16 )
-enemies = [ ExtResource( 1 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ) ]
-warning_masks = ExtResource( 5 )
-warning_palettes = ExtResource( 4 )
 
 [node name="Camera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2
