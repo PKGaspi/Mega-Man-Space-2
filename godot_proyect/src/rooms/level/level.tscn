@@ -176,7 +176,7 @@ n_max_enemies_at_once = 5
 radious = 200.0
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
-to_follow = NodePath("../GameLayer/Camera")
+_to_follow_path = NodePath("../GameLayer/Camera")
 
 [node name="MusicLooper" type="Node" parent="."]
 script = ExtResource( 18 )

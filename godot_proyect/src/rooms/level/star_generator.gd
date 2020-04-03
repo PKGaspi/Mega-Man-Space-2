@@ -7,11 +7,10 @@ export(SpriteFrames) var star_palettes = null
 export(SpriteFrames) var planet_masks = null
 export(SpriteFrames) var planet_palettes = null
 
-var empty_star_texture
-var empty_planet_texture
 var material = preload("res://resources/palette_swap_material.tres")
 
-export(NodePath) var to_follow = null
+export var _to_follow_path: NodePath setget set_to_follow
+var to_follow: CanvasItem
 
 # Initialize runtime constants.
 onready var N_STAR_MASKS = star_masks.get_frame_count("default")
@@ -27,13 +26,13 @@ export(float) var MAX_MOTION_SCALE = 1
 # How many stars are generated.
 # Must be between 0.0 and 1.0
 export(float) var STAR_FREQUENCY = .3
-export(float) var PLANET_FREQUENCY = .01
+export(float) var PLANET_FREQUENCY = .008
 export(int) var MAX_PLANETS_PER_SECTOR = 1
 
 const SECTOR_SIZE_MULTIPLIER = .35
-onready var sector_size = get_viewport().get_size_override() * SECTOR_SIZE_MULTIPLIER # Sector size.
-onready var sector_rows = get_viewport().get_size_override().y / 27 # Number of sectors loaded at the same time on a row.
-onready var sector_columns = get_viewport().get_size_override().x / 48 # Number of sectors loaded at the same time on a column.
+onready var sector_size = get_viewport().size * SECTOR_SIZE_MULTIPLIER # Sector size.
+onready var sector_rows = get_viewport().size.y / 27 # Number of sectors loaded at the same time on a row.
+onready var sector_columns = get_viewport().size.x / 48 # Number of sectors loaded at the same time on a column.
 onready var stars_per_sector = 5 # Number of stars to attempt to generate per sector.
 
 var random # Base randomizer.
@@ -45,18 +44,18 @@ var materials = {}
 
 var prev_sector = null # Megaship last sector.
 
+
+
 func _ready():
 	# Create random generator.
 	random = global.init_random()
 	r_seed = random.seed
 	
-	# Create empty textures for stars and planets.
-	empty_star_texture = global.create_empty_image(star_masks.get_frame("default", 0).get_size())
-	empty_planet_texture = global.create_empty_image(planet_masks.get_frame("default", 0).get_size())
 	
 	# Create materials.
 	create_materials(star_masks, star_palettes)
 	create_materials(planet_masks, planet_palettes)
+	
 	
 	# Create parallax layers.
 	for i in range(N_LAYERS):
@@ -69,17 +68,17 @@ func _ready():
 		add_child(layer)
 		layers.append(layer)
 	
-	# Connect to_follow signal.
-	if to_follow != null:
-		get_node(to_follow).connect("tree_exiting", self, "_on_to_follow_tree_exiting")
+	
 	
 	# Connect Viewport size_changes signal.
 	get_viewport().connect("size_changed", self, "_on_viewport_size_changed")
-	$BackgroundColor.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+	
+	set_to_follow(_to_follow_path)
 
-func _process(delta):
-	if to_follow != null and get_node(to_follow) is Node2D:
-		var sector = pos_to_sector(get_node(to_follow).position)
+
+func _physics_process(delta: float) -> void:
+	if is_instance_valid(to_follow):
+		var sector = pos_to_sector(to_follow.global_position)
 		if prev_sector != sector:
 			prev_sector = sector
 			var active_sectors = Rect2(sector.x - sector_columns / 2, sector.y - sector_rows / 2, sector_columns, sector_columns)
@@ -91,23 +90,36 @@ func _process(delta):
 					var new_sector = Vector2(sector.x + i, sector.y + j)
 					if !stars.has(new_sector):
 						create_stars(new_sector)
-	
+
 
 func _on_to_follow_tree_exiting():
 	to_follow = null
 
+
 func _on_viewport_size_changed():
 	$BackgroundColor.set_anchors_and_margins_preset(Control.PRESET_WIDE)
-	sector_size = get_viewport().get_size_override() * SECTOR_SIZE_MULTIPLIER
+	
+	sector_rows = get_viewport().get_size_override().y / 27 
+	sector_columns = get_viewport().get_size_override().x / 48
+
+
 
 #########################
 ## Auxiliar functions. ##
 #########################
 
+func set_to_follow(path: NodePath) -> void:
+	_to_follow_path = path
+	if has_node(_to_follow_path):
+		to_follow = get_node(_to_follow_path)
+		
+
+
 func create_materials(masks : SpriteFrames, palettes : SpriteFrames) -> void:
 	for i in range(masks.get_frame_count("default")):
 		for j in range(palettes.get_frame_count("default")):
 			create_material(masks.get_frame("default", i), palettes.get_frame("default", j))
+
 
 func create_material(mask : Texture, palette : Texture) -> Material:
 	var new_material = material.duplicate()
@@ -116,23 +128,26 @@ func create_material(mask : Texture, palette : Texture) -> Material:
 	materials[[mask, palette]] = new_material
 	return new_material
 
+
 func pos_to_sector(pos):
 	# Vector2 pos: position to check if is on the sector.
 	var sector_x = int(pos.x / sector_size.x)
 	var sector_y = int(pos.y / sector_size.y)
 	return Vector2(sector_x, sector_y)
 
-func create_star(pos, layer, texture, mask, palette):
+
+func create_star(pos, layer, mask, palette):
 	# Vector2 pos: position of the star.
 	# int layer: layer index to place the star.
 	# String sprite: route of the texture of the star.
 	var star = Sprite.new()
-	star.texture = texture
+	star.texture = mask
 	star.z_index = layers[layer].z_index
 	star.position = pos * layers[layer].motion_scale
 	star.material = materials[[mask, palette]]
 	layers[layer].add_child(star)
 	return star
+
 
 func create_stars(sector):
 	# Calculate sector position (top left corner).
@@ -173,14 +188,13 @@ func create_stars(sector):
 				n_planets += 1
 				mask = planet_masks.get_frame("default", random.randi_range(0, N_PLANET_MASKS - 1))
 				palette = planet_palettes.get_frame("default", random.randi_range(0, N_PLANET_PALETTES - 1))
-				texture = empty_planet_texture
 			else:
 				mask = star_masks.get_frame("default", star_mask)
 				palette = star_palettes.get_frame("default", star_palette)
-				texture = empty_star_texture
 			
 			# Create the star.
-			stars[sector].append(create_star(Vector2(x, y), layer, texture, mask, palette))
+			stars[sector].append(create_star(Vector2(x, y), layer, mask, palette))
+
 
 func destroy_stars(sector):
 	# Calculate sector coordinates.
