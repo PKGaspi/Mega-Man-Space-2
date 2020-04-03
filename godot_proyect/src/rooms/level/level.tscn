@@ -166,12 +166,12 @@ script = ExtResource( 10 )
 _path_to_follow = NodePath("../Megaship")
 
 [node name="EnemyWave" type="Node2D" parent="GameLayer"]
-position = Vector2( -32.1772, 93.4805 )
+position = Vector2( 1.63708, 138.321 )
 script = ExtResource( 21 )
 enemies = SubResource( 4 )
-n_total_enemies = 8
+n_total_enemies = 100
 n_max_enemies_at_once = 3
-radious = 100.0
+radious = 200.0
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 to_follow = NodePath("../GameLayer/Camera")

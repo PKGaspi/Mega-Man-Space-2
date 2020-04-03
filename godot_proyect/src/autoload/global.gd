@@ -227,4 +227,3 @@ func fix_mouse_mode() -> void:
 	Input.set_mouse_mode(tmp)
 	# Input.call_deferred("set_mouse_mode", Input.get_mouse_mode())
 
-
