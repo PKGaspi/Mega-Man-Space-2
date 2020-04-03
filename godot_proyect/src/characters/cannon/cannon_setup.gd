@@ -15,7 +15,7 @@ func fire(power: int = 0) -> bool:
 			shooted = child.fire(power) or shooted # If any cannon shooted, return true and act as so.
 	if shooted:
 		# TODO: Consume ammo
-		global.play_audio_random_pitch(snd_shoot, Vector2(.98, 1.02)) # Play sound.
+		snd_shoot.play() # Play sound.
 	return shooted
 
 

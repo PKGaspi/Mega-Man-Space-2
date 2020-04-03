@@ -228,7 +228,3 @@ func fix_mouse_mode() -> void:
 	# Input.call_deferred("set_mouse_mode", Input.get_mouse_mode())
 
 
-func play_audio_random_pitch(snd, interval) -> void:
-	if snd != null and snd.has_method("play"):
-		snd.play(0)
-		snd.pitch_scale = random.randf_range(interval.x, interval.y)
