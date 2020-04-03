@@ -48,3 +48,7 @@ func register_enemy(enemy: Node) -> void:
 
 func register_pickup(pickup: Node) -> void:
 	_pickups.call_deferred("add_child", pickup)
+
+
+func get_n_enemies() -> int:
+	return _enemies.get_child_count()

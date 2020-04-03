@@ -9,9 +9,12 @@ var velocity: Vector2
 
 var spr_ship
 
+
+
 func _ready() -> void:
 	yield(owner, "ready")
 	spr_ship = character.spr_ship
+
 
 func enter(msg: Dictionary = {}) -> void:
 	# Set animation.
@@ -30,24 +33,26 @@ func enter(msg: Dictionary = {}) -> void:
 	else:
 		final_position = current_position
 	
-	var dir = init_position.direction_to(final_position)
-	velocity = dir * teleport_speed
-	character.global_rotation = dir.angle()
+
 
 
 func physics_process(delta: float) -> void:
+	# Move.
+	var dir = init_position.direction_to(final_position)
+	velocity = dir * teleport_speed
+	character.global_rotation = dir.angle()
 	# Check if we have reached the final_position.
 	# Check how far we are to final_position.
 	var current_position = character.global_position
 	var distance = current_position.distance_to(final_position)
 	if distance < velocity.length() * delta:
-		# This is the last movement.
-		# TODO: play teleport end animation.
+		# Target reached.
 		_state_machine.transition_to("TeleportEnd")
 	else:
 		# Move towards the final_position.
 		_parent.velocity = velocity
 		_parent.physics_process(delta)
+
 
 func exit() -> void:
 	character.global_position = final_position

@@ -18,11 +18,18 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Spawn new enemies if possible.
 	while n_enemies < n_max_enemies_at_once and n_total_enemies > 0:
-		random_spawn()
+		random_enemy_spawn()
+	
+	# Check if the wave is defeated.
+	if n_total_enemies <= 0 and ObjectRegistry.get_n_enemies() == 0:
+		print("muy bien")
+		emit_signal("completed")
+		queue_free()
 
 
-func random_spawn() -> void:
+func random_enemy_spawn() -> void:
 	var enemy = enemies.get_random_item()
 	
 	# TODO: Avoid spawning enemies on-screen.
@@ -31,7 +38,6 @@ func random_spawn() -> void:
 	var pos = global_position + Vector2(x, y)
 	
 	enemy_spawn(enemy, pos)
-	
 
 
 func enemy_spawn(enemy: PackedScene, pos: Vector2) -> void:
@@ -42,13 +48,7 @@ func enemy_spawn(enemy: PackedScene, pos: Vector2) -> void:
 	n_total_enemies -= 1
 	n_enemies += 1
 	ObjectRegistry.register_node(inst)
-	
 
 
 func _on_enemy_tree_exited() -> void:
 	n_enemies -= 1
-	
-	# Check if the wave is defeated.
-	if n_total_enemies <= 0 and ObjectRegistry._enemies.get_child_count() == 0:
-		emit_signal("completed")
-		queue_free()

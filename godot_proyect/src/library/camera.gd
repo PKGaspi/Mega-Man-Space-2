@@ -4,9 +4,12 @@ export var _path_to_follow: NodePath setget set_to_follow
 var _node_to_follow: Node2D
 var _current_transform: RemoteTransform2D
 
+
+
 func _ready() -> void:
 	yield(owner,"ready")
 	set_to_follow(_path_to_follow)
+
 
 func set_to_follow(value: NodePath) -> void:
 	_path_to_follow = value
@@ -22,3 +25,7 @@ func set_to_follow(value: NodePath) -> void:
 		_current_transform.name = "CameraTransform"
 		_current_transform.remote_path = get_path()
 		_node_to_follow.add_child(_current_transform)
+
+
+func get_visible_area() -> Rect2:
+	return Rect2(global_position, get_viewport().size)
