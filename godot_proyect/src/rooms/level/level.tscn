@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
@@ -9,6 +9,8 @@
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
 [ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
+[ext_resource path="res://src/characters/enemies/fly_robot/fly_robot.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/music_looper.gd" type="Script" id=18]
@@ -55,8 +57,8 @@ shader_param/mask = ExtResource( 12 )
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 20 )
-items = [ ExtResource( 11 ) ]
-weights = [ 1 ]
+items = [ ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ) ]
+weights = [ 6, 2, 1 ]
 
 [node name="Space" type="Node"]
 pause_mode = 2
@@ -169,8 +171,8 @@ _path_to_follow = NodePath("../Megaship")
 position = Vector2( 1.63708, 138.321 )
 script = ExtResource( 21 )
 enemies = SubResource( 4 )
-n_total_enemies = 100
-n_max_enemies_at_once = 3
+n_total_enemies = 20
+n_max_enemies_at_once = 5
 radious = 200.0
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
