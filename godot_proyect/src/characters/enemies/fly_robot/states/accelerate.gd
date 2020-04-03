@@ -24,7 +24,6 @@ func _ready() -> void:
 	tween = Tween.new()
 	tween.name = "Tween"
 	add_child(tween)
-	tween.connect("tween_completed", self, "_on_tween_completed")
 
 
 func enter(msg: Dictionary = {}) -> void:
@@ -36,6 +35,7 @@ func enter(msg: Dictionary = {}) -> void:
 	_move_node.max_speed = 0
 	tween.interpolate_property(_move_node, "max_speed", 0, max_speed, 3, Tween.TRANS_LINEAR, Tween.EASE_IN, .2)
 	tween.start()
+	tween.connect("tween_completed", self, "_on_tween_completed")
 
 
 func physics_process(delta: float) -> void:
@@ -46,4 +46,5 @@ func physics_process(delta: float) -> void:
 
 func _on_tween_completed(object, key) -> void:
 	if object == _move_node:
+		tween.disconnect("tween_completed", self, "_on_tween_completed")
 		_state_machine.transition_to("Move/Deaccelerate")
