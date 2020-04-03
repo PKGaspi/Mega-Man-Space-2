@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/state machine/enemy_state.gd"
 }, {
+"base": "Node2D",
+"class": "EnemyWave",
+"language": "GDScript",
+"path": "res://src/library/enemy_wave.gd"
+}, {
 "base": "Control",
 "class": "Joystick",
 "language": "GDScript",
@@ -218,6 +223,7 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyGenerator": "",
 "EnemyState": "",
+"EnemyWave": "",
 "Joystick": "",
 "Megaship": "",
 "MegashipCannons": "",

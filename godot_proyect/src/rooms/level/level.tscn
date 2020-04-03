@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/characters/enemies/asteroid/asteroid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/music_looper.gd" type="Script" id=18]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=20]
+[ext_resource path="res://src/library/enemy_wave.gd" type="Script" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -56,6 +58,11 @@ shader = SubResource( 2 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 3 )
 shader_param/mask = ExtResource( 12 )
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 20 )
+items = [ ExtResource( 11 ) ]
+weights = [ 1 ]
 
 [node name="Space" type="Node"]
 pause_mode = 2
@@ -170,11 +177,13 @@ editor_draw_drag_margin = true
 script = ExtResource( 10 )
 _path_to_follow = NodePath("../Megaship")
 
-[node name="FlyRobot" parent="GameLayer" instance=ExtResource( 13 )]
-position = Vector2( -122.965, 43.0766 )
-
-[node name="TellySpawner" parent="GameLayer" instance=ExtResource( 14 )]
-position = Vector2( 161.162, 142.455 )
+[node name="EnemyWave" type="Node2D" parent="GameLayer"]
+position = Vector2( -32.1772, 93.4805 )
+script = ExtResource( 21 )
+enemies = SubResource( 4 )
+n_total_enemies = 8
+n_max_enemies_at_once = 3
+radious = 100.0
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 to_follow = NodePath("../GameLayer/Camera")
