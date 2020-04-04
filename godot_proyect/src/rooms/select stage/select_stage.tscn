@@ -6,8 +6,9 @@
 [ext_resource path="res://src/gui/menus/select stage menu/select_stage_menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/music/select_stage_intro.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/music/select_stage_loop.ogg" type="AudioStream" id=6]
-[ext_resource path="res://src/library/music_looper.gd" type="Script" id=7]
+[ext_resource path="res://src/library/audio/music_looper.gd" type="Script" id=7]
 [ext_resource path="res://src/rooms/select stage/select_stage.gd" type="Script" id=8]
+
 
 [node name="SelectStage" type="Control"]
 anchor_right = 1.0

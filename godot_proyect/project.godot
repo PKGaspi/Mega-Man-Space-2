@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "AnimatedSprite",
 "class": "AnimatedPaletteSprite",
 "language": "GDScript",
-"path": "res://src/library/animated_palette_sprite.gd"
+"path": "res://src/library/sprites/animated_palette_sprite.gd"
 }, {
 "base": "MoveableArea2D",
 "class": "Bullet",
@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "AnimatedPaletteSprite",
 "class": "DirectionalSprite",
 "language": "GDScript",
-"path": "res://src/library/directional_sprite.gd"
+"path": "res://src/library/sprites/directional_sprite.gd"
 }, {
 "base": "Character",
 "class": "Enemy",
@@ -69,10 +69,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/state machine/enemy_state.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "EnemyWave",
 "language": "GDScript",
-"path": "res://src/library/enemy_wave.gd"
+"path": "res://src/library/enemy_waves/enemy_wave.gd"
+}, {
+"base": "Reference",
+"class": "EnemyWaveData",
+"language": "GDScript",
+"path": "res://src/library/enemy_waves/enemy_wave_data.gd"
 }, {
 "base": "Control",
 "class": "Joystick",
@@ -104,35 +109,35 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/state machine/moveable_state.gd"
 }, {
-"base": "Node",
+"base": "Reference",
 "class": "MusicLooper",
 "language": "GDScript",
-"path": "res://src/library/music_looper.gd"
+"path": "res://src/library/audio/music_looper.gd"
 }, {
 "base": "MoveableArea2D",
 "class": "Pickup",
 "language": "GDScript",
 "path": "res://src/pickups/pickup.gd"
 }, {
-"base": "Sprite",
+"base": "Reference",
 "class": "PointingSprite",
 "language": "GDScript",
-"path": "res://src/library/pointing_sprite.gd"
+"path": "res://src/library/sprites/pointing_sprite.gd"
 }, {
-"base": "AudioStreamPlayer2D",
+"base": "Reference",
 "class": "RandomPitchAudioStreamPlayer2D",
 "language": "GDScript",
-"path": "res://src/library/random_pitch_audio_stream_player_2D.gd"
+"path": "res://src/library/audio/random_pitch_audio_stream_player_2D.gd"
 }, {
 "base": "WeaponState",
 "class": "RapidWeaponState",
 "language": "GDScript",
 "path": "res://src/library/state machine/rapid_weapon_state.gd"
 }, {
-"base": "Position2D",
+"base": "Reference",
 "class": "Spawner",
 "language": "GDScript",
-"path": "res://src/library/spawner.gd"
+"path": "res://src/library/enemy_waves/spawner.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -218,6 +223,7 @@ _global_script_class_icons={
 "Enemy": "",
 "EnemyState": "",
 "EnemyWave": "",
+"EnemyWaveData": "",
 "Joystick": "",
 "Megaship": "",
 "MegashipCannons": "",

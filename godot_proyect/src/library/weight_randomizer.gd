@@ -22,6 +22,7 @@ func calculate_total_weight() -> void:
 	for weight in weights:
 		total_weight += weight
 
+
 # This returns a variant.
 func get_random_item():
 	# This assumes that total_weight is correctly cached.

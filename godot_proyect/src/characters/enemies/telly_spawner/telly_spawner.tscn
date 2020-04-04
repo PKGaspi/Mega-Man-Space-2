@@ -6,7 +6,8 @@
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_stats.tres" type="Resource" id=5]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_drops.tres" type="Resource" id=6]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner_collision_shape.tres" type="Shape2D" id=7]
-[ext_resource path="res://src/library/spawner.gd" type="Script" id=8]
+[ext_resource path="res://src/library/enemy_waves/spawner.gd" type="Script" id=8]
+
 
 [node name="TellySpawner" instance=ExtResource( 1 )]
 stats = ExtResource( 5 )

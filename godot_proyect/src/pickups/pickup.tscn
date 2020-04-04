@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=2]
 [ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=4]
-[ext_resource path="res://src/library/animated_palette_sprite.gd" type="Script" id=5]
+[ext_resource path="res://src/library/sprites/animated_palette_sprite.gd" type="Script" id=5]
 [ext_resource path="res://resources/pickups/pickup_icons.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://src/library/state machine/state.gd" type="Script" id=7]
 [ext_resource path="res://src/pickups/states/move.gd" type="Script" id=8]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/stats/pickup_stats.gd" type="Script" id=10]
 [ext_resource path="res://assets/sprites/characters/pickups/ammo/ammo_mask_1.png" type="Texture" id=11]
 [ext_resource path="res://src/characters/states/follow.gd" type="Script" id=12]
+
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 10 )

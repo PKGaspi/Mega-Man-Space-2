@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
+[ext_resource path="res://src/library/enemy_waves/enemy_wave_data.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
@@ -13,10 +14,10 @@
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
-[ext_resource path="res://src/library/music_looper.gd" type="Script" id=18]
+[ext_resource path="res://src/library/audio/music_looper.gd" type="Script" id=18]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=20]
-[ext_resource path="res://src/library/enemy_wave.gd" type="Script" id=21]
+[ext_resource path="res://src/library/enemy_waves/enemy_wave.gd" type="Script" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -58,7 +59,15 @@ shader_param/mask = ExtResource( 12 )
 [sub_resource type="Resource" id=4]
 script = ExtResource( 20 )
 items = [ ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ) ]
-weights = [ 6, 2, 1 ]
+weights = [ 10, 3, 1 ]
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 1 )
+enemies = SubResource( 4 )
+n_total_enemies = 20
+n_max_enemies_at_once = 4
+center = Vector2( 20, 20 )
+radious = 200.0
 
 [node name="Space" type="Node"]
 pause_mode = 2
@@ -170,10 +179,7 @@ _path_to_follow = NodePath("../Megaship")
 [node name="EnemyWave" type="Node2D" parent="GameLayer"]
 position = Vector2( 1.63708, 138.321 )
 script = ExtResource( 21 )
-enemies = SubResource( 4 )
-n_total_enemies = 20
-n_max_enemies_at_once = 5
-radious = 200.0
+wave_data = SubResource( 5 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 _to_follow_path = NodePath("../GameLayer/Camera")

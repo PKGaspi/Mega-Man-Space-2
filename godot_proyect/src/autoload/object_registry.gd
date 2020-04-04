@@ -6,6 +6,8 @@ onready var _pickups:= $Pickups
 
 var current_scene: Node
 
+signal enemy_registered(enemy)
+
 func _ready() -> void:
 	current_scene = get_tree().current_scene
 	global.connect("user_paused", self, "_on_user_paused")
@@ -44,6 +46,7 @@ func register_projectile(projectile: Node) -> void:
 
 func register_enemy(enemy: Node) -> void:
 	_enemies.call_deferred("add_child", enemy)
+	emit_signal("enemy_registered", enemy)
 
 
 func register_pickup(pickup: Node) -> void:

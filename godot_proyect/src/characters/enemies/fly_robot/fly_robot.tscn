@@ -4,12 +4,13 @@
 [ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_body_mask_2.png" type="Texture" id=2]
 [ext_resource path="res://resources/characters/enemies/fly_robot_masks.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_3.png" type="Texture" id=4]
-[ext_resource path="res://src/library/animated_palette_sprite.gd" type="Script" id=11]
+[ext_resource path="res://src/library/sprites/animated_palette_sprite.gd" type="Script" id=11]
 [ext_resource path="res://resources/characters/enemies/enemy_palettes.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://assets/sprites/characters/enemies/palettes/enemy_palette_0.png" type="Texture" id=13]
 [ext_resource path="res://src/characters/enemies/fly_robot/fly_robot_stats.tres" type="Resource" id=14]
 [ext_resource path="res://src/characters/enemies/fly_robot/states/accelerate.gd" type="Script" id=15]
 [ext_resource path="res://src/characters/enemies/fly_robot/states/deaccelerate.gd" type="Script" id=16]
+
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
