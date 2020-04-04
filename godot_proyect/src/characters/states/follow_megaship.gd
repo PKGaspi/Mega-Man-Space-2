@@ -1,16 +1,5 @@
 extends EnemyState
 
-var view_distance: float
-
-
-func _ready() -> void:
-	yield(owner,"ready")
-	
-	var stats = character.stats
-	stats.initialize()
-	
-	view_distance = stats.get_stat("view_distance")
-	
 
 func physics_process(delta: float) -> void:
 	# Move.

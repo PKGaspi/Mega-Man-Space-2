@@ -1,9 +1,4 @@
-extends CharacterState
-
-
-var view_distance: float
-var megaship: Megaship
-
+extends EnemyState
 
 
 func _ready() -> void:

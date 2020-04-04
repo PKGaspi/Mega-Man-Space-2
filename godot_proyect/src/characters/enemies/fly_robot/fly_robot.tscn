@@ -1,16 +1,15 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_body_mask_2.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_2.png" type="Texture" id=2]
 [ext_resource path="res://resources/characters/enemies/fly_robot_masks.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_3.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_body_mask_0.png" type="Texture" id=4]
 [ext_resource path="res://src/library/sprites/animated_palette_sprite.gd" type="Script" id=11]
 [ext_resource path="res://resources/characters/enemies/enemy_palettes.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://assets/sprites/characters/enemies/palettes/enemy_palette_0.png" type="Texture" id=13]
 [ext_resource path="res://src/characters/enemies/fly_robot/fly_robot_stats.tres" type="Resource" id=14]
 [ext_resource path="res://src/characters/enemies/fly_robot/states/accelerate.gd" type="Script" id=15]
 [ext_resource path="res://src/characters/enemies/fly_robot/states/deaccelerate.gd" type="Script" id=16]
-
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -44,7 +43,7 @@ resource_name = "PaletteMaterial"
 shader = SubResource( 1 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 13 )
-shader_param/mask = ExtResource( 2 )
+shader_param/mask = ExtResource( 4 )
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -78,7 +77,7 @@ resource_name = "PaletteMaterial"
 shader = SubResource( 3 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 13 )
-shader_param/mask = ExtResource( 4 )
+shader_param/mask = ExtResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10.5, 18 )
@@ -90,7 +89,6 @@ stats = ExtResource( 14 )
 material = SubResource( 2 )
 frames = ExtResource( 3 )
 animation = "body_charging"
-frame = 1
 playing = true
 script = ExtResource( 11 )
 palettes = ExtResource( 12 )
@@ -99,7 +97,7 @@ palettes = ExtResource( 12 )
 material = SubResource( 4 )
 frames = ExtResource( 3 )
 animation = "propeller"
-frame = 3
+frame = 2
 playing = true
 script = ExtResource( 11 )
 palettes = ExtResource( 12 )

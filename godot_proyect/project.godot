@@ -69,12 +69,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/state machine/enemy_state.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "EnemyWave",
 "language": "GDScript",
 "path": "res://src/library/enemy_waves/enemy_wave.gd"
 }, {
-"base": "Reference",
+"base": "Resource",
 "class": "EnemyWaveData",
 "language": "GDScript",
 "path": "res://src/library/enemy_waves/enemy_wave_data.gd"
@@ -109,7 +109,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/state machine/moveable_state.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "MusicLooper",
 "language": "GDScript",
 "path": "res://src/library/audio/music_looper.gd"
@@ -119,12 +119,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/pickups/pickup.gd"
 }, {
-"base": "Reference",
+"base": "Sprite",
 "class": "PointingSprite",
 "language": "GDScript",
 "path": "res://src/library/sprites/pointing_sprite.gd"
 }, {
-"base": "Reference",
+"base": "AudioStreamPlayer2D",
 "class": "RandomPitchAudioStreamPlayer2D",
 "language": "GDScript",
 "path": "res://src/library/audio/random_pitch_audio_stream_player_2D.gd"
@@ -134,7 +134,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/state machine/rapid_weapon_state.gd"
 }, {
-"base": "Reference",
+"base": "Position2D",
 "class": "Spawner",
 "language": "GDScript",
 "path": "res://src/library/enemy_waves/spawner.gd"

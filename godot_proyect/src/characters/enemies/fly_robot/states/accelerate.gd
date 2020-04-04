@@ -5,7 +5,6 @@ var spr_propeller: AnimatedPaletteSprite
 
 var _move_node_path: NodePath = "Move"
 onready var _move_node := _state_machine.get_node(_move_node_path)
-onready var max_speed: float
 
 var tween: Tween
 
@@ -46,5 +45,8 @@ func physics_process(delta: float) -> void:
 
 func _on_tween_completed(object, key) -> void:
 	if object == _move_node:
-		tween.disconnect("tween_completed", self, "_on_tween_completed")
 		_state_machine.transition_to("Move/Deaccelerate")
+
+
+func exit() -> void:
+	tween.disconnect("tween_completed", self, "_on_tween_completed")

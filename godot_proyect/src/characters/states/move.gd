@@ -1,12 +1,6 @@
 class_name CharacterMoveState
 extends CharacterState
 
-# Stats.
-var stats
-
-var max_speed: float
-var acceleration_ratio: float
-var deacceleration_ratio: float
 
 export var invert_movement := false
 export var rotate_forwards := false
@@ -14,12 +8,8 @@ var velocity:= Vector2.ZERO
 
 func _ready() -> void:
 	yield(owner, "ready")
-	stats = character.stats
 	stats.connect("stat_changed", self, "_on_stat_changed")
-	
-	max_speed = stats.get_stat("max_speed")
-	acceleration_ratio = stats.get_stat("acceleration_ratio")
-	deacceleration_ratio = stats.get_stat("deacceleration_ratio")
+
 
 
 func _on_stat_changed(stat_name: String, new_value: float) -> void:
