@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/library/enemy_waves/enemy_wave_data.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
+[ext_resource path="res://src/rooms/level/data/wood_man_level_data.tres" type="Resource" id=4]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=7]
 [ext_resource path="res://src/gui/aimer.gd" type="Script" id=8]
@@ -72,6 +73,7 @@ radious = 200.0
 [node name="Space" type="Node"]
 pause_mode = 2
 script = ExtResource( 15 )
+level_data = ExtResource( 4 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 pause_mode = 2

@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/gui/joystick/Joystick.gd"
 }, {
+"base": "Resource",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://src/rooms/level/data/level_data.gd"
+}, {
 "base": "Character",
 "class": "Megaship",
 "language": "GDScript",
@@ -225,6 +230,7 @@ _global_script_class_icons={
 "EnemyWave": "",
 "EnemyWaveData": "",
 "Joystick": "",
+"LevelData": "",
 "Megaship": "",
 "MegashipCannons": "",
 "MenuPanel": "",

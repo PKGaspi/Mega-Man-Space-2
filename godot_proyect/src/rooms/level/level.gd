@@ -4,7 +4,7 @@ extends Node
 const SELECT_STAGE = "res://src/rooms/select stage/select_stage.tscn"
 const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
-
+export var level_data: Resource = LevelData.new()
 
 ############
 ## Nodes. ##
@@ -27,34 +27,6 @@ onready var center_text = hud.get_node("CenterContainer/CenterText")
 ############
 
 
-var music_intros = {
-	Weapon.TYPES.MEGA : preload("res://assets/music/stage_crashman_intro.wav"),
-	Weapon.TYPES.AIR : null,
-	Weapon.TYPES.BUBBLE : preload("res://assets/music/stage_bubbleman_intro.wav"),
-	Weapon.TYPES.CRASH : preload("res://assets/music/stage_crashman_intro.wav"),
-	Weapon.TYPES.FLASH : preload("res://assets/music/stage_flashman_intro.wav"),
-	Weapon.TYPES.HEAT : null,
-	Weapon.TYPES.METAL : null,
-	Weapon.TYPES.QUICK : null,
-	Weapon.TYPES.WOOD : preload("res://assets/music/stage_woodman_intro.wav"),
-}
-
-var music_loops = {
-	Weapon.TYPES.MEGA : preload("res://assets/music/stage_crashman_loop.ogg"),
-	Weapon.TYPES.AIR : preload("res://assets/music/stage_airman_loop.ogg"),
-	Weapon.TYPES.BUBBLE : preload("res://assets/music/stage_bubbleman_loop.ogg"),
-	Weapon.TYPES.CRASH : preload("res://assets/music/stage_crashman_loop.ogg"),
-	Weapon.TYPES.FLASH : preload("res://assets/music/stage_flashman_loop.ogg"),
-	Weapon.TYPES.HEAT : preload("res://assets/music/stage_heatman_loop.ogg"),
-	Weapon.TYPES.METAL : preload("res://assets/music/stage_metalman_loop.ogg"),
-	Weapon.TYPES.QUICK : preload("res://assets/music/stage_quickman_loop.ogg"),
-	Weapon.TYPES.WOOD : preload("res://assets/music/stage_woodman_loop.ogg"),
-}
-
-
-var lvl_id = 0 # This is set when selecting the level.
-
-
 
 func _ready() -> void:
 	get_tree().current_scene = self
@@ -68,7 +40,7 @@ func _ready() -> void:
 	global.create_touchscreen_layout(hud)
 	
 	# Music and ready animation.
-	set_music(lvl_id)
+	set_music(level_data.music_intro, level_data.music_loop)
 	start_ready_animation()
 
 
@@ -95,7 +67,7 @@ func _on_game_over_timer_timeout() -> void:
 		global.modify_stat("one_ups", -1)
 		# Reset level.
 		var inst = load(filename).instance()
-		inst.lvl_id = lvl_id
+		inst.level_data = level_data
 		get_tree().current_scene = inst
 		get_tree().root.add_child(inst)
 		queue_free()
@@ -108,13 +80,10 @@ func _on_global_user_pause(value) -> void:
 		create_weapons_menu()
 
 
-func set_music(music_index: int) -> void:
-	if music_intros.has(music_index) and music_loops.has(music_index):
-		var intro = music_intros[music_index]
-		var loop = music_loops[music_index]
-		music_looper.intro = intro
-		music_looper.loop = loop
-		music_looper.play()
+func set_music(music_intro: AudioStream, music_loop: AudioStream) -> void:
+	music_looper.intro = music_intro
+	music_looper.loop = music_loop
+	music_looper.play()
 
 
 func start_ready_animation():
@@ -125,7 +94,7 @@ func start_ready_animation():
 
 func create_weapons_menu() -> void:
 	var inst = WEAPONS_MENU.instance()
-	inst.set_palette(lvl_id)
+	inst.set_palette(level_data.palette)
 	var weapon_index = megaship.get_weapon()
 	var unlocked_weapons = global.unlocked_weapons
 	var unlocked_entries = {}
