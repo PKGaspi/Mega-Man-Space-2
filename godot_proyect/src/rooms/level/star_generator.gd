@@ -65,6 +65,7 @@ func _ready():
 		var scale = lerp(MIN_MOTION_SCALE, MAX_MOTION_SCALE, t)
 		layer.motion_scale = Vector2(scale, scale)
 		layer.z_index = Z_INDEX_OFFSET + i
+		layer.name = "Layer%02d" % i
 		add_child(layer)
 		layers.append(layer)
 	
@@ -140,11 +141,13 @@ func create_star(pos, layer, mask, palette):
 	# Vector2 pos: position of the star.
 	# int layer: layer index to place the star.
 	# String sprite: route of the texture of the star.
+	var index = layers[layer].get_child_count()
 	var star = Sprite.new()
 	star.texture = mask
 	star.z_index = layers[layer].z_index
 	star.position = pos * layers[layer].motion_scale
 	star.material = materials[[mask, palette]]
+	star.name = "Star%02d" % index
 	layers[layer].add_child(star)
 	return star
 
@@ -181,7 +184,6 @@ func create_stars(sector):
 			# Get mask and palette.
 			var mask
 			var palette
-			var texture
 			# This star might be a planet!
 			if (star_mask == 0 && random.randf() < PLANET_FREQUENCY && n_planets < MAX_PLANETS_PER_SECTOR):
 				# IT'S A PLANET!!
