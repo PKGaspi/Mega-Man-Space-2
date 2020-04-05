@@ -12,6 +12,7 @@ func _ready() -> void:
 
 
 func physics_process(delta: float) -> void:
-	var distance_to_megaship = character.global_position.distance_to(megaship.global_position)
-	if distance_to_megaship <= view_distance:
-		_state_machine.restart()
+	if is_instance_valid(megaship):
+		var distance_to_megaship = character.global_position.distance_to(megaship.global_position)
+		if distance_to_megaship <= view_distance:
+			_state_machine.restart()

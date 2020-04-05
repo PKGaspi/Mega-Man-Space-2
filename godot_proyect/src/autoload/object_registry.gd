@@ -10,19 +10,19 @@ signal enemy_registered(enemy)
 
 func _ready() -> void:
 	current_scene = get_tree().current_scene
-	global.connect("user_paused", self, "_on_user_paused")
 
 
 func _process(delta: float) -> void:
+	# Check if current scene changed. If so, reset.
 	if current_scene != get_tree().current_scene:
 		current_scene = get_tree().current_scene
 		reset()
 
 
-func _on_user_paused(value: bool) -> void:
+func set_visibility(value: bool) -> void:
 	for child in get_children():
 		if child is CanvasItem:
-			child.visible = !value
+			child.visible = value
 
 
 func reset() -> void:

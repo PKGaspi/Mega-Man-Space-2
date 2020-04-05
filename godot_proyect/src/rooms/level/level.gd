@@ -1,7 +1,7 @@
 extends Node
 
 
-const SELECT_STAGE = "res://src/rooms/select stage/select_stage.tscn"
+const SELECT_STAGE_SCREEN = "res://src/rooms/select stage/select_stage.tscn"
 const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
 export var level_data: Resource = LevelData.new()
@@ -19,7 +19,7 @@ onready var megaship = game_layer.get_node("Megaship")
 
 onready var ui = $UILayer
 onready var hud = ui.get_node("HUD")
-onready var center_text = hud.get_node("CenterContainer/CenterText")
+onready var center_text = ui.get_node("CenterContainer/CenterText")
 
 
 ############
@@ -29,6 +29,7 @@ onready var center_text = hud.get_node("CenterContainer/CenterText")
 
 
 func _ready() -> void:
+	# Set as current scene.
 	get_tree().current_scene = self
 	
 	# Setup signals.
@@ -44,40 +45,46 @@ func _ready() -> void:
 	start_ready_animation()
 
 
+#####################
+## Signal methods. ##
+#####################
+
+
 func _on_animation_finished(animation):
 	if animation == "ready":
 		global.unpause()
-		megaship.visible = true
+		set_entities_visibility(true)
 		# TODO: Start enemy generation
 
 
 func _on_megaship_death() -> void:
-	death()
+	# Stop any animation or music.
+	center_text.set_animation("none") 
+	music_looper.stop()
+	game_over_timer.start()
 
 
 func _on_game_over_timer_timeout() -> void:
 	if global.one_ups == 0:
 		print(":(")
 		global.game_over() # Resets lifes, e-tanks and points.
-		# TODO: Go to game over screen.
-		get_tree().change_scene(SELECT_STAGE)
+		# TODO: Go to game over screen instead of Select Stage screen.
+		get_tree().change_scene(SELECT_STAGE_SCREEN)
 		
 	else:
-		
 		global.modify_stat("one_ups", -1)
-		# Reset level.
-		var inst = load(filename).instance()
-		inst.level_data = level_data
-		get_tree().current_scene = inst
-		get_tree().root.add_child(inst)
-		queue_free()
+		reload_level()
 
 
 func _on_global_user_pause(value) -> void:
-	hud.visible = !value
-	game_layer.visible = !value
+	set_entities_visibility(!value)
 	if value: # Game is paused.
 		create_weapons_menu()
+
+
+##########
+## API. ##
+##########
 
 
 func set_music(music_intro: AudioStream, music_loop: AudioStream) -> void:
@@ -86,9 +93,17 @@ func set_music(music_intro: AudioStream, music_loop: AudioStream) -> void:
 	music_looper.play()
 
 
+func set_entities_visibility(value: bool) -> void:
+	hud.visible = value
+	center_text.visible = value
+	game_layer.visible = value
+	ObjectRegistry.set_visibility(value)
+
+
 func start_ready_animation():
-	megaship.visible = false
 	center_text.set_animation("ready", 3)
+	set_entities_visibility(false)
+	center_text.visible = true
 	global.pause()
 
 
@@ -98,21 +113,24 @@ func create_weapons_menu() -> void:
 	var weapon_index = megaship.get_weapon()
 	var unlocked_weapons = global.unlocked_weapons
 	var unlocked_entries = {}
-	for i in range(12):
-		# Create dictionary with the unlocked entries. Key is a vector2 with
-		# page-entry and value is a boolean true if unlocked.
+	# Create dictionary with the unlocked entries. Key is a vector2 with
+	# page-entry and value is a boolean true if unlocked.
+	for i in range(Weapon.TYPES.size()):
 		unlocked_entries[Vector2(floor(i / 6), 1 + i % 6)] = unlocked_weapons[i]
 	inst.unlocked_entries = unlocked_entries
 	ui.add_child(inst)
 	yield(inst, "opened")
 	# Set active entry of the current weapon.
-# warning-ignore:unused_variable
+	# warning-ignore:unused_variable
 	for i in range(floor(weapon_index / 6)):
 		inst.next_page()
 	inst.set_entry((weapon_index % 6) + 1)
 
 
-func death() -> void:
-	center_text.set_animation("none") # Stop any animation.
-	music_looper.stop()
-	game_over_timer.start()
+func reload_level() -> void:
+		# Reset level.
+		var inst = load(filename).instance()
+		inst.level_data = level_data
+		get_tree().current_scene = inst
+		get_tree().root.add_child(inst)
+		queue_free()

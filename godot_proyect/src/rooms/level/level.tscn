@@ -114,23 +114,6 @@ cell_size = Vector2( 7, 2 )
 horizontal = false
 palette = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="UILayer/HUD"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterText" type="Label" parent="UILayer/HUD/CenterContainer"]
-margin_left = 240.0
-margin_top = 131.0
-margin_right = 240.0
-margin_bottom = 139.0
-custom_fonts/font = SubResource( 1 )
-align = 1
-valign = 1
-script = ExtResource( 7 )
-
 [node name="Aimer" type="TextureRect" parent="UILayer/HUD"]
 margin_right = 5.0
 margin_bottom = 5.0
@@ -140,6 +123,23 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CenterContainer" type="CenterContainer" parent="UILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterText" type="Label" parent="UILayer/CenterContainer"]
+margin_left = 240.0
+margin_top = 131.0
+margin_right = 240.0
+margin_bottom = 139.0
+custom_fonts/font = SubResource( 1 )
+align = 1
+valign = 1
+script = ExtResource( 7 )
 
 [node name="GameLayer" type="Node2D" parent="."]
 pause_mode = 1
@@ -191,6 +191,7 @@ script = ExtResource( 18 )
 
 [node name="GameOverTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]
 
 [editable path="GameLayer/Megaship"]
