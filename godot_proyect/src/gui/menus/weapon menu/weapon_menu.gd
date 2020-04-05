@@ -7,9 +7,11 @@ onready var pager = get_node("Contents/Pager")
 var unlocked_entries: Dictionary
 
 func _on_action_pressed_ui_left():
+	play_sound(snd_ui_left)
 	previous_page()
 
 func _on_action_pressed_ui_right():
+	play_sound(snd_ui_right)
 	next_page()
 
 func _on_action_pressed_ui_accept():
@@ -81,3 +83,6 @@ func update_entries() -> void:
 				node.modulate.a = 0
 		n_entries += 1
 	entry = entries[entry_index]
+	
+	while entry == null:
+		next_entry()

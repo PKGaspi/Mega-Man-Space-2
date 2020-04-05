@@ -267,37 +267,30 @@ text = "next"
 [node name="P" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 16.0
 margin_bottom = 24.0
-max_value = 28.0
-palette = 0
 
 [node name="H" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_bottom = 40.0
-max_value = 28.0
 palette = 1
 
 [node name="A" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 48.0
 margin_bottom = 56.0
-max_value = 28.0
 palette = 2
 
 [node name="W" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_bottom = 72.0
-max_value = 28.0
 palette = 3
 
 [node name="B" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 80.0
 margin_bottom = 88.0
-max_value = 28.0
 palette = 4
 
 [node name="Q" parent="Contents/Pager/Page0/Info" instance=ExtResource( 3 )]
 margin_top = 96.0
 margin_bottom = 104.0
-max_value = 28.0
 palette = 5
 
 [node name="E" type="HBoxContainer" parent="Contents/Pager/Page0/Info"]
@@ -500,37 +493,31 @@ text = "next"
 [node name="F" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 16.0
 margin_bottom = 24.0
-max_value = 28.0
 palette = 6
 
 [node name="M" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 32.0
 margin_bottom = 40.0
-max_value = 28.0
 palette = 7
 
 [node name="C" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 48.0
 margin_bottom = 56.0
-max_value = 28.0
 palette = 8
 
 [node name="1" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 64.0
 margin_bottom = 72.0
-max_value = 28.0
 palette = 9
 
 [node name="2" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 80.0
 margin_bottom = 88.0
-max_value = 28.0
 palette = 9
 
 [node name="3" parent="Contents/Pager/Page1/Info" instance=ExtResource( 3 )]
 margin_top = 96.0
 margin_bottom = 104.0
-max_value = 28.0
 palette = 9
 
 [node name="1ups" type="Control" parent="Contents/Pager/Page1/Info"]
