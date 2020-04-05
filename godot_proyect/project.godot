@@ -72,12 +72,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "EnemyWave",
 "language": "GDScript",
-"path": "res://src/library/enemy_waves/enemy_wave.gd"
+"path": "res://src/rooms/level/enemy_waves/enemy_wave.gd"
 }, {
 "base": "Resource",
 "class": "EnemyWaveData",
 "language": "GDScript",
-"path": "res://src/library/enemy_waves/enemy_wave_data.gd"
+"path": "res://src/rooms/level/enemy_waves/enemy_wave_data.gd"
 }, {
 "base": "Control",
 "class": "Joystick",
@@ -142,7 +142,7 @@ _global_script_classes=[ {
 "base": "Position2D",
 "class": "Spawner",
 "language": "GDScript",
-"path": "res://src/library/enemy_waves/spawner.gd"
+"path": "res://src/library/spawner.gd"
 }, {
 "base": "Node",
 "class": "State",

@@ -15,11 +15,18 @@ export(Weapon.TYPES) var main_weapon_unlocked: int
 export(Weapon.TYPES) var secondary_weapon_unlocked: int
 
 
+func initialize() -> void:
+	current_wave_index = 0
+
 # Returns the next wave. If there is no next wave,
 # null should be returned instead.
 func next_wave() -> EnemyWaveData:
-	current_wave_index += 1
-	return enemy_waves[current_wave_index]
+	var wave = null
+	if current_wave_index < len(enemy_waves):
+		wave = enemy_waves[current_wave_index]
+		current_wave_index += 1
+	
+	return wave
 
 
 # Marks the main and secondary weapon of this level as unlocked.

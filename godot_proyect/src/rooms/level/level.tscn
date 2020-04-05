@@ -1,6 +1,5 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://src/library/enemy_waves/enemy_wave_data.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
 [ext_resource path="res://src/rooms/level/data/wood_man_level_data.tres" type="Resource" id=4]
@@ -9,16 +8,11 @@
 [ext_resource path="res://src/gui/aimer.gd" type="Script" id=8]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
-[ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
-[ext_resource path="res://src/characters/enemies/fly_robot/fly_robot.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/audio/music_looper.gd" type="Script" id=18]
 [ext_resource path="res://src/characters/megaship/megaship.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=20]
-[ext_resource path="res://src/library/enemy_waves/enemy_wave.gd" type="Script" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -57,20 +51,7 @@ shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 3 )
 shader_param/mask = ExtResource( 12 )
 
-[sub_resource type="Resource" id=4]
-script = ExtResource( 20 )
-items = [ ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ) ]
-weights = [ 10, 3, 1 ]
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 1 )
-enemies = SubResource( 4 )
-n_total_enemies = 20
-n_max_enemies_at_once = 4
-center = Vector2( 20, 20 )
-radious = 200.0
-
-[node name="Space" type="Node"]
+[node name="Level" type="Node"]
 pause_mode = 2
 script = ExtResource( 15 )
 level_data = ExtResource( 4 )
@@ -137,13 +118,14 @@ script = ExtResource( 7 )
 pause_mode = 1
 
 [node name="Megaship" parent="GameLayer" instance=ExtResource( 19 )]
-_hp_bar_path = NodePath("../../UILayer/HUD/BarContainer/MegashipHPBar")
+_hp_bar_path = NodePath("../../../Level/UILayer/HUD/BarContainer/MegashipHPBar")
+_cannons_path = NodePath("../../../Level/GameLayer/Megaship/Cannons")
 
 [node name="SprShip" parent="GameLayer/Megaship" index="0"]
 material = SubResource( 3 )
 
 [node name="StateMachine" parent="GameLayer/Megaship" index="2"]
-initial_state = NodePath("Move/Teleport")
+initial_state = NodePath("../../../../Level/GameLayer/Megaship/StateMachine/Move/Teleport")
 initial_msg = {
 "final_position": Vector2( 0, 0 ),
 "init_position": Vector2( 0, -300 )
@@ -153,7 +135,7 @@ initial_msg = {
 knockback_speed = 80.0
 
 [node name="Cannons" parent="GameLayer/Megaship" index="3"]
-_ammo_bar_path = NodePath("../../../UILayer/HUD/BarContainer/MegashipAmmoBar")
+_ammo_bar_path = NodePath("../../../../Level/UILayer/HUD/BarContainer/MegashipAmmoBar")
 
 [node name="Camera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2
@@ -168,15 +150,10 @@ drag_margin_right = 0.1
 drag_margin_bottom = 0.1
 editor_draw_drag_margin = true
 script = ExtResource( 10 )
-_path_to_follow = NodePath("../Megaship")
-
-[node name="EnemyWave" type="Node2D" parent="GameLayer"]
-position = Vector2( 1.63708, 138.321 )
-script = ExtResource( 21 )
-wave_data = SubResource( 5 )
+_path_to_follow = NodePath("../../../Level/GameLayer/Megaship")
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
-_to_follow_path = NodePath("../GameLayer/Camera")
+_to_follow_path = NodePath("../../Level/GameLayer/Camera")
 
 [node name="MusicLooper" type="Node" parent="."]
 script = ExtResource( 18 )

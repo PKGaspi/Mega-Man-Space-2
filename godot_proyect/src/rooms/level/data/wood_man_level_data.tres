@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://src/rooms/level/data/level_data.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/stage_woodman_intro.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/music/stage_woodman_loop.ogg" type="AudioStream" id=3]
+[ext_resource path="res://src/rooms/level/enemy_waves/test_wave.tres" type="Resource" id=4]
 
 [resource]
 script = ExtResource( 1 )
@@ -10,6 +11,6 @@ name = "Wood Man Stage"
 music_intro = ExtResource( 2 )
 music_loop = ExtResource( 3 )
 palette = 3
-enemy_waves = [  ]
+enemy_waves = [ ExtResource( 4 ) ]
 main_weapon_unlocked = 3
 secondary_weapon_unlocked = 0

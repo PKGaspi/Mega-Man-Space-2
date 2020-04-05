@@ -6,7 +6,7 @@
 script = ExtResource( 1 )
 max_hp = 10.0
 max_speed = 320.0
-acceleration_ratio = 2.2
+acceleration_ratio = 2.7
 deacceleration_ratio = 0.7
 collision_damage = 5.0
 invencibility_time = 0.65

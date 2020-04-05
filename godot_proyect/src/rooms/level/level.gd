@@ -32,17 +32,18 @@ func _ready() -> void:
 	# Set as current scene.
 	get_tree().current_scene = self
 	
+	# Touchscreen controls.
+	global.create_touchscreen_layout(hud)
+	
+	# Resources init.
+	level_data.initialize()
+	set_music(level_data.music_intro, level_data.music_loop)
+	start_ready_animation()
+	
 	# Setup signals.
 	global.connect("user_paused", self, "_on_global_user_pause")
 	megaship.connect("death", self, "_on_megaship_death")
 	center_text.connect("animation_finished", self, "_on_animation_finished")
-	
-	# Touchscreen controls.
-	global.create_touchscreen_layout(hud)
-	
-	# Music and ready animation.
-	set_music(level_data.music_intro, level_data.music_loop)
-	start_ready_animation()
 
 
 #####################
@@ -54,7 +55,7 @@ func _on_animation_finished(animation):
 	if animation == "ready":
 		global.unpause()
 		set_entities_visibility(true)
-		# TODO: Start enemy generation
+		next_wave()
 
 
 func _on_megaship_death() -> void:
@@ -100,11 +101,26 @@ func set_entities_visibility(value: bool) -> void:
 	ObjectRegistry.set_visibility(value)
 
 
-func start_ready_animation():
+func start_ready_animation() -> void:
 	center_text.set_animation("ready", 3)
 	set_entities_visibility(false)
 	center_text.visible = true
 	global.pause()
+
+
+func next_wave() -> void:
+	var wave = level_data.next_wave()
+	if wave != null:
+		# Spawn wave.
+		var inst = EnemyWave.new()
+		inst.wave_data = wave
+		inst.name = "EnemyWave"
+		inst.connect("completed", self, "next_wave")
+		game_layer.add_child(inst)
+		# TODO: create wave signal and warning animation.
+	else:
+		print("muy bien!!")
+		# TODO: Start victory animation
 
 
 func create_weapons_menu() -> void:

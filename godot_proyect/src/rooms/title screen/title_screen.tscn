@@ -43,7 +43,7 @@ __meta__ = {
 
 [node name="StarGenerator" parent="." instance=ExtResource( 5 )]
 _to_follow_path = NodePath("../Camera")
-STAR_FREQUENCY = 1.0
+STAR_FREQUENCY = 0.5
 PLANET_FREQUENCY = 0.03
 
 [node name="Camera" type="Camera2D" parent="."]
