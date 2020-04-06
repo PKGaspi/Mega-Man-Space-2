@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/gui/menus/select stage menu/select_stage_menu.gd" type="Script" id=2]
@@ -7,6 +7,12 @@
 [ext_resource path="res://src/gui/menus/menu_entry_frame.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/rooms/level/data/wood_man_level_data.tres" type="Resource" id=6]
 [ext_resource path="res://src/rooms/level/data/crash_man_level_data.tres" type="Resource" id=7]
+[ext_resource path="res://src/rooms/level/data/flash_man_level_data.tres" type="Resource" id=8]
+[ext_resource path="res://src/rooms/level/data/metal_man_level_data.tres" type="Resource" id=9]
+[ext_resource path="res://src/rooms/level/data/bubble_man_level_data.tres" type="Resource" id=10]
+[ext_resource path="res://src/rooms/level/data/heat_man_level_data.tres" type="Resource" id=11]
+[ext_resource path="res://src/rooms/level/data/quick_man_level_data.tres" type="Resource" id=12]
+[ext_resource path="res://src/rooms/level/data/air_man_level_data.tres" type="Resource" id=13]
 
 [node name="SelectStageMenu" type="Control"]
 anchor_right = 1.0
@@ -32,6 +38,7 @@ __meta__ = {
 }
 column = -1
 row = -1
+entry_data = ExtResource( 10 )
 
 [node name="FrameContainer" type="MarginContainer" parent="TopLeftEntry"]
 anchor_right = 1.0
@@ -90,6 +97,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 row = -1
+entry_data = ExtResource( 13 )
 
 [node name="FrameContainer" type="MarginContainer" parent="TopCenterEntry"]
 anchor_right = 1.0
@@ -149,6 +157,7 @@ __meta__ = {
 }
 column = 1
 row = -1
+entry_data = ExtResource( 12 )
 
 [node name="FrameContainer" type="MarginContainer" parent="TopRightEntry"]
 anchor_right = 1.0
@@ -206,6 +215,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 column = -1
+entry_data = ExtResource( 11 )
 
 [node name="FrameContainer" type="MarginContainer" parent="MiddleLeftEntry"]
 anchor_right = 1.0
@@ -381,6 +391,7 @@ __meta__ = {
 }
 column = -1
 row = 1
+entry_data = ExtResource( 9 )
 
 [node name="FrameContainer" type="MarginContainer" parent="BottomLeftEntry"]
 anchor_right = 1.0
@@ -439,6 +450,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 row = 1
+entry_data = ExtResource( 8 )
 
 [node name="FrameContainer" type="MarginContainer" parent="BottomCenterEntry"]
 anchor_right = 1.0
