@@ -5,6 +5,7 @@ extends Resource
 export var enemies: Resource = WeightRandomizer.new()
 export var n_total_enemies: int
 var n_enemies: int = 0 # Current number of enemies spawned.
+var n_spawns_left: int
 export var n_max_enemies_at_once: int
 export var center: Vector2
 export var radious: float = 500
@@ -15,6 +16,8 @@ var rng: RandomNumberGenerator
 func initialize() -> void:
 	assert(enemies is WeightRandomizer)
 	enemies.initialize()
+	
+	n_spawns_left = n_total_enemies
 	
 	rng = global.init_random()
 	
@@ -49,10 +52,14 @@ func spawn_enemy(enemy: PackedScene, pos: Vector2) -> void:
 	var inst = enemy.instance()
 	inst.global_position = pos
 	
-	n_total_enemies -= 1
+	n_spawns_left -= 1
 	ObjectRegistry.register_node(inst)
 
 
 func can_spawn() -> bool:
-	return n_enemies < n_max_enemies_at_once and n_total_enemies > 0
+	return n_enemies < n_max_enemies_at_once and n_spawns_left > 0
+
+
+func is_completed() -> bool:
+	return n_spawns_left <= 0 and n_enemies <= 0
 

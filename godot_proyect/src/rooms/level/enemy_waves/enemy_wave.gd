@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 		spawn_random_enemy()
 	
 	# Check if the wave is defeated.
-	if wave_data.n_total_enemies <= 0 and wave_data.n_enemies <= 0:
+	if wave_data.is_completed():
 		print("muy bien")
 		emit_signal("completed")
 		queue_free()

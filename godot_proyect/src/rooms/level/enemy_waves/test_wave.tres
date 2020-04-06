@@ -14,7 +14,7 @@ weights = [ 10, 3, 1 ]
 [resource]
 script = ExtResource( 3 )
 enemies = SubResource( 1 )
-n_total_enemies = 20
+n_total_enemies = 4
 n_max_enemies_at_once = 4
 center = Vector2( 20, 20 )
 radious = 200.0

@@ -10,6 +10,7 @@ var to_move : Vector2 = Vector2(0, 300)
 
 func _ready() -> void:
 	get_tree().current_scene = self
+	ObjectRegistry.reset()
 	randomize()
 	$Music.play()
 	animate_camera()

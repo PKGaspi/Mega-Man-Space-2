@@ -12,13 +12,6 @@ func _ready() -> void:
 	current_scene = get_tree().current_scene
 
 
-func _process(delta: float) -> void:
-	# Check if current scene changed. If so, reset.
-	if current_scene != get_tree().current_scene:
-		current_scene = get_tree().current_scene
-		reset()
-
-
 func set_visibility(value: bool) -> void:
 	for child in get_children():
 		if child is CanvasItem:

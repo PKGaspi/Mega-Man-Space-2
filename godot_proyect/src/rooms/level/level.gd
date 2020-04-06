@@ -31,6 +31,7 @@ onready var center_text = ui.get_node("CenterContainer/CenterText")
 func _ready() -> void:
 	# Set as current scene.
 	get_tree().current_scene = self
+	ObjectRegistry.reset()
 	
 	# Touchscreen controls.
 	global.create_touchscreen_layout(hud)
@@ -147,6 +148,5 @@ func reload_level() -> void:
 		# Reset level.
 		var inst = load(filename).instance()
 		inst.level_data = level_data
-		get_tree().current_scene = inst
 		get_tree().root.add_child(inst)
 		queue_free()
