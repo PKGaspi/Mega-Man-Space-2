@@ -54,26 +54,15 @@ func get_visibility():
 	return spr_ship.visible
 
 
-func hit(damage: float, weapon := Weapon.TYPES.MEGA) -> void:
-	.hit(damage, weapon)
-	hit_particles.emitting = true
-	hit_particles.restart()
-
-
 func apply_propulsion_effects(propulsion: Vector2) -> void:
 	spr_ship.set_direction(propulsion)
 	propulsion_particles.emit(propulsion)
 
 
-func fill(type, ammount):
-	if type == "1up":
-		global.obtain_1up()
-	elif type == "e-tank":
-		global.obtain_etank()
-	elif type == "heal":
-		set_hp_relative(ammount, true)
-	elif type == "ammo":
-		cannons.set_relative_ammo(ammount, true)
+func hit(damage: float, weapon := Weapon.TYPES.MEGA) -> void:
+	.hit(damage, weapon)
+	hit_particles.emitting = true
+	hit_particles.restart()
 
 
 func set_palette(palette_index : int) -> void:

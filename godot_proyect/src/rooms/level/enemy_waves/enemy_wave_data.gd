@@ -21,7 +21,8 @@ func initialize() -> void:
 	
 	rng = global.init_random()
 	
-	ObjectRegistry.connect("enemy_registered", self, "_on_enemy_registered")
+	if not ObjectRegistry.is_connected("enemy_registered", self, "_on_enemy_registered"):
+		ObjectRegistry.connect("enemy_registered", self, "_on_enemy_registered")
 
 
 func _on_enemy_registered(enemy: Enemy) -> void:
