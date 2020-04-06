@@ -9,7 +9,6 @@
 [ext_resource path="res://src/library/audio/music_looper.gd" type="Script" id=7]
 [ext_resource path="res://src/rooms/select stage/select_stage.gd" type="Script" id=8]
 
-
 [node name="SelectStage" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0

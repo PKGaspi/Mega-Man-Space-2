@@ -1,27 +1,27 @@
 extends Control
 
-export(int) var column : int = 0
-export(int) var row : int = 0
+const LEVEL_SCENE = "res://src/rooms/level/level.tscn"
 
-export(Texture) var texture : Texture = null
+export var column: int = 0
+export var row: int = 0
 
-var selected : bool = false
+export var texture: Texture = null setget set_texture
+export var entry_data: Resource
 
-signal actioned
+var selected: bool = false setget set_selected
+
+onready var frame = $FrameContainer/MenuEntryFrame
+
 
 func _ready() -> void:
 	set_texture(texture)
 
+
 func set_texture(value : Texture) -> void:
-	$FrameContainer/MenuEntryFrame.set_texture(value)
-	
+	texture = value
+	frame.set_texture(value)
+
+
 func set_selected(value : bool) -> void:
 	selected = value
-	$FrameContainer/MenuEntryFrame.set_selected(value)
-
-func toggle_selected() -> void:
-	set_selected(!selected)
-
-func action() -> void:
-	emit_signal("actioned", column, row)
-	
+	frame.set_selected(value)

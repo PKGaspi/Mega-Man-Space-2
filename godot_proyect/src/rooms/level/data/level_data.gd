@@ -6,7 +6,7 @@ export var name: String
 export var music_intro: AudioStream
 export var music_loop: AudioStream
 
-export var palette: int
+export(Weapon.TYPES) var palette: int
 
 export(Array, Resource) var enemy_waves: Array
 var current_wave_index: int = 0

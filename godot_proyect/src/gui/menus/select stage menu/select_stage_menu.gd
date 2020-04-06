@@ -1,19 +1,21 @@
 extends Control
 
-export(Vector2) var selected : Vector2 = Vector2.ZERO
+export(Vector2) var selected: Vector2 = Vector2.ZERO
 var entries = {}
 
+signal actioned(entry_data)
+
+
 func _ready() -> void:
-	var parent = get_parent()
 	for child in get_children():
 		if child is Control:
 			entries[Vector2(child.column, child.row)] = child
-			child.connect("actioned", parent, "_on_entry_actioned")
 	entries[selected].set_selected(true)
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		entries[selected].action()
+		emit_signal("actioned", entries[selected].entry_data)
 	else:
 		var new_selected = selected
 		if event.is_action_pressed("ui_left"):
@@ -27,7 +29,8 @@ func _input(event: InputEvent) -> void:
 		
 		if set_selected(new_selected):
 			$SndSelectionChange.play()
-		
+
+
 func set_selected(value : Vector2) -> bool:
 	if value != selected and entries.has(value):
 		entries[selected].set_selected(false)

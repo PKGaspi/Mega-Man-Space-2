@@ -6,14 +6,14 @@
 [ext_resource path="res://src/characters/enemies/fly_robot/fly_robot.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=5]
 
-[sub_resource type="Resource" id=4]
+[sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 items = [ ExtResource( 1 ), ExtResource( 4 ), ExtResource( 5 ) ]
 weights = [ 10, 3, 1 ]
 
 [resource]
 script = ExtResource( 3 )
-enemies = SubResource( 4 )
+enemies = SubResource( 1 )
 n_total_enemies = 20
 n_max_enemies_at_once = 4
 center = Vector2( 20, 20 )
