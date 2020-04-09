@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Sprite",
+"class": "Aimer",
+"language": "GDScript",
+"path": "res://src/gui/aimer.gd"
+}, {
 "base": "AnimatedSprite",
 "class": "AnimatedPaletteSprite",
 "language": "GDScript",
@@ -215,6 +220,7 @@ _global_script_classes=[ {
 "path": "res://src/library/weight_randomizer.gd"
 } ]
 _global_script_class_icons={
+"Aimer": "",
 "AnimatedPaletteSprite": "",
 "Bullet": "",
 "Cannon": "",

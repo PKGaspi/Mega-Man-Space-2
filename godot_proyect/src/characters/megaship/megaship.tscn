@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://assets/sfx/megaship/hit.wav" type="AudioStream" id=11]
 [ext_resource path="res://src/characters/megaship/states/teleport.gd" type="Script" id=12]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=14]
+[ext_resource path="res://src/gui/aimer.gd" type="Script" id=15]
 [ext_resource path="res://src/library/sprites/directional_sprite.gd" type="Script" id=16]
 [ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
@@ -20,7 +22,6 @@
 [ext_resource path="res://src/characters/megaship/states/teleport_end.gd" type="Script" id=20]
 [ext_resource path="res://src/characters/megaship/states/travel.gd" type="Script" id=25]
 [ext_resource path="res://src/characters/megaship/states/knockback.gd" type="Script" id=26]
-
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -122,11 +123,16 @@ animation = "iddle"
 script = ExtResource( 16 )
 palettes = ExtResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="Aimer" type="Sprite" parent="." index="1"]
+z_index = 1
+texture = ExtResource( 14 )
+script = ExtResource( 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0.5, -0.5 )
 shape = SubResource( 3 )
 
-[node name="StateMachine" parent="." index="2"]
+[node name="StateMachine" parent="." index="3"]
 initial_state = NodePath("Move/Travel")
 
 [node name="Travel" type="Node" parent="StateMachine/Move" index="0"]
@@ -143,10 +149,10 @@ script = ExtResource( 12 )
 [node name="TeleportEnd" type="Node" parent="StateMachine" index="1"]
 script = ExtResource( 20 )
 
-[node name="Cannons" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Cannons" parent="." index="4" instance=ExtResource( 4 )]
 position = Vector2( 0.5, -0.5 )
 
-[node name="HitParticles" type="Particles2D" parent="." index="4"]
+[node name="HitParticles" type="Particles2D" parent="." index="5"]
 z_index = 1
 emitting = false
 amount = 3
@@ -156,7 +162,7 @@ explosiveness = 1.0
 process_material = SubResource( 4 )
 texture = SubResource( 5 )
 
-[node name="PropulsionParticles" type="Node2D" parent="." index="5"]
+[node name="PropulsionParticles" type="Node2D" parent="." index="6"]
 script = ExtResource( 17 )
 
 [node name="PropulsionParticles1" type="Particles2D" parent="PropulsionParticles" index="0"]
@@ -177,14 +183,14 @@ randomness = 0.3
 local_coords = false
 process_material = SubResource( 7 )
 
-[node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="6"]
+[node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = SubResource( 8 )
 
-[node name="SndHit" parent="." index="7"]
+[node name="SndHit" parent="." index="8"]
 stream = ExtResource( 11 )
 script = null
 
-[node name="SndUpgrade" parent="." index="8"]
+[node name="SndUpgrade" parent="." index="9"]
 stream = ExtResource( 13 )
 [connection signal="palette_changed" from="." to="SprShip" method="set_palette"]
 [connection signal="weapon_changed" from="Cannons" to="." method="set_palette"]

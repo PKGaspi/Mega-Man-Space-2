@@ -1,11 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
 [ext_resource path="res://src/rooms/level/data/wood_man_level_data.tres" type="Resource" id=4]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=7]
-[ext_resource path="res://src/gui/aimer.gd" type="Script" id=8]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
@@ -79,6 +77,10 @@ margin_left = 16.0
 margin_top = 24.0
 margin_right = 23.0
 margin_bottom = 80.0
+max_value = 28.0
+cell_size = Vector2( 7, 2 )
+horizontal = false
+palette = 0
 
 [node name="MegashipAmmoBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
 visible = false
@@ -86,16 +88,10 @@ margin_left = 23.0
 margin_top = 24.0
 margin_right = 30.0
 margin_bottom = 80.0
-
-[node name="Aimer" type="TextureRect" parent="UILayer/HUD"]
-margin_right = 5.0
-margin_bottom = 5.0
-texture = ExtResource( 2 )
-expand = true
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+max_value = 28.0
+cell_size = Vector2( 7, 2 )
+horizontal = false
+palette = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="UILayer"]
 anchor_right = 1.0
