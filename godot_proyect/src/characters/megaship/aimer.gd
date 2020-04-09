@@ -8,16 +8,16 @@ func _ready() -> void:
 	size = texture.get_size()
 	pass
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	global_rotation = 0
 	match global.input_type:
 		global.INPUT_TYPES.KEY_MOUSE:
 			global_position = get_global_mouse_position()
 			visible = true
 		_:
 			var dir = get_aiming_direction()
-			position = dir.rotated(-global_rotation) * radious
+			position = dir * radious
 			visible = dir.length() >= .1
-			# TODO: Set position around the MEGASHIP. Maybe a pointing sprite like warnings?
 
 
 func get_aiming_direction() -> Vector2:
@@ -28,5 +28,4 @@ func get_aiming_direction() -> Vector2:
 	if dir.length() > 1:
 		dir = dir.normalized()
 	
-	print(dir)
 	return dir

@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "Aimer",
 "language": "GDScript",
-"path": "res://src/gui/aimer.gd"
+"path": "res://src/characters/megaship/aimer.gd"
 }, {
 "base": "AnimatedSprite",
 "class": "AnimatedPaletteSprite",

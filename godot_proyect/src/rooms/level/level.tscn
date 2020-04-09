@@ -120,7 +120,7 @@ _cannons_path = NodePath("../../../Level/GameLayer/Megaship/Cannons")
 [node name="SprShip" parent="GameLayer/Megaship" index="0"]
 material = SubResource( 3 )
 
-[node name="StateMachine" parent="GameLayer/Megaship" index="2"]
+[node name="StateMachine" parent="GameLayer/Megaship" index="3"]
 initial_state = NodePath("../../../../Level/GameLayer/Megaship/StateMachine/Move/Teleport")
 initial_msg = {
 "final_position": Vector2( 0, 0 ),
@@ -130,7 +130,7 @@ initial_msg = {
 [node name="Knockback" parent="GameLayer/Megaship/StateMachine/Move" index="1"]
 knockback_speed = 80.0
 
-[node name="Cannons" parent="GameLayer/Megaship" index="3"]
+[node name="Cannons" parent="GameLayer/Megaship" index="4"]
 _ammo_bar_path = NodePath("../../../../Level/UILayer/HUD/BarContainer/MegashipAmmoBar")
 
 [node name="Camera" type="Camera2D" parent="GameLayer"]

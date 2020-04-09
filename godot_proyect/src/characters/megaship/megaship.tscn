@@ -14,7 +14,7 @@
 [ext_resource path="res://src/characters/megaship/states/teleport.gd" type="Script" id=12]
 [ext_resource path="res://assets/sfx/megaship/upgrade.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=14]
-[ext_resource path="res://src/gui/aimer.gd" type="Script" id=15]
+[ext_resource path="res://src/characters/megaship/aimer.gd" type="Script" id=15]
 [ext_resource path="res://src/library/sprites/directional_sprite.gd" type="Script" id=16]
 [ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
@@ -124,6 +124,7 @@ script = ExtResource( 16 )
 palettes = ExtResource( 6 )
 
 [node name="Aimer" type="Sprite" parent="." index="1"]
+visible = false
 z_index = 1
 texture = ExtResource( 14 )
 script = ExtResource( 15 )
