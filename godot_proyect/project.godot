@@ -124,12 +124,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/audio/music_looper.gd"
 }, {
+"base": "Sprite",
+"class": "PaletteSprite",
+"language": "GDScript",
+"path": "res://src/library/sprites/palette_sprite.gd"
+}, {
 "base": "MoveableArea2D",
 "class": "Pickup",
 "language": "GDScript",
 "path": "res://src/pickups/pickup.gd"
 }, {
-"base": "Sprite",
+"base": "PaletteSprite",
 "class": "PointingSprite",
 "language": "GDScript",
 "path": "res://src/library/sprites/pointing_sprite.gd"
@@ -243,6 +248,7 @@ _global_script_class_icons={
 "MoveableArea2D": "",
 "MoveableState": "",
 "MusicLooper": "",
+"PaletteSprite": "",
 "Pickup": "",
 "PointingSprite": "",
 "RandomPitchAudioStreamPlayer2D": "",

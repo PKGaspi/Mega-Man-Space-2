@@ -8,7 +8,7 @@ func _ready() -> void:
 	size = texture.get_size()
 	pass
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	global_rotation = 0
 	match global.input_type:
 		global.INPUT_TYPES.KEY_MOUSE:
@@ -28,4 +28,4 @@ func get_aiming_direction() -> Vector2:
 	if dir.length() > 1:
 		dir = dir.normalized()
 	
-	return dir
+	return dir.rotated(-owner.global_rotation)

@@ -5,6 +5,8 @@ extends Character
 ## Resources. ##
 ################
 
+var ENEMY_WAVE_POINTER = preload("res://src/characters/megaship/pointers/enemy_wave_pointer.tscn")
+
 var palettes = preload("res://resources/characters/megaship/megaship_palettes.tres")
 
 onready var hit_particles := $HitParticles
@@ -57,6 +59,14 @@ func get_visibility():
 func apply_propulsion_effects(propulsion: Vector2) -> void:
 	spr_ship.set_direction(propulsion)
 	propulsion_particles.emit(propulsion)
+
+
+func create_enemy_wave_pointer(pos: Vector2) -> PointingSprite:
+	var inst: PointingSprite = ENEMY_WAVE_POINTER.instance()
+	inst.pointing_to = pos
+	add_child(inst)
+	inst.owner = self
+	return inst
 
 
 func hit(damage: float, weapon := Weapon.TYPES.MEGA) -> void:

@@ -110,15 +110,19 @@ func start_ready_animation() -> void:
 
 
 func next_wave() -> void:
-	var wave = level_data.next_wave()
-	if wave != null:
+	var wave_data = level_data.next_wave()
+	if wave_data != null:
 		# Spawn wave.
-		var inst = EnemyWave.new()
-		inst.wave_data = wave
-		inst.name = "EnemyWave"
-		inst.connect("completed", self, "next_wave")
-		game_layer.add_child(inst)
-		# TODO: create wave signal and warning animation.
+		var wave := EnemyWave.new()
+		wave.wave_data = wave_data
+		wave.name = "EnemyWave"
+		wave.connect("completed", self, "next_wave")
+		game_layer.add_child(wave)
+		# Create the enemy wave pointer so the player can find it.
+		var pointer = megaship.create_enemy_wave_pointer(wave_data.center)
+		pointer.palette = level_data.palette
+		wave.connect("completed", pointer, "queue_free")
+		# TODO: Play warning animation.
 	else:
 		print("muy bien!!")
 		# TODO: Start victory animation
