@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/library/sprites/pointing_sprite.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/characters/megaship/pointers/warning_mask.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/megaship/pointers/enemy_pointer_mask.png" type="Texture" id=2]
 [ext_resource path="res://resources/gui/menu_palettes.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=4]
 
@@ -39,7 +39,7 @@ shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 4 )
 shader_param/mask = ExtResource( 2 )
 
-[node name="EnemyWavePointer" type="Sprite"]
+[node name="EnemyPointer" type="Sprite"]
 modulate = Color( 1, 1, 1, 0.2 )
 material = SubResource( 2 )
 texture = ExtResource( 2 )

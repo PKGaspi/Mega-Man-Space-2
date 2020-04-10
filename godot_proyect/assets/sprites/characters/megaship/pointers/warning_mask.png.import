@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/warning_mask.png-48aa708ba055a7bd27ba65cf35f09a90.stex"
+path="res://.import/warning_mask.png-698adf57fff2e2ac9230811a2a3c520c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/gui/warning/warning_mask.png"
-dest_files=[ "res://.import/warning_mask.png-48aa708ba055a7bd27ba65cf35f09a90.stex" ]
+source_file="res://assets/sprites/characters/megaship/pointers/warning_mask.png"
+dest_files=[ "res://.import/warning_mask.png-698adf57fff2e2ac9230811a2a3c520c.stex" ]
 
 [params]
 

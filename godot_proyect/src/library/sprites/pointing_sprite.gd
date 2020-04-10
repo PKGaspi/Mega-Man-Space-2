@@ -5,7 +5,7 @@ extends PaletteSprite
 
 
 export var _to_owner_path: NodePath
-onready var to_owner: CanvasItem = get_node(_to_owner_path) if has_node(_to_owner_path) else null
+onready var to_owner: CanvasItem = get_node(_to_owner_path) if has_node(_to_owner_path) else to_owner
 var pointing_to: Vector2
 
 export var radious: float = 70.0

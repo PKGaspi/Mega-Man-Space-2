@@ -6,6 +6,7 @@ extends Character
 ################
 
 var ENEMY_WAVE_POINTER = preload("res://src/characters/megaship/pointers/enemy_wave_pointer.tscn")
+var ENEMY_POINTER = preload("res://src/characters/megaship/pointers/enemy_pointer.tscn")
 
 var palettes = preload("res://resources/characters/megaship/megaship_palettes.tres")
 
@@ -61,12 +62,23 @@ func apply_propulsion_effects(propulsion: Vector2) -> void:
 	propulsion_particles.emit(propulsion)
 
 
-func create_enemy_wave_pointer(pos: Vector2) -> PointingSprite:
-	var inst: PointingSprite = ENEMY_WAVE_POINTER.instance()
-	inst.pointing_to = pos
-	add_child(inst)
-	inst.owner = self
-	return inst
+func create_enemy_wave_pointer(wave: EnemyWave, palette: int) -> void:
+	var wave_data = wave.wave_data
+	var pointer: PointingSprite = ENEMY_WAVE_POINTER.instance()
+	pointer.pointing_to = wave_data.center
+	pointer.palette = palette
+	wave.connect("completed", pointer, "queue_free")
+	add_child(pointer)
+	pointer.owner = self
+
+
+func create_enemy_pointer(enemy: Enemy, palette: int) -> void:
+	var pointer: PointingSprite = ENEMY_POINTER.instance()
+	pointer.to_owner = enemy
+	pointer.palette = palette
+	enemy.connect("tree_exited", pointer, "queue_free")
+	add_child(pointer)
+	pointer.owner = self
 
 
 func hit(damage: float, weapon := Weapon.TYPES.MEGA) -> void:

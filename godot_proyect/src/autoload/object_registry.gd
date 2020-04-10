@@ -46,5 +46,9 @@ func register_pickup(pickup: Node) -> void:
 	_pickups.call_deferred("add_child", pickup)
 
 
-func get_n_enemies() -> int:
+func get_enemies() -> Array:
+	return _enemies.get_children()
+
+
+func get_enemy_count() -> int:
 	return _enemies.get_child_count()

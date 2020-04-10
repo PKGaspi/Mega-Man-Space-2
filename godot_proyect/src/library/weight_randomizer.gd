@@ -8,7 +8,7 @@ export(Array, int) var weights := []
 
 var total_weight: int = 0
 
-var rng := global.init_random()
+var rng: RandomNumberGenerator = global.init_random()
 
 
 
