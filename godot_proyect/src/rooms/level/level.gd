@@ -14,6 +14,7 @@ export var level_data: Resource = LevelData.new()
 onready var music_looper = $MusicLooper
 onready var game_over_timer = $GameOverTimer
 onready var wave_timer = $WaveTimer
+onready var snd_wave_help = $SndWaveHelp
 
 onready var game_layer = $GameLayer
 onready var megaship = game_layer.get_node("Megaship")
@@ -87,7 +88,7 @@ func _on_GameOverTimer_timeout() -> void:
 
 
 func _on_WaveTimer_timeout() -> void:
-	# TODO: play a sound to give life to the pointers.
+	snd_wave_help.play()
 	# Mega Man 1 platform power may be good for this.
 	ObjectRegistry.connect("enemy_registered", self, "_on_enemy_registered")
 	for enemy in ObjectRegistry.get_enemies():

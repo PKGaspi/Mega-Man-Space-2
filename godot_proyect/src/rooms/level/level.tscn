@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
+[ext_resource path="res://assets/sfx/other/wave_help.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
 [ext_resource path="res://src/rooms/level/data/wood_man_level_data.tres" type="Resource" id=4]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
@@ -160,8 +161,14 @@ one_shot = true
 
 [node name="WaveTimer" type="Timer" parent="."]
 pause_mode = 1
-wait_time = 20.0
+wait_time = 5.0
 one_shot = true
+
+[node name="SndWaveHelp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = 8.0
+pitch_scale = 0.9
+bus = "Sfx"
 [connection signal="transitioned" from="GameLayer/Megaship/StateMachine" to="." method="_on_megaship_transitioned"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_GameOverTimer_timeout"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
