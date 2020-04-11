@@ -12,6 +12,7 @@ export var radious: float = 70.0
 
 export(float, 0.0, 1.0, .05) var max_opacity := .9
 export(float, 0.0, 1.0, .05) var min_opacity := .2
+export var distance_to_disappear: float = 200.0
 
 var initial_distance := 1.0
 
@@ -25,7 +26,10 @@ func _physics_process(delta: float) -> void:
 	# Apply alpha
 	var distance = global_position.distance_to(pointing_to)
 	initial_distance = max(initial_distance, distance)
-	modulate.a = clamp(distance / initial_distance, min_opacity, max_opacity)
+	if distance <= distance_to_disappear:
+		modulate.a = 0
+	else:
+		modulate.a = clamp(distance / initial_distance, min_opacity, max_opacity)
 
 
 func calculate_position() -> Vector2:

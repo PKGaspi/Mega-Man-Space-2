@@ -40,8 +40,9 @@ shader_param/palette = ExtResource( 4 )
 shader_param/mask = ExtResource( 2 )
 
 [node name="EnemyPointer" type="Sprite"]
-modulate = Color( 1, 1, 1, 0.2 )
+modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 2 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 palettes = ExtResource( 3 )
+distance_to_disappear = 100.0
