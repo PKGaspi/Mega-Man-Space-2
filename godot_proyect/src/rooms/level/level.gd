@@ -57,7 +57,6 @@ func _on_animation_finished(animation):
 	if animation == "ready":
 		global.unpause()
 		set_entities_visibility(true)
-		next_wave()
 
 
 func _on_megaship_death() -> void:
@@ -65,6 +64,14 @@ func _on_megaship_death() -> void:
 	center_text.set_animation("none") 
 	music_looper.stop()
 	game_over_timer.start()
+
+
+func _on_megaship_transitioned(state_path: String) -> void:
+	match state_path:
+		"TeleportEnd":
+			if level_data.current_wave_index == 0:
+				# Start the first wave only. This is when the tp animation ends.
+				next_wave()
 
 
 func _on_GameOverTimer_timeout() -> void:
@@ -115,9 +122,11 @@ func set_music(music_intro: AudioStream, music_loop: AudioStream) -> void:
 
 func set_entities_visibility(value: bool) -> void:
 	hud.visible = value
-	center_text.visible = value
 	game_layer.visible = value
 	ObjectRegistry.set_visibility(value)
+	if !value:
+		# Only hide this text. It will show up itself when needed.
+		center_text.visible = value
 
 
 func start_ready_animation() -> void:
@@ -141,6 +150,7 @@ func next_wave() -> void:
 		
 		wave_timer.start()
 		# TODO: Play warning animation.
+		center_text.set_animation("warning", 3)
 	else:
 		wave_timer.stop()
 		print("muy bien!!")
