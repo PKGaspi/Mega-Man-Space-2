@@ -10,7 +10,7 @@ acceleration_ratio = 3.0
 deacceleration_ratio = 0.8
 collision_damage = 4.0
 invencibility_time = 0.4
-view_distance = 9.22337e+18
+view_distance = 420.0
 weaknesses = {
 0: 1,
 1: 1,

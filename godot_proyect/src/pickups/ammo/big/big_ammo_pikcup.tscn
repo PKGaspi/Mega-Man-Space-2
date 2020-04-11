@@ -44,7 +44,6 @@ stats = ExtResource( 2 )
 
 [node name="SprIcon" parent="." index="0"]
 material = SubResource( 2 )
-frame = 1
 
 [node name="CollisionBox" parent="." index="1"]
 shape = ExtResource( 5 )

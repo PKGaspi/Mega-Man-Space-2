@@ -1,9 +1,17 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=1]
 [ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/pickups/ammo/small/small_ammo_pikcup.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/pickups/ammo/big/big_ammo_pikcup.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/pickups/e_tank/e_tank_pikcup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/pickups/one_up/one_up_pikcup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/pickups/hp/small/small_hp_pikcup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/pickups/upgrades/max_hp/max_hp_upgrade.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/pickups/upgrades/max_ammo/max_ammo_upgrade.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/pickups/hp/big/big_hp_pikcup.tscn" type="PackedScene" id=10]
 
 [resource]
 script = ExtResource( 1 )
-items = [ ExtResource( 2 ) ]
-weights = [ 1 ]
+items = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 8 ) ]
+weights = [ 150, 5, 4, 4, 3, 5, 5, 10, 10 ]

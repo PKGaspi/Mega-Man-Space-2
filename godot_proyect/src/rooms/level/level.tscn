@@ -155,20 +155,20 @@ _to_follow_path = NodePath("../../Level/GameLayer/Camera")
 [node name="MusicLooper" type="Node" parent="."]
 script = ExtResource( 18 )
 
+[node name="SndWaveHelp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = 8.0
+pitch_scale = 0.9
+bus = "Sfx"
+
 [node name="GameOverTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 
 [node name="WaveTimer" type="Timer" parent="."]
 pause_mode = 1
-wait_time = 5.0
+wait_time = 30.0
 one_shot = true
-
-[node name="SndWaveHelp" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 1 )
-volume_db = 8.0
-pitch_scale = 0.9
-bus = "Sfx"
 [connection signal="transitioned" from="GameLayer/Megaship/StateMachine" to="." method="_on_megaship_transitioned"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_GameOverTimer_timeout"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

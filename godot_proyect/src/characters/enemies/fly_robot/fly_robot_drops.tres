@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=11 format=2]
+
+[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=1]
+[ext_resource path="res://src/pickups/hp/small/small_hp_pikcup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/pickups/upgrades/max_speed/max_speed_upgrade.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/pickups/upgrades/max_ammo/max_ammo_upgrade.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/pickups/upgrades/bullets/bullets_upgrade.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/pickups/upgrades/max_hp/max_hp_upgrade.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/pickups/upgrades/cannons/cannons_upgrade.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/pickups/hp/big/big_hp_pikcup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/pickups/one_up/one_up_pikcup.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/pickups/e_tank/e_tank_pikcup.tscn" type="PackedScene" id=10]
+
+[resource]
+script = ExtResource( 1 )
+items = [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 2 ), ExtResource( 10 ), ExtResource( 9 ), null ]
+weights = [ 10, 10, 10, 20, 30, 20, 20, 3, 3, 5 ]
