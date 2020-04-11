@@ -91,6 +91,8 @@ func set_max_projectiles(value: int) -> void:
 
 
 func set_ammo(value: float, pause: bool = false) -> void:
+	if weapon == Weapon.TYPES.MEGA:
+		return
 	ammo = clamp(value, 0, max_ammo)
 	if ammo_bar != null:
 		ammo_bar.set_value(ammo, pause)
