@@ -6,13 +6,14 @@
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://src/gui/menus/menu_entry_frame.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/rooms/level/data/wood_man_level_data.tres" type="Resource" id=6]
-[ext_resource path="res://src/rooms/level/data/crash_man_level_data.tres" type="Resource" id=7]
+[ext_resource path="res://src/rooms/level/data/debug_level_data.tres" type="Resource" id=7]
 [ext_resource path="res://src/rooms/level/data/flash_man_level_data.tres" type="Resource" id=8]
 [ext_resource path="res://src/rooms/level/data/metal_man_level_data.tres" type="Resource" id=9]
 [ext_resource path="res://src/rooms/level/data/bubble_man_level_data.tres" type="Resource" id=10]
 [ext_resource path="res://src/rooms/level/data/heat_man_level_data.tres" type="Resource" id=11]
 [ext_resource path="res://src/rooms/level/data/quick_man_level_data.tres" type="Resource" id=12]
 [ext_resource path="res://src/rooms/level/data/air_man_level_data.tres" type="Resource" id=13]
+
 
 [node name="SelectStageMenu" type="Control"]
 anchor_right = 1.0
