@@ -30,9 +30,9 @@ export(float) var PLANET_FREQUENCY = .008
 export(int) var MAX_PLANETS_PER_SECTOR = 1
 
 const SECTOR_SIZE_MULTIPLIER = .35
-onready var sector_size = get_viewport().size * SECTOR_SIZE_MULTIPLIER # Sector size.
-onready var sector_rows = get_viewport().size.y / 27 # Number of sectors loaded at the same time on a row.
-onready var sector_columns = get_viewport().size.x / 48 # Number of sectors loaded at the same time on a column.
+var sector_size: Vector2 # Sector size.
+var sector_rows: int # Number of sectors loaded at the same time on a row.
+var sector_columns: int # Number of sectors loaded at the same time on a column.
 onready var stars_per_sector = 5 # Number of stars to attempt to generate per sector.
 
 var random # Base randomizer.
@@ -47,6 +47,7 @@ var prev_sector = null # Megaship last sector.
 
 
 func _ready():
+	update_sector_values()
 	# Create random generator.
 	random = global.init_random()
 	r_seed = random.seed
@@ -98,10 +99,15 @@ func _on_to_follow_tree_exiting():
 
 
 func _on_viewport_size_changed():
+	update_sector_values()
+
+
+func update_sector_values() -> void:
 	$BackgroundColor.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 	
-	sector_rows = get_viewport().get_size_override().y / 27 
-	sector_columns = get_viewport().get_size_override().x / 48
+	sector_size = get_viewport().get_visible_rect().size * SECTOR_SIZE_MULTIPLIER
+	sector_rows = round(get_viewport().get_visible_rect().size.y / 27)
+	sector_columns = round(get_viewport().get_visible_rect().size.x / 48)
 
 
 

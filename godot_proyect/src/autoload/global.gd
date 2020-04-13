@@ -4,7 +4,7 @@ const DEBUG_BUS_LAYOUT := preload("res://resources/audio/debug_bus_layout.tres")
 const CURSOR := preload("res://assets/sprites/gui/cursor.png")
 const TOUCHSCREEN_LAYOUT := preload("res://src/gui/touchscreen_layout.tscn")
 
-const SCREEN_SIZE := Vector2(480, 270)
+const BASE_RES := Vector2(480, 270)
 
 onready var snd_collect := $SndCollect
 onready var game_exit_timer := $GameExitTimer

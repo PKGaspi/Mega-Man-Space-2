@@ -40,7 +40,7 @@ func spawn_enemy(enemy: PackedScene, pos: Vector2) -> void:
 # If it is, it returns the closest point outside the camera + margin.
 # If it isn't, it returns the point itself.
 func move_point_off_screen(pos: Vector2, margin: float = 0) -> Vector2:
-	var visible_area_size := get_viewport().size
+	var visible_area_size := get_viewport().get_visible_rect().size
 	var visible_area_center := -get_canvas_transform().get_origin()
 	var visible_area := Rect2(visible_area_center, visible_area_size).grow(margin)
 	

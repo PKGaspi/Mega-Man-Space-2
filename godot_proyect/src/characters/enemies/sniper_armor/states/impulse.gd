@@ -23,7 +23,6 @@ func enter(msg: Dictionary = {}) -> void:
 
 
 func physics_process(delta: float) -> void:
-	print(_parent.velocity)
 	var dir = direction_to_megaship()
 	
 	character.global_rotation = dir.rotated(PI/2).angle()
