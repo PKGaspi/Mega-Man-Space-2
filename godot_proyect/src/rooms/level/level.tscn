@@ -53,6 +53,7 @@ shader_param/palette = ExtResource( 3 )
 shader_param/mask = ExtResource( 12 )
 
 [sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 29.7028, 10 )
 
 [node name="Level" type="Node"]
 pause_mode = 2
@@ -151,14 +152,16 @@ script = ExtResource( 10 )
 _path_to_follow = NodePath("../../../Level/GameLayer/Megaship")
 
 [node name="SniperArmor" parent="GameLayer" instance=ExtResource( 4 )]
-position = Vector2( 215.973, -56.313 )
-_cannons_path = NodePath("")
+position = Vector2( 176.584, -52.1522 )
 
-[node name="Shield" type="StaticBody2D" parent="GameLayer"]
+[node name="Shield" type="StaticBody2D" parent="GameLayer/SniperArmor"]
+position = Vector2( 0.518005, 0 )
+collision_layer = 32
+collision_mask = 2
 script = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameLayer/Shield"]
-position = Vector2( 79.0559, 0 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameLayer/SniperArmor/Shield"]
+position = Vector2( -0.554848, -21.359 )
 shape = SubResource( 4 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]

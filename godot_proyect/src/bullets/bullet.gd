@@ -9,6 +9,9 @@ export(int) var n_collisions: int = 1 # Number of collisions before the bullet d
 var power: int
 var dir: Vector2
 
+onready var snd_bounce := $SndBounce
+
+
 func _ready():
 	dir = Vector2(cos(global_rotation), sin(global_rotation))
 	if get_collision_layer_bit(1):
@@ -60,7 +63,7 @@ func hit_character(character) -> void:
 
 
 func bounce(collision: KinematicCollision2D) -> void:
-	# TODO: Play bounce sound.
+	snd_bounce.play()
 	dir = -dir.reflect(collision.normal)
 	global_rotation = dir.angle()
 	add_collision_exception_with(collision.collider)
