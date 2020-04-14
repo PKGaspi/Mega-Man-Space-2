@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/characters/enemies/sniper/sniper_frames.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://src/characters/enemies/sniper/sniper_stats.tres" type="Resource" id=3]
+[ext_resource path="res://src/characters/enemies/shield.gd" type="Script" id=4]
+[ext_resource path="res://src/characters/enemies/sniper/sniper_collision_shape.tres" type="Shape2D" id=5]
+[ext_resource path="res://src/characters/enemies/sniper/sniper_shield_collision_shape.tres" type="Shape2D" id=6]
+[ext_resource path="res://src/characters/states/random_direction.gd" type="Script" id=7]
+[ext_resource path="res://src/characters/enemies/sniper/states/aim.gd" type="Script" id=8]
+[ext_resource path="res://src/characters/enemies/sniper/states/shield.gd" type="Script" id=9]
+
+[node name="Sniper" instance=ExtResource( 1 )]
+stats = ExtResource( 3 )
+_hp_bar_path = NodePath("../Sniper/hud/HPBar")
+
+[node name="SprBody" type="AnimatedSprite" parent="." index="0"]
+frames = ExtResource( 2 )
+animation = "aim"
+
+[node name="CollisionBox" parent="." index="1"]
+position = Vector2( 1.5, -2 )
+shape = ExtResource( 5 )
+
+[node name="Shield" type="StaticBody2D" parent="." index="2"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="CollisionBox" type="CollisionShape2D" parent="Shield" index="0"]
+position = Vector2( 2, 9.5 )
+shape = ExtResource( 6 )
+
+[node name="StateMachine" parent="." index="3"]
+initial_state = NodePath("Move/RandomDirection/Shield")
+
+[node name="RandomDirection" type="Node" parent="StateMachine/Move" index="2"]
+script = ExtResource( 7 )
+
+[node name="Shield" type="Node" parent="StateMachine/Move/RandomDirection" index="0"]
+script = ExtResource( 9 )
+
+[node name="Aim" type="Node" parent="StateMachine/Move/RandomDirection" index="1"]
+script = ExtResource( 8 )
+
+[node name="HPBar" parent="hud" index="0"]
+margin_left = 14.0
+margin_top = -8.0
+margin_right = 19.0
+margin_bottom = 8.0
+max_value = 8.0
+value = 8.0

@@ -1,21 +1,22 @@
 extends State
 
-onready var dir: Vector2
 onready var rng := global.init_random()
-
+onready var dir: Vector2 = random_dir()
 
 
 func _ready() -> void:
 	dir = random_dir()
 
 
-func enter(msg: Dictionary = {}) -> void:
+func enter(msg: Dictionary = {"new_dir": false}) -> void:
 	# Calculate velocity.
-	_parent.velocity = dir * _parent.max_speed
+	if msg["new_dir"]:
+		dir = random_dir()
 
 
 func physics_process(delta: float) -> void:
 	# Move.
+	_parent.velocity = dir * _parent.max_speed
 	_parent.physics_process(delta)
 
 

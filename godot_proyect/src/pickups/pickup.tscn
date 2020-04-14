@@ -8,11 +8,10 @@
 [ext_resource path="res://resources/pickups/pickup_icons.tres" type="SpriteFrames" id=6]
 [ext_resource path="res://src/library/state machine/state.gd" type="Script" id=7]
 [ext_resource path="res://src/pickups/states/move.gd" type="Script" id=8]
-[ext_resource path="res://src/pickups/states/random_direction.gd" type="Script" id=9]
+[ext_resource path="res://src/characters/states/random_direction.gd" type="Script" id=9]
 [ext_resource path="res://src/stats/pickup_stats.gd" type="Script" id=10]
-[ext_resource path="res://assets/sprites/characters/pickups/ammo/ammo_mask_1.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/characters/pickups/ammo/ammo_mask_0.png" type="Texture" id=11]
 [ext_resource path="res://src/characters/states/follow.gd" type="Script" id=12]
-
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 10 )
@@ -65,7 +64,6 @@ stats = SubResource( 1 )
 material = SubResource( 3 )
 frames = ExtResource( 6 )
 animation = "ammo"
-frame = 1
 playing = true
 script = ExtResource( 5 )
 palettes = ExtResource( 3 )

@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/sfx/other/wave_help.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/rooms/level/data/debug_level_data.tres" type="Resource" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
-[ext_resource path="res://src/characters/enemies/sniper_armor/sniper_armor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/characters/enemies/shield.gd" type="Script" id=5]
+[ext_resource path="res://src/characters/enemies/sniper/sniper.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=7]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
@@ -51,9 +50,6 @@ shader = SubResource( 2 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 3 )
 shader_param/mask = ExtResource( 12 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 29.7028, 10 )
 
 [node name="Level" type="Node"]
 pause_mode = 2
@@ -151,18 +147,8 @@ editor_draw_drag_margin = true
 script = ExtResource( 10 )
 _path_to_follow = NodePath("../../../Level/GameLayer/Megaship")
 
-[node name="SniperArmor" parent="GameLayer" instance=ExtResource( 4 )]
-position = Vector2( 176.584, -52.1522 )
-
-[node name="Shield" type="StaticBody2D" parent="GameLayer/SniperArmor"]
-position = Vector2( 0.518005, 0 )
-collision_layer = 32
-collision_mask = 2
-script = ExtResource( 5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameLayer/SniperArmor/Shield"]
-position = Vector2( -0.554848, -21.359 )
-shape = SubResource( 4 )
+[node name="Sniper" parent="GameLayer" instance=ExtResource( 4 )]
+position = Vector2( 74.2012, -69.7198 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 _to_follow_path = NodePath("../../Level/GameLayer/Camera")

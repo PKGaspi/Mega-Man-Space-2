@@ -34,6 +34,7 @@ onready var snd_hit := $SndHit
 onready var snd_upgrade := $SndUpgrade
 
 # Signals.
+signal shooted()
 signal hitted(total_damage, direction)
 signal death()
 
@@ -141,6 +142,14 @@ func set_invencible(value: bool) -> void:
 ####################
 ## API functions. ##
 ####################
+
+
+func shoot(power: int = 0) -> bool:
+	if is_instance_valid(cannons) and cannons.fire(power):
+		emit_signal("shooted")
+		return true
+	
+	return false
 
 
 func collide_character(character) -> void:

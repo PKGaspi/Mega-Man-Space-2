@@ -11,11 +11,6 @@ animations = [ {
 "name": "slide",
 "speed": 5.0
 }, {
-"frames": [  ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ],
 "loop": false,
 "name": "contract",
