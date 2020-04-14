@@ -14,7 +14,7 @@ var shoot_timer: Timer
 func _ready() -> void:
 	yield(owner,"ready")
 	
-	shield_transform = Transform2D(deg2rad(90), Vector2(-1, -2))
+	shield_transform = Transform2D(deg2rad(90), Vector2(-1, -4))
 	# Nodes.
 	spr_body = character.get_node("SprBody")
 	shield = character.get_node("Shield")

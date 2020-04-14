@@ -46,7 +46,7 @@ collision_mask = 2
 script = ExtResource( 4 )
 
 [node name="CollisionBox" type="CollisionShape2D" parent="Shield" index="0"]
-position = Vector2( 2, 9.5 )
+position = Vector2( 2, 11.5 )
 shape = ExtResource( 6 )
 
 [node name="StateMachine" parent="." index="4"]

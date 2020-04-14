@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/sfx/other/wave_help.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/rooms/level/data/debug_level_data.tres" type="Resource" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
+[ext_resource path="res://src/characters/enemies/sniper_armor/sniper_armor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=7]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
@@ -145,6 +146,9 @@ drag_margin_bottom = 0.1
 editor_draw_drag_margin = true
 script = ExtResource( 10 )
 _path_to_follow = NodePath("../../../Level/GameLayer/Megaship")
+
+[node name="SniperArmor" parent="GameLayer" instance=ExtResource( 4 )]
+position = Vector2( 285.771, 90.0026 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 _to_follow_path = NodePath("../../Level/GameLayer/Camera")
