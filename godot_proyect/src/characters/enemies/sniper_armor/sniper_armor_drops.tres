@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=1]
+[ext_resource path="res://src/characters/enemies/sniper/sniper.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+items = [ ExtResource( 2 ) ]
+weights = [ 1 ]

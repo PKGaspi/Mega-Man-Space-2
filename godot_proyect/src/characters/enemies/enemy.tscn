@@ -71,7 +71,7 @@ stream = ExtResource( 5 )
 attenuation = 0.0272047
 script = null
 
-[node name="hud" type="Control" parent="." index="3"]
+[node name="hud" type="Control" parent="." index="4"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {

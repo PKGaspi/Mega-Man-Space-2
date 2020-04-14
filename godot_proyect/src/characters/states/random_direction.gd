@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func enter(msg: Dictionary = {"new_dir": false}) -> void:
 	# Calculate velocity.
-	if msg["new_dir"]:
+	if msg.has("new_dir") and msg["new_dir"]:
 		dir = random_dir()
 
 
