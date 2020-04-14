@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/sprites/animated_palette_sprite.gd"
 }, {
-"base": "MoveableArea2D",
+"base": "KinematicBody2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://src/bullets/bullet.gd"
@@ -149,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/library/state machine/rapid_weapon_state.gd"
 }, {
+"base": "StaticBody2D",
+"class": "Shield",
+"language": "GDScript",
+"path": "res://src/characters/enemies/shield.gd"
+}, {
 "base": "Position2D",
 "class": "Spawner",
 "language": "GDScript",
@@ -253,6 +258,7 @@ _global_script_class_icons={
 "PointingSprite": "",
 "RandomPitchAudioStreamPlayer2D": "",
 "RapidWeaponState": "",
+"Shield": "",
 "Spawner": "",
 "State": "",
 "StateMachine": "",
@@ -494,8 +500,8 @@ pointing/emulate_mouse_from_touch=false
 
 [layer_names]
 
-2d_render/layer_1="player"
-2d_physics/layer_1="player"
+2d_render/layer_1="players"
+2d_physics/layer_1="players"
 2d_render/layer_2="bullets"
 2d_physics/layer_2="player_bullets"
 2d_render/layer_3="enemies"
@@ -503,6 +509,7 @@ pointing/emulate_mouse_from_touch=false
 2d_render/layer_4="pickups"
 2d_physics/layer_4="enemy_bullets"
 2d_physics/layer_5="pickups"
+2d_physics/layer_6="shields"
 2d_render/layer_20="stars"
 
 [rendering]

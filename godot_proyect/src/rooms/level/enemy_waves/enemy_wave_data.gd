@@ -25,7 +25,7 @@ func initialize() -> void:
 		ObjectRegistry.connect("enemy_registered", self, "_on_enemy_registered")
 
 
-func _on_enemy_registered(enemy: Enemy) -> void:
+func _on_enemy_registered(enemy) -> void:
 	n_enemies += 1
 	enemy.connect("tree_exited", self, "_on_enemy_tree_exited")
 

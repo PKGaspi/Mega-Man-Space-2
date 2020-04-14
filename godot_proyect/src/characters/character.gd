@@ -149,10 +149,9 @@ func collide_character(character) -> void:
 	character.hit(collision_damage, dir)
 
 
-func hit_bullet(bullet: Bullet) -> void:
+func hit_bullet(bullet) -> void:
 	# bullet collided with self. self gets hit by the bullet.
-	var dir = bullet.global_position.direction_to(global_position)
-	hit(bullet.damage, dir, bullet.weapon)
+	hit(bullet.damage, bullet.dir, bullet.weapon)
 
 
 func hit(damage: float, dir: Vector2, weapon: int = Weapon.TYPES.MEGA) -> void:

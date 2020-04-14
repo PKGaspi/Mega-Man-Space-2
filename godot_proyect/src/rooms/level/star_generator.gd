@@ -106,8 +106,8 @@ func update_sector_values() -> void:
 	$BackgroundColor.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 	
 	sector_size = get_viewport().get_visible_rect().size * SECTOR_SIZE_MULTIPLIER
-	sector_rows = round(get_viewport().get_visible_rect().size.y / 27)
-	sector_columns = round(get_viewport().get_visible_rect().size.x / 48)
+	sector_rows = int(round(get_viewport().get_visible_rect().size.y / 27))
+	sector_columns = int(round(get_viewport().get_visible_rect().size.x / 48))
 
 
 

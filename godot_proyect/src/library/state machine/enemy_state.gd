@@ -2,7 +2,7 @@ class_name EnemyState
 extends CharacterState
 
 
-var megaship: Megaship
+var megaship
 
 func _ready() -> void:
 	yield(owner, "ready")

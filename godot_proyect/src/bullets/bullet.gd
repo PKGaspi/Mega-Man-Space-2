@@ -1,31 +1,31 @@
 class_name Bullet
-extends MoveableArea2D
+extends KinematicBody2D
 
-export(float, 0, 1000, 10) var motion_speed = 560 # Pixels/second.
-export(float, 0, 30, .1) var damage : float = 2
-export(Weapon.TYPES) var weapon = Weapon.TYPES.MEGA
-export(int) var n_collisions = 1 # Number of collisions before the bullet dissapears. Cero or negative for no max.
+export(float, 0, 1000, 10) var motion_speed: float = 560 # Pixels/second.
+export(float, 0, 30, .1) var damage: float = 2
+export(Weapon.TYPES) var weapon: int = Weapon.TYPES.MEGA
+export(int) var n_collisions: int = 1 # Number of collisions before the bullet dissapears. Cero or negative for no max.
 
-var power
-var dir
+var power: int
+var dir: Vector2
 
 func _ready():
-	dir = Vector2(cos(rotation), sin(rotation))
+	dir = Vector2(cos(global_rotation), sin(global_rotation))
 	if get_collision_layer_bit(1):
 		add_to_group("player_bullets")
 
 
 func _physics_process(delta):
-	move(motion_speed * delta * dir)
+	var velocity := motion_speed * dir
+	var collision := move_and_collide(velocity * delta)
+	
+	collide(collision)
+	
 
 
 func _on_screen_exited():
 	# Destroy itself if it has exited the screen.
 	queue_free()
-
-
-func _on_body_entered(body: PhysicsBody2D) -> void:
-	collide(body)
 
 
 func init(global_position, rotation, group):
@@ -38,9 +38,29 @@ func init(global_position, rotation, group):
 #########################
 
 
-func collide(character) -> void:
+func collide(collision: KinematicCollision2D) -> void:
+	if not is_instance_valid(collision):
+		return
+	
+	var collider = collision.collider
+	
+	if collider is Shield:
+		bounce(collision)
+	elif collider is Character:
+		hit_character(collider)
+
+
+func hit_character(character) -> void:
+	# self hits character. self collided with character.
 	character.hit_bullet(self)
 	n_collisions -= 1
+	add_collision_exception_with(character)
 	if n_collisions == 0:
-		disconnect("body_entered", self, "_on_body_entered")
 		queue_free()
+
+
+func bounce(collision: KinematicCollision2D) -> void:
+	# TODO: Play bounce sound.
+	dir = -dir.reflect(collision.normal)
+	global_rotation = dir.angle()
+	add_collision_exception_with(collision.collider)
