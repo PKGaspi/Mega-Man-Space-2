@@ -62,6 +62,12 @@ func apply_propulsion_effects(propulsion: Vector2) -> void:
 	propulsion_particles.emit(propulsion)
 
 
+func collide_character(character) -> void:
+	# self collided with character, but the megaship always get hit on collision.
+	# Reverse the collision.
+	character.collide_character(self)
+
+
 func emit_hit_particles() -> void:
 	hit_particles.emitting = true
 	hit_particles.restart()

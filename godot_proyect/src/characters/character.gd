@@ -144,11 +144,13 @@ func set_invencible(value: bool) -> void:
 
 
 func collide_character(character) -> void:
-	var dir = character.global_position.direction_to(global_position)
-	hit(character.collision_damage, dir)
+	# self collided with character. character gets hit by self.
+	var dir = global_position.direction_to(character.global_position)
+	character.hit(collision_damage, dir)
 
 
-func collide_bullet(bullet: Bullet) -> void:
+func hit_bullet(bullet: Bullet) -> void:
+	# bullet collided with self. self gets hit by the bullet.
 	var dir = bullet.global_position.direction_to(global_position)
 	hit(bullet.damage, dir, bullet.weapon)
 
