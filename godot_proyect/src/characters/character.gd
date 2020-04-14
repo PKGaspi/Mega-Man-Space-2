@@ -11,6 +11,7 @@ var max_hp: float setget set_max_hp
 var invencibility_time: float setget set_invencibility_time 
 # A dictionary with multipliers of what makes more damage or less to this character.
 var weaknesses: Dictionary
+var collision_damage: float
 
 # HP bar.
 export var _hp_bar_path: NodePath
@@ -33,7 +34,8 @@ onready var snd_hit := $SndHit
 onready var snd_upgrade := $SndUpgrade
 
 # Signals.
-signal death
+signal hitted(total_damage, direction)
+signal death()
 
 
 
@@ -64,6 +66,7 @@ func _ready() -> void:
 	set_hp(max_hp)
 	set_invencibility_time(stats.get_stat("invencibility_time"))
 	weaknesses = stats.get_stat("weaknesses")
+	collision_damage = stats.get_stat("collision_damage")
 	
 	# Signals.
 	stats.connect("stat_changed", self, "_on_stat_changed")
@@ -140,14 +143,29 @@ func set_invencible(value: bool) -> void:
 ####################
 
 
-func hit(damage: float, weapon: int = Weapon.TYPES.MEGA) -> void:
-	# var weapon = bullet.weapon
+func collide_character(character) -> void:
+	var dir = character.global_position.direction_to(global_position)
+	hit(character.collision_damage, dir)
+
+
+func collide_bullet(bullet: Bullet) -> void:
+	var dir = bullet.global_position.direction_to(global_position)
+	hit(bullet.damage, dir, bullet.weapon)
+
+
+func hit(damage: float, dir: Vector2, weapon: int = Weapon.TYPES.MEGA) -> void:
 	if not invencible:
 		snd_hit.play()
 		set_invencible(true)
 		# TODO: Calculate damage with enemy weakness and type.
-		set_hp_relative(-damage)
+		var total_damage = damage
+		set_hp_relative(-total_damage)
+		emit_hit_particles()
+		emit_signal("hitted", total_damage, dir)
 
+
+func emit_hit_particles() -> void:
+	pass
 
 func check_death() -> void:
 	# Overwrite to add more death conditions.

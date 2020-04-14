@@ -39,7 +39,7 @@ func init(global_position, rotation, group):
 
 
 func collide(character) -> void:
-	character.hit(damage, weapon)
+	character.collide_bullet(self)
 	n_collisions -= 1
 	if n_collisions == 0:
 		disconnect("body_entered", self, "_on_body_entered")

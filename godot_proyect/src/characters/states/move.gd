@@ -25,6 +25,10 @@ func physics_process(delta):
 	
 	character.move_and_slide(velocity)
 	
+	var collider := get_collided_character()
+	if is_instance_valid(collider):
+		collider.collide_character(character)
+	
 	# Apply rotation.
 	if rotate_forwards and velocity.length() > 0:
 		character.global_rotation = velocity.rotated(PI/2).angle()

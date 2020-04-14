@@ -10,6 +10,7 @@ func _ready() -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	character.connect("hitted", self, "_on_character_hitted")
 	# Allow cannon shooting.
 	cannons.state_machine.transition_to(cannons.weapon_to_state(cannons.weapon))
 	if msg.has("velocity"):
@@ -17,9 +18,15 @@ func enter(msg: Dictionary = {}) -> void:
 
 
 func exit() -> void:
+	character.disconnect("hitted", self, "_on_character_hitted")
 	# Disable cannon shooting.
 	cannons.state_machine.transition_to("Disabled")
 
+
+func _on_character_hitted(total_damage, dir) -> void:
+	_state_machine.transition_to("Move/Knockback", 
+		{"dir": dir, "damage": total_damage})
+	
 
 func physics_process(delta: float) -> void:
 	# Calculate movement.
@@ -40,18 +47,7 @@ func physics_process(delta: float) -> void:
 	
 	# Call the parent state's method to apply movement.
 	_parent.physics_process(delta)
-	
-	# Get collisions.
-	var collider = _parent.get_collided_character()
-	if collider != null:
-		if collider is Pickup:
-			# TODO: Apply the pickup effect.
-			pass 
-		elif collider is Character and not character.invencible:
-			# Get hit and knockbacked.
-			character.hit(collider.collision_damage)
-			var dir = collider.global_position.direction_to(character.global_position)
-			_state_machine.transition_to("Move/Knockback", {"knockback_dir": dir})
+
 
 
 func input(event: InputEvent) -> void:

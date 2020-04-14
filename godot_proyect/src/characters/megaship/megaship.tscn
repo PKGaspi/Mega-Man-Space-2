@@ -142,7 +142,7 @@ script = ExtResource( 25 )
 [node name="Knockback" type="Node" parent="StateMachine/Move" index="1"]
 script = ExtResource( 26 )
 knockback_time = 1.0
-knockback_speed = 70.0
+knockback_multiplier = 25.0
 
 [node name="Teleport" type="Node" parent="StateMachine/Move" index="2"]
 script = ExtResource( 12 )

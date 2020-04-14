@@ -129,9 +129,6 @@ initial_msg = {
 "init_position": Vector2( 0, -300 )
 }
 
-[node name="Knockback" parent="GameLayer/Megaship/StateMachine/Move" index="1"]
-knockback_speed = 80.0
-
 [node name="Cannons" parent="GameLayer/Megaship" index="4"]
 _ammo_bar_path = NodePath("../../../../Level/UILayer/HUD/BarContainer/MegashipAmmoBar")
 
@@ -151,7 +148,7 @@ script = ExtResource( 10 )
 _path_to_follow = NodePath("../../../Level/GameLayer/Megaship")
 
 [node name="SniperArmor" parent="GameLayer" instance=ExtResource( 4 )]
-position = Vector2( 35.472, -178.299 )
+position = Vector2( 123.822, -113.699 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 _to_follow_path = NodePath("../../Level/GameLayer/Camera")

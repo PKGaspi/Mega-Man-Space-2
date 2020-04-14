@@ -62,6 +62,11 @@ func apply_propulsion_effects(propulsion: Vector2) -> void:
 	propulsion_particles.emit(propulsion)
 
 
+func emit_hit_particles() -> void:
+	hit_particles.emitting = true
+	hit_particles.restart()
+
+
 func create_enemy_wave_pointer(wave: EnemyWave, palette: int) -> void:
 	var wave_data = wave.wave_data
 	var pointer: PointingSprite = ENEMY_WAVE_POINTER.instance()
@@ -79,12 +84,6 @@ func create_enemy_pointer(enemy: Enemy, palette: int) -> void:
 	enemy.connect("tree_exited", pointer, "queue_free")
 	add_child(pointer)
 	pointer.owner = self
-
-
-func hit(damage: float, weapon := Weapon.TYPES.MEGA) -> void:
-	.hit(damage, weapon)
-	hit_particles.emitting = true
-	hit_particles.restart()
 
 
 func set_palette(palette_index : int) -> void:

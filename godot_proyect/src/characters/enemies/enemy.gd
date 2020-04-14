@@ -3,11 +3,8 @@ extends Character
 
 export var drops: Resource
 
-var collision_damage
-
 
 func _ready() -> void:
-	collision_damage = stats.get_stat("collision_damage")
 	drops.initialize()
 
 
@@ -17,6 +14,7 @@ func die() -> void:
 	
 	# Execute regular death.
 	.die()
+
 
 func drop() -> void:
 	# Drop something.
