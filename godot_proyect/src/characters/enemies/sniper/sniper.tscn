@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/enemies/sniper/sniper_frames.tres" type="SpriteFrames" id=2]
@@ -9,10 +9,15 @@
 [ext_resource path="res://src/characters/states/random_direction.gd" type="Script" id=7]
 [ext_resource path="res://src/characters/enemies/sniper/states/aim.gd" type="Script" id=8]
 [ext_resource path="res://src/characters/enemies/sniper/states/shield.gd" type="Script" id=9]
+[ext_resource path="res://assets/sfx/enemy/shoot.wav" type="AudioStream" id=10]
+[ext_resource path="res://src/characters/cannon/cannon_setup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/characters/cannon/cannon.gd" type="Script" id=12]
+[ext_resource path="res://src/characters/enemies/enemy_bullet.tscn" type="PackedScene" id=13]
 
 [node name="Sniper" instance=ExtResource( 1 )]
 stats = ExtResource( 3 )
 _hp_bar_path = NodePath("../Sniper/hud/HPBar")
+_cannons_path = NodePath("CannonSetup")
 
 [node name="SprBody" type="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
@@ -22,7 +27,18 @@ animation = "aim"
 position = Vector2( 1.5, -2 )
 shape = ExtResource( 5 )
 
-[node name="Shield" type="StaticBody2D" parent="." index="2"]
+[node name="CannonSetup" parent="." index="2" instance=ExtResource( 11 )]
+
+[node name="Cannon" type="Position2D" parent="CannonSetup" index="0"]
+position = Vector2( 5.5, 13 )
+rotation = 1.5708
+script = ExtResource( 12 )
+projectile = ExtResource( 13 )
+
+[node name="SndShoot" parent="CannonSetup" index="1"]
+stream = ExtResource( 10 )
+
+[node name="Shield" type="StaticBody2D" parent="." index="3"]
 collision_layer = 32
 collision_mask = 2
 script = ExtResource( 4 )
@@ -31,7 +47,7 @@ script = ExtResource( 4 )
 position = Vector2( 2, 9.5 )
 shape = ExtResource( 6 )
 
-[node name="StateMachine" parent="." index="3"]
+[node name="StateMachine" parent="." index="4"]
 initial_state = NodePath("Move/RandomDirection/Shield")
 
 [node name="RandomDirection" type="Node" parent="StateMachine/Move" index="2"]
@@ -50,3 +66,5 @@ margin_right = 19.0
 margin_bottom = 8.0
 max_value = 8.0
 value = 8.0
+
+[editable path="CannonSetup"]

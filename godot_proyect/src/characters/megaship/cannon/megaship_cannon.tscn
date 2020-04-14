@@ -17,8 +17,6 @@
 [ext_resource path="res://src/library/state machine/rapid_weapon_state.gd" type="Script" id=15]
 [ext_resource path="res://src/characters/megaship/cannon/stats/quick_weapon_stats.tres" type="Resource" id=16]
 
-
-
 [sub_resource type="Resource" id=1]
 script = ExtResource( 6 )
 max_ammo = 28.0
@@ -77,32 +75,32 @@ script = ExtResource( 11 )
 [node name="Mega" type="Node" parent="StateMachine/RapidFire"]
 script = ExtResource( 15 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 13 )
+weapon_stats = ExtResource( 13 )
 
 [node name="Air" type="Node" parent="StateMachine/RapidFire"]
 script = ExtResource( 15 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 16 )
+weapon_stats = ExtResource( 16 )
 
 [node name="Bubble" type="Node" parent="StateMachine/RapidFire"]
 script = ExtResource( 15 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 16 )
+weapon_stats = ExtResource( 16 )
 
 [node name="Quick" type="Node" parent="StateMachine/RapidFire"]
 script = ExtResource( 15 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 16 )
+weapon_stats = ExtResource( 16 )
 
 [node name="Metal" type="Node" parent="StateMachine/RapidFire"]
 script = ExtResource( 15 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 16 )
+weapon_stats = ExtResource( 16 )
 
 [node name="Crash" type="Node" parent="StateMachine/RapidFire"]
 script = ExtResource( 15 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 16 )
+weapon_stats = ExtResource( 16 )
 
 [node name="ChargedFire" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
@@ -110,29 +108,29 @@ script = ExtResource( 10 )
 [node name="Heat" type="Node" parent="StateMachine/ChargedFire"]
 script = ExtResource( 12 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 14 )
+weapon_stats = ExtResource( 14 )
 
 [node name="Flash" type="Node" parent="StateMachine/ChargedFire"]
 script = ExtResource( 12 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 14 )
+weapon_stats = ExtResource( 14 )
 
 [node name="Wood" type="Node" parent="StateMachine/ChargedFire"]
 script = ExtResource( 12 )
 projectile = ExtResource( 4 )
-stats = ExtResource( 14 )
+weapon_stats = ExtResource( 14 )
 
 [node name="One" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
-stats = ExtResource( 13 )
+weapon_stats = ExtResource( 13 )
 
 [node name="Two" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
-stats = ExtResource( 13 )
+weapon_stats = ExtResource( 13 )
 
 [node name="Three" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
-stats = ExtResource( 13 )
+weapon_stats = ExtResource( 13 )
 
 [node name="Disabled" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )

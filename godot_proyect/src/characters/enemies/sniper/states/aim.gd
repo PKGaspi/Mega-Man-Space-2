@@ -55,5 +55,6 @@ func exit() -> void:
 
 
 func shoot() -> void:
-	character.shoot()
+	if megaship_in_view_distance():
+		character.shoot()
 	n_shoots -= 1

@@ -24,6 +24,7 @@ func _ready() -> void:
 
 
 func _on_megaship_shooted() -> void:
+	print("holi")
 	shield_timer.start()
 
 

@@ -4,7 +4,7 @@ extends CannonState
 export var projectile: PackedScene
 
 # Stats.
-export var stats: Resource
+export var weapon_stats: Resource
 
 var weapon: int
 var ammo: float
@@ -15,10 +15,10 @@ func _ready() -> void:
 	yield(owner, "ready")
 	
 	# Setup stats.
-	stats.initialize()
-	weapon = stats.get_stat("weapon")
+	weapon_stats.initialize()
+	weapon = weapon_stats.get_stat("weapon")
 	ammo = cannons.ammo
-	ammo_per_shot = stats.get_stat("ammo_per_shot")
+	ammo_per_shot = weapon_stats.get_stat("ammo_per_shot")
 
 
 func enter(msg := {}) -> void:

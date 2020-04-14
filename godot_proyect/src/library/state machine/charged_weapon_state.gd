@@ -7,11 +7,11 @@ var charging_time: float
 
 
 func _ready() -> void:
-	assert(stats != null)
+	assert(weapon_stats != null)
 	
-	stats.initialize()
-	charging_fases = stats.get_stat("charging_fases")
-	charging_time = stats.get_stat("charging_time")
+	weapon_stats.initialize()
+	charging_fases = weapon_stats.get_stat("charging_fases")
+	charging_time = weapon_stats.get_stat("charging_time")
 
 
 func enter(msg: Dictionary = {}) -> void:

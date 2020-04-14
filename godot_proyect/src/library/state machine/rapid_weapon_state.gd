@@ -8,11 +8,11 @@ var cooldown: float
 
 
 func _ready() -> void:
-	assert(stats != null)
+	assert(weapon_stats != null)
 	
-	stats.initialize()
-	max_bullets = stats.get_stat("max_bullets")
-	cooldown = stats.get_stat("cooldown")
+	weapon_stats.initialize()
+	max_bullets = weapon_stats.get_stat("max_bullets")
+	cooldown = weapon_stats.get_stat("cooldown")
 
 
 func enter(msg: Dictionary = {}) -> void:
