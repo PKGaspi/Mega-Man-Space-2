@@ -89,7 +89,8 @@ func _input(event: InputEvent) -> void:
 #		printt(event.axis, event.axis_value)
 	if event.is_action_pressed("toggle_fullscreen"):
 		# Toggle fullscreen	
-		toggle_fullscreen()
+		Config.toggle_fullscreen()
+		Config.save()
 	
 	# Exit game function.
 	if event.is_action_pressed("exit_game"):
@@ -203,11 +204,6 @@ func init_random() -> RandomNumberGenerator:
 	var random = RandomNumberGenerator.new()
 	random.randomize()
 	return random
-
-
-func toggle_fullscreen() -> void:
-	OS.window_fullscreen = !OS.window_fullscreen
-	fix_mouse_mode()
 
 
 func fix_mouse_mode() -> void:
