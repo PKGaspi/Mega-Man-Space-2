@@ -32,6 +32,8 @@ signal opened
 signal closed
 signal animation_ended
 
+
+
 func _ready() -> void:
 	_init_children()
 	
@@ -43,7 +45,8 @@ func _ready() -> void:
 		opening_animation()
 	# Update current entires.
 	call_deferred("update_entries")
-	
+
+
 func _input(event: InputEvent) -> void:
 	if active:
 		if event.is_action_pressed("ui_down"):
@@ -85,12 +88,19 @@ func _on_action_pressed_ui_accept():
 func _on_action_pressed_ui_cancel():
 	pass
 
+
 func _on_FlickeringTimer_timeout() -> void:
 	if entry != null: entry.modulate.a = 0 if entry.modulate.a == 1 else 1
+
 
 func _on_global_user_pause(value : bool) -> void:
 	if !value:
 		close_menu()
+
+
+func _on_child_menu_closed() -> void:
+	set_active(true)
+
 
 func _init_children():
 	# Setup tween.
@@ -100,6 +110,7 @@ func _init_children():
 	flickering_timer.wait_time = _selected_flickering_interval
 	flickering_timer.connect("timeout", self, "_on_FlickeringTimer_timeout")
 	flickering_timer.start()
+
 
 func play_sound(snd: NodePath) -> void:
 	if has_node(snd):
@@ -144,6 +155,14 @@ func close_menu():
 		yield(self, "closed")
 	queue_free()
 
+
+func open_child_menu(menu: PackedScene) -> Control:
+	var inst = menu.instance()
+	inst.palette = palette
+	inst.connect("closed", self, "_on_child_menu_closed")
+	get_parent().add_child(inst)
+	set_active(false)
+	return inst
 
 func set_entry(value : int) -> bool:
 # warning-ignore:narrowing_conversion

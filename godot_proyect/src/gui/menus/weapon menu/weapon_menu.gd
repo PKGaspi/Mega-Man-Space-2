@@ -26,12 +26,8 @@ func _on_action_pressed_ui_accept():
 				global.MEGASHIP.call_deferred("set_hp", global.MEGASHIP.max_hp, true)
 				global.set_user_pause(false)
 		8:
-			# TODO: Open settings menu.
-			var inst = PAUSE_MENU.instance()
-			inst.palette = palette
-			get_parent().add_child(inst)
-			set_active(false)
-			pass
+			# Open pause menu.
+			open_child_menu(PAUSE_MENU)
 		_:
 			# Set weapon.
 			if global.MEGASHIP != null and global.MEGASHIP.has_method("set_weapon"):
