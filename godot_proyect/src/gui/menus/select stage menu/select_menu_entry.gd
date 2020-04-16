@@ -18,10 +18,16 @@ func _ready() -> void:
 
 
 func set_texture(value : Texture) -> void:
+	if not is_instance_valid(frame):
+		call_deferred("set_texture", value)
+		return
 	texture = value
 	frame.set_texture(value)
 
 
 func set_selected(value : bool) -> void:
+	if not is_instance_valid(frame):
+		call_deferred("set_selected", value)
+		return
 	selected = value
 	frame.set_selected(value)

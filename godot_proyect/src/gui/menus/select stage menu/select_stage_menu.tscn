@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/sfx/other/ui_move.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/gui/menus/select stage menu/select_stage_menu.gd" type="Script" id=2]
@@ -13,8 +13,7 @@
 [ext_resource path="res://src/rooms/level/data/heat_man_level_data.tres" type="Resource" id=11]
 [ext_resource path="res://src/rooms/level/data/quick_man_level_data.tres" type="Resource" id=12]
 [ext_resource path="res://src/rooms/level/data/air_man_level_data.tres" type="Resource" id=13]
-
-
+[ext_resource path="res://assets/sprites/gui/menus/boss portraits/heat_man_protrait.png" type="Texture" id=14]
 
 [node name="SelectStageMenu" type="Control"]
 anchor_right = 1.0
@@ -217,6 +216,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 column = -1
+texture = ExtResource( 14 )
 entry_data = ExtResource( 11 )
 
 [node name="FrameContainer" type="MarginContainer" parent="MiddleLeftEntry"]
