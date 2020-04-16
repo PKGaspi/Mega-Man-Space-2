@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/gui/menus/slider_bar_0.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/gui/menus/slider_bar_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/gui/menus/minus.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/gui/menus/slider_bar_2.png" type="Texture" id=4]
+[ext_resource path="res://src/gui/menus/slider.gd" type="Script" id=5]
+[ext_resource path="res://assets/sprites/gui/menus/plus.png" type="Texture" id=6]
+
+[node name="MinusPlusSlider" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -409.0
+margin_bottom = -262.0
+rect_min_size = Vector2( 8, 8 )
+custom_constants/separation = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minus" type="TextureRect" parent="."]
+margin_right = 8.0
+margin_bottom = 8.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource( 3 )
+
+[node name="Slider" type="TextureProgress" parent="."]
+margin_left = 9.0
+margin_right = 62.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 8, 8 )
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+value = 0.4
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
+
+[node name="Plus" type="TextureRect" parent="."]
+margin_left = 63.0
+margin_right = 71.0
+margin_bottom = 8.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource( 6 )

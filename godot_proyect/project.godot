@@ -238,6 +238,11 @@ _global_script_classes=[ {
 "class": "WeightRandomizer",
 "language": "GDScript",
 "path": "res://src/library/weight_randomizer.gd"
+}, {
+"base": "Control",
+"class": "gspSlider",
+"language": "GDScript",
+"path": "res://src/gui/menus/slider.gd"
 } ]
 _global_script_class_icons={
 "Aimer": "",
@@ -285,7 +290,8 @@ _global_script_class_icons={
 "Toggler": "",
 "Weapon": "",
 "WeaponState": "",
-"WeightRandomizer": ""
+"WeightRandomizer": "",
+"gspSlider": ""
 }
 
 [application]

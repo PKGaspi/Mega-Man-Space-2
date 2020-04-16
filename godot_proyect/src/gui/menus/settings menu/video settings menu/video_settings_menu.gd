@@ -28,15 +28,14 @@ func _ready() -> void:
 func _on_action_pressed_ui_accept():
 	match entry_index:
 		0: # Fullscreen.
-			fullscreen_toggler.toggle_checked()
 			Config.toggle_fullscreen()
+			fullscreen_toggler.set_checked(Config.get_fullscreen())
 		1: # Window Scale.
 			# Do nothing. This setting is changed pressing left and right.
 			pass
 		2: # V-Sync.
-			vsync_toggler.toggle_checked()
 			Config.toggle_vsync()
-			pass
+			vsync_toggler.set_checked(Config.get_vsync())
 		3: # Back.
 			# Close this menu and save the config.
 			close_menu()
