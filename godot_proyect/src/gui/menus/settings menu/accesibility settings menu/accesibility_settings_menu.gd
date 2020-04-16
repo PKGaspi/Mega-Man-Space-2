@@ -53,18 +53,20 @@ func _on_action_pressed_ui_cancel():
 
 func _on_action_pressed_ui_left():
 	match entry_index:
-		0: # Window Scale.
-			play_sound(snd_ui_left)
-			star_frequency_shifter.previous_entry()
-			Config.set_star_frequency(star_frequency_shifter.get_current_value())
+		0: # Star Frequency.
+			var changed = star_frequency_shifter.previous_entry()
+			if changed:
+				play_sound(snd_ui_left)
+				Config.set_star_frequency(star_frequency_shifter.get_current_value())
 
 
 func _on_action_pressed_ui_right():
 	match entry_index:
-		0: # Window Scale.
-			play_sound(snd_ui_right)
-			star_frequency_shifter.next_entry()
-			Config.set_star_frequency(star_frequency_shifter.get_current_value())
+		0: # Star Frequency.
+			var changed = star_frequency_shifter.next_entry()
+			if changed:
+				play_sound(snd_ui_right)
+				Config.set_star_frequency(star_frequency_shifter.get_current_value())
 
 
 func close_menu() -> void:

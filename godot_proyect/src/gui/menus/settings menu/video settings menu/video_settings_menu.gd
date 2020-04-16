@@ -63,17 +63,19 @@ func _on_action_pressed_ui_cancel():
 func _on_action_pressed_ui_left():
 	match entry_index:
 		1: # Window Scale.
-			play_sound(snd_ui_left)
-			window_scale_shifter.previous_entry()
-			Config.set_window_scale(window_scale_shifter.get_current_value())
+			var changed = window_scale_shifter.previous_entry()
+			if changed:
+				play_sound(snd_ui_left)
+				Config.set_window_scale(window_scale_shifter.get_current_value())
 
 
 func _on_action_pressed_ui_right():
 	match entry_index:
 		1: # Window Scale.
-			play_sound(snd_ui_right)
-			window_scale_shifter.next_entry()
-			Config.set_window_scale(window_scale_shifter.get_current_value())
+			var changed = window_scale_shifter.next_entry()
+			if changed:
+				play_sound(snd_ui_right)
+				Config.set_window_scale(window_scale_shifter.get_current_value())
 
 
 func close_menu() -> void:

@@ -105,7 +105,6 @@ func _on_viewport_size_changed():
 
 func _on_setting_changed(section: String, key: String, value) -> void:
 	if section == "accesibility" and key == "star_frequency":
-		print(value)
 		star_frequency = value
 
 

@@ -30,9 +30,17 @@ func get_ratio() -> float:
 	return slider.ratio
 
 
-func add_step() -> void:
+func add_step() -> bool:
+	if get_ratio() == 1:
+		return false
+	
 	slider.value += slider.step
+	return true
 
 
-func substract_step() -> void:
+func substract_step() -> bool:
+	if get_ratio() == 0:
+		return false
+	
 	slider.value -= slider.step
+	return true

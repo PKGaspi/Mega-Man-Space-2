@@ -60,31 +60,39 @@ func _on_action_pressed_ui_cancel():
 func _on_action_pressed_ui_left():
 	match entry_index:
 		0: # Master Volume.
-			play_sound(snd_ui_left)
-			master_slider.substract_step()
-			Config.set_bus_volume_ratio("Master", master_slider.get_ratio())
+			var changed = master_slider.substract_step()
+			if changed:
+				play_sound(snd_ui_right)
+				Config.set_bus_volume_ratio("Master", master_slider.get_ratio())
 		1: # SFX Volume.
-			play_sound(snd_ui_left)
-			sfx_slider.substract_step()
-			Config.set_bus_volume_ratio("Sfx", sfx_slider.get_ratio())
+			var changed = sfx_slider.substract_step()
+			if changed:
+				play_sound(snd_ui_right)
+				Config.set_bus_volume_ratio("Sfx", sfx_slider.get_ratio())
 		2: # Music Volume.
-			music_slider.substract_step()
-			Config.set_bus_volume_ratio("Music", music_slider.get_ratio())
+			var changed = music_slider.substract_step()
+			if changed:
+				# Do not play a sound in the music slider.
+				Config.set_bus_volume_ratio("Music", music_slider.get_ratio())
 
 
 func _on_action_pressed_ui_right():
 	match entry_index:
 		0: # Master Volume.
-			play_sound(snd_ui_right)
-			master_slider.add_step()
-			Config.set_bus_volume_ratio("Master", master_slider.get_ratio())
+			var changed = master_slider.add_step()
+			if changed:
+				play_sound(snd_ui_right)
+				Config.set_bus_volume_ratio("Master", master_slider.get_ratio())
 		1: # SFX Volume.
-			play_sound(snd_ui_right)
-			sfx_slider.add_step()
-			Config.set_bus_volume_ratio("Sfx", sfx_slider.get_ratio())
+			var changed = sfx_slider.add_step()
+			if changed:
+				play_sound(snd_ui_right)
+				Config.set_bus_volume_ratio("Sfx", sfx_slider.get_ratio())
 		2: # Music Volume.
-			music_slider.add_step()
-			Config.set_bus_volume_ratio("Music", music_slider.get_ratio())
+			var changed = music_slider.add_step()
+			if changed:
+				# Do not play a sound in the music slider.
+				Config.set_bus_volume_ratio("Music", music_slider.get_ratio())
 
 
 func close_menu() -> void:
