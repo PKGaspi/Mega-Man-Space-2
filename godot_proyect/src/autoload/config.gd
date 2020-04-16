@@ -217,7 +217,6 @@ func get_bus_volume_ratio(bus_name: String) -> float:
 
 
 func set_bus_mute(bus_name: String, value: bool) -> void:
-	printt("muting", bus_name, value)
 	AudioServer.set_bus_mute(AudioServer.get_bus_index(bus_name), value)
 
 func set_mute(value: bool) -> void:

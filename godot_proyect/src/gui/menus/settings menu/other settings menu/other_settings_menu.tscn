@@ -1,0 +1,161 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=2]
+[ext_resource path="res://assets/sfx/other/ui_move.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=4]
+[ext_resource path="res://src/gui/menus/settings menu/other settings menu/other_settings_menu.gd" type="Script" id=5]
+[ext_resource path="res://assets/sfx/other/menu_open.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sfx/other/ui_cancel.wav" type="AudioStream" id=11]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+//The palette used
+uniform sampler2D palette;
+//how many horizontal pixels has the palette
+uniform float palette_size;
+//Mask for wich color use from palette
+uniform sampler2D mask;
+
+void fragment() {
+	vec4 mask_color = texture(mask,UV);
+	vec4 output = texture(TEXTURE,UV);
+	if(mask_color.r != 1.0)
+	{
+		highp float color_r = mask_color.r;
+		//If an inconsistency appears between Intel and Amd/Nvidia, feel free to fix it and commit, but take this as a warning for production use
+		output = texture(palette,vec2((color_r*255.0+0.5)/255.0,0.0));
+	}
+	COLOR.rgba = output;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/palette_size = 8.0
+shader_param/palette = ExtResource( 2 )
+shader_param/mask = ExtResource( 4 )
+
+[node name="OtherSettingsMenu" type="Control"]
+anchor_right = 1.0
+margin_left = 43.0
+margin_top = 43.0
+margin_right = -173.0
+margin_bottom = 227.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+entries = [ NodePath("Contents/Sections/Entries/Back") ]
+
+[node name="Background" type="NinePatchRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 4 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Contents" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 20.0
+margin_right = -12.0
+margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Contents"]
+margin_right = 240.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Other
+
+There isn't much here
+at the moment. Sorry."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sections" type="HBoxContainer" parent="Contents"]
+margin_right = 240.0
+margin_bottom = 144.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Entries" type="VBoxContainer" parent="Contents/Sections"]
+margin_top = 68.0
+margin_right = 31.0
+margin_bottom = 76.0
+size_flags_vertical = 4
+
+[node name="Back" type="Label" parent="Contents/Sections/Entries"]
+margin_right = 31.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Back"
+
+[node name="VSeparator" type="VSeparator" parent="Contents/Sections"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 39.0
+margin_right = 192.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+
+[node name="Additional" type="VBoxContainer" parent="Contents/Sections"]
+margin_left = 200.0
+margin_top = 68.0
+margin_right = 240.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 40, 0 )
+size_flags_vertical = 4
+
+[node name="BackEmpty" type="Label" parent="Contents/Sections/Additional"]
+margin_right = 40.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+
+[node name="SndUIMove" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Sfx"
+
+[node name="SndOpen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "Sfx"
+
+[node name="SndUICancel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = 6.0
+pitch_scale = 0.7
+bus = "Sfx"
