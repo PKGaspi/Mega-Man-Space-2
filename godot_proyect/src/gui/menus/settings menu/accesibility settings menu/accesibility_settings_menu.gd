@@ -35,17 +35,26 @@ func _on_action_pressed_ui_accept():
 			# Do nothing. This setting is changed pressing left and right.
 			pass
 		1: # Screen Shaking.
+			play_sound(snd_ui_up)
 			Config.set_screen_shake(not screen_shake_toggler.get_checked())
 		2: # Flashing.
+			play_sound(snd_ui_up)
 			Config.set_flashing(not flashing_toggler.get_checked())
 		3: # Back.
 			# Close this menu and save the config.
+			play_sound(snd_ui_cancel)
 			close_menu()
+
+
+func _on_action_pressed_ui_cancel():
+	play_sound(snd_ui_cancel)
+	close_menu()
 
 
 func _on_action_pressed_ui_left():
 	match entry_index:
 		0: # Window Scale.
+			play_sound(snd_ui_left)
 			star_frequency_shifter.previous_entry()
 			Config.set_star_frequency(star_frequency_shifter.get_current_value())
 
@@ -53,6 +62,7 @@ func _on_action_pressed_ui_left():
 func _on_action_pressed_ui_right():
 	match entry_index:
 		0: # Window Scale.
+			play_sound(snd_ui_right)
 			star_frequency_shifter.next_entry()
 			Config.set_star_frequency(star_frequency_shifter.get_current_value())
 

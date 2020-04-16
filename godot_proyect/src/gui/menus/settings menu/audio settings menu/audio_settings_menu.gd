@@ -43,19 +43,28 @@ func _on_action_pressed_ui_accept():
 		2: # Music Volume.
 			# Do nothing. This setting is changed pressing left and right.
 			pass
-		3: # V-Sync.
+		3: # Mute.
+			play_sound(snd_ui_up)
 			Config.set_mute(not mute_toggler.get_checked())
 		4: # Back.
 			# Close this menu and save the config.
+			play_sound(snd_ui_cancel)
 			close_menu()
+
+
+func _on_action_pressed_ui_cancel():
+	play_sound(snd_ui_cancel)
+	close_menu()
 
 
 func _on_action_pressed_ui_left():
 	match entry_index:
 		0: # Master Volume.
+			play_sound(snd_ui_left)
 			master_slider.substract_step()
 			Config.set_bus_volume_ratio("Master", master_slider.get_ratio())
 		1: # SFX Volume.
+			play_sound(snd_ui_left)
 			sfx_slider.substract_step()
 			Config.set_bus_volume_ratio("Sfx", sfx_slider.get_ratio())
 		2: # Music Volume.
@@ -66,9 +75,11 @@ func _on_action_pressed_ui_left():
 func _on_action_pressed_ui_right():
 	match entry_index:
 		0: # Master Volume.
+			play_sound(snd_ui_right)
 			master_slider.add_step()
 			Config.set_bus_volume_ratio("Master", master_slider.get_ratio())
 		1: # SFX Volume.
+			play_sound(snd_ui_right)
 			sfx_slider.add_step()
 			Config.set_bus_volume_ratio("Sfx", sfx_slider.get_ratio())
 		2: # Music Volume.

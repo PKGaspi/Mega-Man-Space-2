@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sfx/other/ui_move.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/gui/menus/select stage menu/select_stage_menu.gd" type="Script" id=2]
 [ext_resource path="res://src/gui/menus/select stage menu/select_menu_entry.gd" type="Script" id=3]
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=4]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/rooms/level/data/heat_man_level_data.tres" type="Resource" id=11]
 [ext_resource path="res://src/rooms/level/data/quick_man_level_data.tres" type="Resource" id=12]
 [ext_resource path="res://src/rooms/level/data/air_man_level_data.tres" type="Resource" id=13]
+
 
 
 [node name="SelectStageMenu" type="Control"]

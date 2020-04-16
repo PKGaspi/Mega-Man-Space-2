@@ -23,4 +23,9 @@ func _on_action_pressed_ui_accept():
 			open_child_menu(OTHER_MENU)
 		5: # Back.
 			# Close this menu.
+			play_sound(snd_ui_cancel)
 			close_menu()
+
+func _on_action_pressed_ui_cancel():
+	play_sound(snd_ui_cancel)
+	close_menu()

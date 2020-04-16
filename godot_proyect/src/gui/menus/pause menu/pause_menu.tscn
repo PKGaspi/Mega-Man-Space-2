@@ -2,10 +2,10 @@
 
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=2]
-[ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sfx/other/ui_move.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=4]
 [ext_resource path="res://src/gui/menus/pause menu/pause_menu.gd" type="Script" id=5]
-[ext_resource path="res://assets/sfx/other/pause_menu.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sfx/other/menu_open.wav" type="AudioStream" id=6]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;

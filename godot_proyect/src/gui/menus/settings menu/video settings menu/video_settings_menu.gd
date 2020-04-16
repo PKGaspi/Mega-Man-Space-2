@@ -41,20 +41,29 @@ func _on_config_setting_changed(section: String, key: String, value) -> void:
 func _on_action_pressed_ui_accept():
 	match entry_index:
 		0: # Fullscreen.
+			play_sound(snd_ui_up)
 			Config.toggle_fullscreen()
 		1: # Window Scale.
 			# Do nothing. This setting is changed pressing left and right.
 			pass
 		2: # V-Sync.
+			play_sound(snd_ui_up)
 			Config.toggle_vsync()
 		3: # Back.
 			# Close this menu and save the config.
+			play_sound(snd_ui_cancel)
 			close_menu()
+
+
+func _on_action_pressed_ui_cancel():
+	play_sound(snd_ui_cancel)
+	close_menu()
 
 
 func _on_action_pressed_ui_left():
 	match entry_index:
 		1: # Window Scale.
+			play_sound(snd_ui_left)
 			window_scale_shifter.previous_entry()
 			Config.set_window_scale(window_scale_shifter.get_current_value())
 
@@ -62,6 +71,7 @@ func _on_action_pressed_ui_left():
 func _on_action_pressed_ui_right():
 	match entry_index:
 		1: # Window Scale.
+			play_sound(snd_ui_right)
 			window_scale_shifter.next_entry()
 			Config.set_window_scale(window_scale_shifter.get_current_value())
 
