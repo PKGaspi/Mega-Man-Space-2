@@ -4,6 +4,8 @@ const CONFIG_PATH := "user://settings.cfg"
 const DEFAULT_CONFIG_PATH := "res://resources/default_settings.cfg"
 var config := ConfigFile.new()
 
+signal setting_changed(section, key, value)
+
 
 func _init() -> void:
 	# Check if the config file exists.
@@ -34,6 +36,7 @@ func save() -> void:
 
 func set_value(section: String, key: String, value) -> void:
 	config.set_value(section, key, value)
+	emit_signal("setting_changed", section, key, value)
 
 
 func get_value(section: String, key: String, default_value = null):
@@ -77,6 +80,35 @@ func call_setting_method(section: String, key: String, value) -> void:
 
 
 ## Accesibility. ##
+
+func set_star_frequency(value: int) -> void:
+	set_value("accesibility", "star_frequency", value)
+
+func get_star_frequency() -> int:
+	return get_value("accesibility", "star_frequency")
+
+
+func set_screen_shake(value: bool) -> void:
+	set_value("accesibility", "screen_shake", value)
+	# TODO: Implement (or not, maybe the signal emitted is enough).
+
+func get_screen_shake() -> bool:
+	return get_value("accesibility", "screen_shake")
+
+func toggle_screen_shake() -> void:
+	set_screen_shake(not get_screen_shake())
+
+
+func set_flashing(value: bool) -> void:
+	set_value("accesibility", "flashing", value)
+	# TODO: Implement (or not, maybe the signal emitted is enough).
+
+func get_flashing() -> bool:
+	return get_value("accesibility", "flashing")
+
+func toggle_flashing() -> void:
+	set_flashing(not get_flashing())
+
 
 
 

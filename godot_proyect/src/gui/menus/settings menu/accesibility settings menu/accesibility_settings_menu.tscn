@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=2]
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=4]
-[ext_resource path="res://src/gui/menus/settings menu/video settings menu/video_settings_menu.gd" type="Script" id=5]
+[ext_resource path="res://src/gui/menus/settings menu/accesibility settings menu/accesibility_settings_menu.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/other/pause_menu.wav" type="AudioStream" id=6]
 [ext_resource path="res://src/gui/menus/shifter.gd" type="Script" id=7]
 [ext_resource path="res://src/gui/menus/toggler.gd" type="Script" id=8]
@@ -41,7 +41,7 @@ shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 2 )
 shader_param/mask = ExtResource( 4 )
 
-[node name="VideoSettingsMenu" type="Control"]
+[node name="AccesibilitySettingsMenu" type="Control"]
 anchor_right = 1.0
 margin_left = 43.0
 margin_top = 43.0
@@ -51,7 +51,7 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-entries = [ NodePath("Contents/Sections/Entries/Fullscreen"), NodePath("Contents/Sections/Entries/WindowScale"), NodePath("Contents/Sections/Entries/VSync"), NodePath("Contents/Sections/Entries/Back") ]
+entries = [ NodePath("Contents/Sections/Entries/StarFrequency"), NodePath("Contents/Sections/Entries/ScreenShaking"), NodePath("Contents/Sections/Entries/Flashing"), NodePath("Contents/Sections/Entries/Back") ]
 
 [node name="Background" type="NinePatchRect" parent="."]
 material = SubResource( 2 )
@@ -106,12 +106,12 @@ __meta__ = {
 
 [node name="Entries" type="VBoxContainer" parent="Contents/Sections"]
 margin_top = 44.0
-margin_right = 88.0
+margin_right = 105.0
 margin_bottom = 100.0
 size_flags_vertical = 4
 
-[node name="Fullscreen" type="Label" parent="Contents/Sections/Entries"]
-margin_right = 88.0
+[node name="StarFrequency" type="Label" parent="Contents/Sections/Entries"]
+margin_right = 105.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
@@ -119,14 +119,14 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Fullscreen"
+text = "Star Frequency"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WindowScale" type="Label" parent="Contents/Sections/Entries"]
+[node name="ScreenShaking" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 16.0
-margin_right = 88.0
+margin_right = 105.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
@@ -134,14 +134,14 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Window scale"
+text = "Screen Shaking"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VSync" type="Label" parent="Contents/Sections/Entries"]
+[node name="Flashing" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 32.0
-margin_right = 88.0
+margin_right = 105.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
@@ -149,14 +149,14 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "V-Sync"
+text = "Flashing"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Back" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 48.0
-margin_right = 88.0
+margin_right = 105.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
@@ -168,36 +168,23 @@ text = "Back"
 
 [node name="VSeparator" type="VSeparator" parent="Contents/Sections"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 96.0
-margin_right = 192.0
+margin_left = 113.0
+margin_right = 145.0
 margin_bottom = 144.0
 size_flags_horizontal = 3
 
 [node name="Additional" type="VBoxContainer" parent="Contents/Sections"]
-margin_left = 200.0
+margin_left = 153.0
 margin_top = 44.0
 margin_right = 240.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 40, 0 )
+rect_min_size = Vector2( 87, 0 )
 size_flags_vertical = 4
 
-[node name="FullscreenToggler" type="TextureRect" parent="Contents/Sections/Additional"]
-margin_left = 16.0
-margin_right = 24.0
+[node name="StarFrequencyShifter" type="Label" parent="Contents/Sections/Additional"]
+margin_left = 7.0
+margin_right = 79.0
 margin_bottom = 8.0
-rect_min_size = Vector2( 0, 8 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource( 10 )
-script = ExtResource( 8 )
-off_texture = ExtResource( 10 )
-on_texture = ExtResource( 9 )
-
-[node name="WindowScaleShifter" type="Label" parent="Contents/Sections/Additional"]
-margin_left = 1.0
-margin_top = 16.0
-margin_right = 38.0
-margin_bottom = 24.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
@@ -205,13 +192,30 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "< 1x >"
+text = "< Normal >"
 script = ExtResource( 7 )
+entry_names = [ "Very Low", "Low", "Normal", "High", "Very High" ]
+entry_values = [ 1, 3, 5, 7, 10 ]
+entry_index = 2
 
-[node name="VSyncToggler" type="TextureRect" parent="Contents/Sections/Additional"]
-margin_left = 16.0
+[node name="ScreenShakingToggler" type="TextureRect" parent="Contents/Sections/Additional"]
+margin_left = 39.0
+margin_top = 16.0
+margin_right = 47.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource( 10 )
+script = ExtResource( 8 )
+off_texture = ExtResource( 10 )
+on_texture = ExtResource( 9 )
+checked = false
+
+[node name="FlashingToggler" type="TextureRect" parent="Contents/Sections/Additional"]
+margin_left = 39.0
 margin_top = 32.0
-margin_right = 24.0
+margin_right = 47.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_horizontal = 4
@@ -220,10 +224,11 @@ texture = ExtResource( 10 )
 script = ExtResource( 8 )
 off_texture = ExtResource( 10 )
 on_texture = ExtResource( 9 )
+checked = false
 
 [node name="BackEmpty" type="Label" parent="Contents/Sections/Additional"]
 margin_top = 48.0
-margin_right = 40.0
+margin_right = 87.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )

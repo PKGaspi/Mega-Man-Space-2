@@ -14,6 +14,8 @@ func _ready() -> void:
 	fullscreen_toggler.set_checked(Config.get_fullscreen())
 	vsync_toggler.set_checked(Config.get_vsync())
 	
+	Config.connect("setting_changed", self, "_on_config_setting_changed")
+	
 	# Set window_scale values for this monitor.
 	var max_scale: int = int(floor(OS.get_screen_size().y / get_viewport().get_visible_rect().size.y))
 	window_scale_shifter.entry_names.resize(max_scale)
@@ -25,17 +27,25 @@ func _ready() -> void:
 	window_scale_shifter.set_entry(Config.get_window_scale() - 1)
 
 
+func _on_config_setting_changed(section, key, value) -> void:
+	if section != "video":
+		return
+	
+	match key:
+		"fullscreen": fullscreen_toggler.set_checked(value)
+		"v-sync": vsync_toggler.set_checked(value)
+		"window_scale": window_scale_shifter.set_entry(value - 1)
+
+
 func _on_action_pressed_ui_accept():
 	match entry_index:
 		0: # Fullscreen.
 			Config.toggle_fullscreen()
-			fullscreen_toggler.set_checked(Config.get_fullscreen())
 		1: # Window Scale.
 			# Do nothing. This setting is changed pressing left and right.
 			pass
 		2: # V-Sync.
 			Config.toggle_vsync()
-			vsync_toggler.set_checked(Config.get_vsync())
 		3: # Back.
 			# Close this menu and save the config.
 			close_menu()

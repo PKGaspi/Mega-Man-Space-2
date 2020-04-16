@@ -3,7 +3,7 @@ extends MenuPanel
 
 
 # Derivated menues.
-const ACCESIBILITY_MENU = preload("res://src/gui/menus/settings menu/video settings menu/video_settings_menu.tscn")
+const ACCESIBILITY_MENU = preload("res://src/gui/menus/settings menu/accesibility settings menu/accesibility_settings_menu.tscn")
 const VIDEO_MENU = preload("res://src/gui/menus/settings menu/video settings menu/video_settings_menu.tscn")
 const AUDIO_MENU = preload("res://src/gui/menus/settings menu/video settings menu/video_settings_menu.tscn")
 const CONTROLS_MENU = preload("res://src/gui/menus/settings menu/video settings menu/video_settings_menu.tscn")
