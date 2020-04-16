@@ -53,7 +53,6 @@ func close_menu() -> void:
 	.close_menu()
 
 
-func star_frequency_to_index(star_frequency: int) -> int:
-	star_frequency = clamp(star_frequency, 1, 9)
-	var index = (star_frequency - 1) / 2
+func star_frequency_to_index(star_frequency: float) -> int:
+	var index = max(0, star_frequency_shifter.entry_values.find(star_frequency))
 	return index

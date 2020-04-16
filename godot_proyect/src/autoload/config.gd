@@ -81,10 +81,11 @@ func call_setting_method(section: String, key: String, value) -> void:
 
 ## Accesibility. ##
 
-func set_star_frequency(value: int) -> void:
+func set_star_frequency(value: float) -> void:
+	value = clamp(value, 0.0, 1.0)
 	set_value("accesibility", "star_frequency", value)
 
-func get_star_frequency() -> int:
+func get_star_frequency() -> float:
 	return get_value("accesibility", "star_frequency")
 
 

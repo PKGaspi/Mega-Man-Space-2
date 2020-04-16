@@ -25,15 +25,15 @@ export(float) var MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
-export(float) var STAR_FREQUENCY = .3
-export(float) var PLANET_FREQUENCY = .008
-export(int) var MAX_PLANETS_PER_SECTOR = 1
+var star_frequency: float = Config.get_star_frequency()
+export var max_stars_per_sector: int = 5 # Number of stars to attempt to generate per sector.
+export var planet_frequency: float = .008
+export var max_planets_per_sector: int = 1
 
 const SECTOR_SIZE_MULTIPLIER = .35
 var sector_size: Vector2 # Sector size.
 var sector_rows: int # Number of sectors loaded at the same time on a row.
 var sector_columns: int # Number of sectors loaded at the same time on a column.
-onready var stars_per_sector = 5 # Number of stars to attempt to generate per sector.
 
 var random # Base randomizer.
 var r_seed # Base random seed.
@@ -172,10 +172,10 @@ func create_stars(sector):
 	
 	# Create the stars.
 	var n_planets = 0
-	for i in range(stars_per_sector):
+	for i in range(max_stars_per_sector):
 		# Check if a new star is generated. Every time it's
 		# harder for a new star to generate.
-		if (random.randf() * i < STAR_FREQUENCY):
+		if (random.randf() * i < star_frequency):
 			# Generate random position.
 			var x = random.randi_range(pos.x, pos.x + sector_size.x)
 			var y = random.randi_range(pos.y, pos.y + sector_size.y)
@@ -191,7 +191,7 @@ func create_stars(sector):
 			var mask
 			var palette
 			# This star might be a planet!
-			if (star_mask == 0 && random.randf() < PLANET_FREQUENCY && n_planets < MAX_PLANETS_PER_SECTOR):
+			if (star_mask == 0 && random.randf() < planet_frequency && n_planets < max_planets_per_sector):
 				# IT'S A PLANET!!
 				n_planets += 1
 				mask = planet_masks.get_frame("default", random.randi_range(0, N_PLANET_MASKS - 1))
