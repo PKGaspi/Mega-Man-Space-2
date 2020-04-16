@@ -45,7 +45,7 @@ shader_param/mask = ExtResource( 4 )
 anchor_right = 1.0
 margin_left = 43.0
 margin_top = 43.0
-margin_right = -43.0
+margin_right = -173.0
 margin_bottom = 227.0
 script = ExtResource( 5 )
 __meta__ = {
@@ -82,7 +82,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Contents"]
-margin_right = 370.0
+margin_right = 240.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_vertical = 0
@@ -98,7 +98,7 @@ __meta__ = {
 }
 
 [node name="Sections" type="HBoxContainer" parent="Contents"]
-margin_right = 370.0
+margin_right = 240.0
 margin_bottom = 144.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -169,31 +169,44 @@ text = "Back"
 [node name="VSeparator" type="VSeparator" parent="Contents/Sections"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 96.0
-margin_right = 325.0
+margin_right = 140.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+
+[node name="VSeparator2" type="VSeparator" parent="Contents/Sections"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 148.0
+margin_right = 192.0
 margin_bottom = 144.0
 size_flags_horizontal = 3
 
 [node name="Additional" type="VBoxContainer" parent="Contents/Sections"]
-margin_left = 333.0
+margin_left = 200.0
 margin_top = 44.0
-margin_right = 370.0
+margin_right = 240.0
 margin_bottom = 100.0
+rect_min_size = Vector2( 40, 0 )
 size_flags_vertical = 4
 
 [node name="FullscreenToggler" type="TextureRect" parent="Contents/Sections/Additional"]
-margin_right = 37.0
+margin_left = 16.0
+margin_right = 24.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource( 10 )
 script = ExtResource( 8 )
 off_texture = ExtResource( 10 )
 on_texture = ExtResource( 9 )
 
 [node name="WindowScaleShifter" type="Label" parent="Contents/Sections/Additional"]
+margin_left = 1.0
 margin_top = 16.0
-margin_right = 37.0
+margin_right = 38.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
@@ -203,10 +216,13 @@ text = "< 1x >"
 script = ExtResource( 7 )
 
 [node name="VSyncToggler" type="TextureRect" parent="Contents/Sections/Additional"]
+margin_left = 16.0
 margin_top = 32.0
-margin_right = 37.0
+margin_right = 24.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource( 10 )
 script = ExtResource( 8 )
 off_texture = ExtResource( 10 )
@@ -214,7 +230,7 @@ on_texture = ExtResource( 9 )
 
 [node name="BackEmpty" type="Label" parent="Contents/Sections/Additional"]
 margin_top = 48.0
-margin_right = 37.0
+margin_right = 40.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )

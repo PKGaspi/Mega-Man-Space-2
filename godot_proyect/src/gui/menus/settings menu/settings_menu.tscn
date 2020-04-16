@@ -41,7 +41,7 @@ shader_param/mask = ExtResource( 4 )
 anchor_right = 1.0
 margin_left = 43.0
 margin_top = 43.0
-margin_right = -43.0
+margin_right = -173.0
 margin_bottom = 227.0
 script = ExtResource( 5 )
 __meta__ = {
@@ -78,7 +78,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Contents"]
-margin_right = 370.0
+margin_right = 240.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_vertical = 0
@@ -94,7 +94,7 @@ __meta__ = {
 }
 
 [node name="Sections" type="HBoxContainer" parent="Contents"]
-margin_right = 370.0
+margin_right = 240.0
 margin_bottom = 144.0
 __meta__ = {
 "_edit_use_anchors_": false

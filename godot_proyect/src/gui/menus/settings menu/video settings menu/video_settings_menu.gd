@@ -16,11 +16,9 @@ func _ready() -> void:
 	
 	# Set window_scale values for this monitor.
 	var max_scale: int = int(floor(OS.get_screen_size().y / get_viewport().get_visible_rect().size.y))
-	print(max_scale)
 	window_scale_shifter.entry_names.resize(max_scale)
 	window_scale_shifter.entry_values.resize(max_scale)
 	for i in range(max_scale):
-		print(i)
 		window_scale_shifter.entry_names[i] = "%dx" % (i + 1)
 		window_scale_shifter.entry_values[i] = i + 1
 	
