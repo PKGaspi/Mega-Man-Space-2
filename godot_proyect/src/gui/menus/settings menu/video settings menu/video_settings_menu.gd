@@ -9,12 +9,13 @@ onready var vsync_toggler := $"Contents/Sections/Additional/VSyncToggler"
 
 
 func _ready() -> void:
+	Config.connect("setting_changed", self, "_on_config_setting_changed")
+	
 	# Set togglers, sliders and shifters state.
 	
 	fullscreen_toggler.set_checked(Config.get_fullscreen())
 	vsync_toggler.set_checked(Config.get_vsync())
 	
-	Config.connect("setting_changed", self, "_on_config_setting_changed")
 	
 	# Set window_scale values for this monitor.
 	var max_scale: int = int(floor(OS.get_screen_size().y / get_viewport().get_visible_rect().size.y))
@@ -27,7 +28,7 @@ func _ready() -> void:
 	window_scale_shifter.set_entry(Config.get_window_scale() - 1)
 
 
-func _on_config_setting_changed(section, key, value) -> void:
+func _on_config_setting_changed(section: String, key: String, value) -> void:
 	if section != "video":
 		return
 	

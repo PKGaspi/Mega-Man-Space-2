@@ -9,6 +9,8 @@ onready var flashing_toggler := $"Contents/Sections/Additional/FlashingToggler"
 
 
 func _ready() -> void:
+	Config.connect("setting_changed", self, "_on_config_setting_changed")
+	
 	# Set togglers, sliders and shifters state.
 	
 	screen_shake_toggler.set_checked(Config.get_screen_shake())
@@ -17,17 +19,25 @@ func _ready() -> void:
 	star_frequency_shifter.entry_index = star_frequency_to_index(Config.get_star_frequency())
 
 
+func _on_config_setting_changed(section: String, key: String, value) -> void:
+	if section != "accesibility":
+		return
+	
+	match key:
+		#"star_frequency": star_frequency_shifter.entry_index = star_frequency_to_index(value)
+		"screen_shake": screen_shake_toggler.set_checked(value)
+		"flashing": flashing_toggler.set_checked(value)
+
+
 func _on_action_pressed_ui_accept():
 	match entry_index:
 		0: # Star Frequency.
 			# Do nothing. This setting is changed pressing left and right.
 			pass
 		1: # Screen Shaking.
-			Config.toggle_screen_shake()
-			screen_shake_toggler.set_checked(Config.get_screen_shake())
+			Config.set_screen_shake(not screen_shake_toggler.get_checked())
 		2: # Flashing.
-			Config.toggle_flashing()
-			flashing_toggler.set_checked(Config.get_flashing())
+			Config.set_flashing(not flashing_toggler.get_checked())
 		3: # Back.
 			# Close this menu and save the config.
 			close_menu()

@@ -74,6 +74,7 @@ func _ready():
 	
 	# Connect Viewport size_changes signal.
 	get_viewport().connect("size_changed", self, "_on_viewport_size_changed")
+	Config.connect("setting_changed", self, "_on_setting_changed")
 	
 	set_to_follow(_to_follow_path)
 
@@ -100,6 +101,12 @@ func _on_to_follow_tree_exiting():
 
 func _on_viewport_size_changed():
 	update_sector_values()
+
+
+func _on_setting_changed(section: String, key: String, value) -> void:
+	if section == "accesibility" and key == "star_frequency":
+		print(value)
+		star_frequency = value
 
 
 func update_sector_values() -> void:
@@ -175,7 +182,7 @@ func create_stars(sector):
 	for i in range(max_stars_per_sector):
 		# Check if a new star is generated. Every time it's
 		# harder for a new star to generate.
-		if (random.randf() * i < star_frequency):
+		if (random.randf() < star_frequency):
 			# Generate random position.
 			var x = random.randi_range(pos.x, pos.x + sector_size.x)
 			var y = random.randi_range(pos.y, pos.y + sector_size.y)

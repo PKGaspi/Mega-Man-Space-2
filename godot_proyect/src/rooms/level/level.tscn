@@ -144,6 +144,7 @@ position = Vector2( 285.771, 90.0026 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 _to_follow_path = NodePath("../../Level/GameLayer/Camera")
+max_stars_per_sector = 10
 
 [node name="MusicLooper" type="Node" parent="."]
 script = ExtResource( 18 )

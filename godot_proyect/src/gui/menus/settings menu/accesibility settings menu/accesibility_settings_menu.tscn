@@ -91,7 +91,7 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Settings"
+text = "Accesibility"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -195,7 +195,7 @@ custom_constants/shadow_offset_y = 1
 text = "< Normal >"
 script = ExtResource( 7 )
 entry_names = [ "Very Low", "Low", "Normal", "High", "Very High" ]
-entry_values = [ 0.001, 0.2, 0.3, 0.5, 0.8 ]
+entry_values = [ 0.04, 0.1, 0.3, 0.7, 1.0 ]
 entry_index = 2
 
 [node name="ScreenShakingToggler" type="TextureRect" parent="Contents/Sections/Additional"]
