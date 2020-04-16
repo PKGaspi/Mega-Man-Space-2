@@ -4,9 +4,9 @@
 [ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=2]
 [ext_resource path="res://assets/sfx/other/menu_select.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=4]
-[ext_resource path="res://src/gui/menus/settings menu/video settings menu/video_settings_menu.gd" type="Script" id=5]
+[ext_resource path="res://src/gui/menus/settings menu/audio settings menu/audio_settings_menu.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/other/pause_menu.wav" type="AudioStream" id=6]
-[ext_resource path="res://src/gui/menus/shifter.gd" type="Script" id=7]
+[ext_resource path="res://src/gui/menus/minus_plus_slider.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/gui/menus/toggler.gd" type="Script" id=8]
 [ext_resource path="res://assets/sprites/gui/menus/toggler_1.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/gui/menus/toggler_0.png" type="Texture" id=10]
@@ -41,7 +41,7 @@ shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 2 )
 shader_param/mask = ExtResource( 4 )
 
-[node name="VideoSettingsMenu" type="Control"]
+[node name="AudioSettingsMenu" type="Control"]
 anchor_right = 1.0
 margin_left = 43.0
 margin_top = 43.0
@@ -51,7 +51,12 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-entries = [ NodePath("Contents/Sections/Entries/Fullscreen"), NodePath("Contents/Sections/Entries/WindowScale"), NodePath("Contents/Sections/Entries/VSync"), NodePath("Contents/Sections/Entries/Back") ]
+entries = [ NodePath("Contents/Sections/Entries/MasterVolume"), NodePath("Contents/Sections/Entries/SfxVolume"), NodePath("Contents/Sections/Entries/MusicVolume"), NodePath("Contents/Sections/Entries/Mute"), NodePath("Contents/Sections/Entries/Back") ]
+snd_open = NodePath("../AudioSettingsMenu/SndOpen")
+snd_ui_up = NodePath("../AudioSettingsMenu/SndUIMove")
+snd_ui_down = NodePath("../AudioSettingsMenu/SndUIMove")
+snd_ui_left = NodePath("../AudioSettingsMenu/SndUIMove")
+snd_ui_right = NodePath("../AudioSettingsMenu/SndUIMove")
 
 [node name="Background" type="NinePatchRect" parent="."]
 material = SubResource( 2 )
@@ -91,7 +96,7 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Video"
+text = "Audio"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -105,13 +110,13 @@ __meta__ = {
 }
 
 [node name="Entries" type="VBoxContainer" parent="Contents/Sections"]
-margin_top = 44.0
-margin_right = 88.0
-margin_bottom = 100.0
+margin_top = 36.0
+margin_right = 98.0
+margin_bottom = 108.0
 size_flags_vertical = 4
 
-[node name="Fullscreen" type="Label" parent="Contents/Sections/Entries"]
-margin_right = 88.0
+[node name="MasterVolume" type="Label" parent="Contents/Sections/Entries"]
+margin_right = 98.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
@@ -119,14 +124,14 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Fullscreen"
+text = "Master Volume"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WindowScale" type="Label" parent="Contents/Sections/Entries"]
+[node name="SfxVolume" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 16.0
-margin_right = 88.0
+margin_right = 98.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
@@ -134,14 +139,14 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "Window scale"
+text = "SFX Volume"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VSync" type="Label" parent="Contents/Sections/Entries"]
+[node name="MusicVolume" type="Label" parent="Contents/Sections/Entries"]
 margin_top = 32.0
-margin_right = 88.0
+margin_right = 98.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
@@ -149,15 +154,30 @@ custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
-text = "V-Sync"
+text = "Music Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mute" type="Label" parent="Contents/Sections/Entries"]
+margin_top = 48.0
+margin_right = 98.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 0, 8 )
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Mute All"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Back" type="Label" parent="Contents/Sections/Entries"]
-margin_top = 48.0
-margin_right = 88.0
-margin_bottom = 56.0
+margin_top = 64.0
+margin_right = 98.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
@@ -168,55 +188,46 @@ text = "Back"
 
 [node name="VSeparator" type="VSeparator" parent="Contents/Sections"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 96.0
-margin_right = 192.0
+margin_left = 106.0
+margin_right = 137.0
 margin_bottom = 144.0
 size_flags_horizontal = 3
 
 [node name="Additional" type="VBoxContainer" parent="Contents/Sections"]
-margin_left = 200.0
-margin_top = 44.0
+margin_left = 145.0
+margin_top = 36.0
 margin_right = 240.0
-margin_bottom = 100.0
+margin_bottom = 108.0
 rect_min_size = Vector2( 40, 0 )
+size_flags_horizontal = 3
 size_flags_vertical = 4
+size_flags_stretch_ratio = 3.0
 
-[node name="FullscreenToggler" type="TextureRect" parent="Contents/Sections/Additional"]
-margin_left = 16.0
-margin_right = 24.0
+[node name="MasterSlider" parent="Contents/Sections/Additional" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 95.0
 margin_bottom = 8.0
-rect_min_size = Vector2( 0, 8 )
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource( 10 )
-script = ExtResource( 8 )
-off_texture = ExtResource( 10 )
-on_texture = ExtResource( 9 )
-checked = false
 
-[node name="WindowScaleShifter" type="Label" parent="Contents/Sections/Additional"]
-margin_left = 1.0
+[node name="SfxSlider" parent="Contents/Sections/Additional" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 16.0
-margin_right = 38.0
+margin_right = 95.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 0, 8 )
-size_flags_horizontal = 4
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-text = "< 1x >"
-script = ExtResource( 7 )
-entry_names = [  ]
-entry_values = [  ]
-entry_index = 0
 
-[node name="VSyncToggler" type="TextureRect" parent="Contents/Sections/Additional"]
-margin_left = 16.0
+[node name="MusicSlider" parent="Contents/Sections/Additional" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 32.0
-margin_right = 24.0
+margin_right = 95.0
 margin_bottom = 40.0
+
+[node name="MuteToggler" type="TextureRect" parent="Contents/Sections/Additional"]
+margin_left = 43.0
+margin_top = 48.0
+margin_right = 51.0
+margin_bottom = 56.0
 rect_min_size = Vector2( 0, 8 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -227,9 +238,9 @@ on_texture = ExtResource( 9 )
 checked = false
 
 [node name="BackEmpty" type="Label" parent="Contents/Sections/Additional"]
-margin_top = 48.0
-margin_right = 40.0
-margin_bottom = 56.0
+margin_top = 64.0
+margin_right = 95.0
+margin_bottom = 72.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )

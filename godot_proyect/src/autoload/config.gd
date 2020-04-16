@@ -2,6 +2,10 @@ extends Node
 
 const CONFIG_PATH := "user://settings.cfg"
 const DEFAULT_CONFIG_PATH := "res://resources/default_settings.cfg"
+
+const MIN_VOLUME := -20.0 # In dB
+const MAX_VOLUME := 0.0 # In dB
+
 var config := ConfigFile.new()
 
 signal setting_changed(section, key, value)
@@ -69,10 +73,22 @@ func call_setting_method(section: String, key: String, value) -> void:
 	# defined as in the .ini file. This method does not update the
 	# .ini file. The called method shouls be doing that.
 	match section:
+		"accesibility":
+			match key:
+				"star_frequency": set_star_frequency(value)
+				"screen_shake": set_screen_shake(value)
+				"flashing": set_flashing(value)
 		"video":
 			match key:
 				"fullscreen": set_fullscreen(value)
-				_: set_value(section, key, value)
+				"window_scale": set_window_scale(value)
+				"v-sync": set_vsync(value)
+		"audio":
+			match key:
+				"master_volume": call_deferred("set_bus_volume_ratio", "Master", value)
+				"sfx_volume": call_deferred("set_bus_volume_ratio", "Sfx", value)
+				"music_volume": call_deferred("set_bus_volume_ratio", "Music", value)
+				"mute": call_deferred("set_mute", value)
 		_: set_value(section, key, value)
 
 
@@ -185,27 +201,31 @@ func set_aspect_ratio(value: float) -> void:
 
 ## Audio. ##
 
-func set_bus_volume_scale(bus_name: String, volume_scale: float) -> void:
-	volume_scale = clamp(volume_scale, 0.0, 1.0)
-	set_value("audio", bus_name.to_lower() + "_volume", volume_scale)
+func set_bus_volume_ratio(bus_name: String, volume_ratio: float) -> void:
+	volume_ratio = clamp(volume_ratio, 0.0, 1.0)
+	set_value("audio", bus_name.to_lower() + "_volume", volume_ratio)
 	
-	var volume_db: float = lerp(-40.0, 6.0, volume_scale)
-	print(volume_db)
-	set_bus_mute(bus_name, volume_db <= -40.0 or (get_mute() and bus_name == "master"))
-	print(AudioServer.get_bus_index(bus_name))
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), volume_db)
+	var volume_db: float = lerp(MIN_VOLUME, MAX_VOLUME, volume_ratio)
+	set_bus_volume_db(bus_name, volume_db)
 
-func get_bus_volume_scale(bus_name: String) -> float:
+func set_bus_volume_db(bus_name: String, volume_db: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), volume_db)
+	set_bus_mute(bus_name, volume_db <= MIN_VOLUME or (get_mute() and bus_name == "Master"))
+
+func get_bus_volume_ratio(bus_name: String) -> float:
 	return get_value("audio", bus_name.to_lower() + "_volume")
 
 
 func set_bus_mute(bus_name: String, value: bool) -> void:
-	print(value)
+	printt("muting", bus_name, value)
 	AudioServer.set_bus_mute(AudioServer.get_bus_index(bus_name), value)
 
 func set_mute(value: bool) -> void:
 	set_value("audio", "mute", value)
-	set_bus_mute("Master", value)
+	
+	if get_bus_volume_ratio("Master") > 0:
+		# Only unmute if Master has volume.
+		set_bus_mute("Master", value)
 
 func get_mute() -> bool:
 	return get_value("audio", "mute")

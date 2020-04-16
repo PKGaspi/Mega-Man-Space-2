@@ -26,7 +26,7 @@ export(float) var MAX_MOTION_SCALE = 1
 # How many stars are generated.
 # Must be between 0.0 and 1.0
 var star_frequency: float = Config.get_star_frequency()
-export var max_stars_per_sector: int = 5 # Number of stars to attempt to generate per sector.
+export var max_stars_per_sector: int = 10 # Number of stars to attempt to generate per sector.
 export var planet_frequency: float = .008
 export var max_planets_per_sector: int = 1
 

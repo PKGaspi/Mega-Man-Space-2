@@ -7,6 +7,7 @@ export var loop: AudioStream setget set_loop
 export var playing:= false setget set_playing
 export var autoplay:= false
 
+
 onready var intro_node: AudioStreamPlayer
 onready var loop_node: AudioStreamPlayer
 
@@ -19,6 +20,8 @@ func _ready() -> void:
 	loop_node = AudioStreamPlayer.new()
 	intro_node.name = "MscIntro"
 	loop_node.name = "MscLoop"
+	intro_node.bus = "Music"
+	loop_node.bus = "Music"
 	intro_node.connect("finished", self, "_on_intro_finished")
 	add_child(intro_node)
 	add_child(loop_node)

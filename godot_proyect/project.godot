@@ -302,7 +302,7 @@ config/icon="res://icon.png"
 
 [audio]
 
-default_bus_layout="res://resources/audio/default_bus_layout.tres"
+default_bus_layout="res://resources/default_bus_layout.tres"
 
 [autoload]
 
