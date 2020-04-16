@@ -1,5 +1,5 @@
 tool
-class_name OptionShifter
+class_name Shifter
 extends Label
 
 const PREFIX := "< "

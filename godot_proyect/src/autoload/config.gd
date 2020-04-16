@@ -89,11 +89,11 @@ func set_fullscreen(value: bool) -> void:
 	if !value:
 		set_window_scale(get_window_scale())
 
-func toggle_fullscreen() -> void:
-	set_fullscreen(!get_fullscreen())
-
 func get_fullscreen() -> bool:
 	return get_value("video", "fullscreen")
+	
+func toggle_fullscreen() -> void:
+	set_fullscreen(not get_fullscreen())
 
 
 func set_vsync(value: bool) -> void:
@@ -101,7 +101,10 @@ func set_vsync(value: bool) -> void:
 	set_value("video", "v-sync", value)
 
 func get_vsync() -> bool:
-	return get_value("vide", "v-sync")
+	return get_value("video", "v-sync")
+
+func toggle_vsync() -> void:
+	set_vsync(not get_vsync())
 
 
 func set_window_scale(value: int) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=2]
@@ -6,7 +6,10 @@
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=4]
 [ext_resource path="res://src/gui/menus/settings menu/video settings menu/video_settings_menu.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/other/pause_menu.wav" type="AudioStream" id=6]
-[ext_resource path="res://src/gui/menus/option_shifter.gd" type="Script" id=7]
+[ext_resource path="res://src/gui/menus/shifter.gd" type="Script" id=7]
+[ext_resource path="res://src/gui/menus/toggler.gd" type="Script" id=8]
+[ext_resource path="res://assets/sprites/gui/menus/toggler_1.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/gui/menus/toggler_0.png" type="Texture" id=10]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -166,34 +169,29 @@ text = "Back"
 [node name="VSeparator" type="VSeparator" parent="Contents/Sections"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 96.0
-margin_right = 282.0
+margin_right = 325.0
 margin_bottom = 144.0
 size_flags_horizontal = 3
 
 [node name="Additional" type="VBoxContainer" parent="Contents/Sections"]
-margin_left = 290.0
+margin_left = 333.0
 margin_top = 44.0
 margin_right = 370.0
 margin_bottom = 100.0
 size_flags_vertical = 4
 
-[node name="Fullscreen" type="Label" parent="Contents/Sections/Additional"]
-margin_right = 80.0
+[node name="FullscreenToggler" type="TextureRect" parent="Contents/Sections/Additional"]
+margin_right = 37.0
 margin_bottom = 8.0
 rect_min_size = Vector2( 0, 8 )
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-text = "Fullscreen"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 10 )
+script = ExtResource( 8 )
+off_texture = ExtResource( 10 )
+on_texture = ExtResource( 9 )
 
 [node name="WindowScaleShifter" type="Label" parent="Contents/Sections/Additional"]
 margin_top = 16.0
-margin_right = 80.0
+margin_right = 37.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
@@ -204,24 +202,19 @@ custom_constants/shadow_offset_y = 1
 text = "< 1x >"
 script = ExtResource( 7 )
 
-[node name="VSync" type="Label" parent="Contents/Sections/Additional"]
+[node name="VSyncToggler" type="TextureRect" parent="Contents/Sections/Additional"]
 margin_top = 32.0
-margin_right = 80.0
+margin_right = 37.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 8 )
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-text = "V-Sync"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 10 )
+script = ExtResource( 8 )
+off_texture = ExtResource( 10 )
+on_texture = ExtResource( 9 )
 
-[node name="Back" type="Label" parent="Contents/Sections/Additional"]
+[node name="BackEmpty" type="Label" parent="Contents/Sections/Additional"]
 margin_top = 48.0
-margin_right = 80.0
+margin_right = 37.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 0, 8 )
 custom_fonts/font = ExtResource( 1 )
