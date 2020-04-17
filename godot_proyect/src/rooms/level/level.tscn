@@ -1,18 +1,14 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/sfx/other/wave_help.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/rooms/level/data/debug_level_data.tres" type="Resource" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
-[ext_resource path="res://src/characters/enemies/sniper_armor/sniper_armor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=7]
-[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=8]
+[ext_resource path="res://src/gui/bar_container.gd" type="Script" id=8]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
-[ext_resource path="res://src/characters/enemies/enemy_death.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
-[ext_resource path="res://src/stats/ship_stats.gd" type="Script" id=13]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/audio/music_looper.gd" type="Script" id=18]
@@ -55,34 +51,6 @@ shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 3 )
 shader_param/mask = ExtResource( 12 )
 
-[sub_resource type="Resource" id=4]
-script = ExtResource( 13 )
-max_hp = 111.0
-max_speed = 260.0
-acceleration_ratio = 1.75
-deacceleration_ratio = 0.8
-collision_damage = 4.0
-invencibility_time = 0.5
-view_distance = 300.0
-weaknesses = {
-0: 1,
-1: 1,
-2: 1,
-3: 1,
-4: 1,
-5: 1,
-6: 1,
-7: 1,
-8: 1
-}
-_cap_max_speed = Vector2( 200, 380 )
-_cap_max_hp = Vector2( 20, 36 )
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 8 )
-items = [  ]
-weights = [  ]
-
 [node name="Level" type="Node"]
 pause_mode = 2
 script = ExtResource( 15 )
@@ -102,6 +70,7 @@ __meta__ = {
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -111,10 +80,6 @@ margin_left = 16.0
 margin_top = 24.0
 margin_right = 23.0
 margin_bottom = 80.0
-max_value = 28.0
-cell_size = Vector2( 7, 2 )
-horizontal = false
-palette = 0
 
 [node name="MegashipAmmoBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
 visible = false
@@ -122,23 +87,6 @@ margin_left = 23.0
 margin_top = 24.0
 margin_right = 30.0
 margin_bottom = 80.0
-max_value = 28.0
-cell_size = Vector2( 7, 2 )
-horizontal = false
-palette = 0
-
-[node name="BossHpBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -30.0
-margin_top = 24.0
-margin_right = -23.0
-margin_bottom = 246.0
-max_value = 111.0
-value = 111.0
-cell_size = Vector2( 7, 2 )
-horizontal = false
-palette = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="UILayer"]
 anchor_right = 1.0
@@ -191,18 +139,6 @@ drag_margin_bottom = 0.1
 editor_draw_drag_margin = true
 script = ExtResource( 10 )
 _path_to_follow = NodePath("../../../Level/GameLayer/Megaship")
-
-[node name="SniperArmor" parent="GameLayer" instance=ExtResource( 4 )]
-position = Vector2( 285.771, 90.0026 )
-
-[node name="HeatMan" parent="GameLayer" instance=ExtResource( 5 )]
-position = Vector2( 124.162, 34.7468 )
-collision_layer = 4
-collision_mask = 0
-stats = SubResource( 4 )
-_hp_bar_path = NodePath("../../UILayer/HUD/BarContainer/BossHpBar")
-death_instance = ExtResource( 11 )
-drops = SubResource( 5 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 _to_follow_path = NodePath("../../Level/GameLayer/Camera")

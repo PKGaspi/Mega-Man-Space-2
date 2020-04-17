@@ -74,6 +74,9 @@ func emit_hit_particles() -> void:
 
 
 func create_enemy_wave_pointer(wave: EnemyWave, palette: int) -> void:
+	if not is_instance_valid(wave):
+		return
+	
 	var wave_data = wave.wave_data
 	var pointer: PointingSprite = ENEMY_WAVE_POINTER.instance()
 	pointer.pointing_to = wave_data.center
@@ -84,6 +87,9 @@ func create_enemy_wave_pointer(wave: EnemyWave, palette: int) -> void:
 
 
 func create_enemy_pointer(enemy: Enemy, palette: int) -> void:
+	if not is_instance_valid(enemy):
+		return
+	
 	var pointer: PointingSprite = ENEMY_POINTER.instance()
 	pointer.to_owner = enemy
 	pointer.palette = palette

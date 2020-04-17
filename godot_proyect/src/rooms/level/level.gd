@@ -21,6 +21,7 @@ onready var megaship = game_layer.get_node("Megaship")
 
 onready var ui = $UILayer
 onready var hud = ui.get_node("HUD")
+onready var bar_containter = hud.get_node("BarContainer")
 onready var center_text = ui.get_node("CenterContainer/CenterText")
 
 
@@ -47,6 +48,7 @@ func _ready() -> void:
 	global.connect("user_paused", self, "_on_global_user_pause")
 	megaship.connect("death", self, "_on_megaship_death")
 	center_text.connect("animation_finished", self, "_on_animation_finished")
+	ObjectRegistry.connect("boss_registered", self, "_on_boss_registered")
 
 
 #####################
@@ -95,7 +97,15 @@ func _on_WaveTimer_timeout() -> void:
 		create_enemy_pointer(enemy)
 
 
-func _on_enemy_registered(enemy) -> void:
+func _on_boss_registered(boss: Boss) -> void:
+	# TODO: Set correct palette
+	yield(boss, "ready")
+	var hp_bar = bar_containter.new_boss_bar(boss.max_hp, boss.hp, Weapon.TYPES.HEAT)
+	boss.hp_bar = hp_bar
+	boss.connect("tree_exited", hp_bar, "queue_free")
+
+
+func _on_enemy_registered(enemy: Enemy) -> void:
 	if wave_timer.is_stopped():
 		# A new enemy has spawned. Point towards it.
 		create_enemy_pointer(enemy)

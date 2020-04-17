@@ -1,0 +1,26 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/stats/ship_stats.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+max_hp = 5.0
+max_speed = 260.0
+acceleration_ratio = 1.75
+deacceleration_ratio = 0.8
+collision_damage = 4.0
+invencibility_time = 0.5
+view_distance = 300.0
+weaknesses = {
+0: 1,
+1: 1,
+2: 1,
+3: 1,
+4: 1,
+5: 1,
+6: 1,
+7: 1,
+8: 1
+}
+_cap_max_speed = Vector2( 200, 380 )
+_cap_max_hp = Vector2( 0, 200 )
