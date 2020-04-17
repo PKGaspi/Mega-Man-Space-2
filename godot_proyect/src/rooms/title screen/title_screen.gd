@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 const SELECT_SCREEN = "res://src/rooms/select stage/select_stage.tscn"
 
@@ -14,12 +14,6 @@ func _ready() -> void:
 	randomize()
 	$Music.play()
 	animate_camera()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("game_start"):
-		accept_event()
-		game_start()
 
 
 func _on_Tween_tween_completed(object: Object, key: NodePath) -> void:
