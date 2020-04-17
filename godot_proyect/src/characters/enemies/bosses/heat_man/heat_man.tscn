@@ -13,8 +13,16 @@ texture = ExtResource( 1 )
 [node name="CollisionBox" parent="." index="1"]
 shape = ExtResource( 2 )
 
+[node name="StateMachine" parent="." index="2"]
+initial_state = NodePath("Iddle")
+
+[node name="hud" parent="." index="5"]
+visible = false
+
 [node name="HPBar" parent="hud" index="0"]
 margin_left = 28.0
 margin_top = -20.0
 margin_right = 33.0
-margin_bottom = -10.0
+margin_bottom = 202.0
+max_value = 111.0
+value = 111.0
