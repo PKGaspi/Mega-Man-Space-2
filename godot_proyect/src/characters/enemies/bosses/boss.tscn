@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/characters/enemies/bosses/boss.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/enemies/bosses/states/init_spawn_animation.gd" type="Script" id=3]
+[ext_resource path="res://src/characters/enemies/bosses/states/move_spawn_animation.gd" type="Script" id=4]
+
+[node name="Boss" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="StateMachine" parent="." index="1"]
+initial_state = NodePath("../../Boss/StateMachine/Move/Follow/Megaship")
+
+[node name="SpawnAnimation" type="Node" parent="StateMachine/Move/Follow" index="1"]
+script = ExtResource( 4 )
+
+[node name="InitSpawnAnimation" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 3 )
+
+[node name="EndSpawnAnimation" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 3 )
