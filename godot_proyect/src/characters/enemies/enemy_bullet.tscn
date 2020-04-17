@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/bullets/bullet.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/sprites/characters/megaship/bullets/lemon.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/enemies/bullets/generic.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 4.11307
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 4 )
 
 [node name="EnemyBullet" instance=ExtResource( 1 )]
 collision_layer = 8
@@ -12,8 +12,11 @@ collision_mask = 1
 motion_speed = 400.0
 damage = 5.0
 
+[node name="CollisionBox" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" parent="." index="1"]
+rect = Rect2( -4, -4, 8, 8 )
+
 [node name="Sprite" type="Sprite" parent="." index="2"]
 texture = ExtResource( 2 )
-
-[node name="CollisionBox" type="CollisionShape2D" parent="." index="3"]
-shape = SubResource( 1 )

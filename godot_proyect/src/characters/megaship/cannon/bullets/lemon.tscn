@@ -3,9 +3,8 @@
 [ext_resource path="res://src/bullets/bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/characters/megaship/bullets/lemon.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 10.9809
-height = 0.310454
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 3 )
 
 [node name="LemonBullet" instance=ExtResource( 1 )]
 
@@ -13,8 +12,7 @@ height = 0.310454
 texture = ExtResource( 2 )
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="1"]
-scale = Vector2( 0.4, 0.3 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" parent="." index="2"]
-rect = Rect2( -10, -10, 21.13, 20 )
+rect = Rect2( -4, -3, 8, 6 )
