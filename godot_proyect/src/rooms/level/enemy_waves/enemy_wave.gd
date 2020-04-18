@@ -9,6 +9,7 @@ signal completed()
 
 func _ready() -> void:
 	wave_data.initialize()
+	spawn_bosses()
 
 
 func _physics_process(delta: float) -> void:
@@ -23,6 +24,13 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
+func spawn_bosses() -> void:
+	for boss in wave_data.bosses:
+		var inst: Boss = spawn_enemy(boss, wave_data.get_random_point())
+		print(inst)
+		inst.start_spawn_animation()
+
+
 func spawn_random_enemy() -> void:
 	var enemy = wave_data.get_random_enemy()
 	var pos = wave_data.get_random_point()
@@ -30,9 +38,9 @@ func spawn_random_enemy() -> void:
 	spawn_enemy(enemy, pos)
 
 
-func spawn_enemy(enemy: PackedScene, pos: Vector2) -> void:
+func spawn_enemy(enemy: PackedScene, pos: Vector2) -> Enemy:
 	pos = move_point_off_screen(pos, 20)
-	wave_data.spawn_enemy(enemy, pos)
+	return wave_data.spawn_enemy(enemy, pos)
 
 
 

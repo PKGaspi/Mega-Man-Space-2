@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-max_hp = 5.0
+max_hp = 111.0
 max_speed = 260.0
 acceleration_ratio = 1.75
 deacceleration_ratio = 0.8

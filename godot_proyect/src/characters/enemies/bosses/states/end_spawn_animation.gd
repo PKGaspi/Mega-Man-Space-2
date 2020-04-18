@@ -11,4 +11,6 @@ func enter(msg: Dictionary = {}) -> void:
 	# Go to the initial intended state.
 	_state_machine.restart()
 	
-	# TODO: Fill hp bar on global hud.
+	# Fill hp bar.
+	character.hp_bar.value = 0
+	character.hp_bar.set_value(character.hp, true)

@@ -178,7 +178,7 @@ func create_stars(sector):
 	
 	# Create the stars.
 	var n_planets = 0
-	for i in range(max_stars_per_sector):
+	for _i in range(max_stars_per_sector):
 		# Check if a new star is generated. Every time it's
 		# harder for a new star to generate.
 		if (random.randf() < star_frequency):
