@@ -5,7 +5,7 @@ extends Node2D
 export var wave_data: Resource = EnemyWaveData.new()
 
 signal completed()
-
+signal boss_spawned(boss)
 
 func _ready() -> void:
 	wave_data.initialize()
@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 func spawn_bosses() -> void:
 	for boss in wave_data.bosses:
 		var inst: Boss = spawn_enemy(boss, wave_data.get_random_point())
-		print(inst)
+		emit_signal("boss_spawned", inst)
 		inst.start_spawn_animation()
 
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/sfx/other/wave_help.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/rooms/level/data/debug_level_data.tres" type="Resource" id=2]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/music/boss_intro.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/music/boss_loop.ogg" type="AudioStream" id=5]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://src/gui/centre_text.gd" type="Script" id=7]
 [ext_resource path="res://src/gui/bar_container.gd" type="Script" id=8]
@@ -80,10 +82,6 @@ margin_left = 16.0
 margin_top = 24.0
 margin_right = 23.0
 margin_bottom = 80.0
-max_value = 28.0
-cell_size = Vector2( 7, 2 )
-horizontal = false
-palette = 0
 
 [node name="MegashipAmmoBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
 visible = false
@@ -91,10 +89,6 @@ margin_left = 23.0
 margin_top = 24.0
 margin_right = 30.0
 margin_bottom = 80.0
-max_value = 28.0
-cell_size = Vector2( 7, 2 )
-horizontal = false
-palette = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="UILayer"]
 anchor_right = 1.0
@@ -151,8 +145,13 @@ _path_to_follow = NodePath("../../../Level/GameLayer/Megaship")
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 _to_follow_path = NodePath("../../Level/GameLayer/Camera")
 
-[node name="MusicLooper" type="Node" parent="."]
+[node name="MscLevel" type="Node" parent="."]
 script = ExtResource( 18 )
+
+[node name="MscBoss" type="Node" parent="."]
+script = ExtResource( 18 )
+intro = ExtResource( 4 )
+loop = ExtResource( 5 )
 
 [node name="SndWaveHelp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )

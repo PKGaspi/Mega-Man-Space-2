@@ -24,10 +24,10 @@ func set_entry(value: int) -> bool:
 		return false
 		
 	if loop:
-		entry_index = fposmod(value, n_entries)
+		entry_index = int(fposmod(value, n_entries))
 		text = PREFIX + str(entry_names[entry_index]) + SUFIX
 	else:
-		entry_index = clamp(value, 0, n_entries - 1)
+		entry_index = int(clamp(value, 0, n_entries - 1))
 		if entry_index == 0:
 			text = str(entry_names[entry_index]) + SUFIX
 		elif entry_index == n_entries - 1:

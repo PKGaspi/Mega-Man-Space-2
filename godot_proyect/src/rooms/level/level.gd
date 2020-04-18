@@ -11,7 +11,8 @@ export var level_data: Resource = LevelData.new()
 ############
 
 
-onready var music_looper = $MusicLooper
+onready var level_music = $MscLevel
+onready var boss_music = $MscBoss
 onready var game_over_timer = $GameOverTimer
 onready var wave_timer = $WaveTimer
 onready var snd_wave_help = $SndWaveHelp
@@ -65,7 +66,8 @@ func _on_animation_finished(animation):
 func _on_megaship_death() -> void:
 	# Stop any animation or music.
 	center_text.set_animation("none") 
-	music_looper.stop()
+	level_music.stop()
+	boss_music.stop()
 	game_over_timer.start()
 
 
@@ -98,11 +100,23 @@ func _on_WaveTimer_timeout() -> void:
 
 
 func _on_boss_registered(boss: Boss) -> void:
+	# This is done for every enemy that inherits boss. Not all bosses
+	# are spawned in the world as bosses, some of them spawn as normal
+	# enemies but their hp must show on the global hud anyways.
 	# TODO: Set correct palette
 	yield(boss, "ready")
 	var hp_bar = bar_containter.new_boss_bar(boss.max_hp, boss.hp, Weapon.TYPES.HEAT)
 	boss.hp_bar = hp_bar
 	boss.connect("tree_exited", hp_bar, "queue_free")
+
+
+func _on_boss_spawned(boss: Boss) -> void:
+	# This is done only for those bosses spawned as a boss, not as a normal
+	# enemy. This means that the boss music should start playing and, when
+	# all of this bosses are killed, the level is completed.
+	level_music.stop()
+	boss_music.play()
+	#boss_music.connect("intro_finished", boss, "_on_boss_music_intro_finished")
 
 
 func _on_enemy_registered(enemy: Enemy) -> void:
@@ -126,9 +140,9 @@ func _on_global_user_pause(value) -> void:
 
 
 func set_music(music_intro: AudioStream, music_loop: AudioStream) -> void:
-	music_looper.intro = music_intro
-	music_looper.loop = music_loop
-	music_looper.play()
+	level_music.intro = music_intro
+	level_music.loop = music_loop
+	level_music.play()
 
 
 func set_entities_visibility(value: bool) -> void:
@@ -155,6 +169,7 @@ func next_wave() -> void:
 		wave.wave_data = wave_data
 		wave.name = "EnemyWave"
 		wave.connect("completed", self, "next_wave")
+		wave.connect("boss_spawned", self, "_on_boss_spawned")
 		game_layer.add_child(wave)
 		# Create the enemy wave pointer so the player can find it.
 		megaship.create_enemy_wave_pointer(wave, level_data.palette)
