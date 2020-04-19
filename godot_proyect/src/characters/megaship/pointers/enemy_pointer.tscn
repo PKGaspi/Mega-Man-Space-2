@@ -46,4 +46,4 @@ texture = ExtResource( 2 )
 script = ExtResource( 1 )
 palettes = ExtResource( 3 )
 radious = 55.0
-distance_to_disappear = 70.0
+distance_to_disappear = 200.0
