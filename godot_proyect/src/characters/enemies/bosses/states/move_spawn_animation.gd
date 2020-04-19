@@ -47,6 +47,5 @@ func next_point() -> void:
 		_parent.to_follow = path[path_index]
 		timer.start()
 	else:
-		print("wtf")
 		_state_machine.transition_to("EndSpawnAnimation")
 	

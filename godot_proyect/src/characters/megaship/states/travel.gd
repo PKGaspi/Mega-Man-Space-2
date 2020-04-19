@@ -84,12 +84,12 @@ func calculate_rotation() -> float:
 			var mouse_pos = character.get_global_mouse_position()
 			var global_position = character.global_position
 			if global_position.distance_to(mouse_pos) > MIN_DISTANCE_TO_CURSOR:
-				rotation = global_position.direction_to(mouse_pos).angle()
+				rotation = global_position.direction_to(mouse_pos).rotated(PI/2).angle()
 		global.INPUT_TYPES.GAMEPAD: # Gamepad input.
 			var aim_vector := Vector2(
 				Input.get_action_strength("aim_right") - Input.get_action_strength("aim_left"),
 				Input.get_action_strength("aim_down") - Input.get_action_strength("aim_up")
-			)
+			).rotated(PI/2)
 			if aim_vector.length() > .3:
 				rotation = aim_vector.angle()
 		_:

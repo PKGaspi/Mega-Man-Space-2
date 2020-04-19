@@ -14,7 +14,7 @@ var shoot_timer: Timer
 func _ready() -> void:
 	yield(owner,"ready")
 	
-	shield_transform = Transform2D(deg2rad(90), Vector2(-1, -4))
+	shield_transform = Transform2D(PI / 2, Vector2(3, 0))
 	# Nodes.
 	spr_body = character.get_node("SprBody")
 	shield = character.get_node("Shield")
@@ -47,7 +47,7 @@ func physics_process(delta: float) -> void:
 	# Move.
 	_parent.physics_process(delta)
 	# Allways face the megaship.
-	character.global_rotation = direction_to_megaship().rotated(-PI/2).angle()
+	character.global_rotation = direction_to_megaship().rotated(PI/2).angle()
 
 
 func exit() -> void:

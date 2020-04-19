@@ -2,7 +2,8 @@ class_name EnemyWaveData
 extends Resource
 
 
-export var bosses: Array
+export var bosses: Array = []
+var bosses_spawned := false
 export var enemies: Resource = WeightRandomizer.new()
 export var n_total_enemies: int
 var n_enemies: int = 0 # Current number of enemies spawned.
@@ -64,5 +65,5 @@ func can_spawn() -> bool:
 
 
 func is_completed() -> bool:
-	return n_spawns_left <= 0 and n_enemies <= 0
+	return n_spawns_left <= 0 and n_enemies <= 0 and (bosses_spawned or len(bosses) == 0)
 

@@ -9,7 +9,6 @@ signal boss_spawned(boss)
 
 func _ready() -> void:
 	wave_data.initialize()
-	spawn_bosses()
 
 
 func _physics_process(delta: float) -> void:

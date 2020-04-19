@@ -37,7 +37,7 @@ func calculate_rotation() -> float:
 			var mouse_pos = character.get_global_mouse_position()
 			var global_position = character.global_position
 			if global_position.distance_to(mouse_pos) > MIN_DISTANCE_TO_CURSOR:
-				rotation = global_position.direction_to(mouse_pos).angle()
+				rotation = global_position.direction_to(mouse_pos).rotated(PI/2).angle()
 		_:
 			pass #rotation = 
 	return rotation

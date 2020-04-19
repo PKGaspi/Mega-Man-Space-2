@@ -5,6 +5,7 @@ const SELECT_STAGE_SCREEN = "res://src/rooms/select stage/select_stage.tscn"
 const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
 export var level_data: Resource = LevelData.new()
+var current_wave: EnemyWave
 
 ############
 ## Nodes. ##
@@ -61,6 +62,10 @@ func _on_animation_finished(animation):
 	if animation == "ready":
 		global.unpause()
 		set_entities_visibility(true)
+	elif animation == "warning":
+		# Spawn bosses after the warning animation finished.
+		if is_instance_valid(current_wave):
+			current_wave.spawn_bosses()
 
 
 func _on_megaship_death() -> void:
@@ -165,14 +170,14 @@ func next_wave() -> void:
 	var wave_data = level_data.next_wave()
 	if wave_data != null:
 		# Spawn wave.
-		var wave := EnemyWave.new()
-		wave.wave_data = wave_data
-		wave.name = "EnemyWave"
-		wave.connect("completed", self, "next_wave")
-		wave.connect("boss_spawned", self, "_on_boss_spawned")
-		game_layer.add_child(wave)
+		current_wave = EnemyWave.new()
+		current_wave.wave_data = wave_data
+		current_wave.name = "EnemyWave"
+		current_wave.connect("completed", self, "next_wave")
+		current_wave.connect("boss_spawned", self, "_on_boss_spawned")
+		game_layer.add_child(current_wave)
 		# Create the enemy wave pointer so the player can find it.
-		megaship.create_enemy_wave_pointer(wave, level_data.palette)
+		megaship.create_enemy_wave_pointer(current_wave, level_data.palette)
 		
 		wave_timer.start()
 		# TODO: Play warning animation.

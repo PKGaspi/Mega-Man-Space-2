@@ -40,7 +40,7 @@ func physics_process(delta: float) -> void:
 	# Move.
 	var dir = init_position.direction_to(final_position)
 	velocity = dir * teleport_speed
-	character.global_rotation = dir.angle()
+	character.global_rotation = dir.rotated(PI/2).angle()
 	# Check if we have reached the final_position.
 	# Check how far we are to final_position.
 	var current_position = character.global_position

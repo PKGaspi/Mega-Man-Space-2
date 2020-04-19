@@ -23,17 +23,16 @@ drops = ExtResource( 14 )
 
 [node name="SprBody" type="AnimatedSprite" parent="." index="0"]
 frames = ExtResource( 2 )
-animation = "aim"
+animation = "shield"
 
 [node name="CollisionBox" parent="." index="1"]
-position = Vector2( 1.5, -2 )
+position = Vector2( -1.511, 3 )
 shape = ExtResource( 5 )
 
 [node name="CannonSetup" parent="." index="2" instance=ExtResource( 11 )]
 
 [node name="Cannon" type="Position2D" parent="CannonSetup" index="0"]
-position = Vector2( 5.5, 13 )
-rotation = 1.5708
+position = Vector2( -4, -13 )
 script = ExtResource( 12 )
 projectile = ExtResource( 13 )
 
@@ -46,7 +45,7 @@ collision_mask = 2
 script = ExtResource( 4 )
 
 [node name="CollisionBox" type="CollisionShape2D" parent="Shield" index="0"]
-position = Vector2( 2, 11.5 )
+position = Vector2( 0, -8 )
 shape = ExtResource( 6 )
 
 [node name="StateMachine" parent="." index="4"]

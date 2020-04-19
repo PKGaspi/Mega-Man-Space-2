@@ -17,7 +17,6 @@
 [ext_resource path="res://src/library/state machine/rapid_weapon_state.gd" type="Script" id=15]
 [ext_resource path="res://src/characters/megaship/cannon/stats/quick_weapon_stats.tres" type="Resource" id=16]
 
-
 [sub_resource type="Resource" id=1]
 script = ExtResource( 6 )
 max_ammo = 28.0
@@ -35,34 +34,34 @@ stats = SubResource( 1 )
 [node name="1" parent="." instance=ExtResource( 2 )]
 
 [node name="CenterCannon" parent="1" instance=ExtResource( 1 )]
-position = Vector2( 16, 0 )
+position = Vector2( 0, -12 )
 projectile = ExtResource( 4 )
 
 [node name="2" parent="." instance=ExtResource( 2 )]
 
 [node name="LeftCannon" parent="2" instance=ExtResource( 1 )]
-position = Vector2( 7, -4.5 )
+position = Vector2( -4.5, -3 )
 rotation = -0.0349066
 projectile = ExtResource( 4 )
 
 [node name="RightCannon" parent="2" instance=ExtResource( 1 )]
-position = Vector2( 7, 4.5 )
+position = Vector2( 4.5, -3 )
 rotation = 0.0349066
 projectile = ExtResource( 4 )
 
 [node name="3" parent="." instance=ExtResource( 2 )]
 
 [node name="CenterCannon" parent="3" instance=ExtResource( 1 )]
-position = Vector2( 16, 0 )
+position = Vector2( 0, -12 )
 projectile = ExtResource( 4 )
 
 [node name="LeftCannon" parent="3" instance=ExtResource( 1 )]
-position = Vector2( 7, -4.5 )
+position = Vector2( -4.5, -3 )
 rotation = -0.174533
 projectile = ExtResource( 4 )
 
 [node name="RightCannon" parent="3" instance=ExtResource( 1 )]
-position = Vector2( 7, 4.5 )
+position = Vector2( 4.5, -3 )
 rotation = 0.174533
 projectile = ExtResource( 4 )
 

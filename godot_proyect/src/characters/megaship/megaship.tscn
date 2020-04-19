@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=19]
 [ext_resource path="res://src/characters/megaship/states/teleport_end.gd" type="Script" id=20]
+[ext_resource path="res://src/characters/megaship/megaship_collision_shape.tres" type="Shape2D" id=21]
 [ext_resource path="res://src/characters/megaship/states/travel.gd" type="Script" id=25]
 [ext_resource path="res://src/characters/megaship/states/knockback.gd" type="Script" id=26]
 
@@ -55,9 +56,6 @@ shader = SubResource( 1 )
 shader_param/palette_size = 8.0
 shader_param/palette = ExtResource( 19 )
 shader_param/mask = ExtResource( 18 )
-
-[sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( -7.5, -9, 16, 0, -7.5, 9 )
 
 [sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
@@ -130,8 +128,8 @@ texture = ExtResource( 14 )
 script = ExtResource( 15 )
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="2"]
-position = Vector2( 0.5, -0.5 )
-shape = SubResource( 3 )
+position = Vector2( -0.5, 0 )
+shape = ExtResource( 21 )
 
 [node name="StateMachine" parent="." index="3"]
 initial_state = NodePath("Move/Travel")
@@ -151,7 +149,7 @@ script = ExtResource( 12 )
 script = ExtResource( 20 )
 
 [node name="Cannons" parent="." index="4" instance=ExtResource( 4 )]
-position = Vector2( 0.5, -0.5 )
+position = Vector2( -0.5, -0.5 )
 
 [node name="HitParticles" type="Particles2D" parent="." index="5"]
 z_index = 1
