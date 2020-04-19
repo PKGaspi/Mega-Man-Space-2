@@ -19,7 +19,7 @@ func new_boss_bar(max_value: float, value: float, palette: int) -> TiledProgress
 	bar.max_value = max_value
 	bar.value = value
 	bar.palette = palette
-	bar.cells_per_step = 4
+	bar.cells_per_step = int(ceil(bar.value / 28))
 	bar.name = "BossHpBar%d" % n_boss_bars
 	
 	bar.connect("tree_exited", self, "_on_boss_bar_tree_exited")

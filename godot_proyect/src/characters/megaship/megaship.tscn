@@ -122,31 +122,15 @@ script = ExtResource( 16 )
 palettes = ExtResource( 6 )
 
 [node name="Aimer" type="Sprite" parent="." index="1"]
+pause_mode = 2
 visible = false
 z_index = 1
 texture = ExtResource( 14 )
 script = ExtResource( 15 )
 
-[node name="CollisionBox" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionBox" parent="." index="2"]
 position = Vector2( -0.5, 0 )
 shape = ExtResource( 21 )
-
-[node name="StateMachine" parent="." index="3"]
-initial_state = NodePath("Move/Travel")
-
-[node name="Travel" type="Node" parent="StateMachine/Move" index="0"]
-script = ExtResource( 25 )
-
-[node name="Knockback" type="Node" parent="StateMachine/Move" index="1"]
-script = ExtResource( 26 )
-knockback_time = 1.0
-knockback_multiplier = 18.0
-
-[node name="Teleport" type="Node" parent="StateMachine/Move" index="2"]
-script = ExtResource( 12 )
-
-[node name="TeleportEnd" type="Node" parent="StateMachine" index="1"]
-script = ExtResource( 20 )
 
 [node name="Cannons" parent="." index="4" instance=ExtResource( 4 )]
 position = Vector2( -0.5, -0.5 )
@@ -185,11 +169,28 @@ process_material = SubResource( 7 )
 [node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = SubResource( 8 )
 
-[node name="SndHit" parent="." index="8"]
+[node name="StateMachine" parent="." index="8"]
+initial_state = NodePath("Move/Travel")
+
+[node name="Travel" type="Node" parent="StateMachine/Move" index="0"]
+script = ExtResource( 25 )
+
+[node name="Knockback" type="Node" parent="StateMachine/Move" index="1"]
+script = ExtResource( 26 )
+knockback_time = 1.0
+knockback_multiplier = 18.0
+
+[node name="Teleport" type="Node" parent="StateMachine/Move" index="2"]
+script = ExtResource( 12 )
+
+[node name="TeleportEnd" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 20 )
+
+[node name="SndHit" parent="." index="9"]
 stream = ExtResource( 11 )
 script = null
 
-[node name="SndUpgrade" parent="." index="9"]
+[node name="SndUpgrade" parent="." index="10"]
 stream = ExtResource( 13 )
 [connection signal="palette_changed" from="." to="SprShip" method="set_palette"]
 [connection signal="weapon_changed" from="Cannons" to="." method="set_palette"]

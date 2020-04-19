@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/sfx/other/wave_help.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/rooms/level/data/debug_level_data.tres" type="Resource" id=2]
@@ -10,9 +10,7 @@
 [ext_resource path="res://src/gui/bar_container.gd" type="Script" id=8]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
-[ext_resource path="res://src/library/state machine/state.gd" type="Script" id=11]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
-[ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=13]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/audio/music_looper.gd" type="Script" id=18]
@@ -119,22 +117,23 @@ _cannons_path = NodePath("../../../Level/GameLayer/Megaship/Cannons")
 [node name="SprShip" parent="GameLayer/Megaship" index="0"]
 material = SubResource( 3 )
 
-[node name="StateMachine" parent="GameLayer/Megaship" index="3"]
-script = ExtResource( 13 )
+[node name="CollisionBox" parent="GameLayer/Megaship" index="2"]
+position = Vector2( 0, 0 )
+shape = null
+
+[node name="CollisionBox" parent="GameLayer/Megaship" index="3"]
+position = Vector2( 0, 0 )
+shape = null
+
+[node name="Cannons" parent="GameLayer/Megaship" index="4"]
+_ammo_bar_path = NodePath("../../../../Level/UILayer/HUD/BarContainer/MegashipAmmoBar")
+
+[node name="StateMachine" parent="GameLayer/Megaship" index="8"]
 initial_state = NodePath("../../../../Level/GameLayer/Megaship/StateMachine/Move/Teleport")
 initial_msg = {
 "final_position": Vector2( 0, 0 ),
 "init_position": Vector2( 0, -300 )
 }
-
-[node name="Iddle" parent="GameLayer/Megaship/StateMachine" index="2"]
-script = ExtResource( 11 )
-
-[node name="Cannons" parent="GameLayer/Megaship" index="4"]
-_ammo_bar_path = NodePath("../../../../Level/UILayer/HUD/BarContainer/MegashipAmmoBar")
-
-[node name="SndUpgrade" parent="GameLayer/Megaship" index="9"]
-script = null
 
 [node name="Camera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2
