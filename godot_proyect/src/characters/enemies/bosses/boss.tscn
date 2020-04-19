@@ -12,6 +12,9 @@ script = ExtResource( 2 )
 [node name="StateMachine" parent="." index="1"]
 initial_state = NodePath("../../Boss/StateMachine/Move/Follow/Megaship")
 
+[node name="Move" parent="StateMachine" index="0"]
+rotate_forwards = true
+
 [node name="SpawnAnimation" type="Node" parent="StateMachine/Move/Follow" index="1"]
 script = ExtResource( 4 )
 

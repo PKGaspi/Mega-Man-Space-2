@@ -3,6 +3,7 @@ extends CharacterState
 
 
 func enter(msg: Dictionary = {}) -> void:
+	character.hp_bar.value = 0
 	# Pause the rest of the game.
 	character.pause_mode = Node.PAUSE_MODE_PROCESS
 	global.pause()

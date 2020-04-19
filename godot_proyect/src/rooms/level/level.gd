@@ -73,7 +73,7 @@ func _on_megaship_death() -> void:
 
 func _on_megaship_transitioned(state_path: String) -> void:
 	match state_path:
-		"TeleportEnd":
+		"Move/Travel":
 			if level_data.current_wave_index == 0:
 				# Start the first wave only. This is when the tp animation ends.
 				next_wave()
