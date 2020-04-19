@@ -1,3 +1,4 @@
+class_name PropulsionParticles
 extends Node2D
 # Handler for propulsion particle effects. All childs of this node should be
 # Particle2D nodes.

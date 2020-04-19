@@ -36,9 +36,15 @@ func enter(msg: Dictionary = {}) -> void:
 	next_point()
 
 
+func physics_process(delta: float) -> void:
+	_parent.physics_process(delta)
+	character.apply_propulsion_effects(_parent.dir * max_speed * acceleration_ratio)
+
+
 func exit() -> void:
 	timer.stop()
 	timer.disconnect("timeout", self, "_on_timer_timeout")
+	character.apply_propulsion_effects(Vector2.ZERO)
 
 
 func next_point() -> void:

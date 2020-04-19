@@ -2,8 +2,8 @@ class_name Boss
 extends Enemy
 
 
-func _ready() -> void:
-	pass
+onready var propulsion_particles := $PropulsionParticles
+
 
 
 func _on_boss_music_intro_finished() -> void:
@@ -18,3 +18,7 @@ func start_spawn_animation() -> void:
 		call_deferred("start_spawn_animation")
 		return
 	_state_machine.transition_to("InitSpawnAnimation")
+
+
+func apply_propulsion_effects(propulsion: Vector2) -> void:
+	propulsion_particles.emit(propulsion)
