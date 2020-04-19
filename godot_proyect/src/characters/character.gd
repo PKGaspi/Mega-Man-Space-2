@@ -33,6 +33,7 @@ var invencibility_timer := Timer.new()
 onready var snd_hit := $SndHit
 onready var snd_upgrade := $SndUpgrade
 onready var _state_machine := $StateMachine
+onready var collision_box := $CollisionBox
 
 # Signals.
 signal shooted()

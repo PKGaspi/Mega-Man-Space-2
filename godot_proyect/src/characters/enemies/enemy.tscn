@@ -86,5 +86,4 @@ margin_bottom = 4.84646
 max_value = 5.0
 value = 5.0
 cell_size = Vector2( 5, 2 )
-horizontal = false
 palette = 1
