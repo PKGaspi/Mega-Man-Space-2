@@ -3,7 +3,6 @@ extends CharacterState
 
 
 func enter(msg: Dictionary = {}) -> void:
-	character.collision_box.disabled = false
 	# Unpause.
 	global.unpause()
 	# Set pause mode back to inherit.
@@ -15,3 +14,6 @@ func enter(msg: Dictionary = {}) -> void:
 	# Fill hp bar.
 	character.hp_bar.value = 0
 	character.hp_bar.set_value(character.hp, true)
+	
+	
+	character.collision_box.disabled = false

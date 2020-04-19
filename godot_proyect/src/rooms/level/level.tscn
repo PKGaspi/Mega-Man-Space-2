@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/sfx/other/wave_help.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/rooms/level/data/debug_level_data.tres" type="Resource" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/gui/bar_container.gd" type="Script" id=8]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
+[ext_resource path="res://src/characters/enemies/sniper_armor/sniper_armor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
@@ -82,6 +83,11 @@ margin_left = 16.0
 margin_top = 24.0
 margin_right = 23.0
 margin_bottom = 80.0
+max_value = 28.0
+cell_size = Vector2( 7, 2 )
+horizontal = false
+palette = 0
+cells_per_step = 1
 
 [node name="MegashipAmmoBar" parent="UILayer/HUD/BarContainer" instance=ExtResource( 9 )]
 visible = false
@@ -89,6 +95,11 @@ margin_left = 23.0
 margin_top = 24.0
 margin_right = 30.0
 margin_bottom = 80.0
+max_value = 28.0
+cell_size = Vector2( 7, 2 )
+horizontal = false
+palette = 0
+cells_per_step = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="UILayer"]
 anchor_right = 1.0
@@ -119,21 +130,16 @@ material = SubResource( 3 )
 
 [node name="CollisionBox" parent="GameLayer/Megaship" index="2"]
 position = Vector2( 0, 0 )
-shape = null
 
-[node name="CollisionBox" parent="GameLayer/Megaship" index="3"]
-position = Vector2( 0, 0 )
-shape = null
-
-[node name="Cannons" parent="GameLayer/Megaship" index="4"]
-_ammo_bar_path = NodePath("../../../../Level/UILayer/HUD/BarContainer/MegashipAmmoBar")
-
-[node name="StateMachine" parent="GameLayer/Megaship" index="8"]
+[node name="StateMachine" parent="GameLayer/Megaship" index="3"]
 initial_state = NodePath("../../../../Level/GameLayer/Megaship/StateMachine/Move/Teleport")
 initial_msg = {
 "final_position": Vector2( 0, 0 ),
 "init_position": Vector2( 0, -300 )
 }
+
+[node name="Cannons" parent="GameLayer/Megaship" index="4"]
+_ammo_bar_path = NodePath("../../../../Level/UILayer/HUD/BarContainer/MegashipAmmoBar")
 
 [node name="Camera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2
@@ -149,6 +155,9 @@ drag_margin_bottom = 0.1
 editor_draw_drag_margin = true
 script = ExtResource( 10 )
 _path_to_follow = NodePath("../../../Level/GameLayer/Megaship")
+
+[node name="SniperArmor" parent="GameLayer" instance=ExtResource( 11 )]
+position = Vector2( 121.997, 43.9982 )
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 17 )]
 _to_follow_path = NodePath("../../Level/GameLayer/Camera")
