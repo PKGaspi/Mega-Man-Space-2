@@ -18,7 +18,8 @@ func physics_process(delta: float) -> void:
 		# Check cooldown.
 		if cooldown_timer.is_stopped():
 			# Check max_bullets.
-			var max_bullets = max_bullets_base + cannons.max_bullets_extra
+			var max_bullets = (max_bullets_base + cannons.max_bullets_extra) * cannons.n_cannons
+			print(max_bullets)
 			if max_bullets > len(get_tree().get_nodes_in_group("player_bullets")):
 				# Fire, everything is correct.
 				var cooldown = cooldown_base - cannons.max_bullets_extra * .2

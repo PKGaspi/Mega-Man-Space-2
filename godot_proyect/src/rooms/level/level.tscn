@@ -128,9 +128,6 @@ _cannons_path = NodePath("../../../Level/GameLayer/Megaship/Cannons")
 [node name="SprShip" parent="GameLayer/Megaship" index="0"]
 material = SubResource( 3 )
 
-[node name="CollisionBox" parent="GameLayer/Megaship" index="2"]
-position = Vector2( 0, 0 )
-
 [node name="StateMachine" parent="GameLayer/Megaship" index="3"]
 initial_state = NodePath("../../../../Level/GameLayer/Megaship/StateMachine/Move/Teleport")
 initial_msg = {
