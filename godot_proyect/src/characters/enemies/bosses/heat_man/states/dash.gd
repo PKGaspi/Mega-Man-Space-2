@@ -15,13 +15,12 @@ func _ready() -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
-	print("holi")
+	path_index = 0
 	# Set animation.
 	spr_ship.set_animation("dashing")
 	spr_ship.play()
 	
 	# Setup values.
-	var current_position = character.global_position
 	assert(msg.has("path"))
 	path = msg["path"]
 	

@@ -11,7 +11,8 @@ var timer: Timer = Timer.new()
 
 
 func _ready() -> void:
-	timer.wait_time = 1.1
+	yield(owner, "ready")
+	timer.wait_time = 220 / max_speed
 	add_child(timer)
 
 func _on_timer_timeout() -> void:
@@ -23,7 +24,6 @@ func enter(msg: Dictionary = {}) -> void:
 	
 	var megaship_dir := Vector2(sin(megaship.global_rotation), -cos(megaship.global_rotation)).normalized()
 	
-	print(megaship_dir)
 	init_pos = megaship.global_position + megaship_dir.rotated(PI) * 320
 	mid_pos = megaship.global_position + megaship_dir.rotated(PI/2) * 220
 	end_pos = megaship.global_position + megaship_dir * 20
@@ -52,7 +52,6 @@ func next_point() -> void:
 	path_index += 1
 	if path_index < len(path):
 		_parent.to_follow = path[path_index]
-		print(_parent.to_follow)
 		timer.start()
 	else:
 		_state_machine.transition_to("EndSpawnAnimation")

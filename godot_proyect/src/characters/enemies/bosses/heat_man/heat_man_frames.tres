@@ -1,6 +1,9 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=2]
+[gd_resource type="SpriteFrames" load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/characters/enemies/bosses/heat_man/heat_man.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/characters/enemies/bosses/heat_man/heat_man_dash_0.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/enemies/bosses/heat_man/heat_man_dash_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/characters/enemies/bosses/heat_man/heat_man_dash_1.png" type="Texture" id=4]
 
 [resource]
 animations = [ {
@@ -19,8 +22,8 @@ animations = [ {
 "name": "dashing_end",
 "speed": 5.0
 }, {
-"frames": [  ],
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "dashing",
-"speed": 5.0
+"speed": 10.0
 } ]

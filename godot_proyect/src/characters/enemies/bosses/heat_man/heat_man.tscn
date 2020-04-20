@@ -53,7 +53,6 @@ disabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Shield" index="1"]
 frames = ExtResource( 7 )
-frame = 1
 playing = true
 
 [node name="SprShip" type="AnimatedSprite" parent="." index="2"]
@@ -62,7 +61,7 @@ frames = ExtResource( 1 )
 [node name="StateMachine" parent="." index="3"]
 initial_state = NodePath("Move/Dash")
 initial_msg = {
-"path": [ Vector2( 30, 50 ), Vector2( 100, 50 ), Vector2( 70, 0 ) ]
+"path": [ Vector2( 350, 200 ), Vector2( 260, 50 ), Vector2( 70, 0 ) ]
 }
 
 [node name="Dash" type="Node" parent="StateMachine/Move" index="2"]

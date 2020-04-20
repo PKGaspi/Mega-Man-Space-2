@@ -209,7 +209,8 @@ func create_weapons_menu() -> void:
 
 
 func create_enemy_pointer(enemy) -> void:
-	megaship.create_enemy_pointer(enemy, level_data.palette)
+	if is_instance_valid(megaship):
+		megaship.create_enemy_pointer(enemy, level_data.palette)
 
 
 func reload_level() -> void:
