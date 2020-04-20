@@ -6,15 +6,20 @@ var path_index := 0
 
 
 var spr_ship
-
+var ship_collision: CollisionShape2D
+var dash_collision: CollisionShape2D
 
 
 func _ready() -> void:
 	yield(owner, "ready")
 	spr_ship = character.get_node("SprShip")
+	ship_collision = character.collision_box
+	dash_collision = character.get_node("DashCollisionBox")
 
 
 func enter(msg: Dictionary = {}) -> void:
+	ship_collision.disabled = true
+	dash_collision.disabled = false
 	path_index = 0
 	# Set animation.
 	spr_ship.set_animation("dashing")
@@ -49,6 +54,8 @@ func physics_process(delta: float) -> void:
 
 
 func exit() -> void:
+	ship_collision.disabled = false
+	dash_collision.disabled = true
 	# Set animation.
 	spr_ship.set_animation("default")
 	spr_ship.play()

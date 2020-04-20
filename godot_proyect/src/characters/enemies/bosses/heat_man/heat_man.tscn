@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_collision_shape.tres" type="Shape2D" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_shield_collision_shape.tres" type="Shape2D" id=6]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_shield_frames.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/states/dash.gd" type="Script" id=8]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_dash_collision_shape.tres" type="Shape2D" id=9]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
@@ -42,7 +43,11 @@ _hp_bar_path = NodePath("")
 [node name="CollisionBox" parent="." index="0"]
 shape = ExtResource( 2 )
 
-[node name="Shield" type="StaticBody2D" parent="." index="1"]
+[node name="DashCollisionBox" type="CollisionShape2D" parent="." index="1"]
+shape = ExtResource( 9 )
+disabled = true
+
+[node name="Shield" type="StaticBody2D" parent="." index="2"]
 visible = false
 collision_mask = 2
 script = ExtResource( 5 )
@@ -53,16 +58,16 @@ disabled = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Shield" index="1"]
 frames = ExtResource( 7 )
+frame = 2
 playing = true
 
-[node name="SprShip" type="AnimatedSprite" parent="." index="2"]
+[node name="SprShip" type="AnimatedSprite" parent="." index="3"]
 frames = ExtResource( 1 )
+animation = "dashing"
+frame = 2
 
-[node name="StateMachine" parent="." index="3"]
-initial_state = NodePath("Move/Dash")
-initial_msg = {
-"path": [ Vector2( 350, 200 ), Vector2( 260, 50 ), Vector2( 70, 0 ) ]
-}
+[node name="StateMachine" parent="." index="4"]
+initial_state = NodePath("Iddle")
 
 [node name="Dash" type="Node" parent="StateMachine/Move" index="2"]
 script = ExtResource( 8 )
@@ -73,7 +78,7 @@ process_material = SubResource( 1 )
 [node name="PropulsionParticles2" parent="PropulsionParticles" index="1"]
 process_material = SubResource( 2 )
 
-[node name="hud" parent="." index="6"]
+[node name="hud" parent="." index="7"]
 visible = false
 
 [node name="HPBar" parent="hud" index="0"]
