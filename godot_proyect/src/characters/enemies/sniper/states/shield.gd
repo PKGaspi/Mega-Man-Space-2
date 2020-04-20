@@ -37,7 +37,8 @@ func enter(msg: Dictionary = {}) -> void:
 	spr_body.animation = "shield"
 	spr_body.play()
 	
-	megaship.connect("shooted", self, "_on_megaship_shooted")
+	if is_instance_valid(megaship):
+		megaship.connect("shooted", self, "_on_megaship_shooted")
 	shield_timer.connect("timeout", self, "_on_shield_timer_timeout")
 	shield_timer.start()
 
@@ -50,5 +51,6 @@ func physics_process(delta: float) -> void:
 
 
 func exit() -> void:
-	megaship.disconnect("shooted", self, "_on_megaship_shooted")
+	if is_instance_valid(megaship):
+		megaship.disconnect("shooted", self, "_on_megaship_shooted")
 	shield_timer.disconnect("timeout", self, "_on_shield_timer_timeout")

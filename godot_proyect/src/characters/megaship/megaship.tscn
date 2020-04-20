@@ -24,9 +24,6 @@
 [ext_resource path="res://src/characters/megaship/states/travel.gd" type="Script" id=25]
 [ext_resource path="res://src/characters/megaship/states/knockback.gd" type="Script" id=26]
 
-
-
-
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
