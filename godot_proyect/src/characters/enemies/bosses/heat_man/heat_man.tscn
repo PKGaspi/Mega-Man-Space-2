@@ -56,15 +56,14 @@ script = ExtResource( 5 )
 shape = ExtResource( 6 )
 disabled = true
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Shield" index="1"]
+[node name="SprShield" type="AnimatedSprite" parent="Shield" index="1"]
 frames = ExtResource( 7 )
-frame = 2
 playing = true
 
 [node name="SprShip" type="AnimatedSprite" parent="." index="3"]
 frames = ExtResource( 1 )
 animation = "dashing"
-frame = 2
+playing = true
 
 [node name="StateMachine" parent="." index="4"]
 initial_state = NodePath("Iddle")

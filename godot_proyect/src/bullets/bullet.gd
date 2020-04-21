@@ -4,7 +4,9 @@ extends KinematicBody2D
 export(float, 0, 1000, 10) var motion_speed: float = 560 # Pixels/second.
 export(float, 0, 30, .1) var damage: float = 2
 export(Weapon.TYPES) var weapon: int = Weapon.TYPES.MEGA
-export(int) var n_collisions: int = 1 # Number of collisions before the bullet dissapears. Cero or negative for no max.
+export var n_collisions: int = 1 # Number of collisions before the bullet dissapears. Cero or negative for no max.
+export var max_distance: float = 0 # Max distance travelled by this bullet before it dissapears. Cero or negative for no max.
+var distance: float
 
 var power: int
 var dir: Vector2
@@ -24,6 +26,10 @@ func _physics_process(delta):
 	
 	collide(collision)
 	
+	distance += velocity.length()
+	
+	if max_distance > 0 and distance >= max_distance:
+		disappear()
 
 
 func _on_screen_exited():
