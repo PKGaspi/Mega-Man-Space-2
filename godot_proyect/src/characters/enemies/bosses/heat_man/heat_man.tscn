@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_collision_shape.tres" type="Shape2D" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_shield_frames.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/states/dash.gd" type="Script" id=8]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_dash_collision_shape.tres" type="Shape2D" id=9]
+[ext_resource path="res://src/characters/cannon/cannon_setup.gd" type="Script" id=10]
+[ext_resource path="res://src/characters/cannon/cannon.gd" type="Script" id=11]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_bullet.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
@@ -47,7 +50,22 @@ shape = ExtResource( 2 )
 shape = ExtResource( 9 )
 disabled = true
 
-[node name="Shield" type="StaticBody2D" parent="." index="2"]
+[node name="CannonSetup" type="Node2D" parent="." index="2"]
+script = ExtResource( 10 )
+
+[node name="Cannon" type="Position2D" parent="CannonSetup" index="0"]
+position = Vector2( -10, -23 )
+rotation = -0.139626
+script = ExtResource( 11 )
+projectile = ExtResource( 12 )
+
+[node name="Cannon2" type="Position2D" parent="CannonSetup" index="1"]
+position = Vector2( 10, -23 )
+rotation = 0.139626
+script = ExtResource( 11 )
+projectile = ExtResource( 12 )
+
+[node name="Shield" type="StaticBody2D" parent="." index="3"]
 visible = false
 collision_mask = 2
 script = ExtResource( 5 )
@@ -58,14 +76,14 @@ disabled = true
 
 [node name="SprShield" type="AnimatedSprite" parent="Shield" index="1"]
 frames = ExtResource( 7 )
+frame = 1
 playing = true
 
-[node name="SprShip" type="AnimatedSprite" parent="." index="3"]
+[node name="SprShip" type="AnimatedSprite" parent="." index="4"]
 frames = ExtResource( 1 )
-animation = "dashing"
 playing = true
 
-[node name="StateMachine" parent="." index="4"]
+[node name="StateMachine" parent="." index="5"]
 initial_state = NodePath("Iddle")
 
 [node name="Dash" type="Node" parent="StateMachine/Move" index="2"]
@@ -77,7 +95,7 @@ process_material = SubResource( 1 )
 [node name="PropulsionParticles2" parent="PropulsionParticles" index="1"]
 process_material = SubResource( 2 )
 
-[node name="hud" parent="." index="7"]
+[node name="hud" parent="." index="8"]
 visible = false
 
 [node name="HPBar" parent="hud" index="0"]
