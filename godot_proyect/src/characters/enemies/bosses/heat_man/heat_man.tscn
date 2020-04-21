@@ -76,7 +76,6 @@ disabled = true
 
 [node name="SprShield" type="AnimatedSprite" parent="Shield" index="1"]
 frames = ExtResource( 7 )
-frame = 1
 playing = true
 
 [node name="SprShip" type="AnimatedSprite" parent="." index="4"]

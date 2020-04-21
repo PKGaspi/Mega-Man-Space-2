@@ -1,5 +1,7 @@
 extends EnemyState
 
+var move_speed: float = 260
+
 var path: Array
 var init_pos: Vector2
 var mid_pos: Vector2
@@ -12,7 +14,7 @@ var timer: Timer = Timer.new()
 
 func _ready() -> void:
 	yield(owner, "ready")
-	timer.wait_time = 220 / max_speed
+	timer.wait_time = 1.15
 	add_child(timer)
 
 func _on_timer_timeout() -> void:
@@ -20,6 +22,7 @@ func _on_timer_timeout() -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	_parent._parent.max_speed = move_speed
 	# Calculate init position and path to follow.
 	
 	var megaship_dir := Vector2(sin(megaship.global_rotation), -cos(megaship.global_rotation)).normalized()
@@ -39,10 +42,11 @@ func enter(msg: Dictionary = {}) -> void:
 
 func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
-	character.apply_propulsion_effects(_parent.dir * max_speed * acceleration_ratio)
+	character.apply_propulsion_effects(_parent.dir * move_speed * acceleration_ratio)
 
 
 func exit() -> void:
+	_parent._parent.max_speed = move_speed
 	timer.stop()
 	timer.disconnect("timeout", self, "_on_timer_timeout")
 	character.apply_propulsion_effects(Vector2.ZERO)
