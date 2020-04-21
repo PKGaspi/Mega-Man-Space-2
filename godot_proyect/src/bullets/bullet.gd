@@ -28,7 +28,7 @@ func _physics_process(delta):
 
 func _on_screen_exited():
 	# Destroy itself if it has exited the screen.
-	queue_free()
+	disappear()
 
 
 func init(global_position, rotation, group):
@@ -59,7 +59,7 @@ func hit_character(character) -> void:
 	n_collisions -= 1
 	add_collision_exception_with(character)
 	if n_collisions == 0:
-		queue_free()
+		disappear()
 
 
 func bounce(collision: KinematicCollision2D) -> void:
@@ -67,3 +67,7 @@ func bounce(collision: KinematicCollision2D) -> void:
 	dir = -dir.reflect(collision.normal)
 	global_rotation = dir.angle()
 	add_collision_exception_with(collision.collider)
+
+
+func disappear() -> void:
+	queue_free()
