@@ -5,8 +5,10 @@ var hp_to_transition: float = 10
 var received_damage: float
 var shoot_timer: Timer = Timer.new()
 
+
+
 func _ready() -> void:
-	shoot_timer.wait_time = 3.0
+	shoot_timer.wait_time = 2.2
 	shoot_timer.name = "ShootTimer"
 	add_child(shoot_timer)
 
@@ -16,7 +18,7 @@ func _on_character_hitted(total_damage: float, direction: Vector2) -> void:
 	
 	if received_damage >= hp_to_transition:
 		# Start a new attack.
-		_state_machine.transition_to("RandomAttack")
+		_state_machine.transition_to("PrepareAttack")
 
 
 func _on_shoot_timer_timeout() -> void:
@@ -30,6 +32,7 @@ func shoot() -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	received_damage = 0
 	character.connect("hitted", self, "_on_character_hitted")
 	shoot_timer.connect("timeout", self, "_on_shoot_timer_timeout")
 	
