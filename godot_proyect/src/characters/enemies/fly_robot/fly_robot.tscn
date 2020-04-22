@@ -3,7 +3,7 @@
 [ext_resource path="res://src/characters/enemies/enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_body_mask_1.png" type="Texture" id=2]
 [ext_resource path="res://src/characters/enemies/fly_robot/fly_robot_frames.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/characters/enemies/fly_robot/fly_robot_propeller_mask_2.png" type="Texture" id=4]
 [ext_resource path="res://src/characters/enemies/fly_robot/fly_robot_drops.tres" type="Resource" id=5]
 [ext_resource path="res://src/characters/enemies/fly_robot/fly_robot_collision_shape.tres" type="Shape2D" id=6]
 [ext_resource path="res://src/library/sprites/animated_palette_sprite.gd" type="Script" id=11]
@@ -98,7 +98,7 @@ palettes = ExtResource( 12 )
 material = SubResource( 4 )
 frames = ExtResource( 3 )
 animation = "propeller"
-frame = 1
+frame = 2
 playing = true
 script = ExtResource( 11 )
 palettes = ExtResource( 12 )

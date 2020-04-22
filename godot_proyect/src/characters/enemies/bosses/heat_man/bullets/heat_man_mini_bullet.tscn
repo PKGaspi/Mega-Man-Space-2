@@ -33,5 +33,4 @@ rect = Rect2( -4, -4, 8, 8 )
 
 [node name="SprBullet" type="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 2 )
-frame = 1
 playing = true

@@ -13,8 +13,6 @@
 [ext_resource path="res://src/characters/enemies/telly/telly_drops.tres" type="Resource" id=11]
 [ext_resource path="res://src/characters/enemies/telly/telly_collision_shape.tres" type="Shape2D" id=12]
 
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 3 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 8 ) ],
@@ -36,5 +34,5 @@ shape = ExtResource( 12 )
 z_index = -1
 frames = SubResource( 1 )
 animation = "rotating"
-frame = 6
+frame = 1
 playing = true

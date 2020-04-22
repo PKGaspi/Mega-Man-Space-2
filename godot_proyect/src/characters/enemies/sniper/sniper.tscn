@@ -17,7 +17,6 @@
 
 [node name="Sniper" instance=ExtResource( 1 )]
 stats = ExtResource( 3 )
-_hp_bar_path = NodePath("../Sniper/hud/HPBar")
 _cannons_path = NodePath("CannonSetup")
 drops = ExtResource( 14 )
 

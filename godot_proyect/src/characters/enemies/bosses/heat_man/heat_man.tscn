@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_collision_shape.tres" type="Shape2D" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/bullets/heat_man_bullet.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_attacks.tres" type="Resource" id=13]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/states/tank.gd" type="Script" id=14]
+[ext_resource path="res://src/characters/states/move.gd" type="Script" id=15]
+[ext_resource path="res://src/library/state machine/state_machine.gd" type="Script" id=16]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
@@ -43,7 +45,6 @@ color = Color( 0.941176, 0.737255, 0.235294, 1 )
 
 [node name="HeatMan" instance=ExtResource( 3 )]
 stats = ExtResource( 4 )
-_hp_bar_path = NodePath("")
 _cannons_path = NodePath("CannonSetup")
 
 [node name="CollisionBox" parent="." index="0"]
@@ -84,6 +85,7 @@ disabled = true
 
 [node name="SprShield" type="AnimatedSprite" parent="Shield" index="1"]
 frames = ExtResource( 7 )
+frame = 1
 playing = true
 
 [node name="SprShip" type="AnimatedSprite" parent="." index="4"]
@@ -91,7 +93,11 @@ frames = ExtResource( 1 )
 playing = true
 
 [node name="StateMachine" parent="." index="5"]
+script = ExtResource( 16 )
 initial_state = NodePath("Move/Follow/Megaship/Tank")
+
+[node name="Move" parent="StateMachine" index="0"]
+script = ExtResource( 15 )
 
 [node name="Tank" type="Node" parent="StateMachine/Move/Follow/Megaship" index="0"]
 script = ExtResource( 14 )

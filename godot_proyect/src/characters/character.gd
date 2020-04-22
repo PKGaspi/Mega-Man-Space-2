@@ -109,7 +109,7 @@ func toggle_visibility() -> void:
 
 func set_hp(value: float, pause := false) -> void:
 	hp = clamp(value, 0, max_hp)
-	if hp_bar != null:
+	if is_instance_valid(hp_bar):
 		hp_bar.set_value(hp, pause)
 	check_death()
 
@@ -120,7 +120,7 @@ func set_hp_relative(relative_value: float, pause := false) -> void:
 
 func set_max_hp(value: float) -> void:
 	max_hp = value
-	if hp_bar != null:
+	if is_instance_valid(hp_bar):
 		hp_bar.max_value = value
 
 
