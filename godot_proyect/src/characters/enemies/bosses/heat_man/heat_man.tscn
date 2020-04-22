@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_collision_shape.tres" type="Shape2D" id=2]
@@ -9,9 +9,11 @@
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_shield_frames.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/states/dash.gd" type="Script" id=8]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_dash_collision_shape.tres" type="Shape2D" id=9]
-[ext_resource path="res://src/characters/cannon/cannon_setup.gd" type="Script" id=10]
+[ext_resource path="res://src/characters/cannon/cannon_setup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/characters/cannon/cannon.gd" type="Script" id=11]
-[ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_bullet.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/bullets/heat_man_bullet.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_attacks.tres" type="Resource" id=13]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/states/tank.gd" type="Script" id=14]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
@@ -42,6 +44,7 @@ color = Color( 0.941176, 0.737255, 0.235294, 1 )
 [node name="HeatMan" instance=ExtResource( 3 )]
 stats = ExtResource( 4 )
 _hp_bar_path = NodePath("")
+_cannons_path = NodePath("CannonSetup")
 
 [node name="CollisionBox" parent="." index="0"]
 shape = ExtResource( 2 )
@@ -50,16 +53,15 @@ shape = ExtResource( 2 )
 shape = ExtResource( 9 )
 disabled = true
 
-[node name="CannonSetup" type="Node2D" parent="." index="2"]
-script = ExtResource( 10 )
+[node name="CannonSetup" parent="." index="2" instance=ExtResource( 10 )]
 
-[node name="Cannon" type="Position2D" parent="CannonSetup" index="0"]
+[node name="Cannon" type="Position2D" parent="CannonSetup" index="2"]
 position = Vector2( -10, -23 )
 rotation = -0.139626
 script = ExtResource( 11 )
 projectile = ExtResource( 12 )
 
-[node name="Cannon2" type="Position2D" parent="CannonSetup" index="1"]
+[node name="Cannon2" type="Position2D" parent="CannonSetup" index="3"]
 position = Vector2( 10, -23 )
 rotation = 0.139626
 script = ExtResource( 11 )
@@ -67,6 +69,7 @@ projectile = ExtResource( 12 )
 
 [node name="Shield" type="StaticBody2D" parent="." index="3"]
 visible = false
+collision_layer = 32
 collision_mask = 2
 script = ExtResource( 5 )
 
@@ -76,6 +79,7 @@ disabled = true
 
 [node name="SprShield" type="AnimatedSprite" parent="Shield" index="1"]
 frames = ExtResource( 7 )
+frame = 2
 playing = true
 
 [node name="SprShip" type="AnimatedSprite" parent="." index="4"]
@@ -83,10 +87,16 @@ frames = ExtResource( 1 )
 playing = true
 
 [node name="StateMachine" parent="." index="5"]
-initial_state = NodePath("Iddle")
+initial_state = NodePath("Tank")
 
 [node name="Dash" type="Node" parent="StateMachine/Move" index="2"]
 script = ExtResource( 8 )
+
+[node name="Tank" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 14 )
+
+[node name="RandomAttack" parent="StateMachine" index="3"]
+attacks = ExtResource( 13 )
 
 [node name="PropulsionParticles1" parent="PropulsionParticles" index="0"]
 process_material = SubResource( 1 )

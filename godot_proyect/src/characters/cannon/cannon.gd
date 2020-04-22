@@ -9,7 +9,7 @@ func fire(power: int = 0) -> bool:
 	var inst = projectile.instance()
 	inst.power = power
 	inst.global_position = global_position
-	inst.global_rotation = global_rotation - PI / 2
+	inst.global_rotation = global_rotation
 	
 	ObjectRegistry.register_projectile(inst)
 	

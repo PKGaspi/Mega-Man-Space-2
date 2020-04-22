@@ -185,6 +185,7 @@ process_material = SubResource( 6 )
 
 [node name="SndTeleport" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = SubResource( 7 )
+bus = "Sfx"
 
 [node name="SndHit" parent="." index="8"]
 stream = ExtResource( 11 )

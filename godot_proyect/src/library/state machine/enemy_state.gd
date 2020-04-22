@@ -25,3 +25,7 @@ func distance_to_megaship() -> float:
 
 func megaship_in_view_distance() -> bool:
 	return distance_to_megaship() <= view_distance and is_instance_valid(megaship)
+
+
+func rotate_towards_megaship() -> void:
+	character.global_rotation = direction_to_megaship().rotated(PI/2).angle()

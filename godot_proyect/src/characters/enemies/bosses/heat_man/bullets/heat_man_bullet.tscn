@@ -4,15 +4,15 @@
 [ext_resource path="res://assets/sprites/characters/enemies/bosses/heat_man/heat_man_bullet_1.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/characters/enemies/bosses/heat_man/heat_man_bullet_2.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/characters/enemies/bosses/heat_man/heat_man_bullet_0.png" type="Texture" id=4]
-[ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_bullet.gd" type="Script" id=5]
-[ext_resource path="res://src/characters/cannon/cannon_setup.gd" type="Script" id=6]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/bullets/heat_man_bullet.gd" type="Script" id=5]
+[ext_resource path="res://src/characters/cannon/cannon_setup.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/characters/cannon/cannon.gd" type="Script" id=7]
-[ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_mini_bullet.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/bullets/heat_man_mini_bullet.tscn" type="PackedScene" id=8]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
@@ -31,43 +31,42 @@ n_collisions = -1
 max_distance = 200.0
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" parent="." index="1"]
 rect = Rect2( -8, -8, 16, 16 )
 
 [node name="SprBullet" type="AnimatedSprite" parent="." index="3"]
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 frame = 2
 playing = true
 
-[node name="CannonSetup" type="Node2D" parent="." index="4"]
-script = ExtResource( 6 )
+[node name="CannonSetup" parent="." index="4" instance=ExtResource( 6 )]
 
-[node name="Cannon" type="Position2D" parent="CannonSetup" index="0"]
+[node name="Cannon" type="Position2D" parent="CannonSetup" index="2"]
 position = Vector2( 0, -6 )
 script = ExtResource( 7 )
 projectile = ExtResource( 8 )
 
-[node name="Cannon2" type="Position2D" parent="CannonSetup" index="1"]
+[node name="Cannon2" type="Position2D" parent="CannonSetup" index="3"]
 position = Vector2( -4, -2 )
 rotation = -0.663225
 script = ExtResource( 7 )
 projectile = ExtResource( 8 )
 
-[node name="Cannon3" type="Position2D" parent="CannonSetup" index="2"]
+[node name="Cannon3" type="Position2D" parent="CannonSetup" index="4"]
 position = Vector2( 4, -2 )
 rotation = 0.663225
 script = ExtResource( 7 )
 projectile = ExtResource( 8 )
 
-[node name="Cannon4" type="Position2D" parent="CannonSetup" index="3"]
+[node name="Cannon4" type="Position2D" parent="CannonSetup" index="5"]
 position = Vector2( -6, 2 )
 rotation = -1.39626
 script = ExtResource( 7 )
 projectile = ExtResource( 8 )
 
-[node name="Cannon5" type="Position2D" parent="CannonSetup" index="4"]
+[node name="Cannon5" type="Position2D" parent="CannonSetup" index="6"]
 position = Vector2( 6, 2 )
 rotation = 1.39626
 script = ExtResource( 7 )

@@ -49,7 +49,9 @@ script = ExtResource( 6 )
 script = ExtResource( 5 )
 
 [node name="SndHit" type="AudioStreamPlayer2D" parent="."]
+bus = "Sfx"
 script = ExtResource( 4 )
 randomness_interval = Vector2( 0.9, 1.1 )
 
 [node name="SndUpgrade" type="AudioStreamPlayer2D" parent="."]
+bus = "Sfx"

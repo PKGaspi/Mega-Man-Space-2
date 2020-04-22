@@ -12,10 +12,10 @@ var power: int
 var dir: Vector2
 
 onready var snd_bounce := $SndBounce
-
+onready var visibility_notifier := $VisibilityNotifier2D
 
 func _ready():
-	dir = Vector2(cos(global_rotation), sin(global_rotation))
+	dir = Vector2(cos(global_rotation), sin(global_rotation)).rotated(-PI/2)
 	if get_collision_layer_bit(1):
 		add_to_group("player_bullets")
 
@@ -26,10 +26,11 @@ func _physics_process(delta):
 	
 	collide(collision)
 	
-	distance += velocity.length()
 	
 	if max_distance > 0 and distance >= max_distance:
 		disappear()
+	
+	distance += velocity.length() * delta
 
 
 func _on_screen_exited():
@@ -76,4 +77,5 @@ func bounce(collision: KinematicCollision2D) -> void:
 
 
 func disappear() -> void:
+	visibility_notifier.disconnect("screen_exited", self, "_on_screen_exited")
 	queue_free()
