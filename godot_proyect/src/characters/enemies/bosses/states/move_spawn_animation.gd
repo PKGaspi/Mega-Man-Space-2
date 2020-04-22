@@ -46,7 +46,9 @@ func physics_process(delta: float) -> void:
 
 
 func exit() -> void:
-	_parent._parent.max_speed = move_speed
+	_parent._parent.max_speed = max_speed
+	_parent._parent.velocity = Vector2.ZERO
+	look_at_megaship()
 	timer.stop()
 	timer.disconnect("timeout", self, "_on_timer_timeout")
 	character.apply_propulsion_effects(Vector2.ZERO)

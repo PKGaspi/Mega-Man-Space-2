@@ -47,7 +47,7 @@ func physics_process(delta: float) -> void:
 	# Move.
 	_parent.physics_process(delta)
 	# Allways face the megaship.
-	rotate_towards_megaship()
+	look_at_megaship()
 
 
 func exit() -> void:

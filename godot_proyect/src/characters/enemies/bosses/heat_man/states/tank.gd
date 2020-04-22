@@ -37,7 +37,8 @@ func enter(msg: Dictionary = {}) -> void:
 
 
 func physics_process(delta: float) -> void:
-	rotate_towards_megaship()
+	_parent.physics_process(delta)
+	look_at_megaship()
 
 
 func exit() -> void:

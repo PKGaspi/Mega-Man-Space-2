@@ -67,6 +67,11 @@ rotation = 0.139626
 script = ExtResource( 11 )
 projectile = ExtResource( 12 )
 
+[node name="Cannon3" type="Position2D" parent="CannonSetup" index="4"]
+position = Vector2( 0, -10 )
+script = ExtResource( 11 )
+projectile = ExtResource( 12 )
+
 [node name="Shield" type="StaticBody2D" parent="." index="3"]
 visible = false
 collision_layer = 32
@@ -79,7 +84,6 @@ disabled = true
 
 [node name="SprShield" type="AnimatedSprite" parent="Shield" index="1"]
 frames = ExtResource( 7 )
-frame = 2
 playing = true
 
 [node name="SprShip" type="AnimatedSprite" parent="." index="4"]
@@ -87,15 +91,15 @@ frames = ExtResource( 1 )
 playing = true
 
 [node name="StateMachine" parent="." index="5"]
-initial_state = NodePath("Tank")
+initial_state = NodePath("Move/Follow/Megaship/Tank")
+
+[node name="Tank" type="Node" parent="StateMachine/Move/Follow/Megaship" index="0"]
+script = ExtResource( 14 )
 
 [node name="Dash" type="Node" parent="StateMachine/Move" index="2"]
 script = ExtResource( 8 )
 
-[node name="Tank" type="Node" parent="StateMachine" index="2"]
-script = ExtResource( 14 )
-
-[node name="RandomAttack" parent="StateMachine" index="3"]
+[node name="RandomAttack" parent="StateMachine" index="2"]
 attacks = ExtResource( 13 )
 
 [node name="PropulsionParticles1" parent="PropulsionParticles" index="0"]

@@ -19,11 +19,11 @@ animations = [ {
 [node name="Bullet" instance=ExtResource( 2 )]
 collision_layer = 8
 collision_mask = 1
-motion_speed = 300.0
+motion_speed = 400.0
 damage = 3.5
 weapon = 1
 n_collisions = -1
-max_distance = 150.0
+max_distance = 180.0
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -33,5 +33,5 @@ rect = Rect2( -4, -4, 8, 8 )
 
 [node name="SprBullet" type="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 2 )
-frame = 2
+frame = 1
 playing = true
