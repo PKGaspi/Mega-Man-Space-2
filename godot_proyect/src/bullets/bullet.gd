@@ -72,7 +72,7 @@ func hit_character(character) -> void:
 func bounce(collision: KinematicCollision2D) -> void:
 	snd_bounce.play()
 	dir = -dir.reflect(collision.normal)
-	global_rotation = dir.angle()
+	global_rotation = dir.rotated(-PI/2).angle()
 	add_collision_exception_with(collision.collider)
 
 
