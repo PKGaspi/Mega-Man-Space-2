@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man_collision_shape.tres" type="Shape2D" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/states/tank.gd" type="Script" id=14]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/states/prepare_attack.gd" type="Script" id=15]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/states/init_dash_attack.gd" type="Script" id=16]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/states/rotation_attack.gd" type="Script" id=17]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
@@ -108,6 +109,9 @@ script = ExtResource( 15 )
 
 [node name="InitDashAttack" type="Node" parent="StateMachine" index="6"]
 script = ExtResource( 16 )
+
+[node name="RotationAttack" type="Node" parent="StateMachine" index="7"]
+script = ExtResource( 17 )
 
 [node name="PropulsionParticles1" parent="PropulsionParticles" index="0"]
 process_material = SubResource( 1 )

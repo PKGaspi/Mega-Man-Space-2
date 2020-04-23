@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource( 1 )
-items = [ "InitDashAttack", "InitRotateAttack" ]
-weights = [ 3, 0 ]
+items = [ "InitDashAttack", "RotationAttack" ]
+weights = [ 7, 2 ]
