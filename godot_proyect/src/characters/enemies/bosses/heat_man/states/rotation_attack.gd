@@ -25,7 +25,7 @@ func _ready() -> void:
 	attack_timer.wait_time = 4
 	attack_timer.name = "AttackTimer"
 	add_child(attack_timer)
-	shoot_timer.wait_time = .1
+	shoot_timer.wait_time = .25
 	shoot_timer.name = "ShootTimer"
 	add_child(shoot_timer)
 

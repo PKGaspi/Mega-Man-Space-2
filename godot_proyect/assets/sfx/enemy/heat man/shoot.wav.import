@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/shoot.wav-fe6059c709e4c1886e6672f2fc05132b.sample"
+
+[deps]
+
+source_file="res://assets/sfx/enemy/heat man/shoot.wav"
+dest_files=[ "res://.import/shoot.wav-fe6059c709e4c1886e6672f2fc05132b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

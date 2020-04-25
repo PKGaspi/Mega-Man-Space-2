@@ -9,6 +9,7 @@ var spr_ship: AnimatedSprite
 var ship_collision: CollisionShape2D
 var dash_collision: CollisionShape2D
 var shield: Shield
+var snd_dash : AudioStreamPlayer2D
 
 var dash_speed := 650.0
 
@@ -17,6 +18,7 @@ func _ready() -> void:
 	yield(owner, "ready")
 	shield = character.get_node("Shield")
 	spr_ship = character.get_node("SprShip")
+	snd_dash = character.get_node("SndDash")
 	ship_collision = character.collision_box
 	dash_collision = character.get_node("DashCollisionBox")
 
@@ -26,6 +28,7 @@ func _on_megaship_hitted(total_damage, direciton) -> void:
 
 
 func enter(msg: Dictionary = {}) -> void:
+	snd_dash.play()
 	character.set_collision_mask_bit(1, false)
 	_parent.max_speed = dash_speed
 	shield.visible = false
