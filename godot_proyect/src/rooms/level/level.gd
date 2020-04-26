@@ -1,8 +1,8 @@
 extends Node
 
 
-const GAME_OVER_SCREEN := "res://src/rooms/select stage/select_stage.tscn"
-const WEAPON_GET_SCREEN := GAME_OVER_SCREEN
+const GAME_OVER_SCREEN := "res://src/rooms/game over/game_over_screen.tscn"
+const WEAPON_GET_SCREEN := "res://src/rooms/weapon get/weapon_get_screen.tscn"
 const WEAPONS_MENU := preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
 export var level_data: Resource = LevelData.new()
@@ -40,6 +40,7 @@ onready var center_text := ui.get_node("CenterContainer/CenterText")
 
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	# Set as current scene.
 	get_tree().current_scene = self
 	ObjectRegistry.reset()
@@ -57,6 +58,7 @@ func _ready() -> void:
 	megaship.connect("death", self, "_on_megaship_death")
 	center_text.connect("animation_finished", self, "_on_animation_finished")
 	ObjectRegistry.connect("boss_registered", self, "_on_boss_registered")
+	connect("tree_exiting", self, "_on_tree_exiting")
 
 
 #####################
@@ -201,6 +203,7 @@ func start_victory_animation() -> void:
 	megaship._state_machine.transition_to("Move/Teleport", {"final_position": final_position})
 	
 	yield(megaship._state_machine, "transitioned")
+	
 	get_tree().change_scene(WEAPON_GET_SCREEN)
 
 
@@ -258,5 +261,8 @@ func reload_level() -> void:
 		get_tree().root.add_child(inst)
 		queue_free()
 
+
+func _on_tree_exiting() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 

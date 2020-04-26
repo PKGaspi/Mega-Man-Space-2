@@ -1,0 +1,133 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/gui/menus/game_over_background_mask.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/gui/menus/dialogue_background.png" type="Texture" id=3]
+[ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://src/rooms/weapon get/feedback_button.gd" type="Script" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+//The palette used
+uniform sampler2D palette;
+//how many horizontal pixels has the palette
+uniform float palette_size;
+//Mask for wich color use from palette
+uniform sampler2D mask;
+
+void fragment() {
+	vec4 mask_color = texture(mask,UV);
+	vec4 output = texture(TEXTURE,UV);
+	if(mask_color.r != 1.0)
+	{
+		highp float color_r = mask_color.r;
+		//If an inconsistency appears between Intel and Amd/Nvidia, feel free to fix it and commit, but take this as a warning for production use
+		output = texture(palette,vec2((color_r*255.0+0.5)/255.0,0.0));
+	}
+	else{
+		output.a = 0.0; // White turns into transparent.
+	}
+	COLOR.rgba = output;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+resource_name = "PaletteMaterial"
+shader = SubResource( 1 )
+shader_param/palette_size = 8.0
+shader_param/palette = ExtResource( 1 )
+shader_param/mask = ExtResource( 2 )
+
+[node name="WeaponGetScreen" type="Node"]
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="Control"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dialogue" type="Control" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -67.5
+margin_right = 120.0
+margin_bottom = 67.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="NinePatchRect" parent="Control/Dialogue"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Dialogue"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -12.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Dialogue/MarginContainer"]
+margin_right = 220.0
+margin_bottom = 113.0
+
+[node name="Label" type="Label" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
+margin_right = 220.0
+margin_bottom = 64.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 4 )
+text = "Thanks for playing!!
+
+This was just an in-dev demo.
+please, consider filling the following pull for feedback."
+align = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 72.0
+margin_right = 220.0
+margin_bottom = 97.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LinkButton" type="LinkButton" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
+margin_left = 28.0
+margin_top = 105.0
+margin_right = 191.0
+margin_bottom = 113.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 4 )
+custom_constants/underline_spacing = 1
+text = "click to Leave feedback"
+script = ExtResource( 5 )

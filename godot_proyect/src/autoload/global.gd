@@ -59,9 +59,6 @@ func _ready():
 	
 	# Init global randomizer.
 	random = init_random()
-	
-	# Set mouse mode.
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 
 func _input(event: InputEvent) -> void:
