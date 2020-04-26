@@ -11,7 +11,7 @@ weights = [  ]
 
 [resource]
 script = ExtResource( 3 )
-bosses = [ ExtResource( 6 ) ]
+boss = ExtResource( 6 )
 enemies = SubResource( 1 )
 n_total_enemies = 0
 n_max_enemies_at_once = 0

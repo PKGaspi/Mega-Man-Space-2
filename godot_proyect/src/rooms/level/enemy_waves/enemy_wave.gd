@@ -23,11 +23,10 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
-func spawn_bosses() -> void:
-	for boss in wave_data.bosses:
-		var inst: Boss = spawn_enemy(boss, wave_data.get_random_point())
-		emit_signal("boss_spawned", inst)
-		inst.start_spawn_animation()
+func spawn_boss() -> void:
+	var inst: Boss = spawn_enemy(wave_data.boss, wave_data.get_random_point())
+	emit_signal("boss_spawned", inst)
+	inst.start_spawn_animation()
 
 
 func spawn_random_enemy() -> void:

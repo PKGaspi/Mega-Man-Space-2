@@ -65,7 +65,7 @@ func _on_animation_finished(animation):
 	elif animation == "warning":
 		# Spawn bosses after the warning animation finished.
 		if is_instance_valid(current_wave):
-			current_wave.spawn_bosses()
+			current_wave.spawn_boss()
 
 
 func _on_megaship_death() -> void:

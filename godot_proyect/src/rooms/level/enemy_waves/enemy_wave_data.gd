@@ -2,8 +2,8 @@ class_name EnemyWaveData
 extends Resource
 
 
-export var bosses: Array = []
-var bosses_spawned := false
+export var boss: PackedScene
+var boss_spawned := false
 export var enemies: Resource = WeightRandomizer.new()
 export var n_total_enemies: int
 var n_enemies: int = 0 # Current number of enemies spawned.
@@ -52,6 +52,9 @@ func get_random_point() -> Vector2:
 
 
 func spawn_enemy(enemy: PackedScene, pos: Vector2) -> Enemy:
+	if enemy == null:
+		return null
+	
 	var inst = enemy.instance()
 	inst.global_position = pos
 	
@@ -65,5 +68,5 @@ func can_spawn() -> bool:
 
 
 func is_completed() -> bool:
-	return n_spawns_left <= 0 and n_enemies <= 0 and (bosses_spawned or len(bosses) == 0)
+	return n_spawns_left <= 0 and n_enemies <= 0 and (boss_spawned or boss == null)
 
