@@ -1,8 +1,9 @@
 extends Node
 
 
-const SELECT_STAGE_SCREEN = "res://src/rooms/select stage/select_stage.tscn"
-const WEAPONS_MENU = preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
+const GAME_OVER_SCREEN := "res://src/rooms/select stage/select_stage.tscn"
+const WEAPON_GET_SCREEN := GAME_OVER_SCREEN
+const WEAPONS_MENU := preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
 export var level_data: Resource = LevelData.new()
 var current_wave: EnemyWave
@@ -12,19 +13,24 @@ var current_wave: EnemyWave
 ############
 
 
-onready var level_music = $MscLevel
-onready var boss_music = $MscBoss
-onready var game_over_timer = $GameOverTimer
-onready var wave_timer = $WaveTimer
-onready var snd_wave_help = $SndWaveHelp
+onready var level_music := $MscLevel
+onready var boss_music := $MscBoss
+onready var victory_music := $MscVictory
+onready var snd_wave_help := $SndWaveHelp
+onready var snd_victory_teleport := $SndVictoryTeleport
 
-onready var game_layer = $GameLayer
-onready var megaship = game_layer.get_node("Megaship")
+onready var game_over_timer := $GameOverTimer
+onready var victory_timer := $VictoryTimer
+onready var wave_timer := $WaveTimer
 
-onready var ui = $UILayer
-onready var hud = ui.get_node("HUD")
-onready var bar_containter = hud.get_node("BarContainer")
-onready var center_text = ui.get_node("CenterContainer/CenterText")
+onready var game_layer := $GameLayer
+onready var megaship := game_layer.get_node("Megaship")
+onready var camera := game_layer.get_node("Camera")
+
+onready var ui := $UILayer
+onready var hud := ui.get_node("HUD")
+onready var bar_containter := hud.get_node("BarContainer")
+onready var center_text := ui.get_node("CenterContainer/CenterText")
 
 
 ############
@@ -89,7 +95,7 @@ func _on_GameOverTimer_timeout() -> void:
 		print(":(")
 		global.game_over() # Resets lifes, e-tanks and points.
 		# TODO: Go to game over screen instead of Select Stage screen.
-		get_tree().change_scene(SELECT_STAGE_SCREEN)
+		get_tree().change_scene(GAME_OVER_SCREEN)
 		
 	else:
 		global.modify_stat("one_ups", -1)
@@ -174,6 +180,30 @@ func start_ready_animation() -> void:
 	global.pause()
 
 
+func start_victory_animation() -> void:
+	
+	level_music.stop()
+	boss_music.stop()
+	
+	megaship._state_machine.transition_to("Iddle")
+	megaship.apply_propulsion_effects(Vector2.ZERO)
+	camera.follow_none()
+	victory_timer.start()
+	
+	yield(victory_timer, "timeout")
+	
+	victory_music.play()
+	
+	yield(victory_music, "finished")
+	
+	snd_victory_teleport.play()
+	var final_position = Vector2(megaship.global_position.x, megaship.global_position.y -500)
+	megaship._state_machine.transition_to("Move/Teleport", {"final_position": final_position})
+	
+	yield(megaship._state_machine, "transitioned")
+	get_tree().change_scene(WEAPON_GET_SCREEN)
+
+
 func next_wave() -> void:
 	var wave_data = level_data.next_wave()
 	if wave_data != null:
@@ -193,7 +223,7 @@ func next_wave() -> void:
 	else:
 		wave_timer.stop()
 		print("muy bien!!")
-		# TODO: Start victory animation
+		start_victory_animation()
 
 
 func create_weapons_menu() -> void:
@@ -227,5 +257,6 @@ func reload_level() -> void:
 		inst.level_data = level_data
 		get_tree().root.add_child(inst)
 		queue_free()
+
 
 

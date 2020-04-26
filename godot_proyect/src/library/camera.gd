@@ -18,13 +18,21 @@ func set_to_follow(value: NodePath) -> void:
 	var node = get_node(_path_to_follow)
 	if node is Node2D:
 		_node_to_follow = node 
-		if _current_transform != null:
+		if is_instance_valid(_current_transform):
 			_current_transform.queue_free()
 		# Create a remote transform on the new to_follow node.
 		_current_transform = RemoteTransform2D.new()
 		_current_transform.name = "CameraTransform"
 		_current_transform.remote_path = get_path()
 		_node_to_follow.add_child(_current_transform)
+
+
+func follow_none() -> void:
+	if is_instance_valid(_current_transform):
+		_current_transform.queue_free()
+	_path_to_follow = ""
+	_node_to_follow = null
+	_current_transform = null
 
 
 func get_visible_area() -> Rect2:

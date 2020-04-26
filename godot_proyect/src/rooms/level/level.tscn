@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/sfx/other/wave_help.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/rooms/level/data/debug_level_data.tres" type="Resource" id=2]
@@ -10,7 +10,9 @@
 [ext_resource path="res://src/gui/bar_container.gd" type="Script" id=8]
 [ext_resource path="res://src/gui/tiled_progress.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/library/camera.gd" type="Script" id=10]
+[ext_resource path="res://assets/music/stage_clear.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=12]
+[ext_resource path="res://assets/sfx/other/stage_selected.wav" type="AudioStream" id=13]
 [ext_resource path="res://src/rooms/level/level.gd" type="Script" id=15]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/library/audio/music_looper.gd" type="Script" id=18]
@@ -162,14 +164,25 @@ script = ExtResource( 18 )
 intro = ExtResource( 4 )
 loop = ExtResource( 5 )
 
+[node name="MscVictory" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "Music"
+
 [node name="SndWaveHelp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = 8.0
 pitch_scale = 0.9
 bus = "Sfx"
 
+[node name="SndVictoryTeleport" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
 [node name="GameOverTimer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
+
+[node name="VictoryTimer" type="Timer" parent="."]
+wait_time = 4.0
 one_shot = true
 
 [node name="WaveTimer" type="Timer" parent="."]

@@ -33,6 +33,10 @@ func enter(msg: Dictionary = {}) -> void:
 	else:
 		final_position = current_position
 	
+	
+	var dir = init_position.direction_to(final_position)
+	character.global_rotation = dir.rotated(PI/2).angle()
+	
 
 
 

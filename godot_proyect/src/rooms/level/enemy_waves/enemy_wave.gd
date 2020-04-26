@@ -30,8 +30,9 @@ func end() -> void:
 func spawn_boss() -> void:
 	wave_data.boss_spawned = true
 	var inst: Boss = spawn_enemy(wave_data.boss, wave_data.get_random_point())
-	emit_signal("main_boss_spawned", inst)
-	inst.start_spawn_animation()
+	if is_instance_valid(inst):
+		emit_signal("main_boss_spawned", inst)
+		inst.start_spawn_animation()
 
 
 func spawn_random_enemy() -> void:
