@@ -5,7 +5,7 @@ extends Node2D
 export var wave_data: Resource = EnemyWaveData.new()
 
 signal completed()
-signal boss_spawned(boss)
+signal main_boss_spawned(boss)
 
 func _ready() -> void:
 	wave_data.initialize()
@@ -18,14 +18,19 @@ func _physics_process(delta: float) -> void:
 	
 	# Check if the wave is defeated.
 	if wave_data.is_completed():
-		print("muy bien")
-		emit_signal("completed")
-		queue_free()
+		end()
 
+
+func end() -> void:
+	# End this wave.
+	print("muy bien")
+	emit_signal("completed")
+	queue_free()
 
 func spawn_boss() -> void:
+	wave_data.boss_spawned = true
 	var inst: Boss = spawn_enemy(wave_data.boss, wave_data.get_random_point())
-	emit_signal("boss_spawned", inst)
+	emit_signal("main_boss_spawned", inst)
 	inst.start_spawn_animation()
 
 

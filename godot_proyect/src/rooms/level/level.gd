@@ -115,13 +115,21 @@ func _on_boss_registered(boss: Boss) -> void:
 	boss.connect("tree_exited", hp_bar, "queue_free")
 
 
-func _on_boss_spawned(boss: Boss) -> void:
+func _on_main_boss_spawned(boss: Boss) -> void:
 	# This is done only for those bosses spawned as a boss, not as a normal
 	# enemy. This means that the boss music should start playing and, when
 	# all of this bosses are killed, the level is completed.
 	level_music.stop()
 	boss_music.play()
-	#boss_music.connect("intro_finished", boss, "_on_boss_music_intro_finished")
+	boss.connect("tree_exited", self, "_on_main_boss_tree_exited")
+
+
+func _on_main_boss_tree_exited() -> void:
+	# End the wave if the main boss is killed.
+	current_wave.end()
+	for enemy in ObjectRegistry.get_enemies():
+		if enemy is Character:
+			enemy.die()
 
 
 func _on_enemy_registered(enemy: Enemy) -> void:
@@ -174,7 +182,7 @@ func next_wave() -> void:
 		current_wave.wave_data = wave_data
 		current_wave.name = "EnemyWave"
 		current_wave.connect("completed", self, "next_wave")
-		current_wave.connect("boss_spawned", self, "_on_boss_spawned")
+		current_wave.connect("main_boss_spawned", self, "_on_main_boss_spawned")
 		game_layer.add_child(current_wave)
 		# Create the enemy wave pointer so the player can find it.
 		megaship.create_enemy_wave_pointer(current_wave, level_data.palette)
