@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/sprites/palettes/menu/menu_palettes_0.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/gui/menus/game_over_background_mask.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/gui/menus/dialogue_background.png" type="Texture" id=3]
 [ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://src/rooms/weapon get/feedback_button.gd" type="Script" id=5]
+[ext_resource path="res://assets/music/weapon_get.ogg" type="AudioStream" id=6]
+[ext_resource path="res://src/rooms/weapon get/weapon_get_screen.gd" type="Script" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -41,6 +43,7 @@ shader_param/palette = ExtResource( 1 )
 shader_param/mask = ExtResource( 2 )
 
 [node name="WeaponGetScreen" type="Node"]
+script = ExtResource( 7 )
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -99,21 +102,40 @@ __meta__ = {
 margin_right = 220.0
 margin_bottom = 113.0
 
-[node name="Label" type="Label" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
 margin_right = 220.0
-margin_bottom = 64.0
+margin_bottom = 8.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
-text = "Thanks for playing!!
-
-This was just an in-dev demo.
-please, consider filling the following pull for feedback."
+text = "Thanks for playing!!"
 align = 1
 autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 72.0
+margin_top = 16.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_vertical = 0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 220.0
+margin_bottom = 60.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 4 )
+text = "This was just an in-dev demo.
+please, consider filling the following poll for feedback."
+align = 1
+autowrap = true
+
+[node name="HSeparator2" type="HSeparator" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 68.0
 margin_right = 220.0
 margin_bottom = 97.0
 size_flags_vertical = 3
@@ -121,7 +143,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LinkButton" type="LinkButton" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
+[node name="FeedbackButton" type="LinkButton" parent="Control/Dialogue/MarginContainer/VBoxContainer"]
 margin_left = 28.0
 margin_top = 105.0
 margin_right = 191.0
@@ -131,3 +153,16 @@ custom_fonts/font = ExtResource( 4 )
 custom_constants/underline_spacing = 1
 text = "click to Leave feedback"
 script = ExtResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+
+[node name="LetterTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="BetweenTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+[connection signal="timeout" from="LetterTimer" to="." method="_on_LetterTimer_timeout"]
+[connection signal="timeout" from="BetweenTimer" to="." method="_on_BetweenTimer_timeout"]
