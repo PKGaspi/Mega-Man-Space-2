@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sfx/other/ui_move.wav" type="AudioStream" id=1]
+[ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/gui/menus/game over menu/game_over_menu.gd" type="Script" id=3]
+[ext_resource path="res://assets/sprites/gui/menus/dialogue_background.png" type="Texture" id=4]
+
+[node name="GameOverMenu" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -45.0
+margin_right = 80.0
+margin_bottom = 45.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+animate_opening = false
+animate_closing = false
+entries = [ NodePath("Contents/Entries/RetryStage"), NodePath("Contents/Entries/SelectStage") ]
+
+[node name="Background" type="NinePatchRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Contents" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Contents"]
+margin_right = 140.0
+margin_bottom = 8.0
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Game Over"
+align = 1
+
+[node name="Entries" type="VBoxContainer" parent="Contents"]
+margin_top = 46.0
+margin_right = 140.0
+margin_bottom = 70.0
+size_flags_vertical = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RetryStage" type="Label" parent="Contents/Entries"]
+margin_right = 140.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 8 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Retry stage"
+align = 1
+
+[node name="SelectStage" type="Label" parent="Contents/Entries"]
+margin_top = 16.0
+margin_right = 140.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 8 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Select stage"
+align = 1
+
+[node name="SndUIMove" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+bus = "Sfx"

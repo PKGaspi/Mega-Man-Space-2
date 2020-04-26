@@ -1,7 +1,7 @@
 extends Node
 
 
-const GAME_OVER_SCREEN := "res://src/rooms/game over/game_over_screen.tscn"
+const GAME_OVER_SCREEN := preload("res://src/rooms/game over/game_over_screen.tscn")
 const WEAPON_GET_SCREEN := "res://src/rooms/weapon get/weapon_get_screen.tscn"
 const WEAPONS_MENU := preload("res://src/gui/menus/weapon menu/weapon_menu.tscn")
 
@@ -96,8 +96,14 @@ func _on_GameOverTimer_timeout() -> void:
 	if global.one_ups == 0:
 		print(":(")
 		global.game_over() # Resets lifes, e-tanks and points.
-		# TODO: Go to game over screen instead of Select Stage screen.
-		get_tree().change_scene(GAME_OVER_SCREEN)
+		# Go to game over screen.
+		ObjectRegistry.reset()
+		
+		var inst = GAME_OVER_SCREEN.instance()
+		inst.level_data = level_data
+		get_tree().root.add_child(inst)
+		get_tree().current_scene = inst
+		queue_free()
 		
 	else:
 		global.modify_stat("one_ups", -1)
@@ -204,6 +210,7 @@ func start_victory_animation() -> void:
 	
 	yield(megaship._state_machine, "transitioned")
 	
+	ObjectRegistry.reset()
 	get_tree().change_scene(WEAPON_GET_SCREEN)
 
 
