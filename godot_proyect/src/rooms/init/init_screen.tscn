@@ -1,0 +1,71 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_4.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_0.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_7.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_5.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_6.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_2.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_1.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_3.png" type="Texture" id=9]
+[ext_resource path="res://assets/music/gaspi_logo.ogg" type="AudioStream" id=10]
+[ext_resource path="res://src/rooms/init/gaspi_logo.gd" type="Script" id=11]
+[ext_resource path="res://src/rooms/init/init_screen.gd" type="Script" id=12]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ null, ExtResource( 3 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[node name="InitScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.12549, 0.12549, 0.12549, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="TextureRect" parent="CenterContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 209.0
+margin_top = 123.0
+margin_right = 270.0
+margin_bottom = 146.0
+texture = ExtResource( 1 )
+script = ExtResource( 11 )
+
+[node name="Shine" type="AnimatedSprite" parent="CenterContainer/Text"]
+modulate = Color( 1, 1, 1, 0.784314 )
+frames = SubResource( 1 )
+centered = false
+
+[node name="Timer" type="Timer" parent="CenterContainer/Text"]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="Tween" type="Tween" parent="CenterContainer/Text"]
+
+[node name="SndLogo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+autoplay = true
+bus = "Music"
+[connection signal="animation_finished" from="CenterContainer/Text/Shine" to="CenterContainer/Text" method="_on_Shine_animation_finished"]
+[connection signal="timeout" from="CenterContainer/Text/Timer" to="CenterContainer/Text" method="_on_Timer_timeout"]
+[connection signal="tween_all_completed" from="CenterContainer/Text/Tween" to="." method="_on_Tween_tween_all_completed"]
