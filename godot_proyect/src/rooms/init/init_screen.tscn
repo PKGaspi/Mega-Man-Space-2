@@ -33,6 +33,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.12549, 0.12549, 0.12549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -41,7 +44,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text" type="TextureRect" parent="CenterContainer"]
+[node name="GaspiGamesLogo" type="TextureRect" parent="CenterContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 209.0
 margin_top = 123.0
@@ -49,23 +52,26 @@ margin_right = 270.0
 margin_bottom = 146.0
 texture = ExtResource( 1 )
 script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Shine" type="AnimatedSprite" parent="CenterContainer/Text"]
+[node name="Shine" type="AnimatedSprite" parent="CenterContainer/GaspiGamesLogo"]
 modulate = Color( 1, 1, 1, 0.784314 )
 frames = SubResource( 1 )
 centered = false
 
-[node name="Timer" type="Timer" parent="CenterContainer/Text"]
+[node name="Timer" type="Timer" parent="CenterContainer/GaspiGamesLogo"]
 wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="Tween" type="Tween" parent="CenterContainer/Text"]
+[node name="Tween" type="Tween" parent="CenterContainer/GaspiGamesLogo"]
 
 [node name="SndLogo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
 bus = "Music"
-[connection signal="animation_finished" from="CenterContainer/Text/Shine" to="CenterContainer/Text" method="_on_Shine_animation_finished"]
-[connection signal="timeout" from="CenterContainer/Text/Timer" to="CenterContainer/Text" method="_on_Timer_timeout"]
-[connection signal="tween_all_completed" from="CenterContainer/Text/Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="animation_finished" from="CenterContainer/GaspiGamesLogo/Shine" to="CenterContainer/GaspiGamesLogo" method="_on_Shine_animation_finished"]
+[connection signal="timeout" from="CenterContainer/GaspiGamesLogo/Timer" to="CenterContainer/GaspiGamesLogo" method="_on_Timer_timeout"]
+[connection signal="tween_all_completed" from="CenterContainer/GaspiGamesLogo/Tween" to="." method="_on_Tween_tween_all_completed"]

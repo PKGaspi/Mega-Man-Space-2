@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/rooms/title screen/title_screen.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/title.ogg" type="AudioStream" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/gui/title_logo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/rooms/level/space_background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 4
@@ -37,13 +38,28 @@ margin_bottom = -19.96
 [node name="Version" type="Label" parent="UILayer"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -4.0
-margin_right = 47.0
+margin_left = 4.0
+margin_top = -8.0
+margin_bottom = -4.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 1 )
-text = "In-Dev demo"
+text = "In-Dev demo may 1st"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UILayer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -65.0
+margin_top = -27.0
+margin_right = -4.0
+margin_bottom = -4.0
+texture = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
