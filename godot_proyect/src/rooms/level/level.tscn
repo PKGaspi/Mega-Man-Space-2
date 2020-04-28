@@ -136,7 +136,7 @@ initial_msg = {
 }
 
 [node name="Cannons" parent="GameLayer/Megaship" index="4"]
-_ammo_bar_path = NodePath("../../../../Level/UILayer/HUD/BarContainer/MegashipAmmoBar")
+_ammo_bar_path = NodePath("../../../UILayer/HUD/BarContainer/MegashipAmmoBar")
 
 [node name="Camera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2

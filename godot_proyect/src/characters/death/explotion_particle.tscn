@@ -1,0 +1,25 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/palette_swap_material.tres" type="Material" id=1]
+[ext_resource path="res://src/characters/explotion_particle.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/characters/death/enemy_death_particle_mask_3.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/characters/death/enemy_death_particle_mask_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/characters/death/enemy_death_particle_mask_2.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/characters/death/enemy_death_particle_mask_0.png" type="Texture" id=6]
+[ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[node name="ExplotionParticle" type="AnimatedSprite"]
+material = ExtResource( 1 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+script = ExtResource( 2 )
+palettes = ExtResource( 7 )

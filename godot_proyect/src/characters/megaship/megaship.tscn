@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/characters/character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/characters/megaship/megaship.gd" type="Script" id=2]
-[ext_resource path="res://src/characters/megaship/megaship_death.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/characters/death/character_death_big_explosion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/characters/megaship/cannon/megaship_cannon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/megaship/megaship_frames.tres" type="SpriteFrames" id=5]
 [ext_resource path="res://resources/characters/megaship/megaship_palettes.tres" type="SpriteFrames" id=6]
@@ -16,13 +16,16 @@
 [ext_resource path="res://assets/sprites/gui/cursor.png" type="Texture" id=14]
 [ext_resource path="res://src/characters/megaship/aimer.gd" type="Script" id=15]
 [ext_resource path="res://src/library/sprites/directional_sprite.gd" type="Script" id=16]
-[ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=17]
+[ext_resource path="res://src/characters/death/propulsion_particles.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/characters/megaship/ship/megaship_mask_0.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/palettes/megaship/megaship_palette_0.png" type="Texture" id=19]
 [ext_resource path="res://src/characters/megaship/states/teleport_end.gd" type="Script" id=20]
 [ext_resource path="res://src/characters/megaship/megaship_collision_shape.tres" type="Shape2D" id=21]
 [ext_resource path="res://src/characters/megaship/states/travel.gd" type="Script" id=25]
 [ext_resource path="res://src/characters/megaship/states/knockback.gd" type="Script" id=26]
+
+
+
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;

@@ -147,7 +147,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "PropulsionParticles",
 "language": "GDScript",
-"path": "res://src/characters/propulsion_particles.gd"
+"path": "res://src/characters/death/propulsion_particles.gd"
 }, {
 "base": "AudioStreamPlayer2D",
 "class": "RandomPitchAudioStreamPlayer2D",

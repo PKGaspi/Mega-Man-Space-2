@@ -5,8 +5,9 @@
 [ext_resource path="res://src/characters/enemies/bosses/states/init_spawn_animation.gd" type="Script" id=3]
 [ext_resource path="res://src/characters/enemies/bosses/states/move_spawn_animation.gd" type="Script" id=4]
 [ext_resource path="res://src/characters/enemies/bosses/states/end_spawn_animation.gd" type="Script" id=5]
-[ext_resource path="res://src/characters/propulsion_particles.gd" type="Script" id=6]
+[ext_resource path="res://src/characters/death/propulsion_particles.gd" type="Script" id=6]
 [ext_resource path="res://src/characters/enemies/bosses/states/random_attack.gd" type="Script" id=7]
+
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1

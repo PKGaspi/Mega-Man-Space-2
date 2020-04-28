@@ -136,8 +136,8 @@ func die():
 	
 	# Generate death scene.
 	var inst = death_instance.instance()
+	inst.palette = get_weapon()
 	inst.global_position = global_position
-	
 	# Change particles color to the current palette.
 	#var palette = palettes.get_frame("default", active_weapon)
 	#var image = palette.get_data()
