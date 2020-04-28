@@ -2,6 +2,8 @@ class_name Boss
 extends Enemy
 
 
+export(Weapon.TYPES) var palette: int
+
 onready var propulsion_particles := $PropulsionParticles
 
 
@@ -22,3 +24,14 @@ func start_spawn_animation() -> void:
 
 func apply_propulsion_effects(propulsion: Vector2) -> void:
 	propulsion_particles.emit(propulsion)
+
+
+func die() -> void:
+	# Generate death scene.
+	var inst = death_instance.instance()
+	inst.palette = palette
+	inst.global_position = global_position
+	get_parent().add_child(inst)
+	
+	queue_free()
+	

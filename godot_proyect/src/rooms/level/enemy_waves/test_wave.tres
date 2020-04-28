@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=2]
 [ext_resource path="res://src/rooms/level/enemy_waves/enemy_wave_data.gd" type="Script" id=3]
+[ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -11,6 +12,7 @@ weights = [ 1 ]
 
 [resource]
 script = ExtResource( 3 )
+boss = ExtResource( 4 )
 enemies = SubResource( 1 )
 n_total_enemies = 1
 n_max_enemies_at_once = 1

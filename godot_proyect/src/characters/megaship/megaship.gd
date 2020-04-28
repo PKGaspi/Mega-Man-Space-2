@@ -138,12 +138,6 @@ func die():
 	var inst = death_instance.instance()
 	inst.palette = get_weapon()
 	inst.global_position = global_position
-	# Change particles color to the current palette.
-	#var palette = palettes.get_frame("default", active_weapon)
-	#var image = palette.get_data()
-	#image.lock()
-	#var color = image.get_pixel(2, 0)
-	#inst.modulate = color
 	
 	var new_sprite = spr_ship.duplicate()
 	new_sprite.global_rotation = global_rotation

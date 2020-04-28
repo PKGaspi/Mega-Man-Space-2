@@ -124,9 +124,9 @@ func _on_boss_registered(boss: Boss) -> void:
 	# This is done for every enemy that inherits boss. Not all bosses
 	# are spawned in the world as bosses, some of them spawn as normal
 	# enemies but their hp must show on the global hud anyways.
-	# TODO: Set correct palette
 	yield(boss, "ready")
 	var hp_bar = bar_containter.new_boss_bar(boss.max_hp, boss.hp, Weapon.TYPES.HEAT)
+	hp_bar.palette = boss.palette
 	boss.hp_bar = hp_bar
 	boss.connect("tree_exited", hp_bar, "queue_free")
 
