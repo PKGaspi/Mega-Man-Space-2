@@ -2,11 +2,11 @@ extends Node2D
 
 const EXPLOTION_PARTICLE := preload("res://src/characters/death/explotion_particle.tscn")
 
-var n_rotating_particles: int = 10
+var n_rotating_particles: int = 12
 var angular_speed: float = 2 * PI
 var radious: float = 20
 
-var n_directions_to_explode: int = 14
+var n_directions_to_explode: int = 16
 var linear_speed: float = 120
 
 var palette: int = 0
@@ -32,13 +32,12 @@ func explode():
 	
 	for i in range(n_directions_to_explode):
 		var dir := Vector2.RIGHT.rotated((2*PI / n_directions_to_explode) * i)
-		print(dir)
 		var inst := EXPLOTION_PARTICLE.instance()
 		inst.velocity =  dir * linear_speed
 		inst.set_palette(palette)
 		add_child(inst)
 		var inst2 := EXPLOTION_PARTICLE.instance()
-		inst2.velocity =  dir * linear_speed / 2
+		inst2.velocity =  dir * linear_speed / 1.6
 		inst2.set_palette(palette)
 		add_child(inst2)
 

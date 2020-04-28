@@ -268,10 +268,11 @@ func create_enemy_pointer(enemy) -> void:
 
 
 func reload_level() -> void:
+		disconnect("tree_exiting", self, "_on_tree_exiting")
 		# Reset level.
 		var inst = load(filename).instance()
 		inst.level_data = level_data
-		get_tree().root.add_child(inst)
+		get_tree().root.call_deferred("add_child", inst)
 		queue_free()
 
 

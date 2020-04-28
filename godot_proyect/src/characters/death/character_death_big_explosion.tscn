@@ -4,6 +4,7 @@
 [ext_resource path="res://assets/sfx/megaship/death.wav" type="AudioStream" id=6]
 
 [node name="Death" type="Node2D"]
+position = Vector2( 184.336, 103.742 )
 script = ExtResource( 3 )
 
 [node name="SndDeath" type="AudioStreamPlayer2D" parent="."]
