@@ -40,6 +40,10 @@ func register_projectile(projectile: Node) -> void:
 
 
 func register_enemy(enemy: Node) -> void:
+	# Register in GameStats.
+	var new_val = GameStats.enemies_spawned[enemy.filename] + 1 if GameStats.enemies_spawned.has(enemy.filename) else 1
+	GameStats.enemies_spawned[enemy.filename] = new_val
+	
 	_enemies.call_deferred("add_child", enemy)
 	if enemy is Boss:
 		emit_signal("boss_registered", enemy)
@@ -47,6 +51,10 @@ func register_enemy(enemy: Node) -> void:
 
 
 func register_pickup(pickup: Node) -> void:
+	# Register in GameStats.
+	var new_val = GameStats.pickups_spawned[pickup.filename] + 1 if GameStats.pickups_spawned.has(pickup.filename) else 1
+	GameStats.pickups_spawned[pickup.filename] = new_val
+	
 	_pickups.call_deferred("add_child", pickup)
 
 

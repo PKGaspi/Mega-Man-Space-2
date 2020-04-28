@@ -24,3 +24,12 @@ func drop() -> void:
 		if inst is Node2D:
 			inst.global_position = global_position
 		ObjectRegistry.register_node(inst)
+
+
+func hit_bullet(bullet) -> void:
+	# Register in GameStats.
+	if not invencible:
+		# Register in GameStats.
+		GameStats.damage_dealt += min(hp, bullet.damage)
+	
+	.hit_bullet(bullet)

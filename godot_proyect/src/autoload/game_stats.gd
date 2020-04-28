@@ -27,11 +27,9 @@ func save() -> void:
 	var err
 	if file.file_exists(FILE_PATH):
 		err = file.open(FILE_PATH, File.READ_WRITE)
-		print("why")
 	
 	else:
 		err = file.open(FILE_PATH, File.WRITE)
-		print("why2")
 	
 	if err != OK:
 		printerr("Error(%d): Couldn't open or create stats file." % err)
@@ -49,15 +47,15 @@ func save() -> void:
 	
 	file.store_string("Enemies spawned:\n")
 	for enemy in enemies_spawned:
-		file.store_string(enemy + ": \t%d\n" % enemies_spawned[enemy])
+		file.store_string(enemy + ": \t\t%d\n" % enemies_spawned[enemy])
 	
 	file.store_string("Pickups spawned:\n")
 	for pickup in pickups_spawned:
-		file.store_string(pickup + ": \t%d\n" % pickups_spawned[pickup])
+		file.store_string(pickup + ": \t\t%d\n" % pickups_spawned[pickup])
 	
-	file.store_string("Damage received per enemy:\n")
-	for enemy in damage_received:
-		file.store_string(enemy + ": \t%d\n" % damage_received[enemy])
+	file.store_string("Damage received per source:\n")
+	for source in damage_received:
+		file.store_string(source + ": \t\t%d\n" % damage_received[source])
 	
 	file.store_string("Damage dealt: %s\n" % damage_dealt)
 	

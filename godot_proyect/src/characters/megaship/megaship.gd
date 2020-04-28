@@ -63,9 +63,26 @@ func apply_propulsion_effects(propulsion: Vector2) -> void:
 
 
 func collide_character(character) -> void:
+	# Register in GameStats.
+	if not invencible:
+		# Register in GameStats.
+		var new_val = GameStats.damage_received[character.filename] + character.collision_damage if GameStats.damage_received.has(character.filename) else character.collision_damage
+		GameStats.damage_received[character.filename] = new_val
+	
 	# self collided with character, but the megaship always get hit on collision.
 	# Reverse the collision.
 	character.collide_character(self)
+
+
+
+func hit_bullet(bullet) -> void:
+	# Register in GameStats.
+	if not invencible:
+		# Register in GameStats.
+		var new_val = GameStats.damage_received[bullet.filename] + bullet.damage if GameStats.damage_received.has(bullet.filename) else bullet.damage
+		GameStats.damage_received[bullet.filename] = new_val
+	
+	.hit_bullet(bullet)
 
 
 func emit_hit_particles() -> void:
@@ -115,6 +132,8 @@ func set_palette(palette_index : int) -> void:
 
 
 func die():
+	GameStats.deaths += 1
+	
 	# Generate death scene.
 	var inst = death_instance.instance()
 	inst.global_position = global_position

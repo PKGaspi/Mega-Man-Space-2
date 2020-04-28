@@ -33,7 +33,9 @@ func physics_process(delta: float) -> void:
 	var input_dir = get_input_direction()
 	var acceleration = _parent.acceleration_ratio * _parent.max_speed
 	_parent.velocity = _parent.calculate_velocity(input_dir, delta)
-
+	
+	GameStats.distance_traveled += _parent.velocity.length() * delta
+	
 	# Calculate rotation.
 	character.global_rotation = calculate_rotation()
 	
