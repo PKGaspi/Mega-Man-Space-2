@@ -184,6 +184,7 @@ func modify_stat(stat_name: String, ammount: float) -> void:
 
 
 func exit_game() -> void:
+	GameStats.save()
 	get_tree().quit()
 
 

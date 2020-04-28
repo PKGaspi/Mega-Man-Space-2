@@ -322,6 +322,7 @@ global="*res://src/autoload/global.tscn"
 debug_menu="*res://src/gui/menus/debug menu/debug_panel.tscn"
 ObjectRegistry="*res://src/autoload/object_registry.tscn"
 Config="*res://src/autoload/config.gd"
+GameStats="*res://src/autoload/game_stats.gd"
 
 [debug]
 
