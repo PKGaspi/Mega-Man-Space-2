@@ -96,8 +96,10 @@ func _on_GameOverTimer_timeout() -> void:
 	if global.one_ups == 0:
 		print(":(")
 		global.game_over() # Resets lifes, e-tanks and points.
-		# Go to game over screen.
+		
 		ObjectRegistry.reset()
+		
+		# Go to game over screen.
 		
 		var inst = GAME_OVER_SCREEN.instance()
 		inst.level_data = level_data
@@ -198,6 +200,8 @@ func start_victory_animation() -> void:
 	camera.follow_none()
 	victory_timer.start()
 	
+	global.is_paused = true
+	
 	yield(victory_timer, "timeout")
 	
 	victory_music.play()
@@ -212,6 +216,8 @@ func start_victory_animation() -> void:
 	
 	ObjectRegistry.reset()
 	get_tree().change_scene(WEAPON_GET_SCREEN)
+	
+	global.is_paused = false
 
 
 func next_wave() -> void:

@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/sprites/gui/menus/weapon_menu_background_mask.png" type="Texture" id=4]
 [ext_resource path="res://src/gui/menus/settings menu/accesibility settings menu/accesibility_settings_menu.gd" type="Script" id=5]
 [ext_resource path="res://assets/sfx/other/menu_open.wav" type="AudioStream" id=6]
-[ext_resource path="res://src/gui/menus/shifter.gd" type="Script" id=7]
+[ext_resource path="res://src/gui/menus/minus_plus_slider.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/gui/menus/toggler.gd" type="Script" id=8]
 [ext_resource path="res://assets/sprites/gui/menus/toggler_1.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/gui/menus/toggler_0.png" type="Texture" id=10]
@@ -182,22 +182,11 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 87, 0 )
 size_flags_vertical = 4
 
-[node name="StarFrequencyShifter" type="Label" parent="Contents/Sections/Additional"]
-margin_left = 7.0
-margin_right = 79.0
+[node name="StarFrequencySlider" parent="Contents/Sections/Additional" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 87.0
 margin_bottom = 8.0
-rect_min_size = Vector2( 0, 8 )
-size_flags_horizontal = 4
-custom_fonts/font = ExtResource( 1 )
-custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
-custom_colors/font_color_shadow = Color( 0.12549, 0.12549, 0.12549, 1 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
-text = "< Normal >"
-script = ExtResource( 7 )
-entry_names = [ "Very Low", "Low", "Normal", "High", "Very High" ]
-entry_values = [ 0.04, 0.1, 0.3, 0.7, 1.0 ]
-entry_index = 2
 
 [node name="ScreenShakingToggler" type="TextureRect" parent="Contents/Sections/Additional"]
 margin_left = 39.0

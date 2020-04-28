@@ -24,7 +24,6 @@
 [ext_resource path="res://assets/sprites/background/stars/star_palette_1.png" type="Texture" id=22]
 [ext_resource path="res://assets/sprites/background/stars/star_palette_5.png" type="Texture" id=23]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 21 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 5 ) ],

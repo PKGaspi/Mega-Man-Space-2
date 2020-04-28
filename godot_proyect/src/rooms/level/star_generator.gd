@@ -25,7 +25,8 @@ export(float) var MAX_MOTION_SCALE = 1
 
 # How many stars are generated.
 # Must be between 0.0 and 1.0
-var star_frequency: float = Config.get_star_frequency()
+const MIN_STAR_FREQUENCY: float = 0.04
+var star_frequency: float = max(MIN_STAR_FREQUENCY, Config.get_star_frequency()) setget set_star_frequency
 export var max_stars_per_sector: int = 10 # Number of stars to attempt to generate per sector.
 export var planet_frequency: float = .008
 export var max_planets_per_sector: int = 1
@@ -120,6 +121,9 @@ func update_sector_values() -> void:
 #########################
 ## Auxiliar functions. ##
 #########################
+
+func set_star_frequency(value: float) -> void:
+	star_frequency = max(MIN_STAR_FREQUENCY, value)
 
 func set_to_follow(path: NodePath) -> void:
 	_to_follow_path = path

@@ -2,7 +2,7 @@ extends MenuPanel
 # Select Menu.
 
 
-onready var star_frequency_shifter := $"Contents/Sections/Additional/StarFrequencyShifter"
+onready var star_frequency_slider := $"Contents/Sections/Additional/StarFrequencySlider"
 onready var screen_shake_toggler := $"Contents/Sections/Additional/ScreenShakingToggler"
 onready var flashing_toggler := $"Contents/Sections/Additional/FlashingToggler"
 
@@ -16,7 +16,7 @@ func _ready() -> void:
 	screen_shake_toggler.set_checked(Config.get_screen_shake())
 	flashing_toggler.set_checked(Config.get_flashing())
 	
-	star_frequency_shifter.entry_index = star_frequency_to_index(Config.get_star_frequency())
+	star_frequency_slider.set_ratio(Config.get_star_frequency())
 
 
 func _on_config_setting_changed(section: String, key: String, value) -> void:
@@ -54,27 +54,22 @@ func _on_action_pressed_ui_cancel():
 func _on_action_pressed_ui_left():
 	match entry_index:
 		0: # Star Frequency.
-			var changed = star_frequency_shifter.previous_entry()
+			var changed = star_frequency_slider.substract_step()
 			if changed:
 				play_sound(snd_ui_left)
-				Config.set_star_frequency(star_frequency_shifter.get_current_value())
+				Config.set_star_frequency(star_frequency_slider.get_ratio())
 
 
 func _on_action_pressed_ui_right():
 	match entry_index:
 		0: # Star Frequency.
-			var changed = star_frequency_shifter.next_entry()
+			var changed = star_frequency_slider.add_step()
 			if changed:
 				play_sound(snd_ui_right)
-				Config.set_star_frequency(star_frequency_shifter.get_current_value())
+				Config.set_star_frequency(star_frequency_slider.get_ratio())
 
 
 func close_menu() -> void:
 	# Save the config when exiting this menu.
 	Config.save()
 	.close_menu()
-
-
-func star_frequency_to_index(star_frequency: float) -> int:
-	var index = max(0, star_frequency_shifter.entry_values.find(star_frequency))
-	return index
