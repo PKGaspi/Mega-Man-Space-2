@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/planet_palette_9.png-48474cda01bbbca09973bdda6cc2440e.stex"
+path="res://.import/planet_mask_4.png-84bcda368a47f902eb98c879c9797818.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/background/planets/planet_palette_9.png"
-dest_files=[ "res://.import/planet_palette_9.png-48474cda01bbbca09973bdda6cc2440e.stex" ]
+source_file="res://assets/sprites/background/planets/planet_mask_4.png"
+dest_files=[ "res://.import/planet_mask_4.png-84bcda368a47f902eb98c879c9797818.stex" ]
 
 [params]
 
