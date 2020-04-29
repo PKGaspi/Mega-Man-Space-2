@@ -18,7 +18,10 @@ var deaths: int # Number of times that the player died.
 
 func _init() -> void:
 	session = OS.get_unix_time()
-	
+
+
+func _physics_process(delta: float) -> void:
+	time_played += delta
 
 
 func save() -> void:
@@ -42,6 +45,8 @@ func save() -> void:
 	file.store_string(SEPARATOR)
 	
 	file.store_string("Session: %d\n" % session)
+	
+	file.store_string("Time played (min): %d\n" % int(round(time_played / 60)))
 	
 	file.store_string("Deaths: %d\n" % deaths)
 	
