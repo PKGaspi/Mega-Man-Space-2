@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/gui/gaspi games logo/gaspi_games_logo_shine_4.png" type="Texture" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://assets/music/gaspi_logo.ogg" type="AudioStream" id=10]
 [ext_resource path="res://src/rooms/init/gaspi_logo.gd" type="Script" id=11]
 [ext_resource path="res://src/rooms/init/init_screen.gd" type="Script" id=12]
+[ext_resource path="res://assets/fonts/megaman_2.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://resources/mega_man_font.tres" type="DynamicFont" id=14]
+[ext_resource path="res://src/rooms/init/disclaimer.gd" type="Script" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -20,6 +23,9 @@ animations = [ {
 "name": "default",
 "speed": 20.0
 } ]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 13 )
 
 [node name="InitScreen" type="Control"]
 pause_mode = 2
@@ -69,10 +75,62 @@ autostart = true
 
 [node name="Tween" type="Tween" parent="CenterContainer/GaspiGamesLogo"]
 
+[node name="Disclaimer" type="MarginContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = -50.0
+margin_bottom = -60.0
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Parts" type="VBoxContainer" parent="Disclaimer"]
+margin_right = 380.0
+margin_bottom = 160.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Disclaimer/Parts"]
+margin_right = 380.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+text = "DISCLAIMER"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="Disclaimer/Parts"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 24.0
+margin_right = 380.0
+margin_bottom = 32.0
+size_flags_vertical = 2
+
+[node name="Text" type="Label" parent="Disclaimer/Parts"]
+margin_top = 68.0
+margin_right = 380.0
+margin_bottom = 160.0
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+text = "The following is a non profit, fan-based game.
+
+Mega Man is owned by capcom. Gaspi Games is not afiliated with capcom in any shape or form.
+
+To support Mega Man, please, consider buying the official games. tahnk you."
+align = 1
+autowrap = true
+
+[node name="Tween" type="Tween" parent="Disclaimer"]
+
 [node name="SndLogo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 autoplay = true
 bus = "Music"
 [connection signal="animation_finished" from="CenterContainer/GaspiGamesLogo/Shine" to="CenterContainer/GaspiGamesLogo" method="_on_Shine_animation_finished"]
 [connection signal="timeout" from="CenterContainer/GaspiGamesLogo/Timer" to="CenterContainer/GaspiGamesLogo" method="_on_Timer_timeout"]
-[connection signal="tween_all_completed" from="CenterContainer/GaspiGamesLogo/Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="tween_all_completed" from="CenterContainer/GaspiGamesLogo/Tween" to="." method="_on_LogoTween_tween_all_completed"]
+[connection signal="tween_all_completed" from="Disclaimer/Tween" to="." method="_on_DisclaimerTween_tween_all_completed"]
