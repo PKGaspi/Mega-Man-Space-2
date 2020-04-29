@@ -107,6 +107,7 @@ margin_right = 220.0
 margin_bottom = 8.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 text = "Thanks for playing!!"
 align = 1
 autowrap = true
@@ -128,6 +129,7 @@ margin_right = 220.0
 margin_bottom = 60.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 text = "This was just an in-dev demo.
 please, consider filling the following poll for feedback."
 align = 1

@@ -64,9 +64,13 @@ __meta__ = {
 
 [node name="GameOverMenu" parent="Control" instance=ExtResource( 4 )]
 
+[node name="Title" parent="Control/GameOverMenu/Contents" index="0"]
+custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
+
 [node name="MusicLooper" type="Node" parent="."]
 script = ExtResource( 5 )
 intro = ExtResource( 6 )
 loop = ExtResource( 7 )
+autoplay = true
 
 [editable path="Control/GameOverMenu"]
