@@ -1,20 +1,19 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://src/rooms/level/enemy_waves/enemy_wave_data.gd" type="Script" id=1]
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=2]
 [ext_resource path="res://src/characters/enemies/bosses/heat_man/heat_man.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-items = [ ExtResource( 4 ) ]
-weights = [ 1 ]
+items = [  ]
+weights = [ 0 ]
 
 [resource]
 script = ExtResource( 1 )
 boss = ExtResource( 3 )
 enemies = SubResource( 1 )
-n_total_enemies = 12
-n_max_enemies_at_once = 2
+n_total_enemies = 1
+n_max_enemies_at_once = 1
 center = Vector2( 3800, 2000 )
 radious = 600.0
