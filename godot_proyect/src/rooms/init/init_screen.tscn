@@ -118,9 +118,9 @@ custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color = Color( 0.921569, 0.921569, 0.921569, 1 )
 text = "The following is a non profit, fan-based game.
 
-Mega Man is owned by capcom. Gaspi Games is not afiliated with capcom in any shape or form.
+Mega Man is owned by capcom. Gaspi Games is not affiliated with Capcom.
 
-To support Mega Man, please, consider buying the official games. tahnk you."
+To support Mega Man, please, consider buying the official games. Thank you."
 align = 1
 autowrap = true
 
