@@ -25,7 +25,7 @@ collision_layer = 8
 collision_mask = 1
 script = ExtResource( 5 )
 motion_speed = 260.0
-damage = 5.0
+damage = 7.0
 weapon = 1
 n_collisions = -1
 max_distance = 200.0
@@ -38,7 +38,7 @@ rect = Rect2( -8, -8, 16, 16 )
 
 [node name="SprBullet" type="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 2 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CannonSetup" parent="." index="4" instance=ExtResource( 6 )]

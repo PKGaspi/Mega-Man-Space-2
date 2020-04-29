@@ -1,15 +1,16 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://src/rooms/level/enemy_waves/enemy_wave_data.gd" type="Script" id=1]
 [ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=2]
-[ext_resource path="res://src/characters/enemies/sniper_armor/sniper_armor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/characters/enemies/fly_robot/fly_robot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/characters/enemies/sniper_armor/sniper_armor.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-items = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ]
-weights = [ 2, 4, 2 ]
+items = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ]
+weights = [ 1, 7, 6, 4 ]
 
 [resource]
 script = ExtResource( 1 )
@@ -17,4 +18,4 @@ enemies = SubResource( 1 )
 n_total_enemies = 20
 n_max_enemies_at_once = 4
 center = Vector2( 3200, 800 )
-radious = 200.0
+radious = 300.0
