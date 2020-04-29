@@ -13,6 +13,7 @@ size = 4
 font_data = ExtResource( 6 )
 
 [node name="TitleScreen" type="Node"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]

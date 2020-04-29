@@ -43,6 +43,7 @@ shader_param/palette = ExtResource( 1 )
 shader_param/mask = ExtResource( 2 )
 
 [node name="WeaponGetScreen" type="Node"]
+pause_mode = 2
 script = ExtResource( 7 )
 
 [node name="Control" type="Control" parent="."]

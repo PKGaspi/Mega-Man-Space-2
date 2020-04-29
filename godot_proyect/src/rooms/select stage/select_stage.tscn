@@ -10,6 +10,7 @@
 [ext_resource path="res://src/rooms/select stage/select_stage.gd" type="Script" id=8]
 
 [node name="SelectStage" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )

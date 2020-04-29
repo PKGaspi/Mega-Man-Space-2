@@ -278,6 +278,7 @@ func reload_level() -> void:
 
 
 func _on_tree_exiting() -> void:
+	global.unpause()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
