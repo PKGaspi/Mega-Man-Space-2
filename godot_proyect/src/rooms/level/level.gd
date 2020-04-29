@@ -49,7 +49,6 @@ func _ready() -> void:
 	global.create_touchscreen_layout(hud)
 	
 	# Resources init.
-	level_data.initialize()
 	set_music(level_data.music_intro, level_data.music_loop)
 	start_ready_animation()
 	
@@ -87,7 +86,7 @@ func _on_megaship_death() -> void:
 func _on_megaship_transitioned(state_path: String) -> void:
 	match state_path:
 		"Move/Travel":
-			if level_data.current_wave_index == 0:
+			if current_wave == null:
 				# Start the first wave only. This is when the tp animation ends.
 				next_wave()
 
@@ -279,6 +278,7 @@ func reload_level() -> void:
 
 func _on_tree_exiting() -> void:
 	global.unpause()
+	level_data.current_wave_index -= 1
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 

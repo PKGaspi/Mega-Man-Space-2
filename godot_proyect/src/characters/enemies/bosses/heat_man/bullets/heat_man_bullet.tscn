@@ -38,7 +38,6 @@ rect = Rect2( -8, -8, 16, 16 )
 
 [node name="SprBullet" type="AnimatedSprite" parent="." index="3"]
 frames = SubResource( 2 )
-frame = 1
 playing = true
 
 [node name="CannonSetup" parent="." index="4" instance=ExtResource( 6 )]

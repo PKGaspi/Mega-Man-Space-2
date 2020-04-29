@@ -18,6 +18,7 @@ func _on_entry_actioned(entry_data) -> void:
 
 
 func load_level(level_data: LevelData) -> void:
+	level_data.initialize()
 	var inst = LEVEL_SCENE.instance()
 	inst.level_data = level_data
 	get_tree().root.add_child(inst)
