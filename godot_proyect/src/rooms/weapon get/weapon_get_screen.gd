@@ -13,6 +13,7 @@ var current_field := -1
 
 
 func _ready() -> void:
+	GameStats.save()
 	title.visible_characters = 0
 	message.visible_characters = 0
 	button.visible = false
