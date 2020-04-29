@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://src/rooms/level/enemy_waves/enemy_wave_data.gd" type="Script" id=1]
+[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/enemies/fly_robot/fly_robot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/characters/enemies/telly_spawner/telly_spawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/characters/enemies/telly/telly.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+items = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ) ]
+weights = [ 3, 4, 1 ]
+
+[resource]
+script = ExtResource( 1 )
+enemies = SubResource( 1 )
+n_total_enemies = 15
+n_max_enemies_at_once = 3
+center = Vector2( 1200, 0 )
+radious = 200.0

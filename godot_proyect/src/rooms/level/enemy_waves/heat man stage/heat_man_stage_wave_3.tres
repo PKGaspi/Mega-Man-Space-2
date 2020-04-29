@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://src/rooms/level/enemy_waves/enemy_wave_data.gd" type="Script" id=1]
+[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/enemies/sniper_armor/sniper_armor.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+items = [ ExtResource( 3 ) ]
+weights = [ 1 ]
+
+[resource]
+script = ExtResource( 1 )
+enemies = SubResource( 1 )
+n_total_enemies = 3
+n_max_enemies_at_once = 1
+center = Vector2( 1800, 1000 )
+radious = 200.0

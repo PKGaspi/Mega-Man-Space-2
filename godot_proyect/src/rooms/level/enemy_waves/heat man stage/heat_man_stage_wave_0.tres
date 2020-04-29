@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://src/rooms/level/enemy_waves/enemy_wave_data.gd" type="Script" id=1]
+[ext_resource path="res://src/library/weight_randomizer.gd" type="Script" id=2]
+[ext_resource path="res://src/characters/enemies/fly_robot/fly_robot.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+items = [ ExtResource( 3 ) ]
+weights = [ 0 ]
+
+[resource]
+script = ExtResource( 1 )
+enemies = SubResource( 1 )
+n_total_enemies = 5
+n_max_enemies_at_once = 2
+center = Vector2( 500, 0 )
+radious = 200.0
