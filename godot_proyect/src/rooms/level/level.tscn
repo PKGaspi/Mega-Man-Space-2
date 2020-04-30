@@ -141,6 +141,7 @@ _ammo_bar_path = NodePath("../../../UILayer/HUD/BarContainer/MegashipAmmoBar")
 [node name="Camera" type="Camera2D" parent="GameLayer"]
 pause_mode = 2
 current = true
+process_mode = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
