@@ -64,7 +64,7 @@ func spawn_enemy(enemy: PackedScene, pos: Vector2) -> Enemy:
 
 
 func can_spawn() -> bool:
-	return n_enemies < n_max_enemies_at_once and n_spawns_left > 0
+	return len(enemies.items) > 0 and n_enemies < n_max_enemies_at_once and n_spawns_left > 0
 
 
 func is_completed() -> bool:

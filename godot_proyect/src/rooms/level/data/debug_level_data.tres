@@ -3,7 +3,7 @@
 [ext_resource path="res://src/rooms/level/data/level_data.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/stage_crashman_intro.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/music/stage_crashman_loop.ogg" type="AudioStream" id=3]
-[ext_resource path="res://src/rooms/level/enemy_waves/test_wave.tres" type="Resource" id=4]
+[ext_resource path="res://src/rooms/level/enemy_waves/heat man stage/heat_man_stage_wave_7.tres" type="Resource" id=4]
 
 [resource]
 script = ExtResource( 1 )
