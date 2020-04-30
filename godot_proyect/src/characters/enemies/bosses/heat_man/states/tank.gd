@@ -41,6 +41,7 @@ func enter(msg: Dictionary = {}) -> void:
 
 func physics_process(delta: float) -> void:
 	_parent.physics_process(delta)
+	character.apply_propulsion_effects(_parent._parent.dir * max_speed * acceleration_ratio)
 	look_at_megaship()
 
 
@@ -48,3 +49,4 @@ func exit() -> void:
 	shoot_timer.stop()
 	character.disconnect("hitted", self, "_on_character_hitted")
 	shoot_timer.disconnect("timeout", self, "_on_shoot_timer_timeout")
+	character.apply_propulsion_effects(Vector2.ZERO)
