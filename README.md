@@ -14,14 +14,20 @@ The porpose of this project is self learning as well as entertaining
 anyone who plays it. To support Mega Man, CAPCOM and everyone involved
 on it, please buy the official games or merchandising. Thank you.
 
+## Download
+An in-dev demo is available for download. You can play it, but it's not complete.
+You can get it for PC (Linux, Windows and MacOS) at:
+- Itch.io: (https://gaspi.itch.io/mega-man-space-2)
+- Game Jolt: (https://gaspi.gamejolt.io/mega-man-space-2)
+Later versions will be posted on those sites.
+
 ## State of the game
-As of today the game is in development on a non playable state. You can
-download the code and make a build, but fun is not garanteed. Sugestions,
-feedback and any kind of idea in general is well received. Please, feel
-free to open an issue if you have anything useful for the game.
+As of today the game is in developmente on a playable state, but not all
+the content is implemented. Sugestions, feedback and any kind of idea in 
+general is well received. Please, feel free to open an issue if you have
+anything useful for the game.
 
 Check this repo or my sites below to stay tuned about the latest updates.
-Every monday I do a weekly report on [my Twitter](https://twitter.com/PK_Gaspi).
 If you can't wait any longer to play the game (which I doubt) I suggest
 you to check the prequel, [Mega Man Space].
 
@@ -61,7 +67,7 @@ as well as an original story by me, Tear.
 - My webpage: (www.gaspi.games) (by now it redirects to my itch.io profile)
 - Game Twitter profile: (https://twitter.com/MegaManSpace)
 - Itch.io profile: (https://gaspi.itch.io/)
-- Gamejolt profile: (https://gamejolt.com/@Gaspi)
+- Game Jolt profile: (https://gamejolt.com/@Gaspi)
 - Personal Twitter profile: (https://twitter.com/PK_Gaspi) (personal, not only gamedev there)
 
 ### FAQ
@@ -91,6 +97,5 @@ Virtual Joystick for [Godot]: https://github.com/MarcoFazioRandom/Virtual-Joysti
 [Godot]: https://godotengine.org/
 [Game Maker Studio]: https://www.yoyogames.com/gamemaker
 [Aseprite]: https://www.aseprite.org/
-[Alfedi]: https://github.com/Alfedi
 
 [logo]: https://github.com/rapsaGnauJ/Mega-Man-Space-2/blob/master/assets/markdown/logo.png "Game Logo"
