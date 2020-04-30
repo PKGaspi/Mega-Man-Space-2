@@ -85,10 +85,11 @@ func _input(event: InputEvent) -> void:
 		Config.save()
 	
 	# Exit game function.
-	if event.is_action_pressed("exit_game"):
-		game_exit_timer.start()
-	elif event.is_action_released("exit_game"):
-		game_exit_timer.stop()
+	if OS.is_debug_build():
+		if event.is_action_pressed("exit_game"):
+			game_exit_timer.start()
+		elif event.is_action_released("exit_game"):
+			game_exit_timer.stop()
 
 
 
