@@ -231,3 +231,12 @@ func get_mute() -> bool:
 
 
 ## Controls. ##
+
+
+## Other. ##
+
+func set_allow_intro_skip(value: bool) -> void:
+	set_value("other", "allow_intro_skip", value)
+
+func get_allow_intro_skip() -> bool:
+	return get_value("other", "allow_intro_skip")
