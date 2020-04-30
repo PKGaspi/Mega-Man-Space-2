@@ -16,4 +16,4 @@ enemies = SubResource( 1 )
 n_total_enemies = 20
 n_max_enemies_at_once = 4
 center = Vector2( 2000, 0 )
-radious = 400.0
+radious = 300.0

@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 items = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ]
-weights = [ 1, 7, 6, 4 ]
+weights = [ 2, 5, 1, 5 ]
 
 [resource]
 script = ExtResource( 1 )
@@ -18,4 +18,4 @@ enemies = SubResource( 1 )
 n_total_enemies = 20
 n_max_enemies_at_once = 4
 center = Vector2( 3200, 800 )
-radious = 300.0
+radious = 500.0
