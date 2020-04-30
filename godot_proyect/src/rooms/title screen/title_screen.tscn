@@ -45,8 +45,7 @@ margin_bottom = -4.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_fonts/font = SubResource( 1 )
-text = "In-Dev demo may 1st"
-align = 1
+text = "20w18a"
 __meta__ = {
 "_edit_use_anchors_": false
 }
