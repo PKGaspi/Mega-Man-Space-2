@@ -310,6 +310,7 @@ _global_script_class_icons={
 
 config/name="Mega Man Space 2"
 run/main_scene="res://src/rooms/init/init_screen.tscn"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
 
 [audio]
