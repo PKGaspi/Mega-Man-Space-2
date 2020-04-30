@@ -60,9 +60,9 @@ __meta__ = {
 
 [node name="GaspiGamesLogo" type="TextureRect" parent="CenterContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 224.0
+margin_left = 209.0
 margin_top = 123.0
-margin_right = 285.0
+margin_right = 270.0
 margin_bottom = 146.0
 texture = ExtResource( 1 )
 script = ExtResource( 11 )
@@ -84,9 +84,9 @@ autostart = true
 
 [node name="GodotLogo" type="VBoxContainer" parent="CenterContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 210.0
+margin_left = 195.0
 margin_top = 104.0
-margin_right = 300.0
+margin_right = 285.0
 margin_bottom = 166.0
 rect_min_size = Vector2( 90, 0 )
 script = ExtResource( 17 )
@@ -122,9 +122,9 @@ autowrap = true
 
 [node name="Disclaimer" type="VBoxContainer" parent="CenterContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 155.0
+margin_left = 140.0
 margin_top = 48.0
-margin_right = 355.0
+margin_right = 340.0
 margin_bottom = 222.0
 script = ExtResource( 15 )
 __meta__ = {

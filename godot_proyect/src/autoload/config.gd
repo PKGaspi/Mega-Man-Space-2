@@ -17,9 +17,11 @@ func _init() -> void:
 	if not cfg_file.file_exists(CONFIG_PATH):
 		# Create config file.
 		var err = cfg_file.open(CONFIG_PATH, File.WRITE_READ)
+		cfg_file.close()
 		if err != OK:
 			printerr("Error: Couldn't create config file. ", err)
 			return
+		
 	
 	# Load the config file.
 	var err = config.load("user://settings.cfg")
@@ -227,7 +229,7 @@ func set_mute(value: bool) -> void:
 		set_bus_mute("Master", value)
 
 func get_mute() -> bool:
-	return get_value("audio", "mute")
+	return get_value("audio", "mute", false)
 
 
 ## Controls. ##
