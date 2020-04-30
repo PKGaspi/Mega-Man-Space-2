@@ -92,6 +92,7 @@ func _on_megaship_transitioned(state_path: String) -> void:
 
 
 func _on_GameOverTimer_timeout() -> void:
+	level_data.current_wave_index -= 1
 	if global.one_ups == 0:
 		print(":(")
 		global.game_over() # Resets lifes, e-tanks and points.
@@ -113,7 +114,6 @@ func _on_GameOverTimer_timeout() -> void:
 
 func _on_WaveTimer_timeout() -> void:
 	snd_wave_help.play()
-	# Mega Man 1 platform power may be good for this.
 	ObjectRegistry.connect("enemy_registered", self, "_on_enemy_registered")
 	for enemy in ObjectRegistry.get_enemies():
 		create_enemy_pointer(enemy)
@@ -278,7 +278,6 @@ func reload_level() -> void:
 
 func _on_tree_exiting() -> void:
 	global.unpause()
-	level_data.current_wave_index -= 1
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 

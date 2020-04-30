@@ -12,7 +12,7 @@ export var n_max_enemies_at_once: int
 export var center: Vector2
 export var radious: float = 500
 
-var rng: RandomNumberGenerator
+var rng: RandomNumberGenerator = global.init_random()
 
 
 func initialize() -> void:
@@ -20,8 +20,7 @@ func initialize() -> void:
 	enemies.initialize()
 	
 	n_spawns_left = n_total_enemies
-	
-	rng = global.init_random()
+	boss_spawned = false
 	
 	if not ObjectRegistry.is_connected("enemy_registered", self, "_on_enemy_registered"):
 		ObjectRegistry.connect("enemy_registered", self, "_on_enemy_registered")

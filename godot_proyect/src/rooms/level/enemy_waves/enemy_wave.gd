@@ -27,6 +27,7 @@ func end() -> void:
 	emit_signal("completed")
 	queue_free()
 
+
 func spawn_boss() -> void:
 	wave_data.boss_spawned = true
 	var inst: Boss = spawn_enemy(wave_data.boss, wave_data.get_random_point())
