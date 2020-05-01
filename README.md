@@ -19,6 +19,7 @@ An in-dev demo is available for download. You can play it, but it's not complete
 You can get it for PC (Linux, Windows and MacOS) at:
 - Itch.io: (https://gaspi.itch.io/mega-man-space-2)
 - Game Jolt: (https://gaspi.gamejolt.io/mega-man-space-2)
+
 Later versions will be posted on those sites.
 
 ## State of the game
