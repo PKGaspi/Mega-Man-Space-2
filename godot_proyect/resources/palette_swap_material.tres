@@ -28,6 +28,7 @@ void fragment() {
 	COLOR.rgba = output;
 }
 "
+custom_defines = ""
 
 [resource]
 resource_local_to_scene = true

@@ -47,6 +47,7 @@ void fragment() {
 	COLOR.rgba = output;
 }
 "
+custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true

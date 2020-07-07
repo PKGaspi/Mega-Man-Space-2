@@ -6,6 +6,8 @@ const READY_SIZE := 8
 const READY_FLICKERING_INTERVAL: float = 8.0/60.0
 
 const WARNING_TEXT := "_WARNING_"
+const WARNING_BOTTOM_TEXT_GENERIC: Resource = preload("res://src/gui/texts/warning_bottom_text_generic.tres")
+const WARNING_BOTTOM_TEXT_BOSS := "BOSS INCOMING"
 const WARNING_COLOR := Color("b21030")
 const WARNING_SIZE := 16
 
