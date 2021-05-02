@@ -69,7 +69,7 @@ as well as an original story by me, Tear.
 - Game Twitter profile: (https://twitter.com/MegaManSpace)
 - Itch.io profile: (https://gaspi.itch.io/)
 - Game Jolt profile: (https://gamejolt.com/@Gaspi)
-- Personal Twitter profile: (https://twitter.com/PK_Gaspi) (personal, not only gamedev there)
+- Personal Twitter profile: (https://twitter.com/_Gaspi) (personal, not only gamedev there)
 
 ### FAQ
 Q: When will the game be released?  
