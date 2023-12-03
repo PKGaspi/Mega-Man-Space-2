@@ -23,14 +23,7 @@ You can get it for PC (Linux, Windows and MacOS) at:
 Later versions will be posted on those sites.
 
 ## State of the game
-As of today the game is in developmente on a playable state, but not all
-the content is implemented. Sugestions, feedback and any kind of idea in 
-general is well received. Please, feel free to open an issue if you have
-anything useful for the game.
-
-Check this repo or my sites below to stay tuned about the latest updates.
-If you can't wait any longer to play the game (which I doubt) I suggest
-you to check the prequel, [Mega Man Space].
+As of today the game is no longer in development.
 
 ## Tools
 The game is being developed using [Godot], an open source game engine.  
